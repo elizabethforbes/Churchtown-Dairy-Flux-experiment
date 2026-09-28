@@ -1,0 +1,307 @@
+# 14_goflux_fluxes.R
+# Recompute CO2, CH4 and N2O chamber fluxes from the raw 1 Hz concentration
+# records with goFlux + fluxqc, following the conventions of the user's other
+# flux projects (tree-flux-2025/scripts/01_import/09_goflux_reprocess.R):
+#   - Flux = goFlux::best.flux (LM or HM, Hüppi et al. 2018 criteria), via
+#     fluxqc::process_fluxes().
+#   - MDF = 1.96 * sigma / t * flux.term (95 %, two-sided); sigma = MAD of first
+#     differences over each analyzer's whole record per field day
+#     (precision = "mad"); t = closure length in seconds. Retain-and-flag:
+#     nothing is deleted.
+#   - fluxqc physical QC screens flag closures for review (not removed).
+#
+# Inputs
+#   data/raw/flux/json/*.json        LI-8200 smart chamber + LI-7810 (CO2, CH4, H2O)
+#   data/raw/flux/data/TG20-*.data   LI-7820 (N2O, H2O), separate logger clock
+# Windows
+#   From the smart chamber: start = closure + 25 s deadband (as logged by the
+#   chamber), end = chamber opening (~95 s). N2O uses the same windows after
+#   shifting the LI-7820 clock onto the chamber clock: the per-day offset is
+#   the difference between the H2O rise onsets in the LI-7820 record and in the
+#   chamber's own (LI-7810) record, both found with fluxqc::find_clock_offset()
+#   against the logged closure times. Offsets drift ~1 s/day and reset twice
+#   (3 Jun, 30 Sep). The day offset is then refined per closure by
+#   cross-correlating the chamber H2O trace with the LI-7820 H2O trace
+#   (search +-100 s around the day offset, excluding the neighbouring-closure
+#   aliases at ~+-200 s), smoothed with a running median of 5 within each day.
+#   This catches a ~70 s clock step at ~14:10 on 30 May (plots 10-15) that a
+#   single day offset missed.
+# Geometry
+#   Vtot = the chamber's TotalVolume for that measurement (chamber + collar
+#   offset + LI-7810 loop), Area = 318 cm2, Pcham/Tcham from the chamber
+#   sensors - the same geometry SoilFluxPro used, so the goFlux vs SoilFluxPro
+#   comparison isolates the fitting method. The LI-7820 loop volume is not
+#   added (as in SoilFluxPro).
+# Repeat closures of a collar on one date: the last one is kept (field-sheet
+#   notes record re-measurements after leaks/restarts; same rule as the team's
+#   "redo supersedes" convention). Dropped closures are listed in the report.
+# Outputs
+#   data/processed/flux_goflux.csv               one row per collar x date, all goFlux/fluxqc fields
+#   data/processed/flux_estimates.csv            analysis table (same columns as before + MDF flags)
+#   data/processed/flux_estimates_soilfluxpro.csv (written by 05; kept for comparison)
+#   output/tables/goflux_clock_offsets.csv, goflux_vs_soilfluxpro.csv, goflux_qc_review.csv
+
+`%||%` <- function(a, b) if (is.null(a)) b else a
+suppressPackageStartupMessages({
+  library(dplyr); library(tidyr); library(goFlux); library(fluxqc); library(jsonlite)
+})
+stopifnot(packageVersion("fluxqc") >= "0.2.3")
+
+TZ <- "America/New_York"
+SHOULDER_S <- 30
+PREC_7810 <- c(CO2 = 3.5, CH4 = 0.6, H2O = 45)      # datasheet 1-s precision (goFlux default)
+PREC_7820 <- c(N2O = 0.4, H2O = 45)
+dir.create("output/tables", showWarnings = FALSE, recursive = TRUE)
+treatment_key <- read.csv("data/processed/treatment_key.csv")
+
+# --- 1. Smart chamber records (CO2, CH4) --------------------------------------
+json_files <- list.files("data/raw/flux/json", pattern = "\\.json$", full.names = TRUE)
+json_files <- json_files[!grepl("^2025_05_06_KT01", basename(json_files))]   # empty exports
+ch <- bind_rows(lapply(json_files, function(f) {
+  x <- tryCatch(as.data.frame(import.LI8200(f, timezone = TZ)), error = function(e) NULL)
+  if (!is.null(x)) x$json_file <- basename(f)
+  x
+}))
+ch <- ch[!duplicated(paste(ch$chamID, ch$Etime)), ]      # the KT01 exports overlap
+ch <- ch[!is.na(ch$rep) & !is.na(ch$Etime), ]              # empty datasets (aborted closures, no reps)
+
+# per-measurement header: TotalVolume (cm3), Offset, start time
+hdr <- bind_rows(lapply(json_files, function(f) {
+  d <- fromJSON(f, simplifyVector = FALSE)
+  bind_rows(lapply(d$datasets, function(ds) bind_rows(lapply(names(ds), function(nm)
+    bind_rows(lapply(names(ds[[nm]]$reps), function(rp) {
+      h <- ds[[nm]]$reps[[rp]]$header
+      tibble(chamID = paste0(nm, "_", sub("REP_", "", rp)), TotalVolume_cm3 = h$TotalVolume,
+             Offset_cm = h$Offset, header_time = h$Date)
+    }))))))
+})) %>% distinct(chamID, .keep_all = TRUE)
+
+m <- regmatches(ch$chamID, regexec("^(\\d{4}-\\d{2}-\\d{2})[-_](\\d+)([A-Ca-c])", ch$chamID))
+ch$date_name <- as.Date(sapply(m, `[`, 2)); ch$plot <- as.integer(sapply(m, `[`, 3))
+ch$collar <- toupper(sapply(m, `[`, 4))
+ch <- ch %>% filter(!is.na(plot), plot %in% 1:15) %>% left_join(hdr, by = "chamID")
+
+closures <- ch %>% group_by(chamID) %>%
+  summarize(date_name = first(date_name), plot = first(plot), collar = first(collar),
+            start.time = first(start.time), end.time = first(cham.open), cham.close = first(cham.close),
+            Vtot = first(TotalVolume_cm3) / 1000, Area = first(Area),
+            Pcham = mean(Pcham[flag == 1], na.rm = TRUE), Tcham = mean(Tcham[flag == 1], na.rm = TRUE),
+            json_file = first(json_file), .groups = "drop") %>%
+  mutate(bad_clock = is.na(start.time) | format(start.time, "%Y") != "2025",
+         date = case_when(date_name == as.Date("2025-09-11") ~ as.Date("2025-09-10"),
+                          date_name == as.Date("2025-10-15") ~ as.Date("2025-10-14"),
+                          TRUE ~ date_name)) %>%
+  arrange(date, plot, collar, start.time)
+# repeat closures of a collar on one sheet date. Field sheets give the reason for
+# most repeats (leak, restart, collar height/offset corrected, "#2 is correct"):
+# the last closure supersedes. The only chamber remark marks a confirmation
+# measurement (30 May 13B2: "SECOND MEASUREMENT TO CONFIRM POSITIVE METHANE FLUX"),
+# so when any closure in a group carries a CONFIRM remark, all are kept and averaged.
+remarks <- bind_rows(lapply(json_files, function(f) {
+  d <- fromJSON(f, simplifyVector = FALSE)
+  bind_rows(lapply(d$datasets, function(ds) bind_rows(lapply(names(ds), function(nm)
+    bind_rows(lapply(names(ds[[nm]]$reps), function(rp)
+      tibble(chamID = paste0(nm, "_", sub("REP_", "", rp)), remark = ds[[nm]]$remark %||% "")))))))
+})) %>% distinct(chamID, .keep_all = TRUE)
+closures <- closures %>% left_join(remarks, by = "chamID") %>%
+  group_by(date_name, plot, collar) %>%
+  mutate(n_rep = n(), confirm = any(grepl("CONFIRM", toupper(remark))),
+         keep = confirm | row_number() == n(),
+         repeat_rule = case_when(n_rep == 1 ~ "single", confirm ~ "confirmation: averaged",
+                                 keep ~ "repeat: last kept", TRUE ~ "repeat: superseded")) %>% ungroup()
+write.csv(closures %>% filter(n_rep > 1) %>% select(date_name, plot, collar, chamID, start.time, remark, repeat_rule),
+          "output/tables/goflux_repeat_closures.csv", row.names = FALSE)
+dropped <- closures %>% filter(!keep)
+closures <- closures %>% filter(keep)
+
+# early seal break: a sharp CO2 drop (>15 ppm within 3 s) inside the fit window
+# means the chamber opened or lost its seal before the end of the record (only
+# 29 May 6C, at ~106 s after closure). The window for all gases is cut 1 s before
+# the drop. (Rows with Etime corrupted by +2^32 s lie outside the window.)
+BREAK_PPM_3S <- -15
+break_at <- sapply(closures$chamID, function(id) {
+  w <- ch[ch$chamID == id & ch$Etime >= 0 & ch$Etime <= 95, c("Etime", "CO2dry_ppm")]
+  w <- w[order(w$Etime), ]
+  if (nrow(w) < 10) return(NA_real_)
+  d3 <- w$CO2dry_ppm[-(1:3)] - head(w$CO2dry_ppm, -3)
+  i <- which(d3 < BREAK_PPM_3S)
+  if (length(i)) w$Etime[i[1]] - 1 else NA_real_
+})
+closures <- closures %>%
+  mutate(window_truncated_s = unname(break_at),
+         end.time = if_else(!is.na(window_truncated_s), start.time + window_truncated_s, end.time))
+cat(sprintf("Early seal breaks (window truncated): %s\n",
+            paste(closures$chamID[!is.na(closures$window_truncated_s)], collapse = ", ")))
+cat(sprintf("Chamber closures: %d kept, %d superseded repeats dropped; %d with a corrupted chamber clock\n",
+            nrow(closures), nrow(dropped), sum(closures$bad_clock)))
+
+# --- 2. LI-7820 N2O records + clock alignment ---------------------------------
+read_7820 <- function(f) {           # skip malformed rows (e.g. one truncated line on 11 Sep)
+  L <- readLines(f, warn = FALSE); nf <- lengths(strsplit(L, "\t"))
+  nh <- nf[startsWith(L, "DATAH")][1]; keep <- !startsWith(L, "DATA\t") | nf == nh
+  tf <- tempfile(fileext = ".data"); writeLines(L[keep], tf)
+  x <- as.data.frame(import.LI7820(tf, timezone = TZ)); x$n_malformed <- sum(!keep); x
+}
+n2 <- bind_rows(lapply(list.files("data/raw/flux/data", pattern = "^TG20.*\\.data$", full.names = TRUE), read_7820))
+n2 <- n2[!is.na(n2$POSIX.time) & !duplicated(n2$POSIX.time), ]
+n2$day <- as.Date(n2$POSIX.time, tz = TZ)
+
+ch_ok <- ch %>% filter(format(POSIX.time, "%Y") == "2025")
+ch_ok$day <- as.Date(ch_ok$POSIX.time, tz = TZ)
+days <- sort(unique(ch_ok$day))
+offsets <- bind_rows(lapply(days, function(d) {
+  starts <- closures %>% filter(!bad_clock, as.Date(start.time, tz = TZ) == d) %>% pull(cham.close)
+  n1 <- n2[n2$day == d, ]
+  if (length(starts) < 5 || nrow(n1) < 300) return(tibble(day = d, n_closures = length(starts)))
+  a <- find_clock_offset(n1, starts, gas = "H2O_ppm", search = c(-150, 150), window = 30, plot = FALSE)
+  b <- find_clock_offset(ch_ok[ch_ok$day == d, ], starts, gas = "H2O_ppm", search = c(-120, 120), window = 30, plot = FALSE)
+  tibble(day = d, n_closures = length(starts), onset_7820_s = a$offset, score_7820 = round(a$score, 1),
+         onset_chamber_s = b$offset, clock_offset_s = a$offset - b$offset)
+}))
+
+# per-closure refinement: lag maximizing cor(chamber H2O, shifted LI-7820 H2O)
+day_off <- setNames(offsets$clock_offset_s, as.character(offsets$day))
+closure_lag <- function(id) {
+  tr <- ch[ch$chamID == id, ]; cc <- tr$cham.close[1]
+  if (is.na(cc) || format(cc, "%Y") != "2025") return(NULL)
+  o0 <- day_off[as.character(as.Date(cc, tz = TZ))]; if (is.na(o0)) return(NULL)
+  tc <- as.numeric(tr$POSIX.time - cc, units = "secs")
+  x <- n2[n2$POSIX.time >= cc + o0 - 150 & n2$POSIX.time <= cc + o0 + 300, ]
+  if (nrow(x) < 100) return(NULL)
+  tx <- as.numeric(x$POSIX.time - cc, units = "secs")
+  lags <- (o0 - 100):(o0 + 100)
+  r <- vapply(lags, function(L) {
+    y <- approx(tx - L, x$H2O_ppm, xout = tc)$y; ok <- !is.na(y) & !is.na(tr$H2O_ppm)
+    if (sum(ok) < 60) NA_real_ else cor(y[ok], tr$H2O_ppm[ok])
+  }, numeric(1))
+  if (all(is.na(r))) return(NULL)
+  tibble(chamID = id, cham.close = cc, day_offset_s = unname(o0), lag_s = lags[which.max(r)], lag_r = max(r, na.rm = TRUE))
+}
+lags <- bind_rows(lapply(closures$chamID[!closures$bad_clock], closure_lag)) %>%
+  mutate(day = as.Date(cham.close, tz = TZ)) %>% arrange(cham.close) %>% group_by(day) %>%
+  mutate(run_med = as.numeric(stats::runmed(lag_s, k = min(5, 2 * ((n() - 1) %/% 2) + 1), endrule = "median")),
+         clock_offset_s = ifelse(abs(lag_s - run_med) <= 5 & lag_r >= 0.9, lag_s, run_med)) %>% ungroup()
+write.csv(lags, "output/tables/goflux_clock_offsets_by_closure.csv", row.names = FALSE)
+saveRDS(list(ch = ch, n2 = n2, closures = closures, dropped = dropped, lags = lags),
+        "data/processed/flux_raw_traces.rds")   # for code/qc/plot_closure_traces.R
+offsets <- offsets %>% left_join(lags %>% group_by(day) %>%
+  summarise(closure_offset_min = min(clock_offset_s), closure_offset_max = max(clock_offset_s),
+            n_differ_gt5s = sum(abs(clock_offset_s - day_offset_s) > 5)), by = "day")
+write.csv(offsets, "output/tables/goflux_clock_offsets.csv", row.names = FALSE)
+cat("LI-7820 clock offsets (s, analyzer minus chamber):\n"); print(as.data.frame(offsets))
+
+# --- 3. Trace segments -----------------------------------------------------------
+seg_one <- function(tr, cl, gas_cols, prec, instrument) {
+  s <- tr[tr$POSIX.time >= cl$start.time - SHOULDER_S & tr$POSIX.time <= cl$end.time + SHOULDER_S, ]
+  if (nrow(s) < 10) return(NULL)
+  s <- s[, c("POSIX.time", gas_cols, "H2O_ppm")]
+  s$UniqueID <- cl$chamID
+  s$flag <- as.numeric(s$POSIX.time >= cl$start.time & s$POSIX.time <= cl$end.time)
+  if (sum(s$flag) < 30) return(NULL)
+  s$start.time <- cl$start.time; s$end.time <- cl$end.time
+  s$Etime <- as.numeric(s$POSIX.time - cl$start.time, units = "secs")
+  s$obs.length <- as.numeric(cl$end.time - cl$start.time, units = "secs")
+  s$obs.length_corr <- s$obs.length; s$start.time_corr <- s$start.time; s$end.time_corr <- s$end.time
+  s$Vtot <- cl$Vtot; s$Area <- cl$Area; s$Pcham <- cl$Pcham; s$Tcham <- cl$Tcham
+  s$DATE <- format(cl$start.time, "%Y-%m-%d")
+  for (g in names(prec)) s[[paste0(g, "_prec")]] <- prec[[g]]
+  s$H2O_ppm[is.na(s$H2O_ppm)] <- 0
+  s$instrument <- instrument
+  s$instrument_day <- paste(instrument, cl$date_name)
+  s
+}
+# CO2/CH4: the chamber's own record, per closure (Etime-based, so works even with a bad clock)
+man_ch <- bind_rows(lapply(split(ch, ch$chamID), function(tr) {
+  cl <- closures[closures$chamID == tr$chamID[1], ]
+  if (!nrow(cl)) return(NULL)
+  if (cl$bad_clock) {   # rebuild a notional time axis; only Etime matters for the fit
+    cl$start.time <- as.POSIXct(paste(cl$date_name, "12:00:00"), tz = TZ)
+    cl$end.time <- cl$start.time + 95
+  }
+  tr$POSIX.time <- cl$start.time + tr$Etime            # rebuild times from Etime (robust to clock faults)
+  seg_one(tr, cl, c("CO2dry_ppm", "CH4dry_ppb"), PREC_7810, "LI-7810")
+}))
+# N2O: LI-7820 record shifted onto the chamber clock
+off_map <- setNames(lags$clock_offset_s, lags$chamID)
+man_n2o <- bind_rows(lapply(seq_len(nrow(closures)), function(i) {
+  cl <- closures[i, ]; if (cl$bad_clock) return(NULL)
+  off <- off_map[cl$chamID]
+  if (is.na(off)) return(NULL)
+  tr <- n2[n2$POSIX.time >= cl$start.time + off - 60 & n2$POSIX.time <= cl$end.time + off + 60, ]
+  tr$POSIX.time <- tr$POSIX.time - off
+  seg_one(tr, cl, "N2Odry_ppb", PREC_7820, "LI-7820")
+}))
+cat(sprintf("Segments: CO2/CH4 %d closures; N2O %d closures\n",
+            n_distinct(man_ch$UniqueID), n_distinct(man_n2o$UniqueID)))
+
+# --- 4. goFlux + fluxqc ---------------------------------------------------------
+aux_ch  <- man_ch %>% distinct(UniqueID, instrument_day)
+aux_n2o <- man_n2o %>% distinct(UniqueID, instrument_day)
+qc_list <- list(c0 = TRUE, co2_tracer = TRUE, convex = TRUE, min_window = list(secs = 60),
+                ambient_start = FALSE, noisy = TRUE)   # windows start after the 25 s deadband
+res_co2 <- process_fluxes(man_ch, aux = aux_ch, gastype = "CO2dry_ppm", precision = "mad", mdf = "wassmann",
+                          conf = 0.95, group = "instrument_day", qc = FALSE)
+res_ch4 <- process_fluxes(man_ch, aux = aux_ch, gastype = "CH4dry_ppb", precision = "mad", mdf = "wassmann",
+                          conf = 0.95, group = "instrument_day", co2 = res_co2$fluxes, qc = qc_list)
+res_n2o <- process_fluxes(man_n2o, aux = aux_n2o, gastype = "N2Odry_ppb", precision = "mad", mdf = "wassmann",
+                          conf = 0.95, group = "instrument_day", co2 = res_co2$fluxes, qc = qc_list)
+cs <- bind_rows(closure_seconds(man_ch) %>% mutate(src = "LI-7810"), closure_seconds(man_n2o) %>% mutate(src = "LI-7820"))
+
+pick <- function(f, gas) {
+  se <- ifelse(f$model == "HM" & !is.na(f$HM.SE), f$HM.SE, f$LM.SE)
+  out <- tibble(chamID = f$UniqueID, flux = f$best.flux, model = f$model, LM = f$LM.flux, HM = f$HM.flux,
+                SE = se, LM_r2 = f$LM.r2, g_fact = f$g.fact, sigma_mad = f$sigma_emp, MDF = f$MDF_emp,
+                below_MDF = f$below_MDF_emp, det_class = f$det_class_emp, quality_check = f$quality.check,
+                qc_any = if ("qc_any" %in% names(f)) f$qc_any else NA, qc_note = if ("qc_note" %in% names(f)) f$qc_note else NA)
+  names(out)[-1] <- paste0(gas, "_", names(out)[-1]); out
+}
+gf <- closures %>%
+  left_join(pick(res_co2$fluxes, "CO2"), by = "chamID") %>%
+  left_join(pick(res_ch4$fluxes, "CH4"), by = "chamID") %>%
+  left_join(pick(res_n2o$fluxes, "N2O"), by = "chamID") %>%
+  left_join(treatment_key, by = "plot")
+write.csv(gf, "data/processed/flux_goflux.csv", row.names = FALSE)
+
+# analysis table in the previous schema (+ detection fields); confirmation repeats averaged
+gf_collar <- gf %>% group_by(date, plot, collar, treatment) %>%
+  summarize(n_closures = n(),
+            across(where(is.numeric) & !any_of(c("n_rep")), ~ mean(.x, na.rm = TRUE)),
+            across(where(is.logical), ~ any(.x, na.rm = TRUE)),
+            across(where(is.character) & !any_of(c("treatment", "collar")), ~ paste(unique(.x), collapse = "|")),
+            .groups = "drop") %>%
+  mutate(across(where(is.numeric), ~ ifelse(is.nan(.x), NA, .x)),
+         # detection re-evaluated on the averaged flux
+         CH4_below_MDF = abs(CH4_flux) < CH4_MDF, N2O_below_MDF = abs(N2O_flux) < N2O_MDF,
+         CH4_det_class = ifelse(CH4_below_MDF, "below detection", ifelse(CH4_flux > 0, "emission", "uptake")),
+         N2O_det_class = ifelse(N2O_below_MDF, "below detection", ifelse(N2O_flux > 0, "emission", "uptake")))
+est <- gf_collar %>% transmute(plot, treatment, date, collar,
+                        FCO2_DRY = CO2_flux, FCH4_DRY = CH4_flux, FN2O = N2O_flux,
+                        FCO2_R2 = CO2_LM_r2, FCH4_R2 = CH4_LM_r2, FN2O_R2 = N2O_LM_r2,
+                        CO2_model, CH4_model, N2O_model,
+                        CH4_MDF, CH4_below_MDF, CH4_det_class, N2O_MDF, N2O_below_MDF, N2O_det_class,
+                        CH4_qc_any, N2O_qc_any) %>%
+  arrange(date, plot, collar)
+write.csv(est, "data/processed/flux_estimates.csv", row.names = FALSE)
+
+# --- 5. Reports ------------------------------------------------------------------
+sfp <- read.csv("data/processed/flux_estimates_soilfluxpro.csv") %>% mutate(date = as.Date(date))
+cmp <- est %>% inner_join(sfp %>% select(date, plot, collar, sfp_CO2 = FCO2_DRY, sfp_CH4 = FCH4_DRY, sfp_N2O = FN2O),
+                          by = c("date", "plot", "collar"))
+cmp_tab <- bind_rows(lapply(c("CO2", "CH4", "N2O"), function(g) {
+  a <- cmp[[c(CO2 = "FCO2_DRY", CH4 = "FCH4_DRY", N2O = "FN2O")[g]]]; b <- cmp[[paste0("sfp_", g)]]
+  ok <- complete.cases(a, b)
+  tibble(gas = g, n = sum(ok), r = cor(a[ok], b[ok]), median_ratio = median(a[ok] / b[ok]),
+         goflux_range = paste(signif(range(a[ok]), 3), collapse = " to "),
+         soilfluxpro_range = paste(signif(range(b[ok]), 3), collapse = " to "))
+}))
+write.csv(cmp_tab, "output/tables/goflux_vs_soilfluxpro.csv", row.names = FALSE)
+cat("\ngoFlux vs SoilFluxPro:\n"); print(as.data.frame(cmp_tab))
+qc_rev <- gf %>% filter(CH4_qc_any %in% TRUE | N2O_qc_any %in% TRUE) %>%
+  select(chamID, date, plot, collar, CH4_flux, CH4_qc_note, N2O_flux, N2O_qc_note)
+write.csv(qc_rev, "output/tables/goflux_qc_review.csv", row.names = FALSE)
+det <- gf %>% summarize(across(c(CH4_below_MDF, N2O_below_MDF), ~ round(100 * mean(.x, na.rm = TRUE), 1)),
+                        HM_CO2 = round(100 * mean(CO2_model == "HM", na.rm = TRUE), 1),
+                        HM_CH4 = round(100 * mean(CH4_model == "HM", na.rm = TRUE), 1),
+                        HM_N2O = round(100 * mean(N2O_model == "HM", na.rm = TRUE), 1))
+cat("\n% below MDF and % HM model:\n"); print(as.data.frame(det))
+cat(sprintf("QC screens flagged %d closures for review (not removed)\n", nrow(qc_rev)))

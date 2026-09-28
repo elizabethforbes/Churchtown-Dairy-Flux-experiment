@@ -13,3 +13,15 @@ Icon?
 
 # Large flux metadata PDFs (~700 MB)
 data/raw/flux/metadata_pdfs/
+
+# Scanned field sheets (~630 MB; same PDFs as data/raw/flux/metadata_pdfs)
+data/datasheets_scans/
+
+# Google Drive pointer files and stray R graphics output
+*.gsheet
+*.gdoc
+Rplots.pdf
+
+# Regenerable intermediates / QC output (rebuilt by code/run_all.R)
+data/processed/flux_raw_traces.rds
+output/qc/

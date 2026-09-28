@@ -27,8 +27,9 @@ Field experiment at Hudson Carbon (Churchtown Dairy, NY) investigating the effec
 - `soil/` — Lab soil analyses
   - `sir/` — Substrate-induced respiration (3 timepoints). Methods: LGR closed-loop (timepoints 1–2) and IRGA flow-through (timepoint 3).
   - `cmin/` — Carbon mineralization incubation data (3 timepoints, multiple dates each). Methods: LGR (timepoint 1) and IRGA (timepoints 2–3).
-  - `cmin_mass/` — Soil masses and moisture for C/N mineralization normalization
-  - `manure_amendment/` — Manure-specific incubation samples
+  - `cmin_mass/` — Soil masses and moisture for C/N mineralization normalization (also the N-min tube setup sheets)
+  - `nmin/` — KCl-extractable NO3-N and NH4-N (mg N/L) from the Yale lab (`Yale_inorgN_2026.xlsx`); includes rows from other projects (SRS, CP, BL) that the pipeline drops
+  - `manure_amendment/` — Setup masses for KCl extractions of the compost and slurry material itself
   - `gwc/` — Gravimetric water content (3 timepoints)
   - `ph/` — Soil pH (3 timepoints)
   - `microbes/` — DNA sample inventory (tracking only, no sequence data here)
