@@ -8,11 +8,14 @@
 #   (c) N2O emission factor: amendment-attributable N2O-N as % of applied N,
 #       for days 1-6 and the season, against IPCC 2019 EF1 (1.0% aggregate;
 #       0.6% for organic N inputs in wet climates)
-# Soil CO2 is not included: chamber CO2 is soil respiration (roots + microbes),
+#   (d) context: the non-CO2 budget against soil respiration, aboveground NPP and
+#       the (assumed) amendment C input, all in CO2 units
+# Soil CO2 is not included in the budget: chamber CO2 is soil respiration (roots + microbes),
 # not a net ecosystem exchange, so it is not a GHG balance term.
 # Input:  output/tables/ghg_totals_by_plot.csv (30_main_figures.R),
 #         output/tables/application_inputs.csv
-# Output: output/figures/main/fig7_ghg_budget.{pdf,png}; output/tables/ghg_co2eq_budget.csv
+# Output: output/figures/main/fig7_ghg_budget.{pdf,png}; output/tables/ghg_co2eq_budget.csv,
+#         ghg_co2eq_metrics.csv
 
 source("code/analysis/fig_setup.R")
 
@@ -101,9 +104,96 @@ pc <- ggplot() + scale_x_discrete() +
   theme(legend.position = "bottom") +
   theme(plot.title.position = "plot")
 
-fig7 <- ((pa | pc) / pb) + plot_layout(heights = c(1.3, 1)) + tags_pub()
+# --- (d) context: non-CO2 budget against the system's CO2-C fluxes -----------------
+# All in g CO2(-eq) m-2 over the same season (log axis). These are gross fluxes for
+# scale, not terms of one net balance.
+#   Soil respiration: clipped collars (roots + microbes), season trapezoid total of
+#     midday closures (10:00-17:00), so likely biased high vs a 24-h integral.
+#   ANPP: Oct harvest of a 0.5 m2 subplot left uncut since the pre-experiment mow;
+#     C = 45% of dry mass (standard herbage value).
+#   Amendment C: not measured. Assumed C = 25-40% of dry matter for slurry and
+#     15-30% for compost (typical ranges; checked against C:N of ~13-21 and ~17-34
+#     from the measured N); shown as a range.
+C_FRAC <- list(slurry = c(0.25, 0.40), compost = c(0.15, 0.30))
+co2 <- function(gC) gC * 44 / 12
+rs <- tot %>% filter(period == "season") %>% transmute(plot, treatment = as_trt(treatment), val = co2(CO2_C_g_m2))
+anpp <- read.csv("data/processed/biomass.csv") %>% group_by(plot, treatment) %>%
+  summarize(val = co2(mean(dry_matter_g_m2) * 0.45), .groups = "drop") %>% mutate(treatment = as_trt(treatment))
+dm <- read.csv("output/tables/application_inputs.csv")
+amend_c <- bind_rows(lapply(c("slurry", "compost"), function(tr) {
+  d <- dm$dm_g_m2[dm$treatment == tr]
+  tibble(treatment = as_trt(tr), lo = co2(d * C_FRAC[[tr]][1]), hi = co2(d * C_FRAC[[tr]][2]))
+}))
+att_net <- att %>% filter(comp == "net") %>% select(treatment, diff)
+ctx_rows <- c(rs = "Soil respiration", anpp = "Aboveground NPP",
+              amend = "Amendment C input*", net = "Non-CO₂ net",
+              att = "Non-CO₂, amendment effect", ch4 = "CH₄ uptake (|sink|)")
+lvl <- rev(names(ctx_rows))
+pts <- bind_rows(rs %>% mutate(row = "rs"), anpp %>% mutate(row = "anpp"),
+                 wide %>% transmute(plot, treatment, val = net, row = "net"),
+                 wide %>% transmute(plot, treatment, val = -ch4, row = "ch4")) %>%
+  mutate(row = factor(row, levels = lvl))
+mns <- pts %>% group_by(row, treatment) %>% summarize(val = mean(val), .groups = "drop") %>%
+  bind_rows(att_net %>% transmute(row = factor("att", levels = lvl), treatment, val = diff))
+pdd <- position_dodge(width = 0.6)
+pd_ <- ggplot() +
+  geom_linerange(data = amend_c %>% mutate(row = factor("amend", levels = lvl)),
+                 aes(y = row, xmin = lo, xmax = hi, colour = treatment), position = pdd, linewidth = 1.6, alpha = 0.6) +
+  geom_point(data = pts, aes(val, row, colour = treatment), shape = 16, size = 0.8, alpha = 0.35,
+             position = position_jitterdodge(jitter.width = 0, jitter.height = 0.08, dodge.width = 0.6, seed = 1)) +
+  geom_point(data = mns, aes(val, row, colour = treatment, shape = treatment, fill = treatment),
+             position = pdd, size = 1.8, stroke = 0.4) +
+  scale_x_log10(breaks = c(1, 10, 100, 1000, 10000), labels = c("1", "10", "100", "1k", "10k"), limits = c(0.5, 12000)) +
+  annotation_logticks(sides = "b", linewidth = 0.2, short = unit(1, "pt"), mid = unit(2, "pt"), long = unit(3, "pt")) +
+  scale_y_discrete(labels = ctx_rows, drop = FALSE) +
+  scale_colour_trt(guide = "none") + scale_fill_trt(guide = "none") + scale_shape_trt(guide = "none") +
+  labs(x = expression(g~CO[2]*"(-eq)"~m^{-2}~"(season, log scale)"), y = NULL,
+       title = "In context: the system's carbon fluxes", subtitle = "*assumed C content (range)") +
+  theme(plot.title.position = "plot", panel.grid.major.x = element_line(colour = "grey92", linewidth = 0.25),
+        panel.grid.major.y = element_blank())
 
-save_fig(fig7, "fig7_ghg_budget", 180, 130)
+fig7 <- ((pa | pc) / ((pb | pd_) + plot_layout(widths = c(0.85, 1.25)))) + plot_layout(heights = c(1.15, 1)) + tags_pub()
+save_fig(fig7, "fig7_ghg_budget", 180, 145)
+
+# context numbers
+ctx <- mns %>% mutate(val = signif(val, 3)) %>% pivot_wider(names_from = treatment, values_from = val)
+brk <- att_net %>% left_join(amend_c, by = "treatment") %>%
+  mutate(breakeven_retention_pct_lo = 100 * diff / hi, breakeven_retention_pct_hi = 100 * diff / lo)
+cat("  context (g CO2-eq m-2):\n"); print(as.data.frame(ctx))
+cat("  share of amendment C that must stay in soil to offset attributable non-CO2 (%):\n")
+print(as.data.frame(brk %>% mutate(across(where(is.numeric), ~ signif(.x, 3)))))
+cat(sprintf("  non-CO2 net as %% of soil respiration: %s\n",
+            paste(sprintf("%s %.2f", levels(wide$treatment),
+                          100 * tapply(wide$net, wide$treatment, mean) / tapply(rs$val, rs$treatment, mean)), collapse = ", ")))
+cat(sprintf("  non-CO2 net as %% of ANPP C uptake: %s\n",
+            paste(sprintf("%s %.1f", levels(wide$treatment),
+                          100 * tapply(wide$net, wide$treatment, mean) / tapply(anpp$val, anpp$treatment, mean)), collapse = ", ")))
+
+# --- metric sensitivity (table) ----------------------------------------------------
+# IPCC AR6 WG1 Table 7.15: CH4 non-fossil GWP20 79.7, GWP100 27.0, GTP100 4.7;
+# N2O GWP20 273, GWP100 273, GTP100 233. GWP* (Smith et al. 2021) applies only to
+# the CH4 term and depends on how emissions change over time: a new, sustained
+# change in CH4 flux (e.g. applying slurry every year) is weighted 4.53 x GWP100
+# for its first 20 years; a flux that has been constant for >20 years (the
+# background soil CH4 sink) is weighted 0.28 x GWP100. N2O is treated like CO2
+# (GWP* = GWP100).
+metrics <- tribble(~metric, ~f_ch4_total, ~f_ch4_att, ~f_n2o,
+                   "GWP100", 27.0, 27.0, 273,
+                   "GWP20", 79.7, 79.7, 273,
+                   "GTP100", 4.7, 4.7, 233,
+                   "GWP* (sustained practice)", 0.28 * 27.0, 4.53 * 27.0, 273)
+mass <- wide %>% transmute(plot, treatment, ch4_kg = ch4 / GWP_CH4, n2o_kg = n2o / GWP_N2O)  # g CH4, g N2O per m2
+ctl_mass <- mass %>% filter(treatment == "control") %>% summarize(ch4 = mean(ch4_kg), n2o = mean(n2o_kg))
+met_tab <- bind_rows(lapply(seq_len(nrow(metrics)), function(i) {
+  m <- metrics[i, ]
+  mass %>% group_by(treatment) %>% summarize(ch4 = mean(ch4_kg), n2o = mean(n2o_kg), .groups = "drop") %>%
+    transmute(metric = m$metric, treatment,
+              ch4_co2eq = ch4 * m$f_ch4_total, n2o_co2eq = n2o * m$f_n2o, net_co2eq = ch4_co2eq + n2o_co2eq,
+              attributable_co2eq = ifelse(treatment == "control", NA,
+                                          (ch4 - ctl_mass$ch4) * m$f_ch4_att + (n2o - ctl_mass$n2o) * m$f_n2o))
+})) %>% mutate(across(where(is.numeric), ~ signif(.x, 3)))
+write.csv(met_tab, "output/tables/ghg_co2eq_metrics.csv", row.names = FALSE)
+cat("  wrote ghg_co2eq_metrics.csv\n"); print(as.data.frame(met_tab))
 
 # --- table -------------------------------------------------------------------------
 bud <- wide %>% group_by(treatment) %>%

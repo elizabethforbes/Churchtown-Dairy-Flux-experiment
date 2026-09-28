@@ -55,7 +55,14 @@ All values are in CO2-equivalents (GWP100, IPCC AR6: CH4 27.0, N2O 273), from pl
 (b) N2O emission factor: amendment-attributable N2O-N (plot minus control mean) as % of the N applied (slurry 2.75, compost 3.87 g N m−2), for days 1–6 and the season. Reference lines are the IPCC 2019 EF1 aggregate default (1%) and the value for organic N inputs in wet climates (0.6%).
 (c) Components attributable to each amendment: mean difference from control with Welch 95% CI.
 
-Soil CO2 is not included. Chamber CO2 is soil respiration (roots plus microbes), not net ecosystem exchange, so it is not a term in a GHG balance. The amendments' carbon inputs were not measured.
+(d) The non-CO2 budget in the context of the system's carbon fluxes over the same season, all in g CO2(-eq) m−2 on a log scale. These are gross fluxes shown for scale; they are not terms of a single net balance.
+- **Soil respiration:** from the clipped collars, so roots plus microbes. It is integrated from midday closures (10:00–17:00), so it is likely biased high compared with a 24-h total.
+- **Aboveground NPP:** the October harvest of the 0.5 m² subplot left uncut since the pre-experiment mow, assuming C = 45% of dry mass.
+- **Amendment C input:** not measured. The range assumes C = 25–40% of dry matter for slurry and 15–30% for compost.
+- **Result:** the non-CO2 net is 0.35–0.7% of season soil respiration and 6–11% of aboveground NPP. For the amendment effect to be offset, 10–17% of the slurry C, or 2–4% of the compost C, would have to stay in the soil through the season (point estimates).
+- **Metric choice barely matters** (ghg_co2eq_metrics.csv): season net non-CO2 for the slurry plots is 42 g CO2-eq m−2 under GWP100, 38 under GWP20, 38 under GTP100 and 44 under GWP* for a sustained practice. N2O dominates, and its GWP20 equals its GWP100.
+
+Soil CO2 is not included in panels a–c. Chamber CO2 is soil respiration (roots plus microbes), not net ecosystem exchange, so it is not a term in a GHG balance. The amendments' carbon inputs were not measured.
 
 Results:
 - N2O dominates the non-CO2 budget in every treatment: 23 (control), 33 (compost) and 44 (slurry) g CO2-eq m−2. CH4 uptake offsets about 2 g CO2-eq m−2.
