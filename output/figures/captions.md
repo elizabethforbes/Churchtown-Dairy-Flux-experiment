@@ -39,17 +39,29 @@ Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels show:
 
 p-values are shown where a one-way ANOVA gave p < 0.05.
 
-**Figure 6. Every amendment effect in the study, on one scale.**
-- **Scale:** Hedges' g (amendment minus control, divided by the pooled plot-level SD, with a small-sample correction) with 95% CI. Plots are the experimental unit (n = 5 per treatment). The grey band marks |g| < 0.8, the conventional threshold for a "large" effect; with n = 5 per group, only effects beyond about ±1.3–1.5 reach p < 0.05.
-- **Panels:**
-  - (a) GHG plot totals for days 1–6 and for the season (29 May–14 Oct).
-  - (b) Soil N and C cycling.
-  - (c) Dairy One soil tests. In panels b and c, the three points in each row are the three samplings (14 Oct, 21 Jul, 29 May from top to bottom; lighter = earlier).
-  - (d) October biomass and forage composition.
-- **Symbols:** filled = Welch p < 0.05, uncorrected.
-- **Result:**
-  - 5 of 136 effects had p < 0.05, fewer than the ~7 expected by chance, and none survived Benjamini–Hochberg FDR correction (all q > 0.9). Values are in effect_synthesis.csv.
-  - The first-week slurry N2O and CO2 pulses (Fig. 3) are the largest GHG effects (N2O g = 1.49, CO2 g = 1.14). Their Welch tests narrowly miss p < 0.05 (0.057 and 0.083), but the one-way ANOVA across all three treatments gives p = 0.018 and 0.056.
+**Figure 6. Soil tests and plant response.**
+(a) Dairy One soil tests (Mehlich-3 P, K, Ca and Mg; pH; organic matter; CEC; base saturation) at each sampling, as Hedges' g (amendment minus control, divided by the pooled plot-level SD, small-sample corrected) with 95% CI. The three points in each row are the samplings: 14 Oct, 21 Jul and 29 May from top to bottom, lighter = earlier.
+(b) Aboveground dry biomass at the October harvest. Small points are plots; large symbols are means with 95% CI.
+(c) Forage composition at the October harvest, as Hedges' g.
+
+The grey band marks |g| < 0.8, the conventional "large" effect threshold. With n = 5 per treatment, only effects beyond about ±1.3–1.5 reach p < 0.05. Filled symbols are Welch p < 0.05, uncorrected.
+- Biomass did not differ (ANOVA p = 0.99).
+- Across all 136 amendment × response effects in the study (Figs 2–6), 5 had p < 0.05, fewer than the ~7 expected by chance, and none survived Benjamini–Hochberg FDR correction (effect_synthesis.csv).
+- Forage PERMANOVA: p = 0.40.
+
+**Figure 7. Non-CO2 greenhouse-gas budget.**
+All values are in CO2-equivalents (GWP100, IPCC AR6: CH4 27.0, N2O 273), from plot-level trapezoid totals for 29 May–14 Oct.
+(a) Season budget per treatment. Bars are component means: CH4 uptake, N2O in days 1–6, and N2O over the rest of the season. Small points are net CH4 + N2O per plot; large symbols are the treatment mean ± 95% CI.
+(b) N2O emission factor: amendment-attributable N2O-N (plot minus control mean) as % of the N applied (slurry 2.75, compost 3.87 g N m−2), for days 1–6 and the season. Reference lines are the IPCC 2019 EF1 aggregate default (1%) and the value for organic N inputs in wet climates (0.6%).
+(c) Components attributable to each amendment: mean difference from control with Welch 95% CI.
+
+Soil CO2 is not included. Chamber CO2 is soil respiration (roots plus microbes), not net ecosystem exchange, so it is not a term in a GHG balance. The amendments' carbon inputs were not measured.
+
+Results:
+- N2O dominates the non-CO2 budget in every treatment: 23 (control), 33 (compost) and 44 (slurry) g CO2-eq m−2. CH4 uptake offsets about 2 g CO2-eq m−2.
+- The first week is 3–7% of season N2O.
+- Net budgets did not differ (ANOVA p = 0.57).
+- The slurry emission factor was 0.17% (−0.01 to 0.34) over days 1–6 and 1.8% (−3.2 to 6.8) over the season. Compost was 0.01% and 0.6%.
 
 ## Supplementary
 
