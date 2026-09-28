@@ -1,0 +1,4 @@
+"treatment","ch4_mean","ch4_se","n2o_wk_mean","n2o_wk_se","n2o_rest_mean","n2o_rest_se","n2o_mean","n2o_se","net_mean","net_se","EF_Days_1-6_mean","EF_Season_mean","EF_Days_1-6_lo","EF_Season_lo","EF_Days_1-6_hi","EF_Season_hi"
+"control",-2.3,0.185,1.01,0.113,22,2.95,23,3.05,20.7,3.19,NA,NA,NA,NA,NA,NA
+"compost",-2.35,0.269,1.16,0.242,32.1,10.9,33.3,11.1,31,11.1,0.00929,0.622,-0.0306,-1.21,0.0492,2.46
+"slurry",-2.12,0.16,2.97,0.745,41.5,20.7,44.4,21.4,42.3,21.5,0.166,1.82,-0.00828,-3.2,0.34,6.84

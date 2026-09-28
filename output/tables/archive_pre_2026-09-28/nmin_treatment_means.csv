@@ -1,0 +1,37 @@
+"metric","round","treatment","mean","se","n","p"
+"Initial NO3-N (ug/g)","Round 1 (May 29)","control",2.58,0.67,5,0.905
+"Initial NO3-N (ug/g)","Round 1 (May 29)","compost",2.7,0.52,5,0.905
+"Initial NO3-N (ug/g)","Round 1 (May 29)","slurry",2.3,0.75,5,0.905
+"Initial NO3-N (ug/g)","Round 2 (Jul 21)","control",9.3,1.28,5,0.044
+"Initial NO3-N (ug/g)","Round 2 (Jul 21)","compost",6.27,0.45,5,0.044
+"Initial NO3-N (ug/g)","Round 2 (Jul 21)","slurry",6.91,0.14,5,0.044
+"Initial NO3-N (ug/g)","Round 3 (Oct)","control",14.01,2.56,5,0.039
+"Initial NO3-N (ug/g)","Round 3 (Oct)","compost",10.38,1.36,5,0.039
+"Initial NO3-N (ug/g)","Round 3 (Oct)","slurry",6.74,0.87,5,0.039
+"Initial NH4-N (ug/g)","Round 1 (May 29)","control",6,0.98,5,0.878
+"Initial NH4-N (ug/g)","Round 1 (May 29)","compost",5.38,1.1,5,0.878
+"Initial NH4-N (ug/g)","Round 1 (May 29)","slurry",6.02,0.93,5,0.878
+"Initial NH4-N (ug/g)","Round 2 (Jul 21)","control",8.71,2.17,5,0.414
+"Initial NH4-N (ug/g)","Round 2 (Jul 21)","compost",6.83,0.6,5,0.414
+"Initial NH4-N (ug/g)","Round 2 (Jul 21)","slurry",6.22,0.48,5,0.414
+"Initial NH4-N (ug/g)","Round 3 (Oct)","control",1.57,0.63,5,0.678
+"Initial NH4-N (ug/g)","Round 3 (Oct)","compost",0.52,1.16,5,0.678
+"Initial NH4-N (ug/g)","Round 3 (Oct)","slurry",0.67,0.83,5,0.678
+"Net N mineralization, 28 d (ug N/g)","Round 1 (May 29)","control",19.13,1.95,5,0.103
+"Net N mineralization, 28 d (ug N/g)","Round 1 (May 29)","compost",17.85,4.19,5,0.103
+"Net N mineralization, 28 d (ug N/g)","Round 1 (May 29)","slurry",10.17,2.03,5,0.103
+"Net N mineralization, 28 d (ug N/g)","Round 2 (Jul 21)","control",11.52,2.82,5,0.937
+"Net N mineralization, 28 d (ug N/g)","Round 2 (Jul 21)","compost",11.57,4.87,5,0.937
+"Net N mineralization, 28 d (ug N/g)","Round 2 (Jul 21)","slurry",13.18,3.07,5,0.937
+"Net N mineralization, 28 d (ug N/g)","Round 3 (Oct)","control",14.13,5.55,5,0.866
+"Net N mineralization, 28 d (ug N/g)","Round 3 (Oct)","compost",11.29,2.33,5,0.866
+"Net N mineralization, 28 d (ug N/g)","Round 3 (Oct)","slurry",12.31,2.55,5,0.866
+"Net nitrification, 28 d (ug N/g)","Round 1 (May 29)","control",23.49,2.91,5,0.23
+"Net nitrification, 28 d (ug N/g)","Round 1 (May 29)","compost",21.73,5.22,5,0.23
+"Net nitrification, 28 d (ug N/g)","Round 1 (May 29)","slurry",14.21,2.84,5,0.23
+"Net nitrification, 28 d (ug N/g)","Round 2 (Jul 21)","control",19.24,2.18,5,0.855
+"Net nitrification, 28 d (ug N/g)","Round 2 (Jul 21)","compost",16.18,5.38,5,0.855
+"Net nitrification, 28 d (ug N/g)","Round 2 (Jul 21)","slurry",18.39,3.64,5,0.855
+"Net nitrification, 28 d (ug N/g)","Round 3 (Oct)","control",14.07,5.25,5,0.652
+"Net nitrification, 28 d (ug N/g)","Round 3 (Oct)","compost",10.29,1.4,5,0.652
+"Net nitrification, 28 d (ug N/g)","Round 3 (Oct)","slurry",10.41,1.34,5,0.652
