@@ -23,6 +23,29 @@ gwc_plot_avg <- gwc %>%
 
 source("code/processing/helpers.R")
 
+# Lab numbers are the tube-level key. They are text in some sheets ("62.0",
+# "x6"), so normalize to character: numeric IDs -> "62", extra tubes -> "x6".
+normalize_lab_no <- function(x) {
+  x_chr <- tolower(trimws(as.character(x)))
+  x_num <- suppressWarnings(as.numeric(x_chr))
+  if_else(!is.na(x_num), as.character(round(x_num)), x_chr)
+}
+
+# Flag readings whose IRGA note says the septum was not seated (headspace may
+# have leaked). Flagged readings are excluded from the cumulative integration.
+flag_septa <- function(result, irga, ids) {
+  if (is.null(result) || !"notes.irga" %in% names(irga)) return(result)
+  bad <- normalize_lab_no(ids[grepl("SEPTA|SEPTUM", toupper(irga$notes.irga))])
+  bad <- bad[!is.na(bad)]
+  hit <- result$lab_no %in% bad
+  if (any(hit)) {
+    cat(sprintf("    FLAG: septa_not_seated for lab %s\n", paste(result$lab_no[hit], collapse = ", ")))
+    result$flag[hit] <- if_else(is.na(result$flag[hit]), "septa_not_seated",
+                                paste(result$flag[hit], "septa_not_seated", sep = ";"))
+  }
+  result
+}
+
 # =============================================================================
 # LGR calculation for C-min
 # Uses same physics as SIR LGR but applied across multiple measurement dates
@@ -59,7 +82,7 @@ calc_cmin_lgr <- function(gas_data, mass_data, sheet_name, Vsam = 5, default_Vef
   # Process samples
   samples <- samples %>%
     mutate(
-      Lab_No = as.numeric(Lab_No),
+      Lab_No = normalize_lab_no(Lab_No),
       pre  = suppressWarnings(as.numeric(`Pre-injection`)),
       post = suppressWarnings(as.numeric(`Post-injection`)),
       diff = post - pre
@@ -120,7 +143,7 @@ calc_cmin_lgr <- function(gas_data, mass_data, sheet_name, Vsam = 5, default_Vef
     left_join(
       mass_data %>%
         transmute(
-          Lab_No = as.numeric(Lab_No),
+          Lab_No,
           plot = as.integer(Plot),
           replicate = as.character(Replicate),
           fresh_mass = as.numeric(Mass_Soil_g),
@@ -129,6 +152,7 @@ calc_cmin_lgr <- function(gas_data, mass_data, sheet_name, Vsam = 5, default_Vef
       by = "Lab_No"
     ) %>%
     mutate(
+      lab_no = Lab_No,
       # Mass file GWC is in percent for Mass_1 — convert to fraction
       gwc_frac = if_else(gwc_mass > 1, gwc_mass / 100, gwc_mass),
       dry_mass = fresh_mass / (1 + gwc_frac),
@@ -168,7 +192,7 @@ calc_cmin_lgr <- function(gas_data, mass_data, sheet_name, Vsam = 5, default_Vef
     ))
 
   samples %>%
-    select(Lab_No, plot, replicate, date, cmin_rate_ug_co2c_hr_g, dry_mass, flag)
+    select(lab_no, plot, replicate, date, cmin_rate_ug_co2c_hr_g, dry_mass, flag)
 }
 
 
@@ -290,11 +314,11 @@ calc_cmin_irga <- function(irga_data, mass_data, sheet_name,
       CO2CperHour      = CO2C / incubationTime
     )
 
-  # Rename ID column for joining and ensure numeric type
+  # Rename ID column for joining and normalize to character ("62", "x6")
   # Filter out rows where Lab_No is NA (e.g., standard rows without an ID)
   df <- df %>%
     rename(Lab_No = !!sym(id_col)) %>%
-    mutate(Lab_No = as.numeric(Lab_No)) %>%
+    mutate(Lab_No = normalize_lab_no(Lab_No)) %>%
     filter(!is.na(Lab_No))
 
   # Join with mass data to get plot, replicate, dry mass
@@ -302,13 +326,14 @@ calc_cmin_irga <- function(irga_data, mass_data, sheet_name,
   if ("lab.id" %in% names(df) && any(!is.na(df$lab.id))) {
     # Some sheets have a separate lab.id column for joining
     # (e.g., C-min_3 dec16 which has different cmin.id numbering)
+    # lab_no records the mass-sheet Lab_No the row was assigned to
     df <- df %>%
-      mutate(lab.id = as.numeric(lab.id)) %>%
+      mutate(lab.id = normalize_lab_no(lab.id)) %>%
       filter(!is.na(lab.id)) %>%
       left_join(
         mass_data %>%
           transmute(
-            lab_id_join = as.numeric(Lab_No),
+            lab_id_join = Lab_No,
             plot = as.integer(Plot),
             replicate = as.character(Replicate),
             fresh_mass = as.numeric(Mass_Soil_g),
@@ -316,13 +341,14 @@ calc_cmin_irga <- function(irga_data, mass_data, sheet_name,
           ) %>%
           filter(!is.na(lab_id_join)),
         by = c("lab.id" = "lab_id_join")
-      )
+      ) %>%
+      mutate(lab_no = lab.id)
   } else {
     df <- df %>%
       left_join(
         mass_data %>%
           transmute(
-            Lab_No = as.numeric(Lab_No),
+            Lab_No,
             plot = as.integer(Plot),
             replicate = as.character(Replicate),
             fresh_mass = as.numeric(Mass_Soil_g),
@@ -330,7 +356,8 @@ calc_cmin_irga <- function(irga_data, mass_data, sheet_name,
           ) %>%
           filter(!is.na(Lab_No)),
         by = "Lab_No"
-      )
+      ) %>%
+      mutate(lab_no = Lab_No)
   }
 
   # Compute dry mass if soil.dry.mass not available
@@ -377,7 +404,7 @@ calc_cmin_irga <- function(irga_data, mass_data, sheet_name,
     ))
 
   df %>%
-    select(Lab_No, plot, replicate, date, cmin_rate_ug_co2c_hr_g, dry_mass, flag)
+    select(lab_no, plot, replicate, date, cmin_rate_ug_co2c_hr_g, dry_mass, flag)
 }
 
 
@@ -387,15 +414,18 @@ calc_cmin_irga <- function(irga_data, mass_data, sheet_name,
 cat("Reading mass data files...\n")
 
 mass1 <- read_excel("data/raw/soil/cmin_mass/C-NMin_Mass_1.xlsx", sheet = "Sheet1") %>%
-  mutate(Lab_No = as.numeric(Lab_No), Plot = as.integer(Plot))
+  mutate(Lab_No = normalize_lab_no(Lab_No), Plot = as.integer(Plot))
 
+# Mass_2 Replicate letters are NOT unique within plot x timepoint (e.g. plot 14
+# t1 B is on both lab 62 and 92), and x1-x9 are extra tubes (replicate C).
+# Tubes must therefore be keyed by Lab_No, never by plot + replicate.
 mass2 <- read_excel("data/raw/soil/cmin_mass/C-NMin_Mass_2.xlsx", sheet = "Sheet1") %>%
-  mutate(Lab_No = as.numeric(Lab_No), Plot = as.integer(Plot)) %>%
+  mutate(Lab_No = normalize_lab_no(Lab_No), Plot = as.integer(Plot)) %>%
   # Rename "Initial GWC" to "GWC" for consistency; it's already a fraction
   rename_with(~ ifelse(.x == "Initial GWC", "GWC", .x))
 
 mass3 <- read_excel("data/raw/soil/cmin_mass/C-NMin_Mass_3.xlsx", sheet = "Sheet1") %>%
-  mutate(Lab_No = as.numeric(Lab_No), Plot = as.integer(Plot))
+  mutate(Lab_No = normalize_lab_no(Lab_No), Plot = as.integer(Plot))
 
 # Mass_3 GWC is broken (formula =sum(H:I)). Replace with GWC from processed data.
 mass3_gwc <- gwc %>%
@@ -460,10 +490,10 @@ for (i in seq_along(cmin2_sheets)) {
   if (sheet == "aug8") {
     cat("    RESCUE: Populating missing date/time from flushing_20250807.xlsx\n")
     flush_log <- read_excel("data/raw/soil/cmin/flushing_20250807.xlsx")
-    # Extract numeric ID from 'number' column (e.g., "min62" → 62, "mon80" → 80)
+    # Normalize 'number' to lab IDs: "min62" -> "62", "mon80" -> "80", "x6" -> "x6"
     flush_log <- flush_log %>%
       mutate(
-        cmin_id = suppressWarnings(as.numeric(gsub("[^0-9]", "", number))),
+        cmin_id = normalize_lab_no(sub("^m[io]n", "", trimws(number))),
         flush_time_str = sapply(time.flushed, parse_time_value)
       )
     flush_lookup <- flush_log %>%
@@ -472,14 +502,14 @@ for (i in seq_along(cmin2_sheets)) {
       distinct(cmin_id, .keep_all = TRUE)
     # Map flush times to irga rows by cmin.id
     irga <- irga %>%
-      mutate(cmin_id_num = suppressWarnings(as.numeric(as.character(cmin.id)))) %>%
-      left_join(flush_lookup, by = c("cmin_id_num" = "cmin_id")) %>%
+      mutate(cmin_id_chr = normalize_lab_no(cmin.id)) %>%
+      left_join(flush_lookup, by = c("cmin_id_chr" = "cmin_id")) %>%
       mutate(
         date.flush = as.POSIXct("2025-08-07", tz = "UTC"),
         time.flush = flush_time_str,
         date.irga  = as.POSIXct("2025-08-08", tz = "UTC")
       ) %>%
-      select(-cmin_id_num, -flush_time_str)
+      select(-cmin_id_chr, -flush_time_str)
     cat(sprintf("    Matched %d/%d samples with flush times\n",
                 sum(!is.na(irga$time.flush)), nrow(irga)))
   }
@@ -490,9 +520,32 @@ for (i in seq_along(cmin2_sheets)) {
   if (sheet == "aug18") {
     cat("    RESCUE: Correcting date.irga from 2025-08-10 to 2025-08-18\n")
     irga$date.irga <- as.POSIXct("2025-08-18", tz = "UTC")
+
+    # RESCUE: x6-x9 rows have Excel fill-series flush stamps (Aug 18-21,
+    # 14:40-17:40, one day/hour per row). The 30 numbered tubes were all
+    # flushed 2025-08-17 13:40, and in every other sheet the x tubes are
+    # flushed within minutes of lab 120. Use the numbered tubes' stamp.
+    x_rows <- grepl("^x", normalize_lab_no(irga$cmin.id))
+    num_stamp <- irga %>%
+      filter(!x_rows, !is.na(cmin.id)) %>%
+      distinct(date.flush, time.flush)
+    stopifnot(nrow(num_stamp) == 1)
+    irga$date.flush[x_rows] <- num_stamp$date.flush
+    irga$time.flush[x_rows] <- num_stamp$time.flush
+    cat(sprintf("    RESCUE: Reset %d x-tube flush stamps to %s %s\n",
+                sum(x_rows), as.Date(num_stamp$date.flush),
+                format(num_stamp$time.flush, "%H:%M")))
   }
 
+  # x6-x9 (extra tubes for plots 4, 6, 11, 12) start at aug8 (flushed
+  # 2025-08-07), so their jar has been sampled one time fewer than the
+  # numbered tubes on each sheet.
+  x_rows <- grepl("^x", normalize_lab_no(irga$cmin.id))
+  irga$times.sampled <- suppressWarnings(as.numeric(irga$times.sampled))
+  irga$times.sampled[x_rows & is.na(irga$times.sampled)] <- i - 1
+
   result <- calc_cmin_irga(irga, mass2, sheet, times_sampled_default = i)
+  result <- flag_septa(result, irga, irga$cmin.id)
   if (!is.null(result)) {
     cmin2_results[[sheet]] <- result
   }
@@ -504,18 +557,30 @@ cmin2 <- bind_rows(cmin2_results) %>%
 
 # =============================================================================
 # C-min_3: IRGA method (timepoint 3, 6 sheets)
-# Note: dec16 has cmin.id values from a different numbering scheme (62-120)
-#       with a lab.id column (1-30). This may represent a re-measurement of
-#       run 2 samples or a data entry issue.
-# TODO: Confirm with Jon about dec16 sheet identity
+# All sheets except dec16 list the same 30 incubated tubes (Mass_3 t1 A/B)
+# in the same run order. dec16 was built from the round 2 template (cmin.id
+# 62-120, x6-x9); its lab.id 1-30 is the position in the round 3 run order.
 # =============================================================================
 cat("Processing C-min_3 (IRGA, 6 sheets)...\n")
 
-cmin3_sheets <- c("nov26", "nov29", "dec2", "dec9", "dec16", "dec23")
+# dec16 is excluded (decision 2026-09-28): its row identities can only be
+# inferred from run order, and its standards read ~1.7x every other date while
+# samples read ~2.1x, leaving the whole run ~20% high relative to neighbours.
+INCLUDE_DEC16 <- FALSE
+cmin3_sheets <- c("nov26", "nov29", "dec2", "dec9", if (INCLUDE_DEC16) "dec16", "dec23")
 cmin3_results <- list()
 
-for (i in seq_along(cmin3_sheets)) {
-  sheet <- cmin3_sheets[i]
+# Round 3 run order (identical in nov26, nov29, dec2, dec9, dec23)
+round3_order <- normalize_lab_no(
+  read_excel("data/raw/soil/cmin/C-min_3.xlsx", sheet = "nov26")$cmin.id)
+round3_order <- round3_order[!is.na(round3_order)]
+stopifnot(length(round3_order) == 30)
+
+# Headspace sampling count follows the physical sequence, which includes dec16
+# even when dec16 is excluded (dec23 was the 6th sampling of each jar).
+cmin3_all_sheets <- c("nov26", "nov29", "dec2", "dec9", "dec16", "dec23")
+for (sheet in cmin3_sheets) {
+  i <- match(sheet, cmin3_all_sheets)
   cat(sprintf("  Processing sheet: %s (times_sampled=%d)\n", sheet, i))
   irga <- read_excel("data/raw/soil/cmin/C-min_3.xlsx", sheet = sheet)
 
@@ -555,15 +620,19 @@ for (i in seq_along(cmin3_sheets)) {
                 irga$time.irga[1], irga$time.irga[nrow(irga)]))
   }
 
-  # RESCUE: dec16 has cmin.id 62-120 with lab.id 1-30 mapping to Mass_3
-  # Confirmed: lab.id + 180 = Mass_3 Lab_No (1->181, 2->182, ..., 30->210)
+  # RESCUE: dec16 cmin.id (62-120, x6-x9) is a leftover round 2 template.
+  # lab.id 1-30 = position in the round 3 run order (1 -> 183, 2 -> 184,
+  # 3 -> 187, ...). The earlier lab.id + 180 mapping pointed at t0 tubes
+  # (181, 182, 185, ...) that were never incubated. Rows without lab.id
+  # (x6-x9) are empty and are dropped.
   if (sheet == "dec16") {
-    cat("    RESCUE: dec16 lab.id + 180 -> Mass_3 Lab_No mapping\n")
-    irga <- irga %>% mutate(lab.id = as.numeric(lab.id) + 180)
-    result <- calc_cmin_irga(irga, mass3, sheet, times_sampled_default = i)
-  } else {
-    result <- calc_cmin_irga(irga, mass3, sheet, times_sampled_default = i)
+    cat("    RESCUE: dec16 lab.id = position in round 3 run order\n")
+    irga <- irga %>%
+      mutate(lab.id = round3_order[suppressWarnings(as.integer(lab.id))])
   }
+  result <- calc_cmin_irga(irga, mass3, sheet, times_sampled_default = i)
+  result <- flag_septa(result, irga, if (sheet == "dec16") irga$lab.id else irga$cmin.id)
+  if (!is.null(result)) result$sheet <- sheet
 
   if (!is.null(result)) {
     cmin3_results[[sheet]] <- result
@@ -579,6 +648,9 @@ cmin3 <- bind_rows(cmin3_results) %>%
 # =============================================================================
 cat("Combining time-resolved data...\n")
 
+# day = days since the round's first flush (shared calendar axis for all tubes).
+# incubation_start = first flush date of the tube's incubation: the round start
+# for every tube except round 2 x6-x9, which start 2025-08-07 (measured aug8).
 cmin_all <- bind_rows(cmin1, cmin2, cmin3) %>%
   left_join(treatment_key, by = "plot") %>%
   group_by(timepoint) %>%
@@ -586,9 +658,12 @@ cmin_all <- bind_rows(cmin1, cmin2, cmin3) %>%
     first_date = min(date, na.rm = TRUE),
     day = as.numeric(difftime(date, first_date, units = "days"))
   ) %>%
+  group_by(timepoint, lab_no) %>%
+  mutate(incubation_start = if_else(timepoint == 2L & grepl("^x", lab_no),
+                                    min(date, na.rm = TRUE), first_date)) %>%
   ungroup() %>%
-  select(plot, treatment, timepoint, replicate, date, day,
-         cmin_rate_ug_co2c_hr_g, method, flag)
+  select(plot, treatment, timepoint, lab_no, replicate, date, day,
+         incubation_start, cmin_rate_ug_co2c_hr_g, method, flag, any_of("sheet"))
 
 write.csv(cmin_all, "data/processed/cmin_timeresolved.csv", row.names = FALSE)
 cat("Wrote data/processed/cmin_timeresolved.csv\n")
@@ -599,36 +674,69 @@ cat("Wrote data/processed/cmin_timeresolved.csv\n")
 # =============================================================================
 cat("Calculating cumulative C mineralization...\n")
 
+# Integration unit: one series per tube (lab_no). Replicate letters are not
+# unique tube IDs: round 1 measured both the t0 B and t1 B tubes of each plot,
+# and Mass_2 repeats letters within plot x timepoint.
 # Only include unflagged data in the AUC
-cmin_for_auc <- cmin_all %>%
-  filter(is.na(flag)) %>%
-  select(plot, treatment, timepoint, replicate, day, cmin_rate_ug_co2c_hr_g, method)
+round_start <- cmin_all %>%
+  group_by(timepoint) %>%
+  summarize(round_start = min(date, na.rm = TRUE), .groups = "drop")
 
-# Create day-0 baseline using backward extrapolation from t1 (first measurement)
-# This avoids the bias of setting t0=0 which penalizes high initial rates
-# (see lab discussion: t0 = t1 is more appropriate than t0 = 0)
-day0 <- cmin_for_auc %>%
-  group_by(plot, treatment, timepoint, replicate, method) %>%
-  slice_min(day, n = 1) %>%
-  ungroup() %>%
-  mutate(day = 0)  # keep the t1 rate, set day to 0
+# Integrate each tube's rate series. Rules:
+#   - baseline at the tube's own incubation start, using the first rate
+#     (t0 = t1 backward extrapolation; day 3 for round 2 x6-x9)
+#   - if a tube's last valid reading is before the round's last measurement
+#     day, its last rate is carried forward to that day (e.g. round 3 lab 215,
+#     NA on dec23), so every tube in a round ends on the same day
+#   - flagged readings (e.g. septa_not_seated) are skipped, which interpolates
+#     across them
+# mean_rate = cumulative / days integrated, the fair comparison when tubes
+# started on different days (round 2 x6-x9: 26 d vs 29 d).
+integrate_tubes <- function(tr) {
+  d <- tr %>%
+    filter(is.na(flag), !is.na(cmin_rate_ug_co2c_hr_g)) %>%
+    left_join(round_start, by = "timepoint") %>%
+    mutate(start_day = as.numeric(difftime(incubation_start, round_start, units = "days"))) %>%
+    group_by(timepoint) %>%
+    mutate(round_end = max(day)) %>%
+    ungroup()
 
-cmin_with_baseline <- bind_rows(day0, cmin_for_auc) %>%
-  arrange(plot, timepoint, replicate, day) %>%
-  # Remove duplicate day-0 entries if the first measurement is already day 0
-  distinct(plot, timepoint, replicate, day, .keep_all = TRUE)
+  keys <- c("plot", "treatment", "timepoint", "lab_no", "replicate", "method")
+  day0 <- d %>%
+    group_by(across(all_of(keys))) %>%
+    slice_min(day, n = 1, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(day = start_day)
+  tail_ext <- d %>%
+    group_by(across(all_of(keys))) %>%
+    slice_max(day, n = 1, with_ties = FALSE) %>%
+    ungroup() %>%
+    filter(day < round_end) %>%
+    mutate(carried = round_end - day, day = round_end)
 
-# Trapezoidal integration: AUC of rate (ug CO2-C hr-1 g-1) over time (hours)
-cmin_cumulative <- cmin_with_baseline %>%
-  group_by(plot, treatment, timepoint, replicate, method) %>%
-  summarize(
-    cumulative_ug_co2c_g = if (n() >= 2) {
-      AUC(day * 24, cmin_rate_ug_co2c_hr_g, method = "trapezoid")
-    } else {
-      NA_real_
-    },
-    .groups = "drop"
-  )
+  bind_rows(day0, d, tail_ext) %>%
+    arrange(timepoint, lab_no, day) %>%
+    distinct(timepoint, lab_no, day, .keep_all = TRUE) %>%
+    group_by(across(all_of(keys))) %>%
+    summarize(
+      incubation_start = min(incubation_start),
+      days_integrated = max(day) - min(day),
+      days_carried_forward = sum(coalesce(carried, 0)),
+      cumulative_ug_co2c_g = if (n() >= 2) {
+        AUC(day * 24, cmin_rate_ug_co2c_hr_g, method = "trapezoid")
+      } else NA_real_,
+      .groups = "drop"
+    ) %>%
+    mutate(mean_rate_ug_co2c_g_d = cumulative_ug_co2c_g / days_integrated)
+}
+
+cmin_cumulative <- integrate_tubes(cmin_all)
+
+cmin_cumulative <- cmin_cumulative %>%
+  arrange(plot, timepoint, replicate, suppressWarnings(as.numeric(lab_no)), lab_no) %>%
+  select(plot, treatment, timepoint, lab_no, replicate, method, incubation_start,
+         days_integrated, days_carried_forward, cumulative_ug_co2c_g,
+         mean_rate_ug_co2c_g_d)
 
 write.csv(cmin_cumulative, "data/processed/cmin_cumulative.csv", row.names = FALSE)
 cat("Wrote data/processed/cmin_cumulative.csv\n")
