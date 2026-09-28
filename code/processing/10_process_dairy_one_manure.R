@@ -1,5 +1,6 @@
 # 10_process_dairy_one_manure.R
 # Process DairyOne manure amendment nutrient analysis
+# Samples taken 2025-05-28, received by Dairy One 2026-01-19. All % are as received (fresh basis).
 # Output: data/processed/dairy_one_manure.csv
 
 library(dplyr)
@@ -17,6 +18,8 @@ manure <- manure_raw %>%
     ),
     replicate = as.integer(gsub(".*\\s(\\d+)$", "\\1", trimws(Description.1))),
     total_n_pct = as.numeric(Nitrogen..N.),
+    ammonium_n_pct = as.numeric(Ammonium.Nitrogen..NH3.),  # as received; nitrate not requested
+    organic_n_pct = as.numeric(Organic.Nitrogen),
     p_pct = as.numeric(Phosphorus..P.),
     k_pct = as.numeric(Potassium..K.),
     total_solids_pct = as.numeric(Total.Solids),
