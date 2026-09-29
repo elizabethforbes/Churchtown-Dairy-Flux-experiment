@@ -67,7 +67,7 @@ Results:
     - (b) CH4 ~ moisture × treatment + temperature + temperature:moisture, shown at median temperature.
     - (c) N2O ~ moisture × treatment.
     
-    Drivers are handheld soil temperature (22 Aug gap-filled) and VWC. Model selection among null, T, W, T+W, T+W+W² and T×W is in the table flux_driver_model_selection.csv. The best models were T×W for CO2 and CH4. For N2O, T+W+W² was best, but the evidence for any driver was weak (null ΔAIC 5.4). The slope × treatment p-values test whether amendments changed the response. The y-axes show the 1st–99th percentile of fluxes; the models use all data.
+    Drivers are handheld soil temperature (22 Aug gap-filled) and VWC. Model selection among null, T, W, T+W, T+W+W² and T×W is in the table flux_driver_model_selection.csv. The best models were T×W for CO2 and CH4. For N2O, T+W+W² was best, but the evidence for any driver was weak (null ΔAIC 5.3). The slope × treatment p-values test whether amendments changed the response. The y-axes show the 1st–99th percentile of fluxes; the models use all data.
   - (d–f) The same data coloured by the second driver, with model curves at fixed levels of that driver.
 - **S3. Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg for all plots at each soil sampling.** No treatment differences.
 - **S4. Soil conditions.**
