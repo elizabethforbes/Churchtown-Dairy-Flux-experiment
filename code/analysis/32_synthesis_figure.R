@@ -10,7 +10,7 @@
 # amendment x response effect in the study (GHG, soil N/C, soil tests, plants).
 # Input:  output/tables/treatment_effects.csv (from 30_main_figures.R + 31_si_figures.R),
 #         data/processed/biomass.csv
-# Output: output/figures/main/fig5_soil_tests_plants.{pdf,png}; output/tables/effect_synthesis.csv
+# Output: output/figures/main/fig5_soil_chemistry_plants.{pdf,png}; output/tables/effect_synthesis.csv
 
 source("code/analysis/fig_setup.R")
 
@@ -99,7 +99,7 @@ panel_plot <- function(pn, title) {
           panel.spacing.x = unit(6, "pt"), strip.text = element_text(hjust = 0.5),
           axis.text.y = element_text(size = rel(0.85)))
 }
-pa <- panel_plot("Soil tests", "Soil tests (Dairy One)")
+pa <- panel_plot("Soil tests", "Soil chemistry")
 pc <- panel_plot("Plant", "Forage composition (Oct harvest)")
 biomass <- read.csv("data/processed/biomass.csv") %>% group_by(plot, treatment) %>%
   summarize(biomass = mean(dry_matter_g_m2), .groups = "drop") %>% mutate(treatment = as_trt(treatment))
@@ -111,8 +111,8 @@ pb <- ggplot() + dot_ci_layers(biomass %>% mutate(x = treatment), trt_summary(bi
   theme(plot.title.position = "plot", legend.position = "bottom")
 fig6 <- (((pa / pb) + plot_layout(heights = c(1.35, 1))) | pc) + plot_layout(widths = c(1, 1), guides = "collect") +
   tags_pub() & theme(legend.position = "bottom")
-save_fig(fig6, "fig5_soil_tests_plants", 180, 140)
-old <- file.path(FIG_DIR, "main", paste0(rep(c("fig6_effect_synthesis", "fig6_soil_tests_plants"), each = 2), c(".pdf", ".png")))
+save_fig(fig6, "fig5_soil_chemistry_plants", 180, 140)
+old <- file.path(FIG_DIR, "main", paste0(rep(c("fig6_effect_synthesis", "fig6_soil_tests_plants", "fig5_soil_tests_plants"), each = 2), c(".pdf", ".png")))
 invisible(file.remove(old[file.exists(old)]))
 
 n_sig <- sum(syn$sig); n_q <- sum(syn$q_fdr < 0.05)

@@ -3,7 +3,7 @@
 #   Fig 1   Study design: plot map and timeline (main text)
 #   Fig S1  Amendment composition
 #   Fig S2  Flux drivers (written by 30_main_figures.R)
-#   Fig S3  Dairy One soil tests by sampling round
+#   Fig S3  Soil pH, organic matter, CEC, base saturation and Mehlich-3 nutrients by sampling round
 #   Fig S4  Soil moisture and pH at sampling; temperature-moisture covariation (handheld probe)
 #   Fig S5  C mineralization time courses (all plots shown)
 #   Fig S6  Extractable N pools, day 0 vs day 28
@@ -273,7 +273,7 @@ d1 <- read.csv("data/processed/dairy_one_clean.csv") %>%
   mutate(treatment = as_trt(treatment), round_lab = factor(c("May", "Jul", "Oct")[timepoint], levels = c("May", "Jul", "Oct")))
 d1_vars <- tribble(
   ~col,                  ~title,                 ~ylab,
-  "ph",                  "pH (Dairy One)",       "'pH (Dairy One)'",
+  "ph",                  "pH (Dairy One)",       "'pH'",
   "om_pct",              "Organic matter",       "'Organic matter (%, LOI)'",
   "cec_meq100g",         "CEC",                  "expression(CEC~(meq~100~g^{-1}))",
   "base_sat_total_pct",  "Base saturation",      "'Base saturation (%)'",
@@ -290,7 +290,7 @@ s9 <- lapply(seq_len(nrow(d1_vars)), function(i) {
     labs(x = NULL, y = ev(m$ylab))
 })
 figs9 <- wrap_plots(s9, ncol = 4) + plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(figs9, "figS3_dairyone_soil_tests", 180, 105, "si")
+save_fig(figs9, "figS3_soil_chemistry", 180, 105, "si")
 
 # =============================================================================
 # Append plant and soil-test metrics to the treatment-effects table

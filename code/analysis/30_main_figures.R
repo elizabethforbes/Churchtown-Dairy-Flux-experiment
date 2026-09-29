@@ -130,8 +130,10 @@ save_fig(fig2, "fig2_season_fluxes", 180, 175)
 # are noisy (control N2O on 27 May includes -2.7 nmol m-2 s-1) and would dominate.
 win_dates <- as.Date(c("2025-05-27", "2025-05-29", "2025-05-30", "2025-06-03", "2025-06-19"))
 day_of <- function(d) as.numeric(d - APPLICATION_DATE)
-collar <- flux_raw %>% filter(date %in% win_dates) %>% mutate(day = day_of(date), treatment = as_trt(treatment))
-wplot <- flux_plot %>% filter(date %in% win_dates) %>% mutate(day = day_of(date))
+# compressed x axis: days 6-22 drawn as a short gap with a break mark
+X_BREAK <- 7.6; xpos <- function(day) ifelse(day > 6, day - 22 + 9.2, day)
+collar <- flux_raw %>% filter(date %in% win_dates) %>% mutate(day = xpos(day_of(date)), treatment = as_trt(treatment))
+wplot <- flux_plot %>% filter(date %in% win_dates) %>% mutate(day = xpos(day_of(date)))
 excess <- flux_plot %>% filter(date %in% win_dates[2:4]) %>% mutate(day = day_of(date)) %>%
   group_by(plot, treatment) %>% arrange(day) %>%
   summarize(across(c(FCO2_DRY, FCH4_DRY, FN2O), function(v) sum(diff(day) * (head(v, -1) + tail(v, -1)) / 2)),
@@ -160,7 +162,10 @@ ch4_event_lab <- sprintf("Net CH4 emission events: %d of %d slurry collars in da
                          sum(is_sw1 & flux_raw$FCH4_DRY > 0, na.rm = TRUE), sum(is_sw1),
                          sum(!is_sw1 & flux_raw$FCH4_DRY > 0, na.rm = TRUE), sum(!is_sw1),
                          ifelse(ev_p < 0.001, "< 0.001", sprintf("= %.3f", ev_p)))
-pscale <- list(CO2 = scale_y_log10(), CH4 = scale_y_continuous(trans = pseudo_log_trans(sigma = 0.1), breaks = c(-0.5, 0, 0.5, 2, 5)),
+# log10 that passes +/-Inf through, so panel-edge annotations (the axis-break mark) sit on the axis
+log10_inf <- scales::trans_new("log10_inf", function(x) ifelse(is.infinite(x), x, log10(x)), function(x) 10^x,
+                               breaks = scales::log_breaks(10), domain = c(1e-100, Inf))
+pscale <- list(CO2 = scale_y_continuous(trans = log10_inf, breaks = c(5, 10, 20)), CH4 = scale_y_continuous(trans = pseudo_log_trans(sigma = 0.1), breaks = c(-0.5, 0, 0.5, 2, 5)),
                N2O = scale_y_continuous(trans = pseudo_log_trans(sigma = 0.2), breaks = c(-2, 0, 1, 4)))
 pd2 <- position_dodge(width = 0.9)
 pulse_rows <- lapply(seq_len(nrow(gases)), function(i) {
@@ -184,7 +189,10 @@ pulse_rows <- lapply(seq_len(nrow(gases)), function(i) {
     geom_point(data = ts, aes(day, mean, colour = treatment, fill = treatment, shape = treatment),
                position = pd2, size = 1.6, stroke = 0.35) +
     pscale[[g$gas]] +
-    scale_x_continuous(breaks = c(-1, 1, 2, 6, 22)) +
+    scale_x_continuous(breaks = xpos(c(-1, 1, 2, 6, 22)), labels = c(-1, 1, 2, 6, 22)) +
+    annotation_custom(grid::textGrob("//", y = unit(0, "npc"), vjust = 0.45, gp = grid::gpar(fontsize = 7.5, fontface = "bold", col = INK)),
+                      xmin = X_BREAK, xmax = X_BREAK) +
+    coord_cartesian(clip = "off") +
     scale_colour_trt() + scale_fill_trt() + scale_shape_trt() +
     labs(x = if (i == 3) "Days since application" else NULL, y = ev(g$ylab))
   p_e <- ggplot() + zero_line() +

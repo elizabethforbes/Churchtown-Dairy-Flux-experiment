@@ -16,7 +16,7 @@ Treatment encoding is the same in every figure: control is a grey circle, compos
 (d, f, h) Season totals from 29 May to 14 Oct, integrated per plot by the trapezoid rule. One-way ANOVA p = 0.74 (CO2), 0.72 (CH4) and 0.57 (N2O). The right-hand column is labelled "Season total".
 
 **Figure 3. The application pulse.**
-(a, c, e) Fluxes from the day before application to day 22. Open circles are individual collars and large symbols treatment means ± SE. CO2 is shown on a log axis; CH4 and N2O on pseudo-log axes, so that hotspot collars stay visible.
+(a, c, e) Fluxes from the day before application to day 22. Open circles are individual collars and large symbols treatment means ± SE. CO2 is shown on a log axis; CH4 and N2O on pseudo-log axes, so that hotspot collars stay visible; the time axis is compressed between days 6 and 22 (//).
 (b, d, f) Cumulative flux over days 1–6 (29 May–3 Jun) per plot. Amendment minus control (Welch 95% CI): CO2 compost −1.8 (−14 to 11), slurry 11.5 (−1.9 to 25) g C m−2; CH4 compost 0.15 (−0.88 to 1.2), slurry 1.1 (−0.65 to 2.9) mg C m−2; N2O compost 0.36 (−1.2 to 1.9), slurry 4.6 (−0.23 to 9.4) mg N m−2.
 CH4 is hotspot-driven, so the event count in panel c is the more appropriate test than the plot means in panel d. An emission event is a collar measurement with net CH4 emission (flux > 0). Events occurred in 4 of 45 slurry collar measurements in days 1–6, against 6 of 489 at all other times and in all other treatments (Fisher exact p = 0.006). Control plots had no events at any time. The largest events of the season were all at slurry collar 13B in days 1–6 (5.2, 1.8 and 0.52 nmol m−2 s−1); all others were below 0.5.
 The strongest hotspot (plot 13, collar B) was already a weak source before application (0.26 nmol m−2 s−1 on 27 May). Slurry amplified it about 20-fold on day 1, and it returned to near zero by day 22. Event counts by treatment and period are in ch4_emission_events.csv.
@@ -29,8 +29,8 @@ Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels are grouped in three col
 
 Asterisks mark one-way ANOVA p < 0.05 at that sampling (nitrate on 21 Jul and 14 Oct).
 
-**Figure 5. Soil tests and plant response.**
-(a) Dairy One soil tests (Mehlich-3 P, K, Ca and Mg; pH; organic matter; CEC; base saturation) at each sampling, as Hedges' g (amendment minus control, divided by the pooled plot-level SD, small-sample corrected) with 95% CI. The three points in each row are the samplings: 14 Oct, 21 Jul and 29 May from top to bottom, lighter = earlier.
+**Figure 5. Soil chemistry and plant response.**
+(a) Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg at each sampling, as Hedges' g (amendment minus control, divided by the pooled plot-level SD, small-sample corrected) with 95% CI. The three points in each row are the samplings: 14 Oct, 21 Jul and 29 May from top to bottom, lighter = earlier.
 (b) Aboveground dry biomass at the October harvest. Small points are plots; large symbols are means with 95% CI.
 (c) Forage composition at the October harvest, as Hedges' g.
 
@@ -60,7 +60,7 @@ Results:
 
 ## Supplementary
 
-- **S1. Amendment composition (Dairy One).** Per-mass N forms, total solids and N on a dry-mass basis. Samples were taken 28 May 2025 and analysed January 2026. Applied rates: slurry 2.75 g N m−2 (27.5 kg N ha−1) and 143 g dry matter m−2; compost 3.87 g N m−2 (38.7 kg N ha−1) and 438 g dry matter m−2 (Table 1).
+- **S1. Amendment composition.** Per-mass N forms, total solids and N on a dry-mass basis. Samples were taken 28 May 2025 and analysed January 2026. Applied rates: slurry 2.75 g N m−2 (27.5 kg N ha−1) and 143 g dry matter m−2; compost 3.87 g N m−2 (38.7 kg N ha−1) and 438 g dry matter m−2 (Table 1).
 - **S2. Soil temperature and moisture as flux drivers.**
   - (a–c) Each point is one collar measurement after application (n = 445). Lines are fixed-effect fits for each treatment with 95% CI, from mixed models with random intercepts for plot and collar within plot:
     - (a) log(CO2) ~ temperature × treatment + moisture + temperature:moisture, shown at median moisture.
@@ -69,7 +69,7 @@ Results:
     
     Drivers are handheld soil temperature (22 Aug gap-filled) and VWC. Model selection among null, T, W, T+W, T+W+W² and T×W is in the table flux_driver_model_selection.csv. The best models were T×W for CO2 and CH4. For N2O, T+W+W² was best, but the evidence for any driver was weak (null ΔAIC 5.4). The slope × treatment p-values test whether amendments changed the response. The y-axes show the 1st–99th percentile of fluxes; the models use all data.
   - (d–f) The same data coloured by the second driver, with model curves at fixed levels of that driver.
-- **S3. Dairy One soil tests (Mehlich-3 and Morgan) for all plots at each soil sampling.** No treatment differences.
+- **S3. Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg for all plots at each soil sampling.** No treatment differences.
 - **S4. Soil conditions.**
   - (a) Soil moisture and (b) pH at sampling.
   - (c) Covariation of soil temperature and moisture from the handheld probe (r ≈ −0.3 across collars), which is why the two drivers could be separated in Fig. S2.
