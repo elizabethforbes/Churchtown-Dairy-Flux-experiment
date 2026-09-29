@@ -91,3 +91,17 @@ anc <- bind_rows(lapply(c("CO2_wk", "CH4_wk", "N2O_wk", "CO2", "CH4", "N2O"), fu
 })) %>% mutate(across(c(effect, lo, hi), ~ signif(.x, 3)), p = signif(p, 3))
 write.csv(anc, "output/tables/baseline_adjusted_effects.csv", row.names = FALSE)
 print(as.data.frame(anc %>% filter(treatment == "slurry")))
+
+# 5) first-week N2O vs day-1 (29 May) net N mineralization across plots: overall, within
+#    treatment (partial correlation after removing treatment means) and by treatment.
+#    Output: n2o_vs_nmin_day1.csv
+nmin1 <- read.csv("output/tables/soil_metrics_by_plot.csv") %>% filter(round == 1) %>% select(plot, nmin = net_min_rate_ug_g_d)
+nn <- dat %>% select(plot, treatment, N2O_wk) %>% left_join(nmin1, by = "plot")
+r_part <- cor.test(resid(lm(N2O_wk ~ treatment, nn)), resid(lm(nmin ~ treatment, nn)))
+n2o_nmin <- bind_rows(
+  tibble(group = "all plots", r = cor(nn$N2O_wk, nn$nmin), p = cor.test(nn$N2O_wk, nn$nmin)$p.value, n = nrow(nn)),
+  tibble(group = "within treatment (partial)", r = unname(r_part$estimate), p = r_part$p.value, n = nrow(nn)),
+  nn %>% group_by(group = as.character(treatment)) %>% summarize(r = cor(N2O_wk, nmin), p = cor.test(N2O_wk, nmin)$p.value, n = n())) %>%
+  mutate(r = round(r, 2), p = signif(p, 2))
+write.csv(n2o_nmin, "output/tables/n2o_vs_nmin_day1.csv", row.names = FALSE)
+print(as.data.frame(n2o_nmin))
