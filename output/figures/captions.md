@@ -81,7 +81,7 @@ Results:
   - CO2 and CH4 come from the smart chamber's LI-7810 record; N2O comes from the LI-7820.
   - The window runs from the chamber's 25 s deadband to chamber opening.
   - The LI-7820 clock was aligned to the chamber per closure, by cross-correlating the H2O traces of the two instruments (offsets −3 to 105 s; details in goflux_clock_offsets_by_closure.csv).
-  - The minimum detectable flux is 1.96·σ/t, with σ the MAD of first differences per instrument and day. Values below it are retained and flagged: 52% of N2O and 0.4% of CH4 closures.
+  - The minimum detectable flux is 1.96·σ/t, with σ the MAD of first differences per instrument and day. Values below it are retained and flagged: 52% of N2O and 0.2% of CH4 closures.
   - Early seal break: in one closure (29 May 6C) the chamber opened or lost its seal about 106 s after closure, which shows as a CO2 drop of 240 ppm in 3 s. Its window was cut 1 s before the drop, giving 80 s of data. The corrected values (CO2 21.0 µmol, N2O 1.17 nmol m−2 s−1) match the same collar on 30 May (19.9 and 1.20). The rule is general: a drop of more than 15 ppm CO2 within 3 s inside the window. No other closure triggered it.
   - Clocks: the smart chamber's clock matches its GPS timestamps within 0–3 s. The LI-7820 has no time sync; its clock runs about 1 s per day fast and was reset occasionally, and the 30 May 14:12 reset is visible as duplicated seconds in its log.
   - Per-closure concentration traces for all 546 closures are in output/qc/closure_traces/.

@@ -211,7 +211,7 @@ save_fig(fig3, "fig3_application_pulse", 180, 160)
 # =============================================================================
 # Drivers are the handheld probe readings at each collar (soil temperature at
 # 10 cm; VWC, probe listed as 10 cm), which are only weakly correlated with each other (r ~ -0.3). The
-# chamber's own probe tracks air temperature and was not used (Fig. S10).
+# chamber's own probe tracks air temperature and was used only to gap-fill handheld temperatures.
 # Models (collar-level, after application; random intercepts plot/collar):
 #   CO2: Gamma(log) GLMM; CH4 and N2O: Gaussian LMM (ML). Candidate forms
 #   null, T, W, T+W, T+W+W^2, TxW compared by AIC (table flux_driver_model_selection.csv).

@@ -109,24 +109,6 @@ s4a <- ggplot() + dot_ci_layers(gwc, trt_summary(gwc, gwc, round_lab), round_lab
   labs(x = "Soil sampling", y = expression(Gravimetric~water~(g~g^{-1})))
 s4b <- ggplot() + dot_ci_layers(ph, trt_summary(ph, ph, round_lab), round_lab, ph) +
   labs(x = "Soil sampling", y = "pH (1:1 water)")
-env  <- read.csv("data/processed/chamber_env.csv") %>% mutate(date = as.Date(date))
-hand <- read.csv("data/processed/field_metadata.csv") %>% mutate(date = as.Date(date))
-both <- inner_join(hand %>% select(date, plot, collar, h_vwc = mean_vwc, h_t = soil_temp_c),
-                   env %>% select(date, plot, collar, treatment, p_vwc = vwc, p_t = soil_temp_c),
-                   by = c("date", "plot", "collar")) %>%
-  mutate(h_vwc = h_vwc / 100, date_lab = format(date, "%d %b"))
-cmp <- function(x, y, xl, yl, title) {
-  r <- cor(both[[x]], both[[y]], use = "complete.obs")
-  ggplot(both, aes(.data[[x]], .data[[y]])) +
-    geom_abline(slope = 1, intercept = 0, colour = MUTED, linetype = "22", linewidth = 0.3) +
-    geom_point(shape = 16, size = 0.9, colour = INK, alpha = 0.5) +
-    annotate("text", x = -Inf, y = Inf, label = sprintf("r = %.2f, n = %d", r, sum(complete.cases(both[, c(x, y)]))),
-             hjust = -0.1, vjust = 1.3, size = 2.1, colour = MUTED) +
-    labs(x = xl, y = yl, title = title)
-}
-s4c <- cmp("h_t", "p_t", "Handheld probe, 10 cm (°C)", "Chamber probe (°C)", "Temperature, same collars (all campaigns)")
-s4d <- cmp("h_vwc", "p_vwc", expression(Handheld~(m^3~m^{-3})), expression(Chamber~probe~(m^3~m^{-3})), "Moisture, same collars (all campaigns)")
-# (combined with the temperature-moisture covariation panels below)
 
 # =============================================================================
 # Fig S5: C-min time courses with all plots
@@ -247,9 +229,8 @@ s7b <- ggplot(fdiff, aes(pct, label, colour = treatment)) +
 hand <- read.csv("data/processed/field_metadata.csv") %>% mutate(date = as.Date(date))
 
 # =============================================================================
-# Fig S4 (e, f): temperature-moisture covariation, handheld vs chamber probe
+# Fig S4 (c): temperature-moisture covariation in the handheld probe data
 # =============================================================================
-envc <- read.csv("data/processed/chamber_env.csv") %>% mutate(date = as.Date(date))
 cov_panel <- function(d, x, y, title) {
   cm <- d %>% group_by(date) %>% summarize(x = mean(.data[[x]], na.rm = TRUE), y = mean(.data[[y]], na.rm = TRUE)) %>% filter(!is.nan(x), !is.nan(y))
   ok <- complete.cases(d[[x]], d[[y]])
@@ -259,9 +240,7 @@ cov_panel <- function(d, x, y, title) {
     labs(x = "Soil temperature, 10 cm (°C)", y = expression(VWC~(m^3~m^{-3})))
 }
 s4e <- cov_panel(hand %>% filter(date > APPLICATION_DATE) %>% mutate(W = mean_vwc / 100), "soil_temp_c", "W", "Handheld soil probe")
-s4f <- cov_panel(envc %>% filter(date > APPLICATION_DATE), "soil_temp_c", "vwc", "Chamber probe (near-surface)")
-# The chamber probe is used only to gap-fill handheld temperatures (13_gapfill_soil_temp.R), so the
-# probe-comparison panels (s4c, s4d, s4f) are not shown.
+# (The chamber probe is used only to gap-fill handheld temperatures, 13_gapfill_soil_temp.R.)
 figs4 <- ((s4a | s4b) + plot_layout(guides = "collect") & theme(legend.position = "bottom")) /
   (s4e | plot_spacer()) + plot_layout(heights = c(1, 1)) + tags_pub()
 save_fig(figs4, "figS4_soil_conditions", 180, 125, "si")
