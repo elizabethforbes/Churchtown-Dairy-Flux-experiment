@@ -1,6 +1,6 @@
 # 32_synthesis_figure.R
-# Main Fig 6: soil tests and plant response -- the responses not shown in
-# Figs 2-5 -- in one consolidated main-text figure.
+# Main Fig 4: soil tests and plant response -- the responses not shown in
+# Figs 1-3 -- in one consolidated main-text figure.
 #   (a) Dairy One soil tests at each sampling, as Hedges' g (amendment minus
 #       control, pooled SD, small-sample corrected; 95% CI)
 #   (b) aboveground biomass at the October harvest (plot values, mean and 95% CI)
@@ -10,7 +10,7 @@
 # amendment x response effect in the study (GHG, soil N/C, soil tests, plants).
 # Input:  output/tables/treatment_effects.csv (from 30_main_figures.R + 31_si_figures.R),
 #         data/processed/biomass.csv
-# Output: output/figures/main/fig6_soil_tests_plants.{pdf,png}; output/tables/effect_synthesis.csv
+# Output: output/figures/main/fig4_soil_tests_plants.{pdf,png}; output/tables/effect_synthesis.csv
 
 source("code/analysis/fig_setup.R")
 
@@ -113,8 +113,8 @@ pb <- ggplot() + dot_ci_layers(biomass %>% mutate(x = treatment), trt_summary(bi
   theme(plot.title.position = "plot", legend.position = "bottom")
 fig6 <- (((pa / pb) + plot_layout(heights = c(1.35, 1))) | pc) + plot_layout(widths = c(1, 1), guides = "collect") +
   tags_pub() & theme(legend.position = "bottom")
-save_fig(fig6, "fig6_soil_tests_plants", 180, 140)
-old <- file.path(FIG_DIR, "main", paste0("fig6_effect_synthesis", c(".pdf", ".png")))
+save_fig(fig6, "fig4_soil_tests_plants", 180, 140)
+old <- file.path(FIG_DIR, "main", paste0(rep(c("fig6_effect_synthesis", "fig6_soil_tests_plants"), each = 2), c(".pdf", ".png")))
 invisible(file.remove(old[file.exists(old)]))
 
 n_sig <- sum(syn$sig); n_q <- sum(syn$q_fdr < 0.05)

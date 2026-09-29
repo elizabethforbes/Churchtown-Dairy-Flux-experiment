@@ -1,20 +1,20 @@
 # 33_ghg_budget.R
-# Main Fig 7: non-CO2 greenhouse-gas budget in CO2-equivalents (GWP100, IPCC AR6:
-# CH4 non-fossil 27.0, N2O 273), from the plot-level totals of Figs 2-3.
+# Main Fig 5: non-CO2 greenhouse-gas budget in CO2-equivalents (GWP100, IPCC AR6:
+# CH4 non-fossil 27.0, N2O 273), from the plot-level totals of Figs 1-2.
 #   (a) season budget per treatment (29 May-14 Oct): CH4 uptake, N2O in days 1-6,
 #       N2O over the rest of the season; net per plot and treatment mean +/- 95% CI
-#   (b) the part attributable to each amendment (amendment minus control mean,
-#       Welch 95% CI), by component
-#   (c) N2O emission factor: amendment-attributable N2O-N as % of applied N,
+#   (b) N2O emission factor: amendment-attributable N2O-N as % of applied N,
 #       for days 1-6 and the season, against IPCC 2019 EF1 (1.0% aggregate;
 #       0.6% for organic N inputs in wet climates)
-#   (d) context: the non-CO2 budget against soil respiration, aboveground NPP and
+#   (c) context: the non-CO2 budget against soil respiration, aboveground NPP and
 #       the (assumed) amendment C input, all in CO2 units
+# The attributable (amendment minus control) components are computed below for the
+# tables and the context panel but are no longer drawn as a separate panel.
 # Soil CO2 is not included in the budget: chamber CO2 is soil respiration (roots + microbes),
 # not a net ecosystem exchange, so it is not a GHG balance term.
 # Input:  output/tables/ghg_totals_by_plot.csv (30_main_figures.R),
 #         output/tables/application_inputs.csv
-# Output: output/figures/main/fig7_ghg_budget.{pdf,png}; output/tables/ghg_co2eq_budget.csv,
+# Output: output/figures/main/fig5_ghg_budget.{pdf,png}; output/tables/ghg_co2eq_budget.csv,
 #         ghg_co2eq_metrics.csv
 
 source("code/analysis/fig_setup.R")
@@ -152,8 +152,8 @@ pd_ <- ggplot() +
   theme(plot.title.position = "plot", panel.grid.major.x = element_line(colour = "grey92", linewidth = 0.25),
         panel.grid.major.y = element_blank())
 
-fig7 <- ((pa | pc) / ((pb | pd_) + plot_layout(widths = c(0.85, 1.25)))) + plot_layout(heights = c(1.15, 1)) + tags_pub()
-save_fig(fig7, "fig7_ghg_budget", 180, 145)
+fig7 <- ((free(pa) | pc) / pd_) + plot_layout(heights = c(1.15, 1)) + tags_pub()
+save_fig(fig7, "fig5_ghg_budget", 180, 140)
 
 # context numbers
 ctx <- mns %>% mutate(val = signif(val, 3)) %>% pivot_wider(names_from = treatment, values_from = val)

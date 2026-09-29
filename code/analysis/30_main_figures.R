@@ -1,10 +1,11 @@
 # 30_main_figures.R
 # Main-text figures (output/figures/main) and summary tables (output/tables).
-#   Fig 1  Study timeline and what was applied (per m2)
-#   Fig 2  Season GHG fluxes with field conditions; season totals
-#   Fig 3  The application pulse: first days after manure application
-#   Fig 4  Temperature and moisture as flux drivers (confounded; see text)
-#   Fig 5  Soil N and C cycling across sampling rounds
+#   Fig 1  Season GHG fluxes with field conditions; season totals
+#   Fig 2  The application pulse: first days after manure application
+#   Fig 3  Soil C and N cycling across sampling rounds, grouped by process
+#   Fig S2 Temperature and moisture as flux drivers (by treatment; and by the second driver)
+# Main Figs 4-5 are written by 32_synthesis_figure.R and 33_ghg_budget.R; the design
+# figure (Fig S1: plot map, timeline, amendment composition) by 31_si_figures.R.
 # Plots are the experimental unit (n = 5). Subsamples (collars, tubes) are
 # averaged within plot unless noted. Error bars: 95% CI of the mean unless noted.
 
@@ -34,7 +35,7 @@ flux_plot <- flux_raw %>%
   mutate(treatment = as_trt(treatment))
 
 # =============================================================================
-# Fig 1: timeline + application inputs
+# Application inputs (Table 1; the design figure is Fig S1 in 31_si_figures.R)
 # =============================================================================
 # Application amounts are the planned rates in the field notes ("Fertilizer
 # Fun.docx"): 5 gal slurry and 18 lb compost per 3 x 3 m plot. Slurry density is
@@ -52,49 +53,9 @@ write.csv(inputs %>% mutate(across(where(is.numeric), ~ signif(.x, 3)),
                             n_kg_ha = n_g_m2 * 10, dm_Mg_ha = dm_g_m2 / 100),
           "output/tables/application_inputs.csv", row.names = FALSE)
 
-rows <- c("Manure applied", "GHG flux", "Soil sampling", "Biomass harvest")
-ev_points <- bind_rows(
-  tibble(row = "Manure applied", date = APPLICATION_DATE, kind = "event"),
-  tibble(row = "GHG flux", date = sort(unique(flux_raw$date))) %>%
-    mutate(kind = if_else(date < APPLICATION_DATE, "pre", "post")),
-  tibble(row = "Soil sampling", date = as.Date(ROUND_DATES), kind = "event"),
-  tibble(row = "Biomass harvest", date = unique(biomass$sampling_date), kind = "event")
-)
-f1a <- ggplot(ev_points, aes(date, row)) +
-  geom_vline(xintercept = APPLICATION_DATE, colour = MUTED, linewidth = 0.3, linetype = "22") +
-  geom_point(aes(shape = kind), size = 1.9, colour = INK, fill = "white", stroke = 0.45) +
-  geom_text(data = ev_points %>% filter(row == "Soil sampling") %>% mutate(lab = paste0("Round ", 1:3)),
-            aes(label = lab), vjust = -1.2, size = 2.1, colour = MUTED) +
-  scale_shape_manual(values = c(event = 18, pre = 21, post = 16),
-                     labels = c(pre = "Before application", post = "After application"),
-                     breaks = c("pre", "post"), name = "Flux campaigns") +
-  scale_y_discrete(limits = rev(rows)) + season_axis() +
-  labs(x = NULL, y = NULL) +
-  theme(panel.grid.major.y = element_blank(), axis.line.y = element_blank(),
-        axis.ticks.y = element_blank(), legend.position = "top")
-
-inp_bar <- function(df, cols, ylab, title, subtitle = NULL) {
-  d <- df %>% select(treatment, all_of(unname(cols))) %>% pivot_longer(-treatment) %>%
-    mutate(name = factor(name, levels = unname(cols)), key = paste(treatment, name))
-  shades <- setNames(rep(TRT_COLS[as.character(df$treatment)], each = length(cols)), paste(rep(df$treatment, each = length(cols)), cols))
-  if (length(cols) == 2) shades[grepl(cols[1], names(shades))] <- colorspace::lighten(shades[grepl(cols[1], names(shades))], 0.6)
-  tot <- d %>% group_by(treatment) %>% summarize(v = sum(value))
-  ggplot(d, aes(treatment, value, fill = key)) +
-    geom_col(width = 0.6, colour = "white", linewidth = 0.3) +
-    geom_text(data = tot, aes(treatment, v, label = signif(v, 2)), inherit.aes = FALSE, vjust = -0.4, size = 2.2, colour = INK) +
-    scale_fill_manual(values = shades, guide = "none") + scale_x_discrete(labels = TRT_LABELS) +
-    scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
-    labs(x = NULL, y = ylab, title = title, subtitle = subtitle)
-}
-f1b <- inp_bar(inputs, c("fresh_kg_m2"), expression(kg~m^{-2}), "Fresh mass applied")
-f1c <- inp_bar(inputs, c("dm_g_m2"), expression(g~m^{-2}), "Dry matter applied")
-f1d <- inp_bar(inputs, c("nh4_g_m2", "org_g_m2"), expression(g~N~m^{-2}), "Nitrogen applied",
-               "Light = ammonium N")
-fig1 <- f1a / free(f1b | f1c | f1d) + plot_layout(heights = c(0.9, 1)) + tags_pub()
-save_fig(fig1, "fig1_design_inputs", 180, 110)
 
 # =============================================================================
-# Fig 2: season fluxes with field conditions; season totals
+# Fig 1: season fluxes with field conditions; season totals
 # =============================================================================
 hand_env <- read.csv("data/processed/field_metadata.csv") %>% mutate(date = as.Date(date), vwc = mean_vwc / 100)
 env_camp <- hand_env %>% mutate(soil_temp_c = soil_temp_filled_c) %>% group_by(date) %>%
@@ -109,7 +70,14 @@ env_panel <- function(m, se, ylab) ggplot(env_camp, aes(date, .data[[m]])) +
   scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 21)) +
   season_axis() + scale_y_continuous(n.breaks = 3) + labs(x = NULL, y = ylab) +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
-f2t <- env_panel("soil_temp_c_m", "soil_temp_c_se", "°C") + labs(title = "Soil temperature and moisture (handheld probes, 10 cm; mean ± SE; open = gap-filled)")
+biomass_date <- unique(biomass$sampling_date)
+marks <- tibble(date = c(as.Date(ROUND_DATES), biomass_date), what = c(rep("Soil sampling", 3), "Harvest"))
+f2t <- env_panel("soil_temp_c_m", "soil_temp_c_se", "°C") +
+  geom_point(data = marks, aes(date, Inf), shape = 25, size = 1.3, colour = INK, fill = INK, inherit.aes = FALSE) +
+  geom_text(data = marks, aes(date, Inf, label = c("S1", "S2", "S3", "H")), vjust = -0.9, size = 1.9, colour = INK, inherit.aes = FALSE) +
+  coord_cartesian(clip = "off") +
+  labs(title = "Soil temperature and moisture (handheld probes, 10 cm; mean ± SE; open = gap-filled)") +
+  theme(plot.title = element_text(margin = margin(0, 0, 9, 0)))
 f2w <- env_panel("vwc_m", "vwc_se", "VWC")
 
 post <- flux_plot %>% filter(date > APPLICATION_DATE)
@@ -152,10 +120,10 @@ fig2 <- (f2t + plot_spacer() + f2w + plot_spacer() + wrap_plots(unlist(flux_rows
 fig2 <- wrap_plots(c(list(f2t, plot_spacer(), f2w, plot_spacer()), unlist(flux_rows, recursive = FALSE)),
                    ncol = 2, widths = c(2.6, 1), heights = c(0.55, 0.55, 1, 1, 1)) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig2, "fig2_ghg_fluxes", 180, 175)
+save_fig(fig2, "fig1_season_fluxes", 180, 175)
 
 # =============================================================================
-# Fig 3: the application pulse
+# Fig 2: the application pulse
 # =============================================================================
 # Window: last pre-application campaign (27 May, day -1) to 19 Jun (day 22).
 # First-week total = trapezoid integral of each plot's flux over days 1-6
@@ -170,7 +138,7 @@ excess <- flux_plot %>% filter(date %in% win_dates[2:4]) %>% mutate(day = day_of
   group_by(plot, treatment) %>% arrange(day) %>%
   summarize(across(c(FCO2_DRY, FCH4_DRY, FN2O), function(v) sum(diff(day) * (head(v, -1) + tail(v, -1)) / 2)),
             .groups = "drop")
-# plot-level totals for the CO2-eq budget (Fig 7): season = 29 May-14 Oct, first week = days 1-6
+# plot-level totals for the CO2-eq budget (Fig 5): season = 29 May-14 Oct, first week = days 1-6
 bind_rows(cum_plot %>% mutate(period = "season"), excess %>% mutate(period = "first_week")) %>%
   transmute(plot, treatment, period, CO2_C_g_m2 = FCO2_DRY * 86400 * 12.011e-6,
             CH4_C_mg_m2 = FCH4_DRY * 86400 * 12.011e-6, N2O_N_mg_m2 = FN2O * 86400 * 28.013e-6) %>%
@@ -236,10 +204,10 @@ pulse_rows <- lapply(seq_len(nrow(gases)), function(i) {
 })
 fig3 <- wrap_plots(unlist(pulse_rows, recursive = FALSE), ncol = 2, widths = c(1.6, 1)) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig3, "fig3_application_pulse", 180, 160)
+save_fig(fig3, "fig2_application_pulse", 180, 160)
 
 # =============================================================================
-# Fig 4: soil temperature and moisture as flux drivers
+# Fig S2: soil temperature and moisture as flux drivers
 # =============================================================================
 # Drivers are the handheld probe readings at each collar (soil temperature at
 # 10 cm; VWC, probe listed as 10 cm), which are only weakly correlated with each other (r ~ -0.3). The
@@ -321,9 +289,8 @@ f4c <- ggplot(resp, aes(W, FN2O, colour = Ts)) +
 figS8 <- (f4a | f4b | f4c) + tags_pub() &
   theme(legend.position = "bottom", legend.key.width = unit(16, "pt"), legend.key.height = unit(5, "pt"),
         legend.title = element_text(size = 6.5, vjust = 0.8), legend.text = element_text(size = 6))
-save_fig(figS8, "figS8_flux_drivers_covariates", 180, 80, "si")
 
-# --- Main Fig 4: one fitted line per treatment ---------------------------------
+# --- Fig S2 top row: one fitted line per treatment ---------------------------------
 # CO2: LMM on log(CO2)  CO2 ~ T x treatment + W + T:W        (plotted vs T at median W)
 # CH4: LMM              CH4 ~ W x treatment + T + T:W        (plotted vs W at median T)
 # N2O: LMM              N2O ~ W x treatment                  (plotted vs W)
@@ -376,14 +343,19 @@ f4 <- lapply(trt_specs, function(sp) {
     scale_colour_trt(drop = FALSE) + scale_fill_trt(drop = FALSE) + scale_shape_trt(drop = FALSE) +
     labs(x = if (grepl("expression", sp$xlab)) ev(sp$xlab) else sp$xlab, y = ev(gases$ylab[gases$gas == sp$gas]), title = ev(sp$title))
 })
-fig4 <- wrap_plots(f4, nrow = 1) + plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig4, "fig4_flux_drivers", 180, 75)
+# Fig S2: (a-c) one fitted line per treatment; (d-f) the same data coloured by the second driver
+s2_top <- wrap_plots(f4, nrow = 1) + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+s2_bot <- (f4a | f4b | f4c) &
+  theme(legend.position = "bottom", legend.key.width = unit(14, "pt"), legend.key.height = unit(5, "pt"),
+        legend.title = element_text(size = 6.5, vjust = 0.8), legend.text = element_text(size = 6))
+figS2 <- (s2_top / s2_bot) + tags_pub()
+save_fig(figS2, "figS2_flux_drivers", 180, 160, "si")
 write.csv(bind_rows(trt_tab), "output/tables/flux_driver_slopes_by_treatment.csv", row.names = FALSE)
 write.csv(resp %>% select(date, plot, collar, treatment, Ts, W, FCO2_DRY, FCH4_DRY, FN2O),
           "output/tables/flux_driver_data.csv", row.names = FALSE)
 
 # =============================================================================
-# Fig 5: soil biogeochemistry across rounds
+# Fig 3: soil C and N cycling across rounds, grouped by process
 # =============================================================================
 lab  <- read.csv("data/processed/lab_assays_summary.csv")
 nmin <- read.csv("data/processed/nmin_plot.csv")
@@ -394,13 +366,13 @@ soil <- lab %>%
   mutate(treatment = as_trt(treatment), round_lab = factor(ROUND_LABELS[as.character(round)], levels = ROUND_LABELS))
 write.csv(soil, "output/tables/soil_metrics_by_plot.csv", row.names = FALSE)
 soil_metrics <- tribble(
-  ~col,                    ~title,                     ~ylab,
-  "initial_nh4_ug_g",      "Extractable ammonium",     "expression(NH[4]^'+'*'-N'~(mu*g~N~g^{-1}))",
-  "initial_no3_ug_g",      "Extractable nitrate",      "expression(NO[3]^'-'*'-N'~(mu*g~N~g^{-1}))",
-  "net_min_rate_ug_g_d",   "Net N mineralization",     "expression(mu*g~N~g^{-1}~d^{-1})",
-  "net_nitr_rate_ug_g_d",  "Net nitrification",        "expression(mu*g~N~g^{-1}~d^{-1})",
-  "sir_ug_co2c_hr_g",      "Substrate-induced resp.",  "expression(mu*g~CO[2]*'-C'~g^{-1}~h^{-1})",
-  "cmin_rate_ug_co2c_g_d", "C mineralization (28 d)",  "expression(mu*g~CO[2]*'-C'~g^{-1}~d^{-1})"
+  ~col,                    ~title,                  ~ylab,
+  "sir_ug_co2c_hr_g",      "Active biomass (SIR)",  "expression(mu*g~CO[2]*'-C'~g^{-1}~h^{-1})",
+  "cmin_rate_ug_co2c_g_d", "C mineralization",      "expression(mu*g~CO[2]*'-C'~g^{-1}~d^{-1})",
+  "net_min_rate_ug_g_d",   "Net N mineralization",  "expression(mu*g~N~g^{-1}~d^{-1})",
+  "net_nitr_rate_ug_g_d",  "Net nitrification",     "expression(mu*g~N~g^{-1}~d^{-1})",
+  "initial_nh4_ug_g",      "Ammonium",              "expression(NH[4]^'+'*'-N'~(mu*g~g^{-1}))",
+  "initial_no3_ug_g",      "Nitrate",               "expression(NO[3]^'-'*'-N'~(mu*g~g^{-1}))"
 )
 soil_abs <- lapply(seq_len(nrow(soil_metrics)), function(i) {
   m <- soil_metrics[i, ]; v <- sym(m$col)
@@ -412,11 +384,21 @@ soil_abs <- lapply(seq_len(nrow(soil_metrics)), function(i) {
     dot_ci_layers(soil %>% filter(!is.na(!!v)), s, round_lab, !!v) +
     geom_text(data = pv, aes(round_lab, Inf, label = ifelse(p < 0.05, sprintf("p = %.2f", p), "")),
               vjust = 1.2, size = 2.1, colour = INK) +
-    scale_y_continuous(expand = expansion(mult = c(0.05, 0.12))) +
-    labs(x = "Soil sampling", y = ev(m$ylab), title = m$title)
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.14))) +
+    labs(x = NULL, y = ev(m$ylab), title = m$title) +
+    theme(plot.title = element_text(face = "plain"))
 })
-fig5 <- wrap_plots(soil_abs, ncol = 3) + plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig5, "fig5_soil_biogeochemistry", 180, 120)
+names(soil_abs) <- soil_metrics$col
+# three labelled columns: microbial biomass and C mineralization | N transformations | extractable N
+col_header <- function(txt) wrap_elements(full = grid::grobTree(
+  grid::segmentsGrob(x0 = 0.04, x1 = 0.96, y0 = 0.15, y1 = 0.15, gp = grid::gpar(col = INK, lwd = 0.6)),
+  grid::textGrob(txt, y = 0.55, gp = grid::gpar(fontsize = 7.5, fontface = "bold", col = INK))), ignore_tag = TRUE)
+col_block <- function(h, a, b) wrap_plots(col_header(h), soil_abs[[a]], soil_abs[[b]], ncol = 1, heights = c(0.09, 1, 1))
+fig5 <- wrap_plots(col_block("Microbial biomass and C mineralization", "sir_ug_co2c_hr_g", "cmin_rate_ug_co2c_g_d"),
+                   col_block("N transformations", "net_min_rate_ug_g_d", "net_nitr_rate_ug_g_d"),
+                   col_block("Extractable N", "initial_nh4_ug_g", "initial_no3_ug_g"), nrow = 1) +
+  plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
+save_fig(fig5, "fig3_soil_c_n", 180, 125)
 
 # =============================================================================
 # Treatment-effects table (plant and soil-test metrics appended by 31_si_figures.R)
