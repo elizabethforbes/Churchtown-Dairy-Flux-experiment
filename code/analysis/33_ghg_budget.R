@@ -91,8 +91,6 @@ ef_ci <- bind_rows(lapply(c("n2o_n_wk", "n2o_n_season"), function(v) diff_vs_con
 pc <- ggplot() + scale_x_discrete() +
   geom_hline(yintercept = 0, colour = MUTED, linewidth = 0.3) +
   geom_hline(yintercept = c(1, 0.6), colour = INK, linewidth = 0.3, linetype = c("22", "12")) +
-  annotate("text", x = 0.42, y = c(1, 0.6), label = c("1%", "0.6%"),
-           hjust = 0, vjust = c(-0.35, 1.3), size = 2.2, colour = INK) +
   geom_point(data = ef_plot, aes(period, ef, colour = treatment), shape = 16, size = 1, alpha = 0.45,
              position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.6, seed = 1), show.legend = FALSE) +
   geom_linerange(data = ef_ci, aes(period, ymin = lo, ymax = hi, colour = treatment),

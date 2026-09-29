@@ -72,10 +72,9 @@ env_panel <- function(m, se, ylab) ggplot(env_camp, aes(date, .data[[m]])) +
   season_axis() + scale_y_continuous(n.breaks = 3) + labs(x = NULL, y = ylab) +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 biomass_date <- unique(biomass$sampling_date)
-marks <- tibble(date = c(as.Date(ROUND_DATES), biomass_date), what = c(rep("Soil sampling", 3), "Harvest"))
+marks <- tibble(date = as.Date(ROUND_DATES), what = "Soil sampling")   # harvest date is shown in Fig 1b
 f2t <- env_panel("soil_temp_c_m", "soil_temp_c_se", "Soil T (°C)") +
   geom_point(data = marks, aes(date, Inf), shape = 25, size = 1.3, colour = INK, fill = INK, inherit.aes = FALSE) +
-  geom_text(data = marks, aes(date, Inf, label = c("S1", "S2", "S3", "H")), vjust = -0.9, size = 1.9, colour = INK, inherit.aes = FALSE) +
   coord_cartesian(clip = "off") +
   theme(plot.margin = margin(12, 6, 4, 4))
 f2w <- env_panel("vwc_m", "vwc_se", "VWC")
@@ -109,7 +108,7 @@ flux_rows <- lapply(seq_len(nrow(gases)), function(i) {
     dot_ci_layers(cp %>% mutate(x = treatment), cs %>% mutate(x = treatment), x, val, pt_size = 1.3) +
     trt_axis() + scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
     guides(colour = "none", fill = "none", shape = "none") +
-    labs(x = NULL, y = ev(g$cum_lab), title = if (first) "Season total" else NULL)
+    labs(x = NULL, y = ev(g$cum_lab), title = NULL)
   list(p_ts, p_c)
 })
 fig2 <- (f2t + plot_spacer() + f2w + plot_spacer() + wrap_plots(unlist(flux_rows, recursive = FALSE))) +
@@ -199,7 +198,7 @@ pulse_rows <- lapply(seq_len(nrow(gases)), function(i) {
     dot_ci_layers(ex %>% mutate(x = treatment), es %>% mutate(x = treatment), x, val, pt_size = 1.3) +
     trt_axis() + scale_y_continuous(expand = expansion(mult = c(0.05, 0.35))) +
     guides(colour = "none", fill = "none", shape = "none") +
-    labs(x = NULL, y = ev(g$cum_lab), title = if (first) "Days 1–6 total" else NULL)
+    labs(x = NULL, y = ev(g$cum_lab), title = NULL)
   list(p_ts, p_e)
 })
 fig3 <- wrap_plots(unlist(pulse_rows, recursive = FALSE), ncol = 2, widths = c(1.6, 1)) +
@@ -361,13 +360,13 @@ soil <- lab %>%
 write.csv(soil, "output/tables/soil_metrics_by_plot.csv", row.names = FALSE)
 soil_metrics <- tribble(
   ~col,                    ~title,                  ~ylab,
-  "sir_ug_co2c_hr_g",      "Active biomass (SIR)",  "expression(mu*g~CO[2]*'-C'~g^{-1}~h^{-1})",
-  "cmin_rate_ug_co2c_g_d", "C mineralization",      "expression(mu*g~CO[2]*'-C'~g^{-1}~d^{-1})",
-  "net_min_rate_ug_g_d",   "Net N mineralization",  "expression(mu*g~N~g^{-1}~d^{-1})",
-  "net_nitr_rate_ug_g_d",  "Net nitrification",     "expression(mu*g~N~g^{-1}~d^{-1})",
+  "sir_ug_co2c_hr_g",      "Active biomass (SIR)",  "expression(atop(SIR, (mu*g~CO[2]*'-C'~g^{-1}~h^{-1})))",
+  "cmin_rate_ug_co2c_g_d", "C mineralization",      "expression(atop(C~mineralization, (mu*g~CO[2]*'-C'~g^{-1}~d^{-1})))",
+  "net_min_rate_ug_g_d",   "Net N mineralization",  "expression(atop(Net~N~mineralization, (mu*g~N~g^{-1}~d^{-1})))",
+  "net_nitr_rate_ug_g_d",  "Net nitrification",     "expression(Net~nitrification~(mu*g~N~g^{-1}~d^{-1}))",
   "initial_nh4_ug_g",      "Ammonium",              "expression(NH[4]^'+'*'-N'~(mu*g~g^{-1}))",
   "initial_no3_ug_g",      "Nitrate",               "expression(NO[3]^'-'*'-N'~(mu*g~g^{-1}))",
-  "tin_ug_g",              "Extractable mineral N", "expression(NH[4]^'+'+NO[3]^'-'*'-N'~(mu*g~g^{-1}))"
+  "tin_ug_g",              "Extractable mineral N", "expression(atop(Extractable~mineral~N, (mu*g~N~g^{-1})))"
 )
 soil_abs <- lapply(seq_len(nrow(soil_metrics)), function(i) {
   m <- soil_metrics[i, ]; v <- sym(m$col)
@@ -380,8 +379,7 @@ soil_abs <- lapply(seq_len(nrow(soil_metrics)), function(i) {
     geom_text(data = pv, aes(round_lab, Inf, label = ifelse(p < 0.05, "*", "")),
               vjust = 1.1, size = 3.2, colour = INK) +
     scale_y_continuous(expand = expansion(mult = c(0.05, 0.14))) +
-    labs(x = NULL, y = ev(m$ylab), title = m$title) +
-    theme(plot.title = element_text(face = "plain"))
+    labs(x = NULL, y = ev(m$ylab))
 })
 names(soil_abs) <- soil_metrics$col
 # two labelled columns: microbial biomass and C mineralization | N mineralization and mineral N.
@@ -391,10 +389,9 @@ col_header <- function(txt) wrap_elements(full = grid::grobTree(
   grid::segmentsGrob(x0 = 0.04, x1 = 0.96, y0 = 0.15, y1 = 0.15, gp = grid::gpar(col = INK, lwd = 0.6)),
   grid::textGrob(txt, y = 0.55, gp = grid::gpar(fontsize = 7.5, fontface = "bold", col = INK))), ignore_tag = TRUE)
 col_block <- function(h, a, b) wrap_plots(col_header(h), soil_abs[[a]], soil_abs[[b]], ncol = 1, heights = c(0.09, 1, 1))
-fig5 <- wrap_plots(col_block("Microbial biomass and C mineralization", "sir_ug_co2c_hr_g", "cmin_rate_ug_co2c_g_d"),
-                   col_block("N mineralization and mineral N", "net_min_rate_ug_g_d", "tin_ug_g"), nrow = 1) +
+fig5 <- wrap_plots(soil_abs[c("sir_ug_co2c_hr_g", "cmin_rate_ug_co2c_g_d", "net_min_rate_ug_g_d", "tin_ug_g")], ncol = 2, byrow = FALSE) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig5, "fig4_soil_c_n", 125, 125)
+save_fig(fig5, "fig4_soil_c_n", 125, 115)
 
 # =============================================================================
 # Treatment-effects table (plant and soil-test metrics appended by 31_si_figures.R)

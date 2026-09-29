@@ -11,9 +11,9 @@ Treatment encoding is the same in every figure: control is a grey circle, compos
 (b) Timeline: manure application (28 May 2025), flux campaigns (open before application, filled after), soil samplings and the October biomass harvest.
 
 **Figure 2. Soil greenhouse-gas fluxes through the season.**
-(a) Soil temperature and (b) volumetric water content at each campaign, from the handheld probes at 10 cm (mean ± SE). Triangles mark the soil samplings (S1–S3) and the biomass harvest (H). The open symbol is 22 Aug, where temperature was gap-filled from the chamber probe (see Methods).
+(a) Soil temperature and (b) volumetric water content at each campaign, from the handheld probes at 10 cm (mean ± SE). Triangles mark the soil samplings (the harvest date is shown in Fig. 1b). The open symbol is 22 Aug, where temperature was gap-filled from the chamber probe (see Methods).
 (c, e, g) CO2, CH4 and N2O fluxes. Small points are plot means of three collars; large symbols are treatment means ± SE. Grey shading marks the period before application.
-(d, f, h) Season totals from 29 May to 14 Oct, integrated per plot by the trapezoid rule. One-way ANOVA p = 0.74 (CO2), 0.72 (CH4) and 0.57 (N2O). The right-hand column is labelled "Season total".
+(d, f, h) Season totals from 29 May to 14 Oct, integrated per plot by the trapezoid rule. One-way ANOVA p = 0.74 (CO2), 0.72 (CH4) and 0.57 (N2O).
 
 **Figure 3. The application pulse.**
 (a, c, e) Fluxes from the day before application to day 22. Open circles are individual collars and large symbols treatment means ± SE. CO2 is shown on a log axis; CH4 and N2O on pseudo-log axes, so that hotspot collars stay visible; the time axis is compressed between days 6 and 22 (//).
@@ -24,7 +24,7 @@ The strongest hotspot (plot 13, collar B) was already a weak source before appli
 **Figure 4. Soil C and N cycling across the season.**
 Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels are grouped in two columns:
 - Microbial biomass and C mineralization: (a) substrate-induced respiration and (b) mean C mineralization rate
-- N mineralization and mineral N: (c) net N mineralization over 28 days at 20 °C and 65% water-holding capacity, and (d) KCl-extractable mineral N (NH4+ + NO3−) at the start of the incubation.
+- N mineralization and mineral N: (c) net N mineralization over the incubation (20 °C, 65% water-holding capacity), and (d) KCl-extractable mineral N (NH4+ + NO3−) at the start of the incubation.
 
 Asterisks mark one-way ANOVA p < 0.05 at that sampling (mineral N on 14 Oct). Ammonium, nitrate and net nitrification are in Fig. S6.
 
@@ -46,7 +46,7 @@ All values are in CO2-equivalents (GWP100, IPCC AR6: CH4 27.0, N2O 273), from pl
 - **Soil respiration:** from the clipped collars, so roots plus microbes. It is integrated from midday closures (10:00–17:00), so it is likely biased high compared with a 24-h total.
 - **Aboveground NPP:** the October harvest of the 0.5 m² subplot left uncut since the pre-experiment mow, assuming C = 45% of dry mass.
 - **Amendment C input:** not measured. The range assumes C = 25–40% of dry matter for slurry and 15–30% for compost.
-- **Result:** the non-CO2 net is 0.35–0.7% of season soil respiration and 6–11% of aboveground NPP. For the amendment effect to be offset, 10–17% of the slurry C, or 2–4% of the compost C, would have to stay in the soil through the season (point estimates).
+- **Result:** the non-CO2 net is 0.35–0.7% of season soil respiration and 5–11% of aboveground NPP. For the amendment effect to be offset, 10–17% of the slurry C, or 2–4% of the compost C, would have to stay in the soil through the season (point estimates).
 - **Metric choice barely matters** (ghg_co2eq_metrics.csv): season net non-CO2 for the slurry plots is 42 g CO2-eq m−2 under GWP100, 38 under GWP20, 38 under GTP100 and 44 under GWP* for a sustained practice. N2O dominates, and its GWP20 equals its GWP100.
 
 Soil CO2 is not included in panels a–b. Chamber CO2 is soil respiration (roots plus microbes), not net ecosystem exchange, so it is not a term in a GHG balance. The amendments' carbon inputs were not measured.
