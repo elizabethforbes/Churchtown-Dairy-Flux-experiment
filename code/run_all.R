@@ -97,6 +97,9 @@ source("code/analysis/34_repeated_measures.R")
 cat("\n--- 35: Storage vs field emissions per kg manure N ---\n")
 source("code/analysis/35_storage_vs_field.R")
 
+cat("\n--- 36: Spatial structure of plot responses ---\n")
+source("code/analysis/36_spatial.R")
+
 cat("\n--- QC: per-closure concentration traces ---\n")
 source("code/qc/plot_closure_traces.R")
 

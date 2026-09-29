@@ -3,7 +3,7 @@
 #   Fig S1  Study design: plot map, timeline, amendment composition
 #   Fig S2  Flux drivers (written by 30_main_figures.R)
 #   Fig S3  Dairy One soil tests by sampling round
-#   Fig S4  Soil conditions at sampling, probe comparison, temperature-moisture covariation
+#   Fig S4  Soil moisture and pH at sampling; temperature-moisture covariation (handheld probe)
 #   Fig S5  C mineralization time courses (all plots shown)
 #   Fig S6  Extractable N pools, day 0 vs day 28
 # Also appends plant and soil-test effects to treatment_effects.csv (used by Fig 4).
@@ -267,8 +267,11 @@ cov_panel <- function(d, x, y, title) {
 }
 s4e <- cov_panel(hand %>% filter(date > APPLICATION_DATE) %>% mutate(W = mean_vwc / 100), "soil_temp_c", "W", "Handheld soil probe")
 s4f <- cov_panel(envc %>% filter(date > APPLICATION_DATE), "soil_temp_c", "vwc", "Chamber probe (near-surface)")
-figs4 <- ((s4a | s4b) + plot_layout(guides = "collect") & theme(legend.position = "bottom")) / (s4c | s4d) / (s4e | s4f) + tags_pub()
-save_fig(figs4, "figS4_soil_conditions", 180, 190, "si")
+# The chamber probe is used only to gap-fill handheld temperatures (13_gapfill_soil_temp.R), so the
+# probe-comparison panels (s4c, s4d, s4f) are not shown.
+figs4 <- ((s4a | s4b) + plot_layout(guides = "collect") & theme(legend.position = "bottom")) /
+  (s4e | plot_spacer()) + plot_layout(heights = c(1, 1)) + tags_pub()
+save_fig(figs4, "figS4_soil_conditions", 180, 125, "si")
 
 # =============================================================================
 # Fig S3: Dairy One soil tests by sampling round

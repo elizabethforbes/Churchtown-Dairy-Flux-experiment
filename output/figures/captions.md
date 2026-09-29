@@ -67,10 +67,9 @@ Results:
     Drivers are handheld soil temperature (22 Aug gap-filled) and VWC. Model selection among null, T, W, T+W, T+W+W² and T×W is in the table flux_driver_model_selection.csv. The best models were T×W for CO2 and CH4. For N2O, T+W+W² was best, but the evidence for any driver was weak (null ΔAIC 5.4). The slope × treatment p-values test whether amendments changed the response. The y-axes show the 1st–99th percentile of fluxes; the models use all data.
   - (d–f) The same data coloured by the second driver, with model curves at fixed levels of that driver.
 - **S3. Dairy One soil tests (Mehlich-3 and Morgan) for all plots at each soil sampling.** No treatment differences.
-- **S4. Soil conditions and instruments.**
+- **S4. Soil conditions.**
   - (a) Soil moisture and (b) pH at sampling.
-  - (c, d) Handheld vs chamber probe on the same collars across all campaigns. The chamber probe temperature tracks air temperature and reads 5–10 °C warmer than soil in summer; its moisture agrees poorly with the handheld probe (r ≈ 0.26).
-  - (e, f) Covariation of temperature and moisture: handheld soil probe (r ≈ −0.3) and chamber probe (r ≈ −0.7). This is why the chamber probe could not separate the two drivers.
+  - (c) Covariation of soil temperature and moisture from the handheld probe (r ≈ −0.3 across collars), which is why the two drivers could be separated in Fig. S2.
 - **S5. C-mineralization time courses.** Thin lines are individual plots. The 16 Dec reading of round 3 is excluded: tube identity was uncertain and the standards were anomalous.
 - **S6. Extractable N pools at day 0 and day 28 of each incubation.**
 

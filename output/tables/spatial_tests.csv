@@ -1,0 +1,66 @@
+"test","response","covariate","estimate","p"
+"covariate ~ treatment (ANOVA)","elev","treatment",NA,0.92
+"covariate ~ treatment (ANOVA)","along","treatment",NA,0.916
+"covariate ~ treatment (ANOVA)","across","treatment",NA,0.789
+"covariate ~ treatment (ANOVA)","vwc_pre","treatment",NA,0.579
+"covariate ~ treatment (ANOVA)","vwc_season","treatment",NA,0.539
+"covariate ~ treatment (ANOVA)","pre_CO2","treatment",NA,0.2
+"covariate ~ treatment (ANOVA)","pre_CH4","treatment",NA,0.67
+"covariate ~ treatment (ANOVA)","pre_N2O","treatment",NA,0.117
+"edge x treatment (Fisher)","edge","treatment",NA,1
+"response ~ treatment + covariate","CO2","elev",-172,0.455
+"response ~ treatment + covariate","CO2","along",-2.43,0.574
+"response ~ treatment + covariate","CO2","across",-11.1,0.122
+"response ~ treatment + covariate","CO2","vwc_pre",11.4,0.588
+"response ~ treatment + covariate","CO2","vwc_season",34.8,0.154
+"response ~ treatment + covariate","CO2","edge",25.1,0.785
+"response ~ treatment + covariate","CO2","slurry_neigh",-126,0.0423
+"response ~ treatment + covariate","CO2","background flux",68.1,0.038
+"response ~ treatment + covariate","CH4","elev",-10.3,0.65
+"response ~ treatment + covariate","CH4","along",0.79,0.0392
+"response ~ treatment + covariate","CH4","across",0.684,0.347
+"response ~ treatment + covariate","CH4","vwc_pre",4.17,0.0228
+"response ~ treatment + covariate","CH4","vwc_season",-0.645,0.795
+"response ~ treatment + covariate","CH4","edge",12.5,0.142
+"response ~ treatment + covariate","CH4","slurry_neigh",8.38,0.188
+"response ~ treatment + covariate","CH4","background flux",149,9.95e-06
+"response ~ treatment + covariate","logN2O","elev",-0.923,0.414
+"response ~ treatment + covariate","logN2O","along",0.0136,0.52
+"response ~ treatment + covariate","logN2O","across",-0.0152,0.683
+"response ~ treatment + covariate","logN2O","vwc_pre",0.146,0.139
+"response ~ treatment + covariate","logN2O","vwc_season",0.0895,0.47
+"response ~ treatment + covariate","logN2O","edge",0.726,0.0855
+"response ~ treatment + covariate","logN2O","slurry_neigh",-0.228,0.49
+"response ~ treatment + covariate","logN2O","background flux",1.4,0.258
+"response ~ treatment + covariate","CO2_wk","elev",0.762,0.958
+"response ~ treatment + covariate","CO2_wk","along",0.053,0.845
+"response ~ treatment + covariate","CO2_wk","across",0.118,0.804
+"response ~ treatment + covariate","CO2_wk","vwc_pre",-0.355,0.789
+"response ~ treatment + covariate","CO2_wk","vwc_season",-0.396,0.804
+"response ~ treatment + covariate","CO2_wk","edge",-2.46,0.668
+"response ~ treatment + covariate","CO2_wk","slurry_neigh",-9.27,0.0119
+"response ~ treatment + covariate","CO2_wk","background flux",5.89,0.000993
+"response ~ treatment + covariate","CH4_wk","elev",-0.546,0.752
+"response ~ treatment + covariate","CH4_wk","along",0.0595,0.0424
+"response ~ treatment + covariate","CH4_wk","across",0.0464,0.405
+"response ~ treatment + covariate","CH4_wk","vwc_pre",0.252,0.0865
+"response ~ treatment + covariate","CH4_wk","vwc_season",-0.127,0.501
+"response ~ treatment + covariate","CH4_wk","edge",0.872,0.185
+"response ~ treatment + covariate","CH4_wk","slurry_neigh",0.0738,0.884
+"response ~ treatment + covariate","CH4_wk","background flux",10.1,0.000609
+"response ~ treatment + covariate","N2O_wk","elev",-2.78,0.5
+"response ~ treatment + covariate","N2O_wk","along",0.0688,0.364
+"response ~ treatment + covariate","N2O_wk","across",-0.0131,0.923
+"response ~ treatment + covariate","N2O_wk","vwc_pre",0.309,0.406
+"response ~ treatment + covariate","N2O_wk","vwc_season",0.0203,0.964
+"response ~ treatment + covariate","N2O_wk","edge",1.91,0.228
+"response ~ treatment + covariate","N2O_wk","slurry_neigh",-0.854,0.476
+"response ~ treatment + covariate","N2O_wk","background flux",4.53,0.316
+"Moran's I of treatment residuals","CO2","space",-0.0649,0.441
+"Moran's I of treatment residuals","CH4","space",0.0846,0.000142
+"Moran's I of treatment residuals","logN2O","space",-0.0695,0.482
+"Moran's I of treatment residuals","CO2_wk","space",-0.12,0.869
+"Moran's I of treatment residuals","CH4_wk","space",0.0508,0.000609
+"Moran's I of treatment residuals","N2O_wk","space",-0.0736,0.522
+"Moran's I of treatment residuals","vwc_season","space",-0.0118,0.0799
+"Moran's I of treatment residuals","vwc_pre","space",0.0926,0.000124
