@@ -1,6 +1,6 @@
 # 33_ghg_budget.R
-# Main Fig 5: non-CO2 greenhouse-gas budget in CO2-equivalents (GWP100, IPCC AR6:
-# CH4 non-fossil 27.0, N2O 273), from the plot-level totals of Figs 1-2.
+# Main Fig 6: non-CO2 greenhouse-gas budget in CO2-equivalents (GWP100, IPCC AR6:
+# CH4 non-fossil 27.0, N2O 273), from the plot-level totals of Figs 2-3.
 #   (a) season budget per treatment (29 May-14 Oct): CH4 uptake, N2O in days 1-6,
 #       N2O over the rest of the season; net per plot and treatment mean +/- 95% CI
 #   (b) N2O emission factor: amendment-attributable N2O-N as % of applied N,
@@ -14,7 +14,7 @@
 # not a net ecosystem exchange, so it is not a GHG balance term.
 # Input:  output/tables/ghg_totals_by_plot.csv (30_main_figures.R),
 #         output/tables/application_inputs.csv
-# Output: output/figures/main/fig5_ghg_budget.{pdf,png}; output/tables/ghg_co2eq_budget.csv,
+# Output: output/figures/main/fig6_ghg_budget.{pdf,png}; output/tables/ghg_co2eq_budget.csv,
 #         ghg_co2eq_metrics.csv
 
 source("code/analysis/fig_setup.R")
@@ -153,7 +153,7 @@ pd_ <- ggplot() +
         panel.grid.major.y = element_blank())
 
 fig7 <- ((free(pa) | pc) / pd_) + plot_layout(heights = c(1.15, 1)) + tags_pub()
-save_fig(fig7, "fig5_ghg_budget", 180, 140)
+save_fig(fig7, "fig6_ghg_budget", 180, 140)
 
 # context numbers
 ctx <- mns %>% mutate(val = signif(val, 3)) %>% pivot_wider(names_from = treatment, values_from = val)

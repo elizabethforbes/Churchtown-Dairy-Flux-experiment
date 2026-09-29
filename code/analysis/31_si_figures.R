@@ -1,6 +1,7 @@
 # 31_si_figures.R
 # Supplementary figures (output/figures/si). Run after 30_main_figures.R.
-#   Fig S1  Study design: plot map, timeline, amendment composition
+#   Fig 1   Study design: plot map and timeline (main text)
+#   Fig S1  Amendment composition
 #   Fig S2  Flux drivers (written by 30_main_figures.R)
 #   Fig S3  Dairy One soil tests by sampling round
 #   Fig S4  Soil moisture and pH at sampling; temperature-moisture covariation (handheld probe)
@@ -97,9 +98,10 @@ s1time <- ggplot(ev_points, aes(date, row)) +
         legend.position = "inside", legend.position.inside = c(0.99, 0.02), legend.justification = c(1, 0),
         legend.direction = "vertical", legend.background = element_blank())
 
-figs1 <- ((s1map + theme(legend.position = "bottom")) | s1time) + plot_layout(widths = c(1.25, 1)) 
-figs1 <- figs1 / (s1a | s1b | s1c) + plot_layout(heights = c(1.4, 1)) + tags_pub()
-save_fig(figs1, "figS1_design", 180, 165, "si")
+fig1 <- ((s1map + theme(legend.position = "bottom")) | s1time) + plot_layout(widths = c(1.25, 1)) + tags_pub()
+save_fig(fig1, "fig1_design", 180, 95)
+figs1 <- (s1a | s1b | s1c) + tags_pub()
+save_fig(figs1, "figS1_amendment_composition", 180, 70, "si")
 
 # =============================================================================
 # Fig S4: soil moisture and pH at sampling; instrument comparison

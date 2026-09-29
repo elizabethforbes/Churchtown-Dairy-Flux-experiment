@@ -74,3 +74,20 @@ out <- bind_rows(bal, cov_tests, moran) %>% mutate(estimate = signif(estimate, 3
 write.csv(out, "output/tables/spatial_tests.csv", row.names = FALSE)
 cat("  spatial tests (p < 0.10):\n"); print(as.data.frame(out %>% filter(p < 0.10)))
 cat(sprintf("  edge plots by treatment: %s\n", paste(capture.output(print(edge_tab)), collapse = " | ")))
+
+# 4) baseline-adjusted treatment effects (ANCOVA): each plot's own pre-application flux
+#    (mean of 6 and 27 May) as covariate. Output: baseline_adjusted_effects.csv
+anc <- bind_rows(lapply(c("CO2_wk", "CH4_wk", "N2O_wk", "CO2", "CH4", "N2O"), function(r) {
+  pre <- pre_map[[if (r == "N2O") "logN2O" else r]]
+  bind_rows(lapply(c("unadjusted", "adjusted"), function(k) {
+    f <- if (k == "adjusted") paste(r, "~ treatment +", pre) else paste(r, "~ treatment")
+    m <- lm(as.formula(f), data = dat); ci <- confint(m)
+    bind_rows(lapply(c("compost", "slurry"), function(tr) {
+      rn <- paste0("treatment", tr)
+      tibble(response = r, model = k, treatment = tr, effect = coef(m)[[rn]],
+             lo = ci[rn, 1], hi = ci[rn, 2], p = summary(m)$coefficients[rn, 4])
+    }))
+  }))
+})) %>% mutate(across(c(effect, lo, hi), ~ signif(.x, 3)), p = signif(p, 3))
+write.csv(anc, "output/tables/baseline_adjusted_effects.csv", row.names = FALSE)
+print(as.data.frame(anc %>% filter(treatment == "slurry")))

@@ -1,11 +1,11 @@
 # 30_main_figures.R
 # Main-text figures (output/figures/main) and summary tables (output/tables).
-#   Fig 1  Season GHG fluxes with field conditions; season totals
-#   Fig 2  The application pulse: first days after manure application
-#   Fig 3  Soil C and N cycling across sampling rounds, grouped by process
+#   Fig 2  Season GHG fluxes with field conditions; season totals
+#   Fig 3  The application pulse: first days after manure application
+#   Fig 4  Soil C and N cycling across sampling rounds, grouped by process
 #   Fig S2 Temperature and moisture as flux drivers (by treatment; and by the second driver)
-# Main Figs 4-5 are written by 32_synthesis_figure.R and 33_ghg_budget.R; the design
-# figure (Fig S1: plot map, timeline, amendment composition) by 31_si_figures.R.
+# Main Figs 5-6 are written by 32_synthesis_figure.R and 33_ghg_budget.R; the design
+# figure (Fig 1: plot map, timeline) and Fig S1 (amendment composition) by 31_si_figures.R.
 # Plots are the experimental unit (n = 5). Subsamples (collars, tubes) are
 # averaged within plot unless noted. Error bars: 95% CI of the mean unless noted.
 
@@ -35,7 +35,7 @@ flux_plot <- flux_raw %>%
   mutate(treatment = as_trt(treatment))
 
 # =============================================================================
-# Application inputs (Table 1; the design figure is Fig S1 in 31_si_figures.R)
+# Application inputs (Table 1; the design figure is Fig 1 in 31_si_figures.R)
 # =============================================================================
 # Application amounts are the planned rates in the field notes ("Fertilizer
 # Fun.docx"): 5 gal slurry and 18 lb compost per 3 x 3 m plot. Slurry density is
@@ -55,7 +55,7 @@ write.csv(inputs %>% mutate(across(where(is.numeric), ~ signif(.x, 3)),
 
 
 # =============================================================================
-# Fig 1: season fluxes with field conditions; season totals
+# Fig 2: season fluxes with field conditions; season totals
 # =============================================================================
 hand_env <- read.csv("data/processed/field_metadata.csv") %>% mutate(date = as.Date(date), vwc = mean_vwc / 100)
 env_camp <- hand_env %>% mutate(soil_temp_c = soil_temp_filled_c) %>% group_by(date) %>%
@@ -120,10 +120,10 @@ fig2 <- (f2t + plot_spacer() + f2w + plot_spacer() + wrap_plots(unlist(flux_rows
 fig2 <- wrap_plots(c(list(f2t, plot_spacer(), f2w, plot_spacer()), unlist(flux_rows, recursive = FALSE)),
                    ncol = 2, widths = c(2.6, 1), heights = c(0.55, 0.55, 1, 1, 1)) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig2, "fig1_season_fluxes", 180, 175)
+save_fig(fig2, "fig2_season_fluxes", 180, 175)
 
 # =============================================================================
-# Fig 2: the application pulse
+# Fig 3: the application pulse
 # =============================================================================
 # Window: last pre-application campaign (27 May, day -1) to 19 Jun (day 22).
 # First-week total = trapezoid integral of each plot's flux over days 1-6
@@ -138,7 +138,7 @@ excess <- flux_plot %>% filter(date %in% win_dates[2:4]) %>% mutate(day = day_of
   group_by(plot, treatment) %>% arrange(day) %>%
   summarize(across(c(FCO2_DRY, FCH4_DRY, FN2O), function(v) sum(diff(day) * (head(v, -1) + tail(v, -1)) / 2)),
             .groups = "drop")
-# plot-level totals for the CO2-eq budget (Fig 5): season = 29 May-14 Oct, first week = days 1-6
+# plot-level totals for the CO2-eq budget (Fig 6): season = 29 May-14 Oct, first week = days 1-6
 bind_rows(cum_plot %>% mutate(period = "season"), excess %>% mutate(period = "first_week")) %>%
   transmute(plot, treatment, period, CO2_C_g_m2 = FCO2_DRY * 86400 * 12.011e-6,
             CH4_C_mg_m2 = FCH4_DRY * 86400 * 12.011e-6, N2O_N_mg_m2 = FN2O * 86400 * 28.013e-6) %>%
@@ -204,7 +204,7 @@ pulse_rows <- lapply(seq_len(nrow(gases)), function(i) {
 })
 fig3 <- wrap_plots(unlist(pulse_rows, recursive = FALSE), ncol = 2, widths = c(1.6, 1)) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig3, "fig2_application_pulse", 180, 160)
+save_fig(fig3, "fig3_application_pulse", 180, 160)
 
 # =============================================================================
 # Fig S2: soil temperature and moisture as flux drivers
@@ -355,7 +355,7 @@ write.csv(resp %>% select(date, plot, collar, treatment, Ts, W, FCO2_DRY, FCH4_D
           "output/tables/flux_driver_data.csv", row.names = FALSE)
 
 # =============================================================================
-# Fig 3: soil C and N cycling across rounds, grouped by process
+# Fig 4: soil C and N cycling across rounds, grouped by process
 # =============================================================================
 lab  <- read.csv("data/processed/lab_assays_summary.csv")
 nmin <- read.csv("data/processed/nmin_plot.csv")
@@ -398,7 +398,7 @@ fig5 <- wrap_plots(col_block("Microbial biomass and C mineralization", "sir_ug_c
                    col_block("N transformations", "net_min_rate_ug_g_d", "net_nitr_rate_ug_g_d"),
                    col_block("Extractable N", "initial_nh4_ug_g", "initial_no3_ug_g"), nrow = 1) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig5, "fig3_soil_c_n", 180, 125)
+save_fig(fig5, "fig4_soil_c_n", 180, 125)
 
 # =============================================================================
 # Treatment-effects table (plant and soil-test metrics appended by 31_si_figures.R)
