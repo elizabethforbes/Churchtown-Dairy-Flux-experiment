@@ -93,23 +93,21 @@ panel_plot <- function(pn, title) {
     scale_fill_manual(values = c(TRT_COLS, white = "white"), guide = "none") +
     scale_alpha_manual(values = c("29 May" = 0.45, "21 Jul" = 0.7, "14 Oct" = 1, single = 1), guide = "none") +
     scale_x_continuous(limits = c(-GLIM, GLIM), breaks = c(-4, -2, 0, 2, 4), oob = scales::squish) +
-    labs(x = if (pn %in% c("Soil tests", "Plant")) "Hedges' g (amendment − control)" else NULL, y = NULL, title = title,
-         subtitle = if (multi) "Rows: 14 Oct / 21 Jul / 29 May (top to bottom)" else NULL) +
+    labs(x = if (pn %in% c("Soil tests", "Plant")) "Hedges' g (amendment − control)" else NULL, y = NULL) +
     theme(panel.grid.major.y = element_line(colour = "grey94", linewidth = 0.2),
           plot.title.position = "plot",
           panel.spacing.x = unit(6, "pt"), strip.text = element_text(hjust = 0.5),
           axis.text.y = element_text(size = rel(0.85)))
 }
 pa <- panel_plot("Soil tests", "Soil tests (Dairy One)")
-pc <- panel_plot("Plant", "Forage composition (Oct harvest)") + labs(subtitle = " ")
+pc <- panel_plot("Plant", "Forage composition (Oct harvest)")
 biomass <- read.csv("data/processed/biomass.csv") %>% group_by(plot, treatment) %>%
   summarize(biomass = mean(dry_matter_g_m2), .groups = "drop") %>% mutate(treatment = as_trt(treatment))
 p_bio <- anova_p(biomass, biomass)$p
 pb <- ggplot() + dot_ci_layers(biomass %>% mutate(x = treatment), trt_summary(biomass, biomass) %>% mutate(x = treatment),
                                x, biomass, pt_size = 1.3) +
   trt_axis() + scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.08))) +
-  labs(x = NULL, y = expression(Dry~mass~(g~m^{-2})), title = "Aboveground biomass (Oct harvest)",
-       subtitle = sprintf("ANOVA p = %.2f", p_bio)) +
+  labs(x = NULL, y = expression(Aboveground~biomass~(g~m^{-2}))) +
   theme(plot.title.position = "plot", legend.position = "bottom")
 fig6 <- (((pa / pb) + plot_layout(heights = c(1.35, 1))) | pc) + plot_layout(widths = c(1, 1), guides = "collect") +
   tags_pub() & theme(legend.position = "bottom")

@@ -38,21 +38,17 @@ s1a <- ggplot(man_long, aes(treatment, kg, fill = key)) +
   geom_col(width = 0.6, colour = "white", linewidth = 0.3) +
   geom_point(data = manure, aes(treatment, total_n), inherit.aes = FALSE, position = position_nudge(x = 0.42),
              size = 1, colour = INK) +
-  geom_text(data = man_long %>% group_by(treatment) %>% summarize(f = kg[form == "ammonium"] / sum(kg), top = sum(kg)),
-            aes(treatment, top, label = sprintf("NH[4]^'+'*'-N:'~'%.0f%%'", 100 * f)), parse = TRUE,
-            inherit.aes = FALSE, vjust = -0.5, size = 2.1, colour = INK) +
   scale_fill_manual(values = fills, guide = "none") + scale_x_discrete(labels = TRT_LABELS) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
-  labs(x = NULL, y = expression(N~(kg~Mg^{-1}~fresh~mass)), title = "Nitrogen as applied",
-       subtitle = "Dark = organic N, light = ammonium N")
-dot_amend <- function(v, ylab, title) ggplot(manure, aes(treatment, {{ v }}, colour = treatment, fill = treatment, shape = treatment)) +
+  labs(x = NULL, y = expression(Total~N~(kg~Mg^{-1}~fresh~mass)))
+dot_amend <- function(v, ylab) ggplot(manure, aes(treatment, {{ v }}, colour = treatment, fill = treatment, shape = treatment)) +
   stat_summary(fun = mean, geom = "col", width = 0.6, alpha = 0.25, colour = NA) +
   geom_point(size = 1.5, stroke = 0.4) +
   scale_colour_trt(guide = "none") + scale_fill_trt(guide = "none") + scale_shape_trt(guide = "none") +
   scale_x_discrete(labels = TRT_LABELS) + scale_y_continuous(expand = expansion(mult = c(0, 0.1)), limits = c(0, NA)) +
-  labs(x = NULL, y = ylab, title = title)
-s1b <- dot_amend(total_solids_pct, "% of fresh mass", "Total solids (dry matter)")
-s1c <- dot_amend(n_dry, "% of dry mass", "Total N, dry-mass basis")
+  labs(x = NULL, y = ylab)
+s1b <- dot_amend(total_solids_pct, "Total solids (% of fresh mass)")
+s1c <- dot_amend(n_dry, "Total N (% of dry mass)")
 # plot map from RTK-GPS corners and collars (UTM 18N), relative to the south-west corner
 key <- read.csv("data/processed/treatment_key.csv")
 corners <- read.csv("data/raw/field_metadata/KT-CTD-Plots.csv") %>% transmute(plot = as.integer(Name), E = Easting, N = Northing, z = Elevation)
@@ -72,8 +68,7 @@ s1map <- ggplot() +
   annotate("segment", x = 0, xend = 5, y = -2, yend = -2, linewidth = 0.5, colour = INK) +
   annotate("text", x = 2.5, y = -3.2, label = "5 m", size = 2, colour = INK) +
   coord_equal(clip = "off") + scale_fill_trt() +
-  labs(x = NULL, y = NULL, title = "Plot layout",
-       subtitle = "Dots: flux collars; bold: plot number; grey: elevation (m) above the lowest corner") +
+  labs(x = NULL, y = NULL) +
   theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(),
         panel.grid.major.y = element_blank())
 
@@ -93,7 +88,7 @@ s1time <- ggplot(ev_points, aes(date, row)) +
                      breaks = c("pre", "post"), name = "Flux campaigns") +
   scale_y_discrete(limits = rev(rows)) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b", limits = as.Date(c("2025-05-01", "2025-10-31")), expand = expansion(0)) +
-  labs(x = NULL, y = NULL, title = "Timeline") +
+  labs(x = NULL, y = NULL) +
   theme(panel.grid.major.y = element_blank(), axis.line.y = element_blank(), axis.ticks.y = element_blank(),
         legend.position = "inside", legend.position.inside = c(0.99, 0.02), legend.justification = c(1, 0),
         legend.direction = "vertical", legend.background = element_blank())
@@ -111,9 +106,9 @@ gwc <- read.csv("data/processed/gwc.csv") %>% group_by(plot, treatment, timepoin
 ph <- read.csv("data/processed/ph.csv") %>% group_by(plot, treatment, timepoint) %>%
   summarize(ph = mean(ph, na.rm = TRUE), .groups = "drop") %>% mutate(treatment = as_trt(treatment), round_lab = round_fac(timepoint))
 s4a <- ggplot() + dot_ci_layers(gwc, trt_summary(gwc, gwc, round_lab), round_lab, gwc) +
-  labs(x = "Soil sampling", y = expression(Gravimetric~water~(g~g^{-1})), title = "Soil moisture at sampling")
+  labs(x = "Soil sampling", y = expression(Gravimetric~water~(g~g^{-1})))
 s4b <- ggplot() + dot_ci_layers(ph, trt_summary(ph, ph, round_lab), round_lab, ph) +
-  labs(x = "Soil sampling", y = "pH", title = "Soil pH")
+  labs(x = "Soil sampling", y = "pH (1:1 water)")
 env  <- read.csv("data/processed/chamber_env.csv") %>% mutate(date = as.Date(date))
 hand <- read.csv("data/processed/field_metadata.csv") %>% mutate(date = as.Date(date))
 both <- inner_join(hand %>% select(date, plot, collar, h_vwc = mean_vwc, h_t = soil_temp_c),
@@ -261,11 +256,7 @@ cov_panel <- function(d, x, y, title) {
   ggplot(d, aes(.data[[x]], .data[[y]])) +
     geom_point(colour = "grey70", shape = 16, size = 0.6, alpha = 0.6) +
     geom_point(data = cm, aes(x, y), colour = INK, size = 1.6) +
-    ggrepel::geom_text_repel(data = cm, aes(x, y, label = format(date, "%d %b")), size = 1.9, colour = MUTED,
-                             min.segment.length = 0, segment.size = 0.2, seed = 1) +
-    annotate("text", x = Inf, y = Inf, hjust = 1.05, vjust = 1.3, size = 2.1, colour = INK,
-             label = sprintf("r = %.2f (collars)\nr = %.2f (campaigns)", cor(d[[x]][ok], d[[y]][ok]), cor(cm$x, cm$y))) +
-    labs(x = "Temperature (°C)", y = expression(VWC~(m^3~m^{-3})), title = title)
+    labs(x = "Soil temperature, 10 cm (°C)", y = expression(VWC~(m^3~m^{-3})))
 }
 s4e <- cov_panel(hand %>% filter(date > APPLICATION_DATE) %>% mutate(W = mean_vwc / 100), "soil_temp_c", "W", "Handheld soil probe")
 s4f <- cov_panel(envc %>% filter(date > APPLICATION_DATE), "soil_temp_c", "vwc", "Chamber probe (near-surface)")
@@ -282,10 +273,10 @@ d1 <- read.csv("data/processed/dairy_one_clean.csv") %>%
   mutate(treatment = as_trt(treatment), round_lab = factor(c("May", "Jul", "Oct")[timepoint], levels = c("May", "Jul", "Oct")))
 d1_vars <- tribble(
   ~col,                  ~title,                 ~ylab,
-  "ph",                  "pH (Dairy One)",       "'pH'",
-  "om_pct",              "Organic matter",       "'% (loss on ignition)'",
-  "cec_meq100g",         "CEC",                  "expression(meq~100~g^{-1})",
-  "base_sat_total_pct",  "Base saturation",      "'%'",
+  "ph",                  "pH (Dairy One)",       "'pH (Dairy One)'",
+  "om_pct",              "Organic matter",       "'Organic matter (%, LOI)'",
+  "cec_meq100g",         "CEC",                  "expression(CEC~(meq~100~g^{-1}))",
+  "base_sat_total_pct",  "Base saturation",      "'Base saturation (%)'",
   "p_ppm",               "Phosphorus",           "'Mehlich-3 P (ppm)'",
   "k_ppm",               "Potassium",            "'Mehlich-3 K (ppm)'",
   "ca_ppm",              "Calcium",              "'Mehlich-3 Ca (ppm)'",
@@ -295,8 +286,8 @@ s9 <- lapply(seq_len(nrow(d1_vars)), function(i) {
   m <- d1_vars[i, ]; v <- sym(m$col)
   pv <- anova_p(d1, !!v, round_lab)
   ggplot() + dot_ci_layers(d1, trt_summary(d1, !!v, round_lab), round_lab, !!v) +
-    geom_text(data = pv, aes(round_lab, Inf, label = ifelse(p < 0.05, sprintf("p = %.2f", p), "")), vjust = 1.2, size = 2) +
-    labs(x = NULL, y = ev(m$ylab), title = m$title)
+    geom_text(data = pv, aes(round_lab, Inf, label = ifelse(p < 0.05, "*", "")), vjust = 1.1, size = 3.2) +
+    labs(x = NULL, y = ev(m$ylab))
 })
 figs9 <- wrap_plots(s9, ncol = 4) + plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
 save_fig(figs9, "figS3_dairyone_soil_tests", 180, 105, "si")

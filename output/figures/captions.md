@@ -1,5 +1,7 @@
 # Figure captions (draft)
 
+Panels carry only axis labels, facet labels and necessary markers; statistics and explanations are in the captions below.
+
 Treatment encoding is the same in every figure: control is a grey circle, compost a brown triangle and slurry a blue square. Unless noted, plots are the experimental unit (n = 5 per treatment). Subsamples, such as chamber collars and incubation tubes, were averaged within each plot before summarising. Small translucent points are individual plots. Large symbols are treatment means with 95% confidence intervals.
 
 ## Main text
@@ -11,11 +13,11 @@ Treatment encoding is the same in every figure: control is a grey circle, compos
 **Figure 2. Soil greenhouse-gas fluxes through the season.**
 (a) Soil temperature and (b) volumetric water content at each campaign, from the handheld probes at 10 cm (mean ± SE). Triangles mark the soil samplings (S1–S3) and the biomass harvest (H). The open symbol is 22 Aug, where temperature was gap-filled from the chamber probe (see Methods).
 (c, e, g) CO2, CH4 and N2O fluxes. Small points are plot means of three collars; large symbols are treatment means ± SE. Grey shading marks the period before application.
-(d, f, h) Season totals from 29 May to 14 Oct, integrated per plot by the trapezoid rule. p-values are from one-way ANOVA.
+(d, f, h) Season totals from 29 May to 14 Oct, integrated per plot by the trapezoid rule. One-way ANOVA p = 0.74 (CO2), 0.72 (CH4) and 0.57 (N2O). The right-hand column is labelled "Season total".
 
 **Figure 3. The application pulse.**
 (a, c, e) Fluxes from the day before application to day 22. Open circles are individual collars and large symbols treatment means ± SE. CO2 is shown on a log axis; CH4 and N2O on pseudo-log axes, so that hotspot collars stay visible.
-(b, d, f) Cumulative flux over days 1–6 (29 May–3 Jun) per plot. Text gives each amendment minus control with its Welch 95% CI.
+(b, d, f) Cumulative flux over days 1–6 (29 May–3 Jun) per plot. Amendment minus control (Welch 95% CI): CO2 compost −1.8 (−14 to 11), slurry 11.5 (−1.9 to 25) g C m−2; CH4 compost 0.15 (−0.88 to 1.2), slurry 1.1 (−0.65 to 2.9) mg C m−2; N2O compost 0.36 (−1.2 to 1.9), slurry 4.6 (−0.23 to 9.4) mg N m−2.
 CH4 is hotspot-driven, so the event count in panel c is the more appropriate test than the plot means in panel d. An emission event is a collar measurement with net CH4 emission (flux > 0). Events occurred in 4 of 45 slurry collar measurements in days 1–6, against 6 of 489 at all other times and in all other treatments (Fisher exact p = 0.006). Control plots had no events at any time. The largest events of the season were all at slurry collar 13B in days 1–6 (5.2, 1.8 and 0.52 nmol m−2 s−1); all others were below 0.5.
 The strongest hotspot (plot 13, collar B) was already a weak source before application (0.26 nmol m−2 s−1 on 27 May). Slurry amplified it about 20-fold on day 1, and it returned to near zero by day 22. Event counts by treatment and period are in ch4_emission_events.csv.
 
@@ -25,7 +27,7 @@ Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels are grouped in three col
 - N transformations over 28 days at 20 °C and 65% water-holding capacity: (c) net N mineralization and (d) net nitrification
 - Extractable N: (e) KCl-extractable NH4+-N and (f) NO3−-N.
 
-p-values are shown where a one-way ANOVA gave p < 0.05.
+Asterisks mark one-way ANOVA p < 0.05 at that sampling (nitrate on 21 Jul and 14 Oct).
 
 **Figure 5. Soil tests and plant response.**
 (a) Dairy One soil tests (Mehlich-3 P, K, Ca and Mg; pH; organic matter; CEC; base saturation) at each sampling, as Hedges' g (amendment minus control, divided by the pooled plot-level SD, small-sample corrected) with 95% CI. The three points in each row are the samplings: 14 Oct, 21 Jul and 29 May from top to bottom, lighter = earlier.

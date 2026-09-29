@@ -35,7 +35,8 @@ wide <- tot %>% select(plot, treatment, period, CH4_C_mg_m2, N2O_N_mg_m2) %>%
             n2o_n_wk = N2O_N_mg_m2_first_week, n2o_n_season = N2O_N_mg_m2_season)
 
 # --- (a) season budget -----------------------------------------------------------
-comp_lab <- c(ch4 = "CH₄ (season)", n2o_rest = "N₂O, rest of season", n2o_wk = "N₂O, days 1–6")
+comp_lab <- expression(ch4 = CH[4]*","~season, n2o_rest = N[2]*O*","~rest~of~season,
+                       n2o_wk = N[2]*O*","~days~1*"–"*6)
 comp_fill <- c(ch4 = "grey70", n2o_rest = "#D9C7A8", n2o_wk = "#7A5C2E")
 stack <- wide %>% group_by(treatment) %>% summarize(across(c(ch4, n2o_wk, n2o_rest), mean), .groups = "drop") %>%
   pivot_longer(-treatment, names_to = "comp", values_to = "val") %>%
@@ -55,8 +56,7 @@ pa <- ggplot() +
                     labels = comp_lab[c(3, 2, 1)], name = NULL) +
   scale_colour_trt(guide = "none") + scale_shape_trt(guide = "none") +
   scale_x_discrete(labels = TRT_LABELS) +
-  labs(x = NULL, y = expression(g~CO[2]*"-eq"~m^{-2}), title = "Season non-CO₂ budget",
-       subtitle = sprintf("Net: ANOVA p = %.2f", p_net)) +
+  labs(x = NULL, y = expression(g~CO[2]*"-eq"~m^{-2})) +
   guides(fill = guide_legend(ncol = 1)) +
   theme(plot.title.position = "plot", legend.position = "inside", legend.position.inside = c(0.02, 0.98),
         legend.justification = c(0, 1), legend.key.size = unit(6, "pt"))
@@ -91,8 +91,8 @@ ef_ci <- bind_rows(lapply(c("n2o_n_wk", "n2o_n_season"), function(v) diff_vs_con
 pc <- ggplot() + scale_x_discrete() +
   geom_hline(yintercept = 0, colour = MUTED, linewidth = 0.3) +
   geom_hline(yintercept = c(1, 0.6), colour = INK, linewidth = 0.3, linetype = c("22", "12")) +
-  annotate("text", x = 0.45, y = c(1, 0.6), label = c("IPCC 1%", "0.6%"),
-           hjust = 0, vjust = -0.4, size = 1.9, colour = INK) +
+  annotate("text", x = 0.42, y = c(1, 0.6), label = c("1%", "0.6%"),
+           hjust = 0, vjust = c(-0.35, 1.3), size = 2.2, colour = INK) +
   geom_point(data = ef_plot, aes(period, ef, colour = treatment), shape = 16, size = 1, alpha = 0.45,
              position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.6, seed = 1), show.legend = FALSE) +
   geom_linerange(data = ef_ci, aes(period, ymin = lo, ymax = hi, colour = treatment),
@@ -100,7 +100,7 @@ pc <- ggplot() + scale_x_discrete() +
   geom_point(data = ef_ci, aes(period, mean, colour = treatment, shape = treatment, fill = treatment),
              position = position_dodge(0.6), size = 2, stroke = 0.4) +
   scale_colour_trt() + scale_fill_trt() + scale_shape_trt() +
-  labs(x = NULL, y = "% of applied N as N₂O-N", title = "N₂O emission factor") +
+  labs(x = NULL, y = expression(N[2]*O*"-N"~("%"~of~applied~N))) +
   theme(legend.position = "bottom") +
   theme(plot.title.position = "plot")
 
@@ -126,8 +126,10 @@ amend_c <- bind_rows(lapply(c("slurry", "compost"), function(tr) {
 }))
 att_net <- att %>% filter(comp == "net") %>% select(treatment, diff)
 ctx_rows <- c(rs = "Soil respiration", anpp = "Aboveground NPP",
-              amend = "Amendment C input*", net = "Non-CO₂ net",
-              att = "Non-CO₂, amendment effect", ch4 = "CH₄ uptake (|sink|)")
+              amend = "Amendment C input", net = "Non-CO2 net",
+              att = "Non-CO2, amendment effect", ch4 = "CH4 uptake")
+ctx_labs <- expression(rs = "Soil respiration", anpp = "Aboveground NPP", amend = "Amendment C input",
+                       net = Non*"-"*CO[2]~net, att = Non*"-"*CO[2]*","~amendment~effect, ch4 = CH[4]~uptake)
 lvl <- rev(names(ctx_rows))
 pts <- bind_rows(rs %>% mutate(row = "rs"), anpp %>% mutate(row = "anpp"),
                  wide %>% transmute(plot, treatment, val = net, row = "net"),
@@ -145,10 +147,9 @@ pd_ <- ggplot() +
              position = pdd, size = 1.8, stroke = 0.4) +
   scale_x_log10(breaks = c(1, 10, 100, 1000, 10000), labels = c("1", "10", "100", "1k", "10k"), limits = c(0.5, 12000)) +
   annotation_logticks(sides = "b", linewidth = 0.2, short = unit(1, "pt"), mid = unit(2, "pt"), long = unit(3, "pt")) +
-  scale_y_discrete(labels = ctx_rows, drop = FALSE) +
+  scale_y_discrete(labels = ctx_labs, drop = FALSE) +
   scale_colour_trt(guide = "none") + scale_fill_trt(guide = "none") + scale_shape_trt(guide = "none") +
-  labs(x = expression(g~CO[2]*"(-eq)"~m^{-2}~"(season, log scale)"), y = NULL,
-       title = "In context: the system's carbon fluxes", subtitle = "*assumed C content (range)") +
+  labs(x = expression(Season~flux~(g~CO[2]*"(-eq)"~m^{-2}*","~log~scale)), y = NULL) +
   theme(plot.title.position = "plot", panel.grid.major.x = element_line(colour = "grey92", linewidth = 0.25),
         panel.grid.major.y = element_blank())
 

@@ -25,6 +25,7 @@ gases <- tribble(
   "FN2O",     "N2O", "expression(bold(N[2]*O))", "expression(N[2]*O~(nmol~m^{-2}~s^{-1}))",   86400 * 28.013e-6, "expression(N[2]*O*'-N'~(mg~m^{-2}))"
 )
 ev <- function(x) eval(parse(text = x))
+
 pre_shade <- function() annotate("rect", xmin = -Inf, xmax = APPLICATION_DATE, ymin = -Inf, ymax = Inf, fill = "grey95")
 season_lims <- as.Date(c("2025-05-01", "2025-10-31"))
 season_axis <- function() scale_x_date(date_breaks = "1 month", date_labels = "%b", limits = season_lims, expand = expansion(0))
@@ -72,12 +73,11 @@ env_panel <- function(m, se, ylab) ggplot(env_camp, aes(date, .data[[m]])) +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 biomass_date <- unique(biomass$sampling_date)
 marks <- tibble(date = c(as.Date(ROUND_DATES), biomass_date), what = c(rep("Soil sampling", 3), "Harvest"))
-f2t <- env_panel("soil_temp_c_m", "soil_temp_c_se", "°C") +
+f2t <- env_panel("soil_temp_c_m", "soil_temp_c_se", "Soil T (°C)") +
   geom_point(data = marks, aes(date, Inf), shape = 25, size = 1.3, colour = INK, fill = INK, inherit.aes = FALSE) +
   geom_text(data = marks, aes(date, Inf, label = c("S1", "S2", "S3", "H")), vjust = -0.9, size = 1.9, colour = INK, inherit.aes = FALSE) +
   coord_cartesian(clip = "off") +
-  labs(title = "Soil temperature and moisture (handheld probes, 10 cm; mean ± SE; open = gap-filled)") +
-  theme(plot.title = element_text(margin = margin(0, 0, 9, 0)))
+  theme(plot.margin = margin(12, 6, 4, 4))
 f2w <- env_panel("vwc_m", "vwc_se", "VWC")
 
 post <- flux_plot %>% filter(date > APPLICATION_DATE)
@@ -104,21 +104,19 @@ flux_rows <- lapply(seq_len(nrow(gases)), function(i) {
     geom_point(data = ts, aes(date, mean, colour = treatment, fill = treatment, shape = treatment),
                position = pd, size = 1.4, stroke = 0.35) +
     scale_colour_trt() + scale_fill_trt() + scale_shape_trt() + season_axis() +
-    labs(x = NULL, y = ev(g$ylab), title = ev(g$name))
+    labs(x = NULL, y = ev(g$ylab))
   p_c <- ggplot() + { if (g$gas != "CO2") zero_line() } +
     dot_ci_layers(cp %>% mutate(x = treatment), cs %>% mutate(x = treatment), x, val, pt_size = 1.3) +
-    annotate("text", x = 2, y = Inf, label = sprintf("p = %.2f", pv), vjust = 1.3, size = 2.1, colour = MUTED) +
     trt_axis() + scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
     guides(colour = "none", fill = "none", shape = "none") +
-    labs(x = NULL, y = ev(g$cum_lab), title = if (first) "Season total" else " ",
-         subtitle = if (first) sprintf("%s–%s", format(min(post$date), "%d %b"), format(max(post$date), "%d %b")) else NULL)
+    labs(x = NULL, y = ev(g$cum_lab), title = if (first) "Season total" else NULL)
   list(p_ts, p_c)
 })
 fig2 <- (f2t + plot_spacer() + f2w + plot_spacer() + wrap_plots(unlist(flux_rows, recursive = FALSE))) +
   plot_layout(ncol = 2, widths = c(2.6, 1), heights = c(0.45, 0.45, 1, 1, 1), guides = "collect") +
   tags_pub() & theme(legend.position = "bottom")
 fig2 <- wrap_plots(c(list(f2t, plot_spacer(), f2w, plot_spacer()), unlist(flux_rows, recursive = FALSE)),
-                   ncol = 2, widths = c(2.6, 1), heights = c(0.55, 0.55, 1, 1, 1)) +
+                   ncol = 2, widths = c(2.6, 1), heights = c(0.7, 0.7, 1, 1, 1)) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
 save_fig(fig2, "fig2_season_fluxes", 180, 175)
 
@@ -185,21 +183,15 @@ pulse_rows <- lapply(seq_len(nrow(gases)), function(i) {
                    position = pd2, linewidth = 0.35, show.legend = FALSE) +
     geom_point(data = ts, aes(day, mean, colour = treatment, fill = treatment, shape = treatment),
                position = pd2, size = 1.6, stroke = 0.35) +
-    { if (g$gas == "CH4") annotate("text", x = 22.5, y = Inf, hjust = 1, vjust = 1.2, size = 1.9,
-                                   colour = INK, lineheight = 0.95, label = ch4_event_lab) } +
     pscale[[g$gas]] +
     scale_x_continuous(breaks = c(-1, 1, 2, 6, 22)) +
     scale_colour_trt() + scale_fill_trt() + scale_shape_trt() +
-    labs(x = if (i == 3) "Days since application" else NULL, y = ev(g$ylab), title = ev(g$name),
-         subtitle = if (first) "Circles: collars; symbols: mean ± SE" else NULL)
+    labs(x = if (i == 3) "Days since application" else NULL, y = ev(g$ylab))
   p_e <- ggplot() + zero_line() +
     dot_ci_layers(ex %>% mutate(x = treatment), es %>% mutate(x = treatment), x, val, pt_size = 1.3) +
-    annotate("text", x = 0.5, y = Inf, label = lab, hjust = 0, vjust = 1.2, size = 1.9, colour = MUTED, lineheight = 0.95) +
     trt_axis() + scale_y_continuous(expand = expansion(mult = c(0.05, 0.35))) +
     guides(colour = "none", fill = "none", shape = "none") +
-    labs(x = NULL, y = ev(g$cum_lab),
-         title = if (first) "First-week total" else " ",
-         subtitle = if (first) "Days 1–6 (29 May–3 Jun)" else NULL)
+    labs(x = NULL, y = ev(g$cum_lab), title = if (first) "Days 1–6 total" else NULL)
   list(p_ts, p_e)
 })
 fig3 <- wrap_plots(unlist(pulse_rows, recursive = FALSE), ncol = 2, widths = c(1.6, 1)) +
@@ -264,9 +256,7 @@ f4a <- ggplot(resp, aes(Ts, FCO2_DRY, colour = W)) +
   geom_point(shape = 16, size = 0.8, alpha = 0.75) +
   geom_line(data = g_co2, aes(Ts, fit, group = W, colour = W), linewidth = 0.8) +
   vwc_scale + coord_cartesian(ylim = c(0, quantile(resp$FCO2_DRY, 0.99))) +
-  annotate("text", x = -Inf, y = Inf, hjust = -0.04, vjust = 1.2, size = 2, colour = MUTED, lineheight = 0.95,
-           label = sprintf("%s\nQ10 = %.1f; wetter = more CO2\nlines: VWC 0.08 / 0.15 / 0.25", lab_best("CO2"), q10)) +
-  labs(x = "Soil temperature (°C)", y = ev(gases$ylab[1]), title = expression(bold(CO[2])~"vs temperature"))
+  labs(x = "Soil temperature (°C)", y = ev(gases$ylab[1]))
 g_ch4 <- pred_grid(models$CH4$TxW, "W", seq(quantile(resp$W, .02), quantile(resp$W, .98), length.out = 60),
                    "Ts", c(14, 19, 25))
 f4b <- ggplot(resp, aes(W, FCH4_DRY, colour = Ts)) +
@@ -274,18 +264,14 @@ f4b <- ggplot(resp, aes(W, FCH4_DRY, colour = Ts)) +
   geom_point(shape = 16, size = 0.8, alpha = 0.75) +
   geom_line(data = g_ch4, aes(W, fit, group = Ts, colour = Ts), linewidth = 0.8) +
   temp_scale + coord_cartesian(ylim = quantile(resp$FCH4_DRY, c(0.01, 0.99))) +
-  annotate("text", x = -Inf, y = Inf, hjust = -0.04, vjust = 1.2, size = 2, colour = MUTED, lineheight = 0.95,
-           label = sprintf("%s\nwetter = less uptake\nlines: soil T 14 / 19 / 25 °C", lab_best("CH4"))) +
-  labs(x = expression(Soil~VWC~(m^3~m^{-3})), y = ev(gases$ylab[2]), title = expression(bold(CH[4])~"vs moisture"))
+  labs(x = expression(Soil~VWC~(m^3~m^{-3})), y = ev(gases$ylab[2]))
 n2o_fit <- lme4::fixef(models$N2O$W)
 f4c <- ggplot(resp, aes(W, FN2O, colour = Ts)) +
   zero_line() +
   geom_point(shape = 16, size = 0.8, alpha = 0.75) +
   geom_abline(intercept = n2o_fit[1] - 0.15 * n2o_fit[2], slope = n2o_fit[2], colour = INK, linewidth = 0.7) +
   temp_scale + coord_cartesian(ylim = quantile(resp$FN2O, c(0.01, 0.99))) +
-  annotate("text", x = -Inf, y = Inf, hjust = -0.04, vjust = 1.2, size = 2, colour = MUTED, lineheight = 0.95,
-           label = sprintf("%s\ntemperature adds nothing", lab_best("N2O"))) +
-  labs(x = expression(Soil~VWC~(m^3~m^{-3})), y = ev(gases$ylab[3]), title = expression(bold(N[2]*O)~"vs moisture"))
+  labs(x = expression(Soil~VWC~(m^3~m^{-3})), y = ev(gases$ylab[3]))
 figS8 <- (f4a | f4b | f4c) + tags_pub() &
   theme(legend.position = "bottom", legend.key.width = unit(16, "pt"), legend.key.height = unit(5, "pt"),
         legend.title = element_text(size = 6.5, vjust = 0.8), legend.text = element_text(size = 6))
@@ -338,10 +324,9 @@ f4 <- lapply(trt_specs, function(sp) {
                 alpha = 0.15, show.legend = FALSE) +
     geom_line(data = grid, aes(.data[[sp$x]], fit, colour = treatment), linewidth = 0.7, show.legend = FALSE) +
     geom_point(data = grid[0, ], aes(.data[[sp$x]], fit, fill = treatment, shape = treatment), size = 2) +
-    annotate("text", x = -Inf, y = Inf, hjust = -0.04, vjust = 1.2, size = 2, colour = MUTED, lineheight = 0.95, label = lab) +
     coord_cartesian(ylim = if (sp$gamma) c(0, quantile(resp[[sp$y]], 0.99)) else quantile(resp[[sp$y]], c(0.01, 0.99))) +
     scale_colour_trt(drop = FALSE) + scale_fill_trt(drop = FALSE) + scale_shape_trt(drop = FALSE) +
-    labs(x = if (grepl("expression", sp$xlab)) ev(sp$xlab) else sp$xlab, y = ev(gases$ylab[gases$gas == sp$gas]), title = ev(sp$title))
+    labs(x = if (grepl("expression", sp$xlab)) ev(sp$xlab) else sp$xlab, y = ev(gases$ylab[gases$gas == sp$gas]))
 })
 # Fig S2: (a-c) one fitted line per treatment; (d-f) the same data coloured by the second driver
 s2_top <- wrap_plots(f4, nrow = 1) + plot_layout(guides = "collect") & theme(legend.position = "bottom")
@@ -382,8 +367,8 @@ soil_abs <- lapply(seq_len(nrow(soil_metrics)), function(i) {
     left_join(pv %>% transmute(group = as.character(round_lab), anova_p = p), by = "group") %>% select(-round_lab)
   ggplot() + { if (grepl("net_", m$col)) zero_line() } +
     dot_ci_layers(soil %>% filter(!is.na(!!v)), s, round_lab, !!v) +
-    geom_text(data = pv, aes(round_lab, Inf, label = ifelse(p < 0.05, sprintf("p = %.2f", p), "")),
-              vjust = 1.2, size = 2.1, colour = INK) +
+    geom_text(data = pv, aes(round_lab, Inf, label = ifelse(p < 0.05, "*", "")),
+              vjust = 1.1, size = 3.2, colour = INK) +
     scale_y_continuous(expand = expansion(mult = c(0.05, 0.14))) +
     labs(x = NULL, y = ev(m$ylab), title = m$title) +
     theme(plot.title = element_text(face = "plain"))
