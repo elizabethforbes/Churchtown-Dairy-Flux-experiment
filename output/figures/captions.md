@@ -22,12 +22,11 @@ CH4 is hotspot-driven, so the event count in panel c is the more appropriate tes
 The strongest hotspot (plot 13, collar B) was already a weak source before application (0.26 nmol m−2 s−1 on 27 May). Slurry amplified it about 20-fold on day 1, and it returned to near zero by day 22. Event counts by treatment and period are in ch4_emission_events.csv.
 
 **Figure 4. Soil C and N cycling across the season.**
-Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels are grouped in three columns:
+Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels are grouped in two columns:
 - Microbial biomass and C mineralization: (a) substrate-induced respiration and (b) mean C mineralization rate
-- N transformations over 28 days at 20 °C and 65% water-holding capacity: (c) net N mineralization and (d) net nitrification
-- Extractable N: (e) KCl-extractable NH4+-N and (f) NO3−-N.
+- N mineralization and mineral N: (c) net N mineralization over 28 days at 20 °C and 65% water-holding capacity, and (d) KCl-extractable mineral N (NH4+ + NO3−) at the start of the incubation.
 
-Asterisks mark one-way ANOVA p < 0.05 at that sampling (nitrate on 21 Jul and 14 Oct).
+Asterisks mark one-way ANOVA p < 0.05 at that sampling (mineral N on 14 Oct). Ammonium, nitrate and net nitrification are in Fig. S6.
 
 **Figure 5. Soil chemistry and plant response.**
 (a) Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg at each sampling, as Hedges' g (amendment minus control, divided by the pooled plot-level SD, small-sample corrected) with 95% CI. The three points in each row are the samplings: 14 Oct, 21 Jul and 29 May from top to bottom, lighter = earlier.
@@ -74,7 +73,7 @@ Results:
   - (a) Soil moisture and (b) pH at sampling.
   - (c) Covariation of soil temperature and moisture from the handheld probe (r ≈ −0.3 across collars), which is why the two drivers could be separated in Fig. S2.
 - **S5. C-mineralization time courses.** Thin lines are individual plots. The 16 Dec reading of round 3 is excluded: tube identity was uncertain and the standards were anomalous.
-- **S6. Extractable N pools at day 0 and day 28 of each incubation.**
+- **S6. Extractable N pools at day 0 and day 28 of each incubation, and net nitrification.** Initial extractions were made at incubation setup, about 5, 14 and 42 days after sampling (soils at 4 °C), so the NH4+:NO3− split and net nitrification are not comparable across samplings.
 
 ## Methods notes
 - **Flux calculation.** Fluxes were recomputed from the raw 1 Hz concentration records with goFlux 0.4.0 (best.flux, Hüppi criteria) through fluxqc 0.2.3.

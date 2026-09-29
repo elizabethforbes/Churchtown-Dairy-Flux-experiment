@@ -136,7 +136,7 @@ figs5 <- ggplot() +
 save_fig(figs5, "figS5_cmin_timecourses", 180, 70, "si")
 
 # =============================================================================
-# Fig S6: N pools, day 0 vs day 28
+# Fig S6: N pools, day 0 vs day 28, and net nitrification
 # =============================================================================
 nmin <- read.csv("data/processed/nmin_plot.csv") %>% mutate(treatment = as_trt(treatment))
 pools <- nmin %>%
@@ -152,6 +152,14 @@ figs6 <- ggplot() + zero_line() +
   facet_grid(form ~ round_lab, scales = "free_y", switch = "y", labeller = labeller(form = label_parsed)) +
   labs(x = NULL, y = NULL) +
   theme(strip.placement = "outside", strip.text.y.left = element_text(angle = 90, face = "plain", hjust = 0.5))
+sm <- read.csv("output/tables/soil_metrics_by_plot.csv") %>%
+  mutate(treatment = as_trt(treatment), round_lab = factor(round_lab, levels = ROUND_LABELS))
+s6b <- ggplot() + zero_line() +
+  dot_ci_layers(sm, trt_summary(sm, net_nitr_rate_ug_g_d, round_lab), round_lab, net_nitr_rate_ug_g_d) +
+  facet_wrap(~ "Net nitrification") +
+  labs(x = NULL, y = expression(mu*g~N~g^{-1}~d^{-1}))
+figs6 <- (figs6 | free(s6b, type = "panel", side = "b")) + plot_layout(widths = c(3, 1.1), guides = "collect") + tags_pub() &
+  theme(legend.position = "bottom")
 save_fig(figs6, "figS6_nmin_pools", 180, 95, "si")
 
 # =============================================================================

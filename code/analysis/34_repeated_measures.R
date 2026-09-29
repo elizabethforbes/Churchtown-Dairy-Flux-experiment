@@ -72,7 +72,7 @@ d1 <- read.csv("data/processed/dairy_one_clean.csv") %>%
             d1_base_sat = base_sat_total_pct, d1_p_ppm = p_ppm, d1_k_ppm = k_ppm, d1_ca_ppm = ca_ppm, d1_mg_ppm = mg_ppm)
 soil <- soil %>% left_join(d1, by = c("plot", "round")) %>%
   mutate(mq = cmin_rate_ug_co2c_g_d / (sir_ug_co2c_hr_g * 24))          # (C) metabolic quotient (d-1 per d-1 of SIR)
-soil_vars <- c("initial_nh4_ug_g", "initial_no3_ug_g", "net_min_rate_ug_g_d", "net_nitr_rate_ug_g_d",
+soil_vars <- c("tin_ug_g", "initial_nh4_ug_g", "initial_no3_ug_g", "net_min_rate_ug_g_d", "net_nitr_rate_ug_g_d",
                "sir_ug_co2c_hr_g", "cmin_rate_ug_co2c_g_d", "mq", "d1_ph", "d1_om_pct", "d1_cec", "d1_base_sat",
                "d1_p_ppm", "d1_k_ppm", "d1_ca_ppm", "d1_mg_ppm")
 rm_soil <- bind_rows(lapply(soil_vars, function(v) {

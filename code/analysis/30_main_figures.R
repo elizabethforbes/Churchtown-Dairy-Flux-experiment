@@ -356,7 +356,8 @@ soil <- lab %>%
   select(plot, treatment, round = timepoint, sir_ug_co2c_hr_g, cmin_rate_ug_co2c_g_d) %>%
   left_join(nmin %>% select(plot, round, initial_nh4_ug_g, initial_no3_ug_g,
                             net_min_rate_ug_g_d, net_nitr_rate_ug_g_d), by = c("plot", "round")) %>%
-  mutate(treatment = as_trt(treatment), round_lab = factor(ROUND_LABELS[as.character(round)], levels = ROUND_LABELS))
+  mutate(treatment = as_trt(treatment), round_lab = factor(ROUND_LABELS[as.character(round)], levels = ROUND_LABELS),
+         tin_ug_g = initial_nh4_ug_g + initial_no3_ug_g)
 write.csv(soil, "output/tables/soil_metrics_by_plot.csv", row.names = FALSE)
 soil_metrics <- tribble(
   ~col,                    ~title,                  ~ylab,
@@ -365,7 +366,8 @@ soil_metrics <- tribble(
   "net_min_rate_ug_g_d",   "Net N mineralization",  "expression(mu*g~N~g^{-1}~d^{-1})",
   "net_nitr_rate_ug_g_d",  "Net nitrification",     "expression(mu*g~N~g^{-1}~d^{-1})",
   "initial_nh4_ug_g",      "Ammonium",              "expression(NH[4]^'+'*'-N'~(mu*g~g^{-1}))",
-  "initial_no3_ug_g",      "Nitrate",               "expression(NO[3]^'-'*'-N'~(mu*g~g^{-1}))"
+  "initial_no3_ug_g",      "Nitrate",               "expression(NO[3]^'-'*'-N'~(mu*g~g^{-1}))",
+  "tin_ug_g",              "Extractable mineral N", "expression(NH[4]^'+'+NO[3]^'-'*'-N'~(mu*g~g^{-1}))"
 )
 soil_abs <- lapply(seq_len(nrow(soil_metrics)), function(i) {
   m <- soil_metrics[i, ]; v <- sym(m$col)
@@ -382,16 +384,17 @@ soil_abs <- lapply(seq_len(nrow(soil_metrics)), function(i) {
     theme(plot.title = element_text(face = "plain"))
 })
 names(soil_abs) <- soil_metrics$col
-# three labelled columns: microbial biomass and C mineralization | N transformations | extractable N
+# two labelled columns: microbial biomass and C mineralization | N mineralization and mineral N.
+# Ammonium, nitrate and net nitrification go to Fig S6: the initial extractions were made 5, 14 and 42 d
+# after sampling, so the NH4:NO3 split and net nitrification are not comparable across samplings.
 col_header <- function(txt) wrap_elements(full = grid::grobTree(
   grid::segmentsGrob(x0 = 0.04, x1 = 0.96, y0 = 0.15, y1 = 0.15, gp = grid::gpar(col = INK, lwd = 0.6)),
   grid::textGrob(txt, y = 0.55, gp = grid::gpar(fontsize = 7.5, fontface = "bold", col = INK))), ignore_tag = TRUE)
 col_block <- function(h, a, b) wrap_plots(col_header(h), soil_abs[[a]], soil_abs[[b]], ncol = 1, heights = c(0.09, 1, 1))
 fig5 <- wrap_plots(col_block("Microbial biomass and C mineralization", "sir_ug_co2c_hr_g", "cmin_rate_ug_co2c_g_d"),
-                   col_block("N transformations", "net_min_rate_ug_g_d", "net_nitr_rate_ug_g_d"),
-                   col_block("Extractable N", "initial_nh4_ug_g", "initial_no3_ug_g"), nrow = 1) +
+                   col_block("N mineralization and mineral N", "net_min_rate_ug_g_d", "tin_ug_g"), nrow = 1) +
   plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(fig5, "fig4_soil_c_n", 180, 125)
+save_fig(fig5, "fig4_soil_c_n", 125, 125)
 
 # =============================================================================
 # Treatment-effects table (plant and soil-test metrics appended by 31_si_figures.R)

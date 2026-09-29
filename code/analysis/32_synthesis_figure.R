@@ -28,6 +28,7 @@ labs_tbl <- tribble(
   "season_total_CO2",           "CO2, season",              "GHG fluxes",
   "season_total_CH4",           "CH4, season",              "GHG fluxes",
   "season_total_N2O",           "N2O, season",              "GHG fluxes",
+  "tin_ug_g",                   "Extractable mineral N",    "Soil N and C cycling",
   "initial_nh4_ug_g",           "Extractable NH4+",         "Soil N and C cycling",
   "initial_no3_ug_g",           "Extractable NO3-",         "Soil N and C cycling",
   "net_min_rate_ug_g_d",        "Net N mineralization",     "Soil N and C cycling",
