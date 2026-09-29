@@ -89,8 +89,13 @@ cat("\n(C) Metabolic quotient (C-min rate / SIR-derived daily rate), treatment m
 
 # --- (D) N supply context ------------------------------------------------------------
 # Lab net mineralization (20 C, 65% WHC) is a potential rate; field rates are lower.
-# Soil mass for 0-15 cm assumes bulk density 1.2 g cm-3 (not measured): 1.8e6 kg ha-1.
-SOIL_KG_HA <- 1.2e3 * 0.15 * 1e4
+# Bulk density was not measured. Fine-earth mass for 0-15 cm uses SSURGO values for the plots' map unit
+# (BlA, Blasdell channery loam, 0-25 cm horizon): fine-earth bulk density 1.25 g cm-3 and 32% coarse
+# fragments by volume, giving 1.25e3 * (1 - 0.32) * 0.15 * 1e4 = 1.28e6 kg ha-1. Lab rates are per g of
+# sieved (<2 mm) soil, so the fragment correction applies. The upper bound omits it (1.9e6 kg ha-1).
+BD_FINE <- 1.25; FRAG_VOL <- 0.32
+SOIL_KG_HA <- BD_FINE * 1e3 * (1 - FRAG_VOL) * 0.15 * 1e4
+SOIL_KG_HA_NOFRAG <- BD_FINE * 1e3 * 0.15 * 1e4
 season_d <- as.numeric(as.Date("2025-10-14") - as.Date("2025-05-29"))
 nmin_mean <- mean(soil$net_min_rate_ug_g_d, na.rm = TRUE)
 forage <- read.csv("data/processed/dairy_one_forage.csv")
@@ -102,10 +107,12 @@ nsup <- tibble(item = c("Net N mineralization, lab potential (mg N kg-1 d-1, mea
                         "Season N supply from mineralization at lab potential (kg N ha-1, 0-15 cm)",
                         "Applied N, slurry / compost (kg N ha-1)",
                         "Applied NH4-N, slurry / compost (kg N ha-1)",
-                        "Initial mineral N, 29 May (kg N ha-1, 0-15 cm)"),
+                        "Initial mineral N, 29 May (kg N ha-1, 0-15 cm)",
+                        "Season N supply, no coarse-fragment correction (kg N ha-1, 0-15 cm; upper bound)"),
                value = c(signif(nmin_mean, 3), round(nmin_mean * season_d * SOIL_KG_HA / 1e6),
                          "27.5 / 38.7", "2.8 / 0.5",
-                         round(mean(with(soil[soil$round_lab == "29 May", ], initial_nh4_ug_g + initial_no3_ug_g), na.rm = TRUE) * SOIL_KG_HA / 1e6)))
+                         round(mean(with(soil[soil$round_lab == "29 May", ], initial_nh4_ug_g + initial_no3_ug_g), na.rm = TRUE) * SOIL_KG_HA / 1e6),
+                         round(nmin_mean * season_d * SOIL_KG_HA_NOFRAG / 1e6)))
 write.csv(bind_rows(nsup, upt %>% transmute(item = paste("Plant N uptake (Oct harvest), ", treatment, " (kg N ha-1; N %)"),
                                             value = sprintf("%.0f; %.2f%%", n_uptake_kg_ha, n_pct))),
           "output/tables/n_supply_context.csv", row.names = FALSE)
