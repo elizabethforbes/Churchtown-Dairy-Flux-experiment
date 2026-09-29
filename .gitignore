@@ -25,3 +25,6 @@ Rplots.pdf
 # Regenerable intermediates / QC output (rebuilt by code/run_all.R)
 data/processed/flux_raw_traces.rds
 output/qc/
+
+# Manuscript drafts and their build script stay outside the public repo (docs/manuscript/)
+code/manuscript/

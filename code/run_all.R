@@ -88,6 +88,15 @@ source("code/analysis/31_si_figures.R")
 cat("\n--- 32: Effect-size synthesis (Fig 6) + CO2-eq budget ---\n")
 source("code/analysis/32_synthesis_figure.R")
 
+cat("\n--- 33: Non-CO2 GHG budget (Fig 7) ---\n")
+source("code/analysis/33_ghg_budget.R")
+
+cat("\n--- 34: Repeated-measures models, minimum detectable effects ---\n")
+source("code/analysis/34_repeated_measures.R")
+
+cat("\n--- 35: Storage vs field emissions per kg manure N ---\n")
+source("code/analysis/35_storage_vs_field.R")
+
 cat("\n--- QC: per-closure concentration traces ---\n")
 source("code/qc/plot_closure_traces.R")
 

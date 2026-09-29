@@ -1,0 +1,13 @@
+"phase","material","system","ch4_kg_per_kgN","co2eq_ch4","co2eq_n2o","co2eq_total","total_lo","total_hi"
+"Storage (IPCC Tier 1)","slurry","Liquid/slurry, 1-month storage",0.402,10.8,0,10.8,NA,NA
+"Storage (IPCC Tier 1)","slurry","Liquid/slurry, 6-month storage",1.41,38,0,38,NA,NA
+"Storage (IPCC Tier 1)","slurry","Liquid/slurry, 6-month, natural crust",0.844,22.8,2.14,24.9,NA,NA
+"Storage (IPCC Tier 1)","slurry","Liquid/slurry, 12-month storage",2.08,56.1,0,56.1,NA,NA
+"Storage (IPCC Tier 1)","slurry","Uncovered anaerobic lagoon",4.02,108,0,108,NA,NA
+"Storage (IPCC Tier 1)","compost","Composting, intensive windrow",0.0501,1.35,2.14,3.5,NA,NA
+"Storage (IPCC Tier 1)","compost","Composting, passive windrow",0.1,2.71,2.14,4.85,NA,NA
+"Storage (IPCC Tier 1)","compost","Solid storage (stockpile)",0.201,5.41,4.29,9.7,NA,NA
+"Field application (this study)","compost","Days 1-6 after application",5.28e-05,0.00143,0.0399,0.0413,-0.132,0.214
+"Field application (this study)","compost","Season (29 May-14 Oct)",-0.000494,-0.0133,2.67,2.66,-5.33,10.6
+"Field application (this study)","slurry","Days 1-6 after application",0.00054,0.0146,0.712,0.727,-0.0448,1.5
+"Field application (this study)","slurry","Season (29 May-14 Oct)",0.00242,0.0654,7.81,7.87,-13.9,29.6
