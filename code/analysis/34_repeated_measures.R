@@ -6,11 +6,9 @@
 #       Sensitivity: rank-transformed response (robust to the heavy CH4/N2O tails)
 #       and plot-mean models (plot as the unit). Per-date amendment - control
 #       contrasts from emmeans (Dunnett-adjusted within date).
-#   (B) Soil variables: y ~ treatment * sampling + (1 | plot). BH-FDR q-values for the
-#       treatment and treatment x sampling terms are computed within each hypothesis
-#       family (microbial C and N; soil chemistry); per-date contrasts are treated as
-#       confirmatory only for variables whose family-wise omnibus q < 0.05.
-#       Flux treatment terms (collar model) likewise get BH q within the flux family.
+#   (B) Soil variables: y ~ treatment * sampling + (1 | plot). For the soil chemistry
+#       screening panel (Dairy One variables), treatment and treatment x sampling terms
+#       also get a Benjamini-Hochberg adjusted p (p_adj) across the panel.
 #   (C) Microbial metabolic quotient: C-mineralization rate per unit SIR biomass,
 #       to test whether an unchanged flux could hide offsetting changes in
 #       biomass and activity.
@@ -58,9 +56,6 @@ for (g in names(gases)) {
 }
 rm_anova <- bind_rows(anova_rows)
 rm_contr <- bind_rows(contr_rows)
-rm_anova <- rm_anova %>%
-  group_by(is_fam = model == "collar" & term %in% c("treatment", "treatment:date_f")) %>%
-  mutate(q_family = if_else(is_fam, signif(p.adjust(p, "BH"), 3), NA_real_)) %>% ungroup() %>% select(-is_fam)
 write.csv(rm_anova, "output/tables/rm_flux_anova.csv", row.names = FALSE)
 write.csv(rm_contr, "output/tables/rm_flux_contrasts.csv", row.names = FALSE)
 cat("\n(A) Flux repeated-measures LMM, type III (Satterthwaite):\n")
@@ -87,9 +82,8 @@ rm_soil <- bind_rows(lapply(soil_vars, function(v) {
   tibble(variable = v, term = rownames(a), F = round(a$`F value`, 2), p = signif(a$`Pr(>F)`, 3))
 }))
 rm_soil <- rm_soil %>%
-  mutate(family = if_else(grepl("^d1_", variable), "Soil chemistry", "Microbial C and N")) %>%
-  group_by(family, is_trt = term %in% c("treatment", "treatment:round_lab")) %>%
-  mutate(q_family = if_else(is_trt, signif(p.adjust(p, "BH"), 3), NA_real_)) %>% ungroup() %>% select(-is_trt)
+  group_by(is_panel = grepl("^d1_", variable) & term %in% c("treatment", "treatment:round_lab")) %>%
+  mutate(p_adj = if_else(is_panel, signif(p.adjust(p, "BH"), 3), NA_real_)) %>% ungroup() %>% select(-is_panel)
 write.csv(rm_soil, "output/tables/rm_soil_anova.csv", row.names = FALSE)
 cat("\n(B) Soil repeated-measures LMM (treatment effects):\n")
 print(as.data.frame(rm_soil %>% select(variable, term, p) %>% pivot_wider(names_from = term, values_from = p)), row.names = FALSE)

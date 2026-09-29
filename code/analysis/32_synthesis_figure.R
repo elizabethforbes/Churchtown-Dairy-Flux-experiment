@@ -7,9 +7,9 @@
 #   (c) forage composition at the October harvest, as Hedges' g
 # Open symbols: Welch p >= 0.05; filled: p < 0.05 (uncorrected).
 # Also writes effect_synthesis.csv: Hedges' g and BH-FDR q-values for every
-# amendment x response effect in the study. FDR is controlled within a priori
-# families matching the hypotheses: GHG fluxes, soil microbial C and N (soil N/C
-# cycling), soil chemistry (Dairy One), and plant (biomass + forage).
+# amendment x response effect in the study. Benjamini-Hochberg adjustment is applied
+# only within the two broad screening panels (soil chemistry; forage composition);
+# fluxes, soil microbial C/N assays and biomass were targeted tests (p_adj = NA).
 # Input:  output/tables/treatment_effects.csv (from 30_main_figures.R + 31_si_figures.R),
 #         data/processed/biomass.csv
 # Output: output/figures/main/fig5_soil_chemistry_plants.{pdf,png}; output/tables/effect_synthesis.csv
@@ -69,12 +69,13 @@ syn <- eff %>% inner_join(labs_tbl, by = "metric") %>%
   mutate(sampling = unname(date_std[group]),
          sampling = factor(ifelse(is.na(sampling), "single", sampling), levels = c("29 May", "21 Jul", "14 Oct", "single")),
          treatment = as_trt(treatment),
-         family = if_else(panel %in% c("Plant", "Biomass"), "Plant", panel),
          sig = welch_p < 0.05) %>%
-  group_by(family) %>% mutate(q_fdr = p.adjust(welch_p, "BH")) %>% ungroup()
+  group_by(panel) %>%
+  mutate(p_adj = if (first(panel) %in% c("Soil tests", "Plant")) p.adjust(welch_p, "BH") else NA_real_) %>%
+  ungroup()
 stopifnot(!anyNA(syn$hedges_g))
-write.csv(syn %>% select(family, panel, label, metric, group, treatment, hedges_g, g_lo, g_hi, diff, ci_lo, ci_hi,
-                         control_mean, welch_p, q_fdr, anova_p),
+write.csv(syn %>% select(panel, label, metric, group, treatment, hedges_g, g_lo, g_hi, diff, ci_lo, ci_hi,
+                         control_mean, welch_p, p_adj, anova_p),
           "output/tables/effect_synthesis.csv", row.names = FALSE)
 
 GLIM <- 4.5   # clip CIs for display; arrows mark clipped ends
@@ -118,7 +119,7 @@ save_fig(fig6, "fig5_soil_chemistry_plants", 180, 140)
 old <- file.path(FIG_DIR, "main", paste0(rep(c("fig6_effect_synthesis", "fig6_soil_tests_plants", "fig5_soil_tests_plants"), each = 2), c(".pdf", ".png")))
 invisible(file.remove(old[file.exists(old)]))
 
-n_sig <- sum(syn$sig); n_q <- sum(syn$q_fdr < 0.05)
-cat(sprintf("  %d effects; %d with Welch p < 0.05 (uncorrected), %d with BH q < 0.05\n", nrow(syn), n_sig, n_q))
-print(syn %>% filter(sig) %>% select(label, group, treatment, hedges_g, welch_p, q_fdr) %>% as.data.frame())
+n_sig <- sum(syn$sig); n_q <- sum(syn$p_adj < 0.05, na.rm = TRUE)
+cat(sprintf("  %d effects; %d with Welch p < 0.05 (uncorrected), %d with BH-adjusted p < 0.05 (screening panels)\n", nrow(syn), n_sig, n_q))
+print(syn %>% filter(sig) %>% select(label, group, treatment, hedges_g, welch_p, p_adj) %>% as.data.frame())
 cat("  wrote effect_synthesis.csv\n")

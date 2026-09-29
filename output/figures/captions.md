@@ -36,7 +36,7 @@ Asterisks mark one-way ANOVA p < 0.05 at that sampling (nitrate on 21 Jul and 14
 
 The grey band marks |g| < 0.8, the conventional "large" effect threshold. With n = 5 per treatment, only effects beyond about ±1.3–1.5 reach p < 0.05. Filled symbols are Welch p < 0.05, uncorrected.
 - Biomass did not differ (ANOVA p = 0.99).
-- Across all 136 amendment × response effects in the study (Figs 2–5), 5 had p < 0.05, fewer than the ~7 expected by chance, and none survived Benjamini–Hochberg FDR correction (effect_synthesis.csv).
+- Across the 86 soil chemistry and forage contrasts (the two screening panels), 3 had p < 0.05, fewer than the ~4 expected by chance, and none remained significant after Benjamini–Hochberg correction (effect_synthesis.csv).
 - Forage PERMANOVA: p = 0.40.
 
 **Figure 6. Non-CO2 greenhouse-gas budget.**
