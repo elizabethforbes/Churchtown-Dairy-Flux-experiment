@@ -1,137 +1,137 @@
-"panel","label","metric","group","treatment","hedges_g","g_lo","g_hi","diff","ci_lo","ci_hi","control_mean","welch_p","q_fdr","anova_p"
-"GHG fluxes","CO2, season","season_total_CO2","29 May-14 Oct","compost",0.3,-0.95,1.54,46.9,-161,255,1610,0.616,0.969153153153153,0.738
-"GHG fluxes","CO2, season","season_total_CO2","29 May-14 Oct","slurry",0.47,-0.79,1.73,64.7,-118,247,1610,0.436,0.969153153153153,0.738
-"GHG fluxes","CH4, season","season_total_CH4","29 May-14 Oct","compost",-0.09,-1.33,1.15,-1.43,-22.8,19.9,-63.9,0.879,0.99,0.721
-"GHG fluxes","CH4, season","season_total_CH4","29 May-14 Oct","slurry",0.42,-0.83,1.67,4.99,-10.7,20.7,-63.9,0.483,0.969153153153153,0.721
-"GHG fluxes","N2O, season","season_total_N2O","29 May-14 Oct","compost",0.51,-0.75,1.77,24.1,-46.9,95,53.5,0.415,0.969153153153153,0.573
-"GHG fluxes","N2O, season","season_total_N2O","29 May-14 Oct","slurry",0.57,-0.7,1.83,50,-88,188,53.5,0.376,0.969153153153153,0.573
-"GHG fluxes","CO2, days 1-6","first_week_total_CO2","29 May-3 Jun","compost",-0.19,-1.43,1.05,-1.75,-14.4,10.9,58.4,0.752,0.969153153153153,0.056
-"GHG fluxes","CO2, days 1-6","first_week_total_CO2","29 May-3 Jun","slurry",1.14,-0.2,2.47,11.5,-1.93,24.9,58.4,0.083,0.969153153153153,0.056
-"GHG fluxes","CH4, days 1-6","first_week_total_CH4","29 May-3 Jun","compost",0.21,-1.03,1.45,0.153,-0.88,1.19,-1.79,0.727,0.969153153153153,0.2
-"GHG fluxes","CH4, days 1-6","first_week_total_CH4","29 May-3 Jun","slurry",0.95,-0.36,2.26,1.11,-0.653,2.88,-1.79,0.162,0.969153153153153,0.2
-"GHG fluxes","N2O, days 1-6","first_week_total_N2O","29 May-3 Jun","compost",0.33,-0.92,1.58,0.36,-1.18,1.9,2.35,0.585,0.969153153153153,0.018
-"GHG fluxes","N2O, days 1-6","first_week_total_N2O","29 May-3 Jun","slurry",1.49,0.08,2.89,4.57,-0.228,9.36,2.35,0.057,0.969153153153153,0.018
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","compost",0.34,-0.91,1.59,0.286,-0.837,1.41,5.04,0.568,0.969153153153153,0.176
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","slurry",1.23,-0.21,2.66,1.08,-0.346,2.51,5.04,0.109,0.969153153153153,0.176
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","21 Jul","compost",-0.6,-1.87,0.67,-0.315,-1.01,0.377,5.51,0.325,0.969153153153153,0.206
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","21 Jul","slurry",0.56,-0.7,1.82,0.408,-0.589,1.4,5.51,0.361,0.969153153153153,0.206
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","14 Oct","compost",0.25,-0.99,1.5,0.149,-0.684,0.983,3.87,0.674,0.969153153153153,0.638
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","14 Oct","slurry",0.49,-0.77,1.75,0.299,-0.545,1.14,3.87,0.423,0.969153153153153,0.638
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","compost",0.02,-1.22,1.26,0.0642,-4.69,4.82,17.9,0.976,0.99,0.281
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","slurry",0.9,-0.4,2.2,2.93,-1.36,7.22,17.9,0.154,0.969153153153153,0.281
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","21 Jul","compost",-0.93,-2.23,0.38,-4.86,-12.6,2.84,24.1,0.165,0.969153153153153,0.151
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","21 Jul","slurry",0.24,-1,1.48,1.59,-7.15,10.3,24.1,0.686,0.969153153153153,0.151
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","14 Oct","compost",-0.12,-1.36,1.12,-0.195,-2.43,2.04,10.6,0.843,0.99,0.483
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","14 Oct","slurry",-0.57,-1.83,0.7,-1.51,-5.15,2.13,10.6,0.355,0.969153153153153,0.483
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","compost",-0.16,-1.4,1.08,-0.0444,-0.44,0.351,0.66,0.79,0.969153153153153,0.103
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","slurry",-1.82,-3.29,-0.34,-0.309,-0.533,-0.0849,0.66,0.013,0.969153153153153,0.103
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","compost",0.06,-1.18,1.3,0.0207,-0.466,0.508,0.384,0.921,0.99,0.93
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","slurry",0.28,-0.97,1.52,0.0687,-0.259,0.396,0.384,0.641,0.969153153153153,0.93
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","compost",-0.27,-1.51,0.98,-0.101,-0.643,0.44,0.505,0.656,0.969153153153153,0.866
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","slurry",-0.17,-1.41,1.07,-0.0649,-0.608,0.478,0.505,0.777,0.969153153153153,0.866
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","compost",-0.17,-1.41,1.07,-0.0607,-0.56,0.438,0.81,0.778,0.969153153153153,0.23
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","slurry",-1.3,-2.67,0.06,-0.32,-0.643,0.00332,0.81,0.052,0.969153153153153,0.23
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","compost",-0.21,-1.45,1.03,-0.0774,-0.621,0.466,0.641,0.73,0.969153153153153,0.916
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","slurry",-0.04,-1.28,1.2,-0.00931,-0.359,0.34,0.641,0.951,0.99,0.916
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","compost",-0.4,-1.65,0.85,-0.135,-0.648,0.378,0.503,0.52,0.969153153153153,0.652
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","slurry",-0.39,-1.64,0.86,-0.131,-0.644,0.383,0.503,0.532,0.969153153153153,0.652
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","compost",-0.24,-1.49,1,-0.623,-4.02,2.78,6,0.684,0.969153153153153,0.878
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","slurry",0.01,-1.23,1.25,0.02,-3.1,3.14,6,0.989,0.99,0.878
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","compost",-0.48,-1.73,0.78,-1.88,-7.81,4.06,8.71,0.445,0.969153153153153,0.414
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","slurry",-0.64,-1.91,0.63,-2.48,-8.44,3.47,8.71,0.321,0.969153153153153,0.414
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","compost",-0.46,-1.71,0.8,-1.06,-4.27,2.16,1.57,0.454,0.969153153153153,0.678
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","slurry",-0.49,-1.75,0.76,-0.902,-3.34,1.53,1.57,0.414,0.969153153153153,0.678
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","compost",0.08,-1.16,1.32,0.123,-1.85,2.09,2.58,0.888,0.99,0.905
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","slurry",-0.16,-1.4,1.08,-0.281,-2.61,2.04,2.58,0.787,0.969153153153153,0.905
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","compost",-1.28,-2.64,0.08,-3.03,-6.52,0.463,9.3,0.076,0.969153153153153,0.044
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","slurry",-1.06,-2.39,0.26,-2.39,-5.93,1.15,9.3,0.135,0.969153153153153,0.044
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","compost",-0.71,-1.99,0.56,-3.63,-10.7,3.45,14,0.257,0.969153153153153,0.039
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","slurry",-1.53,-2.94,-0.12,-7.27,-14.3,-0.273,14,0.044,0.969153153153153,0.039
-"Biomass","Aboveground biomass","biomass_g_m2","Oct harvest","compost",-0.01,-1.25,1.23,-0.4,-74.7,73.9,228,0.99,0.99,0.99
-"Biomass","Aboveground biomass","biomass_g_m2","Oct harvest","slurry",0.06,-1.18,1.3,3.6,-72,79.2,228,0.915,0.99,0.99
-"Plant","Crude protein","crude_protein_pct","Oct harvest","compost",0.61,-0.66,1.88,0.76,-0.897,2.42,9.18,0.319,0.969153153153153,0.697
-"Plant","Crude protein","crude_protein_pct","Oct harvest","slurry",0.15,-1.09,1.39,0.26,-2.11,2.63,9.18,0.802,0.973857142857143,0.697
-"Plant","Available protein","avail_protein_pct","Oct harvest","compost",0.57,-0.69,1.84,0.72,-0.952,2.39,7.58,0.346,0.969153153153153,0.538
-"Plant","Available protein","avail_protein_pct","Oct harvest","slurry",-0.04,-1.28,1.2,-0.06,-1.96,1.84,7.58,0.944,0.99,0.538
-"Plant","ADICP","adicp_pct","Oct harvest","compost",0.04,-1.2,1.28,0.02,-0.689,0.729,1.62,0.944,0.99,0.607
-"Plant","ADICP","adicp_pct","Oct harvest","slurry",0.43,-0.82,1.69,0.3,-0.613,1.21,1.62,0.469,0.969153153153153,0.607
-"Plant","NDICP","ndicp_pct","Oct harvest","compost",0.07,-1.17,1.31,0.08,-1.47,1.63,4,0.906,0.99,0.989
-"Plant","NDICP","ndicp_pct","Oct harvest","slurry",0.06,-1.18,1.3,0.06,-1.44,1.56,4,0.924,0.99,0.989
-"Plant","aNDF","andf_pct","Oct harvest","compost",-0.5,-1.76,0.76,-3.24,-12.6,6.14,68.1,0.42,0.969153153153153,0.598
-"Plant","aNDF","andf_pct","Oct harvest","slurry",-0.69,-1.97,0.59,-2.6,-7.6,2.4,68.1,0.263,0.969153153153153,0.598
-"Plant","ADF","adf_pct","Oct harvest","compost",0.37,-0.88,1.62,1.1,-3,5.2,44.2,0.542,0.969153153153153,0.127
-"Plant","ADF","adf_pct","Oct harvest","slurry",1.09,-0.24,2.42,3.94,-0.829,8.71,44.2,0.093,0.969153153153153,0.127
-"Plant","Lignin","lignin_pct","Oct harvest","compost",0.95,-0.36,2.26,1.62,-0.972,4.21,8.92,0.164,0.969153153153153,0.036
-"Plant","Lignin","lignin_pct","Oct harvest","slurry",1.41,0.02,2.79,3.4,0.221,6.58,8.92,0.039,0.969153153153153,0.036
-"Plant","NFC","nfc_pct","Oct harvest","compost",0.21,-1.04,1.45,0.92,-5.39,7.23,13.2,0.731,0.969153153153153,0.888
-"Plant","NFC","nfc_pct","Oct harvest","slurry",0.37,-0.88,1.62,0.98,-2.5,4.46,13.2,0.534,0.969153153153153,0.888
-"Plant","Starch","starch_pct","Oct harvest","compost",0.07,-1.17,1.31,0.02,-0.381,0.421,0.32,0.91,0.99,0.165
-"Plant","Starch","starch_pct","Oct harvest","slurry",0.99,-0.32,2.31,0.4,-0.171,0.971,0.32,0.135,0.969153153153153,0.165
-"Plant","WSC","water_sol_carbs_pct","Oct harvest","compost",-0.13,-1.37,1.11,-0.24,-2.73,2.25,6.4,0.829,0.988982456140351,0.936
-"Plant","WSC","water_sol_carbs_pct","Oct harvest","slurry",-0.24,-1.48,1.01,-0.34,-2.26,1.58,6.4,0.689,0.969153153153153,0.936
-"Plant","Simple sugars","simple_sugars_pct","Oct harvest","compost",-0.41,-1.67,0.84,-0.6,-2.6,1.4,3.26,0.494,0.969153153153153,0.556
-"Plant","Simple sugars","simple_sugars_pct","Oct harvest","slurry",-0.91,-2.21,0.4,-0.72,-1.84,0.396,3.26,0.165,0.969153153153153,0.556
-"Plant","Crude fat","crude_fat_pct","Oct harvest","compost",0.61,-0.66,1.88,0.32,-0.388,1.03,3.12,0.32,0.969153153153153,0.34
-"Plant","Crude fat","crude_fat_pct","Oct harvest","slurry",0.86,-0.43,2.16,0.56,-0.356,1.48,3.12,0.184,0.969153153153153,0.34
-"Plant","TDN","tdn_pct","Oct harvest","compost",-0.86,-2.16,0.43,-2.2,-5.56,1.16,52.6,0.17,0.969153153153153,0.069
-"Plant","TDN","tdn_pct","Oct harvest","slurry",-1.41,-2.8,-0.03,-4,-7.74,-0.259,52.6,0.039,0.969153153153153,0.069
-"Plant","Ash","ash_pct","Oct harvest","compost",0.6,-0.67,1.86,1.23,-1.91,4.37,6.5,0.35,0.969153153153153,0.686
-"Plant","Ash","ash_pct","Oct harvest","slurry",0.34,-0.91,1.59,0.768,-2.69,4.23,6.5,0.581,0.969153153153153,0.686
-"Plant","Ca","ca_pct","Oct harvest","compost",0.64,-0.63,1.91,0.266,-0.281,0.813,1.05,0.295,0.969153153153153,0.41
-"Plant","Ca","ca_pct","Oct harvest","slurry",0.72,-0.56,2,0.254,-0.217,0.725,1.05,0.245,0.969153153153153,0.41
-"Plant","P","p_pct","Oct harvest","compost",0.1,-1.15,1.34,0.006,-0.0787,0.0907,0.228,0.872,0.99,0.46
-"Plant","P","p_pct","Oct harvest","slurry",-0.55,-1.81,0.71,-0.034,-0.118,0.0497,0.228,0.368,0.969153153153153,0.46
-"Plant","Mg","mg_pct","Oct harvest","compost",0.4,-0.85,1.65,0.014,-0.0373,0.0653,0.208,0.514,0.969153153153153,0.496
-"Plant","Mg","mg_pct","Oct harvest","slurry",-0.38,-1.63,0.87,-0.012,-0.0582,0.0342,0.208,0.537,0.969153153153153,0.496
-"Plant","K","k_pct","Oct harvest","compost",-1.12,-2.45,0.22,-0.23,-0.514,0.0536,0.776,0.095,0.969153153153153,0.349
-"Plant","K","k_pct","Oct harvest","slurry",-0.47,-1.73,0.79,-0.128,-0.521,0.265,0.776,0.446,0.969153153153153,0.349
-"Plant","S","s_pct","Oct harvest","compost",1.36,-0.02,2.73,0.068,0.000264,0.136,0.178,0.049,0.969153153153153,0.085
-"Plant","S","s_pct","Oct harvest","slurry",1.06,-0.27,2.38,0.046,-0.0117,0.104,0.178,0.103,0.969153153153153,0.085
-"Soil tests","pH","dairyone_ph","Jul","compost",-0.11,-1.35,1.13,-0.036,-0.472,0.4,5.85,0.853,0.99,0.834
-"Soil tests","pH","dairyone_ph","Jul","slurry",0.23,-1.02,1.47,0.066,-0.332,0.464,5.85,0.705,0.969153153153153,0.834
-"Soil tests","Organic matter","dairyone_om_pct","Jul","compost",-0.65,-1.92,0.62,-0.218,-0.701,0.265,3.73,0.304,0.969153153153153,0.491
-"Soil tests","Organic matter","dairyone_om_pct","Jul","slurry",-0.16,-1.4,1.08,-0.06,-0.561,0.441,3.73,0.785,0.969153153153153,0.491
-"Soil tests","CEC","dairyone_cec_meq100g","Jul","compost",-0.19,-1.43,1.06,-0.22,-1.84,1.4,9.38,0.755,0.969153153153153,0.626
-"Soil tests","CEC","dairyone_cec_meq100g","Jul","slurry",0.33,-0.92,1.57,0.36,-1.21,1.93,9.38,0.59,0.969153153153153,0.626
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Jul","compost",-0.23,-1.48,1.01,-1.56,-10.4,7.3,76.4,0.695,0.969153153153153,0.577
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Jul","slurry",0.37,-0.88,1.62,2.1,-5.59,9.79,76.4,0.536,0.969153153153153,0.577
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Jul","compost",-0.43,-1.68,0.83,-23.4,-95.9,49.1,137,0.478,0.969153153153153,0.538
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Jul","slurry",-0.64,-1.91,0.63,-33.2,-102,35.3,137,0.294,0.969153153153153,0.538
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Jul","compost",-0.42,-1.68,0.83,-23.8,-110,62.4,104,0.496,0.969153153153153,0.666
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Jul","slurry",-0.03,-1.27,1.21,-1.8,-87.8,84.2,104,0.96,0.99,0.666
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Jul","compost",-0.05,-1.29,1.19,-12.4,-376,351,1100,0.938,0.99,0.816
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Jul","slurry",0.27,-0.97,1.52,71.2,-284,427,1100,0.646,0.969153153153153,0.816
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Jul","compost",-0.74,-2.02,0.54,-24.2,-69.5,21.1,170,0.242,0.969153153153153,0.181
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Jul","slurry",0.28,-0.97,1.52,9.2,-36.5,54.9,170,0.645,0.969153153153153,0.181
-"Soil tests","pH","dairyone_ph","May","compost",-0.07,-1.31,1.17,-0.018,-0.362,0.326,5.84,0.907,0.99,0.778
-"Soil tests","pH","dairyone_ph","May","slurry",0.34,-0.91,1.59,0.076,-0.22,0.372,5.84,0.569,0.969153153153153,0.778
-"Soil tests","Organic matter","dairyone_om_pct","May","compost",-0.13,-1.37,1.11,-0.04,-0.447,0.367,3.56,0.824,0.988982456140351,0.957
-"Soil tests","Organic matter","dairyone_om_pct","May","slurry",-0.17,-1.42,1.07,-0.048,-0.414,0.318,3.56,0.77,0.969153153153153,0.957
-"Soil tests","CEC","dairyone_cec_meq100g","May","compost",0.19,-1.05,1.43,0.2,-1.23,1.63,9.06,0.748,0.969153153153153,0.812
-"Soil tests","CEC","dairyone_cec_meq100g","May","slurry",0.34,-0.9,1.59,0.34,-1.06,1.74,9.06,0.57,0.969153153153153,0.812
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","May","compost",0.24,-1,1.49,1.28,-5.8,8.36,75.3,0.683,0.969153153153153,0.449
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","May","slurry",0.71,-0.56,1.99,3.42,-3.34,10.2,75.3,0.259,0.969153153153153,0.449
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","May","compost",0.1,-1.14,1.34,4,-51.5,59.5,118,0.869,0.99,0.836
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","May","slurry",-0.25,-1.5,0.99,-10.8,-68.6,47,118,0.67,0.969153153153153,0.836
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","May","compost",0.6,-0.67,1.87,18.6,-22.3,59.5,75.8,0.324,0.969153153153153,0.627
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","May","slurry",0.44,-0.81,1.7,18.6,-38.3,75.5,75.8,0.464,0.969153153153153,0.627
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","May","compost",0.22,-1.02,1.47,51,-266,368,1050,0.71,0.969153153153153,0.764
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","May","slurry",0.39,-0.87,1.64,86,-228,400,1050,0.526,0.969153153153153,0.764
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","May","compost",-0.34,-1.59,0.91,-9.4,-45.7,26.9,167,0.565,0.969153153153153,0.688
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","May","slurry",0.18,-1.06,1.43,6.4,-40,52.8,167,0.757,0.969153153153153,0.688
-"Soil tests","pH","dairyone_ph","Oct","compost",0.03,-1.21,1.27,0.008,-0.391,0.407,5.94,0.964,0.99,0.447
-"Soil tests","pH","dairyone_ph","Oct","slurry",0.66,-0.61,1.94,0.188,-0.189,0.565,5.94,0.28,0.969153153153153,0.447
-"Soil tests","Organic matter","dairyone_om_pct","Oct","compost",0.82,-0.47,2.11,0.118,-0.0764,0.312,3.44,0.195,0.969153153153153,0.359
-"Soil tests","Organic matter","dairyone_om_pct","Oct","slurry",0.73,-0.55,2.01,0.102,-0.0856,0.29,3.44,0.241,0.969153153153153,0.359
-"Soil tests","CEC","dairyone_cec_meq100g","Oct","compost",0.31,-0.93,1.56,0.34,-1.2,1.88,8.26,0.603,0.969153153153153,0.553
-"Soil tests","CEC","dairyone_cec_meq100g","Oct","slurry",0.56,-0.71,1.82,0.64,-0.937,2.22,8.26,0.365,0.969153153153153,0.553
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Oct","compost",0.27,-0.98,1.51,2,-8.56,12.6,73.2,0.658,0.969153153153153,0.502
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Oct","slurry",0.62,-0.65,1.89,4.44,-6.05,14.9,73.2,0.327,0.969153153153153,0.502
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Oct","compost",-0.25,-1.5,0.99,-12.4,-77.5,52.7,123,0.672,0.969153153153153,0.55
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Oct","slurry",-0.65,-1.93,0.62,-29.6,-89.7,30.5,123,0.287,0.969153153153153,0.55
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Oct","compost",-0.28,-1.52,0.97,-16.6,-101,67.5,103,0.647,0.969153153153153,0.868
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Oct","slurry",-0.16,-1.4,1.08,-9.6,-93.9,74.7,103,0.791,0.969153153153153,0.868
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Oct","compost",0.32,-0.93,1.57,79.8,-266,426,937,0.596,0.969153153153153,0.62
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Oct","slurry",0.51,-0.75,1.77,130,-218,478,937,0.402,0.969153153153153,0.62
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Oct","compost",-0.02,-1.26,1.22,-0.6,-41.9,40.7,137,0.971,0.99,0.333
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Oct","slurry",0.64,-0.63,1.91,20.6,-22.8,64,137,0.3,0.969153153153153,0.333
+"family","panel","label","metric","group","treatment","hedges_g","g_lo","g_hi","diff","ci_lo","ci_hi","control_mean","welch_p","q_fdr","anova_p"
+"GHG fluxes","GHG fluxes","CO2, season","season_total_CO2","29 May-14 Oct","compost",0.3,-0.95,1.54,46.9,-161,255,1610,0.616,0.820363636363636,0.738
+"GHG fluxes","GHG fluxes","CO2, season","season_total_CO2","29 May-14 Oct","slurry",0.47,-0.79,1.73,64.7,-118,247,1610,0.436,0.820363636363636,0.738
+"GHG fluxes","GHG fluxes","CH4, season","season_total_CH4","29 May-14 Oct","compost",-0.09,-1.33,1.15,-1.43,-22.8,19.9,-63.9,0.879,0.879,0.721
+"GHG fluxes","GHG fluxes","CH4, season","season_total_CH4","29 May-14 Oct","slurry",0.42,-0.83,1.67,4.99,-10.7,20.7,-63.9,0.483,0.820363636363636,0.721
+"GHG fluxes","GHG fluxes","N2O, season","season_total_N2O","29 May-14 Oct","compost",0.51,-0.75,1.77,24.1,-46.9,95,53.5,0.415,0.820363636363636,0.573
+"GHG fluxes","GHG fluxes","N2O, season","season_total_N2O","29 May-14 Oct","slurry",0.57,-0.7,1.83,50,-88,188,53.5,0.376,0.820363636363636,0.573
+"GHG fluxes","GHG fluxes","CO2, days 1-6","first_week_total_CO2","29 May-3 Jun","compost",-0.19,-1.43,1.05,-1.75,-14.4,10.9,58.4,0.752,0.820363636363636,0.056
+"GHG fluxes","GHG fluxes","CO2, days 1-6","first_week_total_CO2","29 May-3 Jun","slurry",1.14,-0.2,2.47,11.5,-1.93,24.9,58.4,0.083,0.498,0.056
+"GHG fluxes","GHG fluxes","CH4, days 1-6","first_week_total_CH4","29 May-3 Jun","compost",0.21,-1.03,1.45,0.153,-0.88,1.19,-1.79,0.727,0.820363636363636,0.2
+"GHG fluxes","GHG fluxes","CH4, days 1-6","first_week_total_CH4","29 May-3 Jun","slurry",0.95,-0.36,2.26,1.11,-0.653,2.88,-1.79,0.162,0.648,0.2
+"GHG fluxes","GHG fluxes","N2O, days 1-6","first_week_total_N2O","29 May-3 Jun","compost",0.33,-0.92,1.58,0.36,-1.18,1.9,2.35,0.585,0.820363636363636,0.018
+"GHG fluxes","GHG fluxes","N2O, days 1-6","first_week_total_N2O","29 May-3 Jun","slurry",1.49,0.08,2.89,4.57,-0.228,9.36,2.35,0.057,0.498,0.018
+"Soil N and C cycling","Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","compost",0.34,-0.91,1.59,0.286,-0.837,1.41,5.04,0.568,0.948,0.176
+"Soil N and C cycling","Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","slurry",1.23,-0.21,2.66,1.08,-0.346,2.51,5.04,0.109,0.7425,0.176
+"Soil N and C cycling","Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","21 Jul","compost",-0.6,-1.87,0.67,-0.315,-1.01,0.377,5.51,0.325,0.948,0.206
+"Soil N and C cycling","Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","21 Jul","slurry",0.56,-0.7,1.82,0.408,-0.589,1.4,5.51,0.361,0.948,0.206
+"Soil N and C cycling","Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","14 Oct","compost",0.25,-0.99,1.5,0.149,-0.684,0.983,3.87,0.674,0.948,0.638
+"Soil N and C cycling","Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","14 Oct","slurry",0.49,-0.77,1.75,0.299,-0.545,1.14,3.87,0.423,0.948,0.638
+"Soil N and C cycling","Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","compost",0.02,-1.22,1.26,0.0642,-4.69,4.82,17.9,0.976,0.989,0.281
+"Soil N and C cycling","Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","slurry",0.9,-0.4,2.2,2.93,-1.36,7.22,17.9,0.154,0.7425,0.281
+"Soil N and C cycling","Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","21 Jul","compost",-0.93,-2.23,0.38,-4.86,-12.6,2.84,24.1,0.165,0.7425,0.151
+"Soil N and C cycling","Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","21 Jul","slurry",0.24,-1,1.48,1.59,-7.15,10.3,24.1,0.686,0.948,0.151
+"Soil N and C cycling","Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","14 Oct","compost",-0.12,-1.36,1.12,-0.195,-2.43,2.04,10.6,0.843,0.978967741935484,0.483
+"Soil N and C cycling","Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","14 Oct","slurry",-0.57,-1.83,0.7,-1.51,-5.15,2.13,10.6,0.355,0.948,0.483
+"Soil N and C cycling","Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","compost",-0.16,-1.4,1.08,-0.0444,-0.44,0.351,0.66,0.79,0.948,0.103
+"Soil N and C cycling","Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","slurry",-1.82,-3.29,-0.34,-0.309,-0.533,-0.0849,0.66,0.013,0.468,0.103
+"Soil N and C cycling","Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","compost",0.06,-1.18,1.3,0.0207,-0.466,0.508,0.384,0.921,0.989,0.93
+"Soil N and C cycling","Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","slurry",0.28,-0.97,1.52,0.0687,-0.259,0.396,0.384,0.641,0.948,0.93
+"Soil N and C cycling","Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","compost",-0.27,-1.51,0.98,-0.101,-0.643,0.44,0.505,0.656,0.948,0.866
+"Soil N and C cycling","Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","slurry",-0.17,-1.41,1.07,-0.0649,-0.608,0.478,0.505,0.777,0.948,0.866
+"Soil N and C cycling","Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","compost",-0.17,-1.41,1.07,-0.0607,-0.56,0.438,0.81,0.778,0.948,0.23
+"Soil N and C cycling","Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","slurry",-1.3,-2.67,0.06,-0.32,-0.643,0.00332,0.81,0.052,0.624,0.23
+"Soil N and C cycling","Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","compost",-0.21,-1.45,1.03,-0.0774,-0.621,0.466,0.641,0.73,0.948,0.916
+"Soil N and C cycling","Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","slurry",-0.04,-1.28,1.2,-0.00931,-0.359,0.34,0.641,0.951,0.989,0.916
+"Soil N and C cycling","Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","compost",-0.4,-1.65,0.85,-0.135,-0.648,0.378,0.503,0.52,0.948,0.652
+"Soil N and C cycling","Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","slurry",-0.39,-1.64,0.86,-0.131,-0.644,0.383,0.503,0.532,0.948,0.652
+"Soil N and C cycling","Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","compost",-0.24,-1.49,1,-0.623,-4.02,2.78,6,0.684,0.948,0.878
+"Soil N and C cycling","Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","slurry",0.01,-1.23,1.25,0.02,-3.1,3.14,6,0.989,0.989,0.878
+"Soil N and C cycling","Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","compost",-0.48,-1.73,0.78,-1.88,-7.81,4.06,8.71,0.445,0.948,0.414
+"Soil N and C cycling","Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","slurry",-0.64,-1.91,0.63,-2.48,-8.44,3.47,8.71,0.321,0.948,0.414
+"Soil N and C cycling","Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","compost",-0.46,-1.71,0.8,-1.06,-4.27,2.16,1.57,0.454,0.948,0.678
+"Soil N and C cycling","Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","slurry",-0.49,-1.75,0.76,-0.902,-3.34,1.53,1.57,0.414,0.948,0.678
+"Soil N and C cycling","Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","compost",0.08,-1.16,1.32,0.123,-1.85,2.09,2.58,0.888,0.989,0.905
+"Soil N and C cycling","Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","slurry",-0.16,-1.4,1.08,-0.281,-2.61,2.04,2.58,0.787,0.948,0.905
+"Soil N and C cycling","Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","compost",-1.28,-2.64,0.08,-3.03,-6.52,0.463,9.3,0.076,0.684,0.044
+"Soil N and C cycling","Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","slurry",-1.06,-2.39,0.26,-2.39,-5.93,1.15,9.3,0.135,0.7425,0.044
+"Soil N and C cycling","Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","compost",-0.71,-1.99,0.56,-3.63,-10.7,3.45,14,0.257,0.948,0.039
+"Soil N and C cycling","Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","slurry",-1.53,-2.94,-0.12,-7.27,-14.3,-0.273,14,0.044,0.624,0.039
+"Plant","Biomass","Aboveground biomass","biomass_g_m2","Oct harvest","compost",-0.01,-1.25,1.23,-0.4,-74.7,73.9,228,0.99,0.99,0.99
+"Plant","Biomass","Aboveground biomass","biomass_g_m2","Oct harvest","slurry",0.06,-1.18,1.3,3.6,-72,79.2,228,0.915,0.968205128205128,0.99
+"Plant","Plant","Crude protein","crude_protein_pct","Oct harvest","compost",0.61,-0.66,1.88,0.76,-0.897,2.42,9.18,0.319,0.774736842105263,0.697
+"Plant","Plant","Crude protein","crude_protein_pct","Oct harvest","slurry",0.15,-1.09,1.39,0.26,-2.11,2.63,9.18,0.802,0.968205128205128,0.697
+"Plant","Plant","Available protein","avail_protein_pct","Oct harvest","compost",0.57,-0.69,1.84,0.72,-0.952,2.39,7.58,0.346,0.774736842105263,0.538
+"Plant","Plant","Available protein","avail_protein_pct","Oct harvest","slurry",-0.04,-1.28,1.2,-0.06,-1.96,1.84,7.58,0.944,0.968205128205128,0.538
+"Plant","Plant","ADICP","adicp_pct","Oct harvest","compost",0.04,-1.2,1.28,0.02,-0.689,0.729,1.62,0.944,0.968205128205128,0.607
+"Plant","Plant","ADICP","adicp_pct","Oct harvest","slurry",0.43,-0.82,1.69,0.3,-0.613,1.21,1.62,0.469,0.802962962962963,0.607
+"Plant","Plant","NDICP","ndicp_pct","Oct harvest","compost",0.07,-1.17,1.31,0.08,-1.47,1.63,4,0.906,0.968205128205128,0.989
+"Plant","Plant","NDICP","ndicp_pct","Oct harvest","slurry",0.06,-1.18,1.3,0.06,-1.44,1.56,4,0.924,0.968205128205128,0.989
+"Plant","Plant","aNDF","andf_pct","Oct harvest","compost",-0.5,-1.76,0.76,-3.24,-12.6,6.14,68.1,0.42,0.802962962962963,0.598
+"Plant","Plant","aNDF","andf_pct","Oct harvest","slurry",-0.69,-1.97,0.59,-2.6,-7.6,2.4,68.1,0.263,0.774736842105263,0.598
+"Plant","Plant","ADF","adf_pct","Oct harvest","compost",0.37,-0.88,1.62,1.1,-3,5.2,44.2,0.542,0.802962962962963,0.127
+"Plant","Plant","ADF","adf_pct","Oct harvest","slurry",1.09,-0.24,2.42,3.94,-0.829,8.71,44.2,0.093,0.669090909090909,0.127
+"Plant","Plant","Lignin","lignin_pct","Oct harvest","compost",0.95,-0.36,2.26,1.62,-0.972,4.21,8.92,0.164,0.669090909090909,0.036
+"Plant","Plant","Lignin","lignin_pct","Oct harvest","slurry",1.41,0.02,2.79,3.4,0.221,6.58,8.92,0.039,0.653333333333333,0.036
+"Plant","Plant","NFC","nfc_pct","Oct harvest","compost",0.21,-1.04,1.45,0.92,-5.39,7.23,13.2,0.731,0.968205128205128,0.888
+"Plant","Plant","NFC","nfc_pct","Oct harvest","slurry",0.37,-0.88,1.62,0.98,-2.5,4.46,13.2,0.534,0.802962962962963,0.888
+"Plant","Plant","Starch","starch_pct","Oct harvest","compost",0.07,-1.17,1.31,0.02,-0.381,0.421,0.32,0.91,0.968205128205128,0.165
+"Plant","Plant","Starch","starch_pct","Oct harvest","slurry",0.99,-0.32,2.31,0.4,-0.171,0.971,0.32,0.135,0.669090909090909,0.165
+"Plant","Plant","WSC","water_sol_carbs_pct","Oct harvest","compost",-0.13,-1.37,1.11,-0.24,-2.73,2.25,6.4,0.829,0.968205128205128,0.936
+"Plant","Plant","WSC","water_sol_carbs_pct","Oct harvest","slurry",-0.24,-1.48,1.01,-0.34,-2.26,1.58,6.4,0.689,0.950344827586207,0.936
+"Plant","Plant","Simple sugars","simple_sugars_pct","Oct harvest","compost",-0.41,-1.67,0.84,-0.6,-2.6,1.4,3.26,0.494,0.802962962962963,0.556
+"Plant","Plant","Simple sugars","simple_sugars_pct","Oct harvest","slurry",-0.91,-2.21,0.4,-0.72,-1.84,0.396,3.26,0.165,0.669090909090909,0.556
+"Plant","Plant","Crude fat","crude_fat_pct","Oct harvest","compost",0.61,-0.66,1.88,0.32,-0.388,1.03,3.12,0.32,0.774736842105263,0.34
+"Plant","Plant","Crude fat","crude_fat_pct","Oct harvest","slurry",0.86,-0.43,2.16,0.56,-0.356,1.48,3.12,0.184,0.669090909090909,0.34
+"Plant","Plant","TDN","tdn_pct","Oct harvest","compost",-0.86,-2.16,0.43,-2.2,-5.56,1.16,52.6,0.17,0.669090909090909,0.069
+"Plant","Plant","TDN","tdn_pct","Oct harvest","slurry",-1.41,-2.8,-0.03,-4,-7.74,-0.259,52.6,0.039,0.653333333333333,0.069
+"Plant","Plant","Ash","ash_pct","Oct harvest","compost",0.6,-0.67,1.86,1.23,-1.91,4.37,6.5,0.35,0.774736842105263,0.686
+"Plant","Plant","Ash","ash_pct","Oct harvest","slurry",0.34,-0.91,1.59,0.768,-2.69,4.23,6.5,0.581,0.83,0.686
+"Plant","Plant","Ca","ca_pct","Oct harvest","compost",0.64,-0.63,1.91,0.266,-0.281,0.813,1.05,0.295,0.774736842105263,0.41
+"Plant","Plant","Ca","ca_pct","Oct harvest","slurry",0.72,-0.56,2,0.254,-0.217,0.725,1.05,0.245,0.774736842105263,0.41
+"Plant","Plant","P","p_pct","Oct harvest","compost",0.1,-1.15,1.34,0.006,-0.0787,0.0907,0.228,0.872,0.968205128205128,0.46
+"Plant","Plant","P","p_pct","Oct harvest","slurry",-0.55,-1.81,0.71,-0.034,-0.118,0.0497,0.228,0.368,0.774736842105263,0.46
+"Plant","Plant","Mg","mg_pct","Oct harvest","compost",0.4,-0.85,1.65,0.014,-0.0373,0.0653,0.208,0.514,0.802962962962963,0.496
+"Plant","Plant","Mg","mg_pct","Oct harvest","slurry",-0.38,-1.63,0.87,-0.012,-0.0582,0.0342,0.208,0.537,0.802962962962963,0.496
+"Plant","Plant","K","k_pct","Oct harvest","compost",-1.12,-2.45,0.22,-0.23,-0.514,0.0536,0.776,0.095,0.669090909090909,0.349
+"Plant","Plant","K","k_pct","Oct harvest","slurry",-0.47,-1.73,0.79,-0.128,-0.521,0.265,0.776,0.446,0.802962962962963,0.349
+"Plant","Plant","S","s_pct","Oct harvest","compost",1.36,-0.02,2.73,0.068,0.000264,0.136,0.178,0.049,0.653333333333333,0.085
+"Plant","Plant","S","s_pct","Oct harvest","slurry",1.06,-0.27,2.38,0.046,-0.0117,0.104,0.178,0.103,0.669090909090909,0.085
+"Soil tests","Soil tests","pH","dairyone_ph","Jul","compost",-0.11,-1.35,1.13,-0.036,-0.472,0.4,5.85,0.853,0.970046511627907,0.834
+"Soil tests","Soil tests","pH","dairyone_ph","Jul","slurry",0.23,-1.02,1.47,0.066,-0.332,0.464,5.85,0.705,0.9492,0.834
+"Soil tests","Soil tests","Organic matter","dairyone_om_pct","Jul","compost",-0.65,-1.92,0.62,-0.218,-0.701,0.265,3.73,0.304,0.9492,0.491
+"Soil tests","Soil tests","Organic matter","dairyone_om_pct","Jul","slurry",-0.16,-1.4,1.08,-0.06,-0.561,0.441,3.73,0.785,0.9492,0.491
+"Soil tests","Soil tests","CEC","dairyone_cec_meq100g","Jul","compost",-0.19,-1.43,1.06,-0.22,-1.84,1.4,9.38,0.755,0.9492,0.626
+"Soil tests","Soil tests","CEC","dairyone_cec_meq100g","Jul","slurry",0.33,-0.92,1.57,0.36,-1.21,1.93,9.38,0.59,0.9492,0.626
+"Soil tests","Soil tests","Base saturation","dairyone_base_sat_total_pct","Jul","compost",-0.23,-1.48,1.01,-1.56,-10.4,7.3,76.4,0.695,0.9492,0.577
+"Soil tests","Soil tests","Base saturation","dairyone_base_sat_total_pct","Jul","slurry",0.37,-0.88,1.62,2.1,-5.59,9.79,76.4,0.536,0.9492,0.577
+"Soil tests","Soil tests","P (Mehlich-3)","dairyone_p_ppm","Jul","compost",-0.43,-1.68,0.83,-23.4,-95.9,49.1,137,0.478,0.9492,0.538
+"Soil tests","Soil tests","P (Mehlich-3)","dairyone_p_ppm","Jul","slurry",-0.64,-1.91,0.63,-33.2,-102,35.3,137,0.294,0.9492,0.538
+"Soil tests","Soil tests","K (Mehlich-3)","dairyone_k_ppm","Jul","compost",-0.42,-1.68,0.83,-23.8,-110,62.4,104,0.496,0.9492,0.666
+"Soil tests","Soil tests","K (Mehlich-3)","dairyone_k_ppm","Jul","slurry",-0.03,-1.27,1.21,-1.8,-87.8,84.2,104,0.96,0.971,0.666
+"Soil tests","Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Jul","compost",-0.05,-1.29,1.19,-12.4,-376,351,1100,0.938,0.971,0.816
+"Soil tests","Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Jul","slurry",0.27,-0.97,1.52,71.2,-284,427,1100,0.646,0.9492,0.816
+"Soil tests","Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Jul","compost",-0.74,-2.02,0.54,-24.2,-69.5,21.1,170,0.242,0.9492,0.181
+"Soil tests","Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Jul","slurry",0.28,-0.97,1.52,9.2,-36.5,54.9,170,0.645,0.9492,0.181
+"Soil tests","Soil tests","pH","dairyone_ph","May","compost",-0.07,-1.31,1.17,-0.018,-0.362,0.326,5.84,0.907,0.971,0.778
+"Soil tests","Soil tests","pH","dairyone_ph","May","slurry",0.34,-0.91,1.59,0.076,-0.22,0.372,5.84,0.569,0.9492,0.778
+"Soil tests","Soil tests","Organic matter","dairyone_om_pct","May","compost",-0.13,-1.37,1.11,-0.04,-0.447,0.367,3.56,0.824,0.964682926829268,0.957
+"Soil tests","Soil tests","Organic matter","dairyone_om_pct","May","slurry",-0.17,-1.42,1.07,-0.048,-0.414,0.318,3.56,0.77,0.9492,0.957
+"Soil tests","Soil tests","CEC","dairyone_cec_meq100g","May","compost",0.19,-1.05,1.43,0.2,-1.23,1.63,9.06,0.748,0.9492,0.812
+"Soil tests","Soil tests","CEC","dairyone_cec_meq100g","May","slurry",0.34,-0.9,1.59,0.34,-1.06,1.74,9.06,0.57,0.9492,0.812
+"Soil tests","Soil tests","Base saturation","dairyone_base_sat_total_pct","May","compost",0.24,-1,1.49,1.28,-5.8,8.36,75.3,0.683,0.9492,0.449
+"Soil tests","Soil tests","Base saturation","dairyone_base_sat_total_pct","May","slurry",0.71,-0.56,1.99,3.42,-3.34,10.2,75.3,0.259,0.9492,0.449
+"Soil tests","Soil tests","P (Mehlich-3)","dairyone_p_ppm","May","compost",0.1,-1.14,1.34,4,-51.5,59.5,118,0.869,0.970046511627907,0.836
+"Soil tests","Soil tests","P (Mehlich-3)","dairyone_p_ppm","May","slurry",-0.25,-1.5,0.99,-10.8,-68.6,47,118,0.67,0.9492,0.836
+"Soil tests","Soil tests","K (Mehlich-3)","dairyone_k_ppm","May","compost",0.6,-0.67,1.87,18.6,-22.3,59.5,75.8,0.324,0.9492,0.627
+"Soil tests","Soil tests","K (Mehlich-3)","dairyone_k_ppm","May","slurry",0.44,-0.81,1.7,18.6,-38.3,75.5,75.8,0.464,0.9492,0.627
+"Soil tests","Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","May","compost",0.22,-1.02,1.47,51,-266,368,1050,0.71,0.9492,0.764
+"Soil tests","Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","May","slurry",0.39,-0.87,1.64,86,-228,400,1050,0.526,0.9492,0.764
+"Soil tests","Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","May","compost",-0.34,-1.59,0.91,-9.4,-45.7,26.9,167,0.565,0.9492,0.688
+"Soil tests","Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","May","slurry",0.18,-1.06,1.43,6.4,-40,52.8,167,0.757,0.9492,0.688
+"Soil tests","Soil tests","pH","dairyone_ph","Oct","compost",0.03,-1.21,1.27,0.008,-0.391,0.407,5.94,0.964,0.971,0.447
+"Soil tests","Soil tests","pH","dairyone_ph","Oct","slurry",0.66,-0.61,1.94,0.188,-0.189,0.565,5.94,0.28,0.9492,0.447
+"Soil tests","Soil tests","Organic matter","dairyone_om_pct","Oct","compost",0.82,-0.47,2.11,0.118,-0.0764,0.312,3.44,0.195,0.9492,0.359
+"Soil tests","Soil tests","Organic matter","dairyone_om_pct","Oct","slurry",0.73,-0.55,2.01,0.102,-0.0856,0.29,3.44,0.241,0.9492,0.359
+"Soil tests","Soil tests","CEC","dairyone_cec_meq100g","Oct","compost",0.31,-0.93,1.56,0.34,-1.2,1.88,8.26,0.603,0.9492,0.553
+"Soil tests","Soil tests","CEC","dairyone_cec_meq100g","Oct","slurry",0.56,-0.71,1.82,0.64,-0.937,2.22,8.26,0.365,0.9492,0.553
+"Soil tests","Soil tests","Base saturation","dairyone_base_sat_total_pct","Oct","compost",0.27,-0.98,1.51,2,-8.56,12.6,73.2,0.658,0.9492,0.502
+"Soil tests","Soil tests","Base saturation","dairyone_base_sat_total_pct","Oct","slurry",0.62,-0.65,1.89,4.44,-6.05,14.9,73.2,0.327,0.9492,0.502
+"Soil tests","Soil tests","P (Mehlich-3)","dairyone_p_ppm","Oct","compost",-0.25,-1.5,0.99,-12.4,-77.5,52.7,123,0.672,0.9492,0.55
+"Soil tests","Soil tests","P (Mehlich-3)","dairyone_p_ppm","Oct","slurry",-0.65,-1.93,0.62,-29.6,-89.7,30.5,123,0.287,0.9492,0.55
+"Soil tests","Soil tests","K (Mehlich-3)","dairyone_k_ppm","Oct","compost",-0.28,-1.52,0.97,-16.6,-101,67.5,103,0.647,0.9492,0.868
+"Soil tests","Soil tests","K (Mehlich-3)","dairyone_k_ppm","Oct","slurry",-0.16,-1.4,1.08,-9.6,-93.9,74.7,103,0.791,0.9492,0.868
+"Soil tests","Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Oct","compost",0.32,-0.93,1.57,79.8,-266,426,937,0.596,0.9492,0.62
+"Soil tests","Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Oct","slurry",0.51,-0.75,1.77,130,-218,478,937,0.402,0.9492,0.62
+"Soil tests","Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Oct","compost",-0.02,-1.26,1.22,-0.6,-41.9,40.7,137,0.971,0.971,0.333
+"Soil tests","Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Oct","slurry",0.64,-0.63,1.91,20.6,-22.8,64,137,0.3,0.9492,0.333

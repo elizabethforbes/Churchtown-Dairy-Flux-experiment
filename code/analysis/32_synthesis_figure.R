@@ -7,7 +7,9 @@
 #   (c) forage composition at the October harvest, as Hedges' g
 # Open symbols: Welch p >= 0.05; filled: p < 0.05 (uncorrected).
 # Also writes effect_synthesis.csv: Hedges' g and BH-FDR q-values for every
-# amendment x response effect in the study (GHG, soil N/C, soil tests, plants).
+# amendment x response effect in the study. FDR is controlled within a priori
+# families matching the hypotheses: GHG fluxes, soil microbial C and N (soil N/C
+# cycling), soil chemistry (Dairy One), and plant (biomass + forage).
 # Input:  output/tables/treatment_effects.csv (from 30_main_figures.R + 31_si_figures.R),
 #         data/processed/biomass.csv
 # Output: output/figures/main/fig5_soil_chemistry_plants.{pdf,png}; output/tables/effect_synthesis.csv
@@ -67,10 +69,11 @@ syn <- eff %>% inner_join(labs_tbl, by = "metric") %>%
   mutate(sampling = unname(date_std[group]),
          sampling = factor(ifelse(is.na(sampling), "single", sampling), levels = c("29 May", "21 Jul", "14 Oct", "single")),
          treatment = as_trt(treatment),
-         q_fdr = p.adjust(welch_p, "BH"),
-         sig = welch_p < 0.05)
+         family = if_else(panel %in% c("Plant", "Biomass"), "Plant", panel),
+         sig = welch_p < 0.05) %>%
+  group_by(family) %>% mutate(q_fdr = p.adjust(welch_p, "BH")) %>% ungroup()
 stopifnot(!anyNA(syn$hedges_g))
-write.csv(syn %>% select(panel, label, metric, group, treatment, hedges_g, g_lo, g_hi, diff, ci_lo, ci_hi,
+write.csv(syn %>% select(family, panel, label, metric, group, treatment, hedges_g, g_lo, g_hi, diff, ci_lo, ci_hi,
                          control_mean, welch_p, q_fdr, anova_p),
           "output/tables/effect_synthesis.csv", row.names = FALSE)
 
