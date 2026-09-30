@@ -341,7 +341,7 @@ s2_bot <- (f4a | f4b | f4c) &
   theme(legend.position = "bottom", legend.key.width = unit(14, "pt"), legend.key.height = unit(5, "pt"),
         legend.title = element_text(size = 6.5, vjust = 0.8), legend.text = element_text(size = 6))
 figS2 <- (s2_top / s2_bot) + tags_pub()
-save_fig(figS2, "figS2_flux_drivers", 180, 160, "si")
+save_fig(figS2, "figS1_flux_drivers", 180, 160, "si")
 write.csv(bind_rows(trt_tab), "output/tables/flux_driver_slopes_by_treatment.csv", row.names = FALSE)
 write.csv(resp %>% select(date, plot, collar, treatment, Ts, W, FCO2_DRY, FCH4_DRY, FN2O),
           "output/tables/flux_driver_data.csv", row.names = FALSE)

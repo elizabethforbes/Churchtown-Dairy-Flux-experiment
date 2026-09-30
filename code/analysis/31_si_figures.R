@@ -1,12 +1,12 @@
 # 31_si_figures.R
 # Supplementary figures (output/figures/si). Run after 30_main_figures.R.
-#   Fig 1   Study design: plot map and timeline (main text)
-#   Fig S1  Amendment composition
-#   Fig S2  Flux drivers (written by 30_main_figures.R)
-#   Fig S3  Soil pH, organic matter, CEC, base saturation and Mehlich-3 nutrients by sampling round
-#   Fig S4  Soil moisture and pH at sampling; temperature-moisture covariation (handheld probe)
-#   Fig S5  C mineralization time courses (all plots shown)
-#   Fig S6  Extractable N pools, day 0 vs day 28
+#   Fig 1   Study design: plot map, timeline and N applied (main text)
+#   Fig S1  Flux drivers (written by 30_main_figures.R)
+#   Fig S2  Soil pH, organic matter, CEC, base saturation and Mehlich-3 nutrients by sampling round
+#   Fig S3  Soil moisture at sampling; temperature-moisture covariation (handheld probe)
+#   Fig S4  C mineralization time courses (all plots shown)
+#   Fig S5  Extractable N pools, day 0 vs day 28, and net nitrification
+#   (amendment composition, formerly Fig S1, is summarized as Fig 1c and in Table 1)
 # Also appends plant and soil-test effects to treatment_effects.csv (used by Fig 4).
 
 source("code/analysis/fig_setup.R")
@@ -90,13 +90,27 @@ s1time <- ggplot(ev_points, aes(date, row)) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b", limits = as.Date(c("2025-05-01", "2025-10-31")), expand = expansion(0)) +
   labs(x = NULL, y = NULL) +
   theme(panel.grid.major.y = element_blank(), axis.line.y = element_blank(), axis.ticks.y = element_blank(),
-        legend.position = "inside", legend.position.inside = c(0.99, 0.02), legend.justification = c(1, 0),
+        legend.position = "inside", legend.position.inside = c(0.99, 0.99), legend.justification = c(1, 1),
         legend.direction = "vertical", legend.background = element_blank())
 
-fig1 <- ((s1map + theme(legend.position = "bottom")) | s1time) + plot_layout(widths = c(1.25, 1)) + tags_pub()
-save_fig(fig1, "fig1_design", 180, 95)
-figs1 <- (s1a | s1b | s1c) + tags_pub()
-save_fig(figs1, "figS1_amendment_composition", 180, 70, "si")
+# N applied per area, organic vs ammonium (the design's key contrast)
+napp <- read.csv("output/tables/application_inputs.csv") %>%
+  transmute(treatment = as_trt(treatment), Organic = org_g_m2 * 10, Ammonium = nh4_g_m2 * 10) %>%
+  pivot_longer(-treatment, names_to = "form", values_to = "kg") %>%
+  mutate(form = factor(form, levels = c("Ammonium", "Organic")))
+s1n <- ggplot(napp, aes(treatment, kg, fill = treatment, alpha = form)) +
+  geom_col(width = 0.6, colour = NA) +
+  scale_fill_trt(guide = "none") +
+  scale_alpha_manual(values = c(Organic = 0.9, Ammonium = 0.35), name = NULL,
+                     labels = c(Organic = "Organic N", Ammonium = expression(NH[4]^'+'*'-N'))) +
+  scale_x_discrete(labels = TRT_LABELS) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(x = NULL, y = expression(N~applied~(kg~N~ha^{-1}))) +
+  theme(legend.position = "inside", legend.position.inside = c(0.98, 0.98), legend.justification = c(1, 1),
+        legend.background = element_blank(), legend.key.size = unit(7, "pt"))
+fig1 <- ((s1map + theme(legend.position = "bottom")) | (s1time / s1n + plot_layout(heights = c(1.5, 1)))) +
+  plot_layout(widths = c(1.25, 1)) + tags_pub()
+save_fig(fig1, "fig1_design", 180, 110)
 
 # =============================================================================
 # Fig S4: soil moisture and pH at sampling; instrument comparison
@@ -132,8 +146,8 @@ figs5 <- ggplot() +
   facet_wrap(~ round_lab, nrow = 1) +
   scale_colour_trt() + scale_fill_trt() + scale_shape_trt() +
   scale_x_continuous(breaks = c(0, 7, 14, 21, 28)) +
-  labs(x = "Day of incubation (20 °C, 65% WHC)", y = expression(CO[2]*'-C'~(mu*g~g^{-1}~h^{-1})))
-save_fig(figs5, "figS5_cmin_timecourses", 180, 70, "si")
+  labs(x = "Day of incubation", y = expression(CO[2]*'-C'~(mu*g~g^{-1}~h^{-1})))
+save_fig(figs5, "figS4_cmin_timecourses", 180, 70, "si")
 
 # =============================================================================
 # Fig S6: N pools, day 0 vs day 28, and net nitrification
@@ -160,7 +174,7 @@ s6b <- ggplot() + zero_line() +
   labs(x = NULL, y = expression(mu*g~N~g^{-1}~d^{-1}))
 figs6 <- (figs6 | free(s6b, type = "panel", side = "b")) + plot_layout(widths = c(3, 1.1), guides = "collect") + tags_pub() &
   theme(legend.position = "bottom")
-save_fig(figs6, "figS6_nmin_pools", 180, 95, "si")
+save_fig(figs6, "figS5_nmin_pools", 180, 95, "si")
 
 # =============================================================================
 # Plant response statistics (effects feed main Fig 4)
@@ -249,9 +263,8 @@ cov_panel <- function(d, x, y, title) {
 }
 s4e <- cov_panel(hand %>% filter(date > APPLICATION_DATE) %>% mutate(W = mean_vwc / 100), "soil_temp_c", "W", "Handheld soil probe")
 # (The chamber probe is used only to gap-fill handheld temperatures, 13_gapfill_soil_temp.R.)
-figs4 <- ((s4a | s4b) + plot_layout(guides = "collect") & theme(legend.position = "bottom")) /
-  (s4e | plot_spacer()) + plot_layout(heights = c(1, 1)) + tags_pub()
-save_fig(figs4, "figS4_soil_conditions", 180, 125, "si")
+figs4 <- ((s4a + theme(legend.position = "bottom")) | s4e) + tags_pub()
+save_fig(figs4, "figS3_soil_conditions", 180, 75, "si")
 
 # =============================================================================
 # Fig S3: Dairy One soil tests by sampling round
@@ -277,7 +290,7 @@ s9 <- lapply(seq_len(nrow(d1_vars)), function(i) {
     labs(x = NULL, y = ev(m$ylab))
 })
 figs9 <- wrap_plots(s9, ncol = 4) + plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
-save_fig(figs9, "figS3_soil_chemistry", 180, 105, "si")
+save_fig(figs9, "figS2_soil_chemistry", 180, 105, "si")
 
 # =============================================================================
 # Append plant and soil-test metrics to the treatment-effects table

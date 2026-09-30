@@ -9,6 +9,7 @@ Treatment encoding is the same in every figure: control is a grey circle, compos
 **Figure 1. Study design.**
 (a) Plot layout from the RTK-GPS survey (UTM 18N, north up): 3 × 3 m plots shaded by treatment, flux collars as dots, plot numbers, and plot-mean elevation above the lowest corner (m; total relief 0.85 m). Treatments are balanced for elevation, position, edge location and pre-application moisture and fluxes (36_spatial.R).
 (b) Timeline: manure application (28 May 2025), flux campaigns (open before application, filled after), soil samplings and the October biomass harvest.
+(c) N applied per area, split into organic N and NH4+-N (compost 38.7 kg N ha−1 with 1% as NH4+; slurry 27.5 kg N ha−1 with 10% as NH4+; Table 1).
 
 **Figure 2. Soil greenhouse-gas fluxes through the season.**
 (a) Soil temperature and (b) volumetric water content at each campaign, from the handheld probes at 10 cm (mean ± SE). Triangles mark the soil samplings (the harvest date is shown in Fig. 1b). The open symbol is 22 Aug, where temperature was gap-filled from the chamber probe (see Methods).
@@ -26,7 +27,7 @@ Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels are grouped in two colum
 - Microbial biomass and C mineralization: (a) substrate-induced respiration and (b) mean C mineralization rate
 - N mineralization and mineral N: (c) net N mineralization over the incubation (20 °C, 65% water-holding capacity), and (d) KCl-extractable mineral N (NH4+ + NO3−) at the start of the incubation.
 
-Asterisks mark one-way ANOVA p < 0.05 at that sampling (mineral N on 14 Oct). Ammonium, nitrate and net nitrification are in Fig. S6.
+Asterisks mark one-way ANOVA p < 0.05 at that sampling (mineral N on 14 Oct). Ammonium, nitrate and net nitrification are in Fig. S5.
 
 **Figure 5. Soil chemistry and plant response.**
 (a) Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg at each sampling, as Hedges' g (amendment minus control, divided by the pooled plot-level SD, small-sample corrected) with 95% CI. The three points in each row are the samplings: 14 Oct, 21 Jul and 29 May from top to bottom, lighter = earlier.
@@ -59,8 +60,7 @@ Results:
 
 ## Supplementary
 
-- **S1. Amendment composition.** Per-mass N forms, total solids and N on a dry-mass basis. Samples were taken 28 May 2025 and analysed January 2026. Applied rates: slurry 2.75 g N m−2 (27.5 kg N ha−1) and 143 g dry matter m−2; compost 3.87 g N m−2 (38.7 kg N ha−1) and 438 g dry matter m−2 (Table 1).
-- **S2. Soil temperature and moisture as flux drivers.**
+- **S1. Soil temperature and moisture as flux drivers.**
   - (a–c) Each point is one collar measurement after application (n = 445). Lines are fixed-effect fits for each treatment with 95% CI, from mixed models with random intercepts for plot and collar within plot:
     - (a) log(CO2) ~ temperature × treatment + moisture + temperature:moisture, shown at median moisture.
     - (b) CH4 ~ moisture × treatment + temperature + temperature:moisture, shown at median temperature.
@@ -68,12 +68,12 @@ Results:
     
     Drivers are handheld soil temperature (22 Aug gap-filled) and VWC. Model selection among null, T, W, T+W, T+W+W² and T×W is in the table flux_driver_model_selection.csv. The best models were T×W for CO2 and CH4. For N2O, T+W+W² was best, but the evidence for any driver was weak (null ΔAIC 5.3). The slope × treatment p-values test whether amendments changed the response. The y-axes show the 1st–99th percentile of fluxes; the models use all data.
   - (d–f) The same data coloured by the second driver, with model curves at fixed levels of that driver.
-- **S3. Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg for all plots at each soil sampling.** No treatment differences.
-- **S4. Soil conditions.**
-  - (a) Soil moisture and (b) pH at sampling.
-  - (c) Covariation of soil temperature and moisture from the handheld probe (r ≈ −0.3 across collars), which is why the two drivers could be separated in Fig. S2.
-- **S5. C-mineralization time courses.** Thin lines are individual plots. The 16 Dec reading of round 3 is excluded: tube identity was uncertain and the standards were anomalous.
-- **S6. Extractable N pools at day 0 and day 28 of each incubation, and net nitrification.** Initial extractions were made at incubation setup, about 5, 14 and 42 days after sampling (soils at 4 °C), so the NH4+:NO3− split and net nitrification are not comparable across samplings.
+- **S2. Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg for all plots at each soil sampling.** No treatment differences.
+- **S3. Soil conditions.**
+  - (a) Gravimetric soil moisture at sampling. Amended plots were at most 0.018 g g−1 (≤8%) wetter than controls, a difference also present in field VWC before application.
+  - (b) Covariation of soil temperature and moisture from the handheld probe (r ≈ −0.3 across collars), which is why the two drivers could be separated in Fig. S1.
+- **S4. C-mineralization time courses (20 °C, 65% WHC).** Thin lines are individual plots. The 16 Dec reading of round 3 is excluded: tube identity was uncertain and the standards were anomalous.
+- **S5. Extractable N pools at day 0 and day 28 of each incubation, and net nitrification.** Initial extractions were made at incubation setup, about 5, 14 and 42 days after sampling (soils at 4 °C), so the NH4+:NO3− split and net nitrification are not comparable across samplings.
 
 ## Methods notes
 - **Flux calculation.** Fluxes were recomputed from the raw 1 Hz concentration records with goFlux 0.4.0 (best.flux, Hüppi criteria) through fluxqc 0.2.3.
