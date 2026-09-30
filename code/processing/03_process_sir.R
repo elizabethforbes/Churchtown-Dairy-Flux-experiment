@@ -29,7 +29,7 @@ calc_sir_lgr <- function(gas_data, mass_data, gwc_data, timepoint_num,
   # Constants
   R_gas <- 0.08206  # L atm K-1 mol-1
   P_atm <- 1        # atm
-  T_K   <- 298.15   # 25 C in Kelvin
+  T_K   <- 293.15   # 20 C incubation temperature (same as the IRGA calculation)
   C_mol <- 12.011   # g/mol
 
   # Separate standards from samples

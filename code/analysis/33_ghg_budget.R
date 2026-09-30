@@ -108,7 +108,7 @@ pc <- ggplot() + scale_x_discrete() +
 #   Soil respiration: clipped collars (roots + microbes), season trapezoid total of
 #     midday closures (10:00-17:00), so likely biased high vs a 24-h integral.
 #   ANPP: Oct harvest of a 0.5 m2 subplot left uncut since the pre-experiment mow;
-#     C = 45% of dry mass (standard herbage value).
+#     C = 47% of dry mass (IPCC 2006 Vol. 4 Ch. 6 default for herbaceous biomass).
 #   Amendment C: not measured. C = 50% of volatile solids, using the same assumed
 #     VS shares of dry matter as 35_storage_vs_field.R (slurry 0.80, after ASAE D384.2
 #     VS/TS = 0.85 for lactating dairy manure as excreted; compost 0.55), i.e.
@@ -118,7 +118,7 @@ C_FRAC <- 0.5 * VS_FRAC
 co2 <- function(gC) gC * 44 / 12
 rs <- tot %>% filter(period == "season") %>% transmute(plot, treatment = as_trt(treatment), val = co2(CO2_C_g_m2))
 anpp <- read.csv("data/processed/biomass.csv") %>% group_by(plot, treatment) %>%
-  summarize(val = co2(mean(dry_matter_g_m2) * 0.45), .groups = "drop") %>% mutate(treatment = as_trt(treatment))
+  summarize(val = co2(mean(dry_matter_g_m2) * 0.47), .groups = "drop") %>% mutate(treatment = as_trt(treatment))
 dm <- read.csv("output/tables/application_inputs.csv")
 amend_c <- bind_rows(lapply(c("slurry", "compost"), function(tr) {
   d <- dm$dm_g_m2[dm$treatment == tr]

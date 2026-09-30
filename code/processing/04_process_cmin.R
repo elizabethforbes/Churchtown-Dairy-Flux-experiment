@@ -54,7 +54,7 @@ calc_cmin_lgr <- function(gas_data, mass_data, sheet_name, Vsam = 5, default_Vef
                           jar_volume = 57.15) {
   R_gas <- 0.08206
   P_atm <- 1
-  T_K   <- 298.15
+  T_K   <- 293.15   # 20 C incubation temperature (same as the IRGA calculation)
   C_mol <- 12.011
 
   # Separate standards from samples
@@ -447,6 +447,21 @@ cat("Processing C-min_1 (LGR, 5 sheets)...\n")
 cmin1_sheets <- c("june3", "june10", "june17", "june23", "july1")
 cmin1_results <- list()
 
+# Veff (LGR loop volume) comes from each sheet's CO2 standards. july1 has no usable
+# standards, so it uses the mean Veff of the other round-1 sheets rather than the
+# protocol default (344.6 mL).
+lgr_sheet_veff <- function(gas_data, Vsam = 5) {
+  std <- gas_data %>% filter(grepl("Standard", as.character(Lab_No), ignore.case = TRUE)) %>%
+    mutate(pre = suppressWarnings(as.numeric(`Pre-injection`)),
+           post = suppressWarnings(as.numeric(`Post-injection`)), diff = post - pre) %>%
+    filter(!is.na(pre) & !is.na(post) & diff != 0)
+  if (nrow(std) == 0) NA_real_ else mean(Vsam * (1976 - std$post) / std$diff, na.rm = TRUE)
+}
+cmin1_veff <- sapply(cmin1_sheets, function(sh) lgr_sheet_veff(read_excel("data/raw/soil/cmin/C-min_1.xlsx", sheet = sh)))
+cmin1_default_veff <- mean(cmin1_veff, na.rm = TRUE)
+cat(sprintf("  Round-1 Veff by sheet: %s; default for sheets without standards: %.1f mL\n",
+            paste(sprintf("%s %.0f", names(cmin1_veff), cmin1_veff), collapse = ", "), cmin1_default_veff))
+
 for (sheet in cmin1_sheets) {
   cat(sprintf("  Processing sheet: %s\n", sheet))
   gas <- read_excel("data/raw/soil/cmin/C-min_1.xlsx", sheet = sheet)
@@ -461,7 +476,7 @@ for (sheet in cmin1_sheets) {
     }
   }
 
-  result <- calc_cmin_lgr(gas, mass1, sheet)
+  result <- calc_cmin_lgr(gas, mass1, sheet, default_Veff = cmin1_default_veff)
   if (!is.null(result)) {
     cmin1_results[[sheet]] <- result
   }

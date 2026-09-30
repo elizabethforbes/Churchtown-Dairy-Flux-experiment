@@ -11,48 +11,48 @@
 "GHG fluxes","CH4, days 1-6","first_week_total_CH4","29 May-3 Jun","slurry",0.95,-0.36,2.26,1.11,-0.653,2.88,-1.79,0.162,NA,0.2
 "GHG fluxes","N2O, days 1-6","first_week_total_N2O","29 May-3 Jun","compost",0.33,-0.92,1.58,0.36,-1.18,1.9,2.35,0.585,NA,0.018
 "GHG fluxes","N2O, days 1-6","first_week_total_N2O","29 May-3 Jun","slurry",1.49,0.08,2.89,4.57,-0.228,9.36,2.35,0.057,NA,0.018
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","compost",0.34,-0.91,1.59,0.286,-0.837,1.41,5.04,0.568,NA,0.176
-"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","slurry",1.23,-0.21,2.66,1.08,-0.346,2.51,5.04,0.109,NA,0.176
+"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","compost",0.34,-0.91,1.59,0.291,-0.852,1.43,5.13,0.568,NA,0.176
+"Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","29 May","slurry",1.23,-0.21,2.66,1.1,-0.352,2.55,5.13,0.109,NA,0.176
 "Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","21 Jul","compost",-0.6,-1.87,0.67,-0.315,-1.01,0.377,5.51,0.325,NA,0.206
 "Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","21 Jul","slurry",0.56,-0.7,1.82,0.408,-0.589,1.4,5.51,0.361,NA,0.206
 "Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","14 Oct","compost",0.25,-0.99,1.5,0.149,-0.684,0.983,3.87,0.674,NA,0.638
 "Soil N and C cycling","Substrate-induced resp.","sir_ug_co2c_hr_g","14 Oct","slurry",0.49,-0.77,1.75,0.299,-0.545,1.14,3.87,0.423,NA,0.638
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","compost",0.02,-1.22,1.26,0.0642,-4.69,4.82,17.9,0.976,NA,0.281
-"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","slurry",0.9,-0.4,2.2,2.93,-1.36,7.22,17.9,0.154,NA,0.281
+"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","compost",0.02,-1.22,1.26,0.0664,-4.79,4.92,18.3,0.975,NA,0.282
+"Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","29 May","slurry",0.9,-0.4,2.2,2.99,-1.38,7.36,18.3,0.154,NA,0.282
 "Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","21 Jul","compost",-0.93,-2.23,0.38,-4.86,-12.6,2.84,24.1,0.165,NA,0.151
 "Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","21 Jul","slurry",0.24,-1,1.48,1.59,-7.15,10.3,24.1,0.686,NA,0.151
 "Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","14 Oct","compost",-0.12,-1.36,1.12,-0.195,-2.43,2.04,10.6,0.843,NA,0.483
 "Soil N and C cycling","C mineralization","cmin_rate_ug_co2c_g_d","14 Oct","slurry",-0.57,-1.83,0.7,-1.51,-5.15,2.13,10.6,0.355,NA,0.483
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","compost",-0.16,-1.4,1.08,-0.0444,-0.44,0.351,0.66,0.79,NA,0.103
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","slurry",-1.82,-3.29,-0.34,-0.309,-0.533,-0.0849,0.66,0.013,NA,0.103
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","compost",0.06,-1.18,1.3,0.0207,-0.466,0.508,0.384,0.921,NA,0.93
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","slurry",0.28,-0.97,1.52,0.0687,-0.259,0.396,0.384,0.641,NA,0.93
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","compost",-0.27,-1.51,0.98,-0.101,-0.643,0.44,0.505,0.656,NA,0.866
-"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","slurry",-0.17,-1.41,1.07,-0.0649,-0.608,0.478,0.505,0.777,NA,0.866
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","compost",-0.17,-1.41,1.07,-0.0607,-0.56,0.438,0.81,0.778,NA,0.23
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","slurry",-1.3,-2.67,0.06,-0.32,-0.643,0.00332,0.81,0.052,NA,0.23
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","compost",-0.21,-1.45,1.03,-0.0774,-0.621,0.466,0.641,0.73,NA,0.916
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","slurry",-0.04,-1.28,1.2,-0.00931,-0.359,0.34,0.641,0.951,NA,0.916
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","compost",-0.4,-1.65,0.85,-0.135,-0.648,0.378,0.503,0.52,NA,0.652
-"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","slurry",-0.39,-1.64,0.86,-0.131,-0.644,0.383,0.503,0.532,NA,0.652
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","compost",-0.24,-1.49,1,-0.623,-4.02,2.78,6,0.684,NA,0.878
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","slurry",0.01,-1.23,1.25,0.02,-3.1,3.14,6,0.989,NA,0.878
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","compost",-0.48,-1.73,0.78,-1.88,-7.81,4.06,8.71,0.445,NA,0.414
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","slurry",-0.64,-1.91,0.63,-2.48,-8.44,3.47,8.71,0.321,NA,0.414
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","compost",-0.46,-1.71,0.8,-1.06,-4.27,2.16,1.57,0.454,NA,0.678
-"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","slurry",-0.49,-1.75,0.76,-0.902,-3.34,1.53,1.57,0.414,NA,0.678
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","compost",0.08,-1.16,1.32,0.123,-1.85,2.09,2.58,0.888,NA,0.905
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","slurry",-0.16,-1.4,1.08,-0.281,-2.61,2.04,2.58,0.787,NA,0.905
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","compost",-1.28,-2.64,0.08,-3.03,-6.52,0.463,9.3,0.076,NA,0.044
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","slurry",-1.06,-2.39,0.26,-2.39,-5.93,1.15,9.3,0.135,NA,0.044
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","compost",-0.71,-1.99,0.56,-3.63,-10.7,3.45,14,0.257,NA,0.039
-"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","slurry",-1.53,-2.94,-0.12,-7.27,-14.3,-0.273,14,0.044,NA,0.039
-"Soil N and C cycling","Extractable mineral N","tin_ug_g","29 May","compost",-0.21,-1.45,1.04,-0.5,-3.96,2.96,8.58,0.731,NA,0.939
-"Soil N and C cycling","Extractable mineral N","tin_ug_g","29 May","slurry",-0.13,-1.37,1.11,-0.261,-3.12,2.6,8.58,0.831,NA,0.939
-"Soil N and C cycling","Extractable mineral N","tin_ug_g","21 Jul","compost",-0.88,-2.18,0.42,-4.91,-13.4,3.58,18,0.191,NA,0.144
-"Soil N and C cycling","Extractable mineral N","tin_ug_g","21 Jul","slurry",-0.89,-2.19,0.41,-4.87,-13.4,3.65,18,0.192,NA,0.144
-"Soil N and C cycling","Extractable mineral N","tin_ug_g","14 Oct","compost",-0.86,-2.16,0.44,-4.69,-12,2.59,15.6,0.173,NA,0.028
-"Soil N and C cycling","Extractable mineral N","tin_ug_g","14 Oct","slurry",-1.79,-3.26,-0.32,-8.17,-15,-1.39,15.6,0.027,NA,0.028
+"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","compost",-0.16,-1.4,1.08,-0.0474,-0.464,0.369,0.699,0.788,NA,0.101
+"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","29 May","slurry",-1.82,-3.29,-0.35,-0.328,-0.565,-0.0903,0.699,0.013,NA,0.101
+"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","compost",0.03,-1.21,1.27,0.0117,-0.529,0.552,0.471,0.959,NA,0.943
+"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","21 Jul","slurry",0.24,-1,1.49,0.0656,-0.29,0.421,0.471,0.68,NA,0.943
+"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","compost",-0.26,-1.51,0.98,-0.106,-0.679,0.468,0.533,0.661,NA,0.871
+"Soil N and C cycling","Net N mineralization","net_min_rate_ug_g_d","14 Oct","slurry",-0.17,-1.41,1.07,-0.0678,-0.643,0.507,0.533,0.78,NA,0.871
+"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","compost",-0.17,-1.41,1.07,-0.0647,-0.589,0.46,0.855,0.775,NA,0.227
+"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","29 May","slurry",-1.31,-2.68,0.06,-0.339,-0.679,0.0019,0.855,0.051,NA,0.227
+"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","compost",-0.23,-1.47,1.02,-0.093,-0.694,0.508,0.734,0.707,NA,0.904
+"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","21 Jul","slurry",-0.05,-1.29,1.19,-0.0149,-0.4,0.37,0.734,0.928,NA,0.904
+"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","compost",-0.39,-1.64,0.86,-0.141,-0.684,0.402,0.531,0.525,NA,0.657
+"Soil N and C cycling","Net nitrification","net_nitr_rate_ug_g_d","14 Oct","slurry",-0.38,-1.63,0.87,-0.138,-0.681,0.406,0.531,0.534,NA,0.657
+"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","compost",-0.25,-1.49,1,-0.66,-4.2,2.88,6.26,0.678,NA,0.871
+"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","29 May","slurry",0.01,-1.23,1.25,0.0356,-3.21,3.28,6.26,0.98,NA,0.871
+"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","compost",-0.48,-1.73,0.78,-1.94,-8.09,4.21,8.98,0.446,NA,0.416
+"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","21 Jul","slurry",-0.64,-1.91,0.64,-2.56,-8.73,3.62,8.98,0.323,NA,0.416
+"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","compost",-0.46,-1.71,0.8,-1.12,-4.53,2.29,1.66,0.454,NA,0.678
+"Soil N and C cycling","Extractable NH4+","initial_nh4_ug_g","14 Oct","slurry",-0.5,-1.75,0.76,-0.957,-3.53,1.62,1.66,0.413,NA,0.678
+"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","compost",0.08,-1.16,1.32,0.121,-1.94,2.18,2.69,0.894,NA,0.909
+"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","29 May","slurry",-0.16,-1.4,1.08,-0.29,-2.72,2.14,2.69,0.79,NA,0.909
+"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","compost",-1.27,-2.63,0.09,-3.12,-6.74,0.493,9.59,0.077,NA,0.045
+"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","21 Jul","slurry",-1.05,-2.37,0.27,-2.46,-6.12,1.21,9.59,0.137,NA,0.045
+"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","compost",-0.71,-1.99,0.57,-3.83,-11.4,3.69,14.8,0.26,NA,0.04
+"Soil N and C cycling","Extractable NO3-","initial_no3_ug_g","14 Oct","slurry",-1.53,-2.93,-0.12,-7.68,-15.1,-0.24,14.8,0.045,NA,0.04
+"Soil N and C cycling","Extractable mineral N","tin_ug_g","29 May","compost",-0.21,-1.46,1.03,-0.539,-4.15,3.07,8.95,0.722,NA,0.935
+"Soil N and C cycling","Extractable mineral N","tin_ug_g","29 May","slurry",-0.12,-1.36,1.12,-0.254,-3.24,2.73,8.95,0.841,NA,0.935
+"Soil N and C cycling","Extractable mineral N","tin_ug_g","21 Jul","compost",-0.88,-2.17,0.42,-5.07,-13.9,3.74,18.6,0.193,NA,0.146
+"Soil N and C cycling","Extractable mineral N","tin_ug_g","21 Jul","slurry",-0.88,-2.18,0.42,-5.01,-13.9,3.83,18.6,0.195,NA,0.146
+"Soil N and C cycling","Extractable mineral N","tin_ug_g","14 Oct","compost",-0.85,-2.15,0.44,-4.95,-12.7,2.79,16.5,0.176,NA,0.029
+"Soil N and C cycling","Extractable mineral N","tin_ug_g","14 Oct","slurry",-1.78,-3.24,-0.31,-8.64,-15.9,-1.42,16.5,0.028,NA,0.029
 "Biomass","Aboveground biomass","biomass_g_m2","Oct harvest","compost",-0.01,-1.25,1.23,-0.4,-74.7,73.9,228,0.99,NA,0.99
 "Biomass","Aboveground biomass","biomass_g_m2","Oct harvest","slurry",0.06,-1.18,1.3,3.6,-72,79.2,228,0.915,NA,0.99
 "Plant","Crude protein","crude_protein_pct","Oct harvest","compost",0.61,-0.66,1.88,0.76,-0.897,2.42,9.18,0.319,0.736,0.697

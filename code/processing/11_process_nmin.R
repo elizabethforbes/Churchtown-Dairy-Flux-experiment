@@ -57,7 +57,7 @@ library(stringr)
 
 # --- Settings ----------------------------------------------------------------
 V_KCL_ML            <- 25     # KCl added per tube (protocol)
-ADD_SOIL_WATER      <- FALSE  # TRUE: extract volume = KCl + water held in soil
+ADD_SOIL_WATER      <- TRUE   # TRUE: extract volume = KCl + water held in soil
 TARGET_GWC          <- 0.257  # moisture target hard-coded in the setup sheets (65% WHC)
 ROUND3_WATER_ADDED  <- FALSE  # round 3 has no water record; assume none was added
 INCLUDE_X_INITIAL   <- TRUE   # round-2 x1-x5 initial tubes (stored ~15 d first)

@@ -45,7 +45,7 @@ All values are in CO2-equivalents (GWP100, IPCC AR6: CH4 27.0, N2O 273), from pl
 (b) N2O emission factor: amendment-attributable N2O-N (plot minus control mean) as % of the N applied (slurry 2.75, compost 3.87 g N m−2), for days 1–6 and the season. Reference lines are the IPCC 2019 EF1 aggregate default (1%) and the value for organic N inputs in wet climates (0.6%).
 (c) Season totals for scale, all in g CO2 or CO2-eq m−2 on a log scale. Soil respiration and aboveground production are components of the carbon balance, which was not closed, so the terms are not summed.
 - **Soil respiration:** from the clipped collars, so roots plus microbes. It is integrated from daytime closures (10:00–17:00), so it is likely biased high compared with a 24-h total.
-- **Aboveground production:** the October harvest of the 0.5 m² subplot left uncut since the pre-experiment mow, assuming C = 45% of dry mass.
+- **Aboveground production:** the October harvest of the 0.5 m² subplot left uncut since the pre-experiment mow, assuming C = 47% of dry mass (IPCC 2006 default for herbaceous biomass).
 - **Manure C added:** not measured. Estimated as 50% of volatile solids, with the VS shares of dry matter used for the storage comparison (slurry 0.80, compost 0.55).
 - **Result:** the CH4 + N2O budget is 0.35–0.7% of season soil respiration and 5–11% of aboveground production. The manure C added, as CO2, is roughly 10–40 times the amendment-attributable CH4 + N2O.
 - **Metric choice barely matters** (ghg_co2eq_metrics.csv): season net non-CO2 for the slurry plots is 42 g CO2-eq m−2 under GWP100, 38 under GWP20, 38 under GTP100 and 44 under GWP* for a sustained practice. N2O dominates, and its GWP20 equals its GWP100.
