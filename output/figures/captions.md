@@ -8,8 +8,8 @@ Treatment encoding is the same in every figure: control is a grey circle, compos
 
 **Figure 1. Study design.**
 (a) Plot layout from the RTK-GPS survey (UTM 18N, north up): 3 × 3 m plots shaded by treatment, flux collars as dots, plot numbers, and plot-mean elevation above the lowest corner (m; total relief 0.85 m). Treatments are balanced for elevation, position, edge location and pre-application moisture and fluxes (36_spatial.R).
-(b) Timeline: manure application (28 May 2025), flux campaigns (open before application, filled after), soil samplings and the October biomass harvest.
-(c) N applied per area, split into organic N and NH4+-N (compost 38.7 kg N ha−1 with 1% as NH4+; slurry 27.5 kg N ha−1 with 10% as NH4+; Table 1).
+(b) Timeline of flux campaigns, soil samplings and the October biomass harvest; the dashed line marks manure application (28 May 2025).
+(c) Dry matter and total N applied per hectare (compost 4.4 Mg DM and 38.7 kg N ha−1; slurry 1.4 Mg DM and 27.5 kg N ha−1), with total N split into organic N (filled) and NH4+-N (open; 1% of N in compost, 10% in slurry). Details in Table 1.
 
 **Figure 2. Soil greenhouse-gas fluxes through the season.**
 (a) Soil temperature and (b) volumetric water content at each campaign, from the handheld probes at 10 cm (mean ± SE). Triangles mark the soil samplings (the harvest date is shown in Fig. 1b). The open symbol is 22 Aug, where temperature was gap-filled from the chamber probe (see Methods).
@@ -70,7 +70,7 @@ Results:
   - (d–f) The same data coloured by the second driver, with model curves at fixed levels of that driver.
 - **S2. Soil pH, organic matter, CEC, base saturation and Mehlich-3 P, K, Ca and Mg for all plots at each soil sampling.** No treatment differences.
 - **S3. Soil conditions.**
-  - (a) Gravimetric soil moisture at sampling. Amended plots were at most 0.018 g g−1 (≤8%) wetter than controls, a difference also present in field VWC before application.
+  - (a) Gravimetric soil moisture at sampling. Amended plots averaged 0.008 (compost) and 0.013 g g−1 (slurry) wetter than controls (4% and 7%), a difference also present in field VWC before application.
   - (b) Covariation of soil temperature and moisture from the handheld probe (r ≈ −0.3 across collars), which is why the two drivers could be separated in Fig. S1.
 - **S4. C-mineralization time courses (20 °C, 65% WHC).** Thin lines are individual plots. The 16 Dec reading of round 3 is excluded: tube identity was uncertain and the standards were anomalous.
 - **S5. Extractable N pools at day 0 and day 28 of each incubation, and net nitrification.** Initial extractions were made at incubation setup, about 5, 14 and 42 days after sampling (soils at 4 °C), so the NH4+:NO3− split and net nitrification are not comparable across samplings.

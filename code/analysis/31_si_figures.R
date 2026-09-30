@@ -81,35 +81,44 @@ ev_points <- bind_rows(
   tibble(row = "GHG flux", date = flux_dates) %>% mutate(kind = if_else(date < APPLICATION_DATE, "pre", "post")),
   tibble(row = "Soil sampling", date = as.Date(ROUND_DATES), kind = "event"),
   tibble(row = "Biomass harvest", date = harvest, kind = "event"))
-s1time <- ggplot(ev_points, aes(date, row)) +
-  geom_vline(xintercept = APPLICATION_DATE, colour = MUTED, linewidth = 0.3, linetype = "22") +
-  geom_point(aes(shape = kind), size = 1.7, colour = INK, fill = "white", stroke = 0.45) +
-  scale_shape_manual(values = c(event = 18, pre = 21, post = 16), labels = c(pre = "Before application", post = "After application"),
-                     breaks = c("pre", "post"), name = "Flux campaigns") +
-  scale_y_discrete(limits = rev(rows)) +
+s1time <- ggplot(ev_points %>% filter(row != "Manure applied"), aes(date, row)) +
+  geom_vline(xintercept = APPLICATION_DATE, colour = MUTED, linewidth = 0.35, linetype = "22") +
+  annotate("text", x = APPLICATION_DATE + 3, y = Inf, label = "Manure applied, 28 May", hjust = 0, vjust = 1.2,
+           size = 2.2, colour = INK) +
+  geom_point(size = 1.5, colour = INK) +
+  scale_y_discrete(limits = rev(setdiff(rows, "Manure applied"))) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b", limits = as.Date(c("2025-05-01", "2025-10-31")), expand = expansion(0)) +
+  coord_cartesian(clip = "off") +
   labs(x = NULL, y = NULL) +
-  theme(panel.grid.major.y = element_blank(), axis.line.y = element_blank(), axis.ticks.y = element_blank(),
-        legend.position = "inside", legend.position.inside = c(0.99, 0.99), legend.justification = c(1, 1),
-        legend.direction = "vertical", legend.background = element_blank())
+  theme(panel.grid.major.y = element_blank(), axis.line.y = element_blank(), axis.ticks.y = element_blank())
 
-# N applied per area, organic vs ammonium (the design's key contrast)
-napp <- read.csv("output/tables/application_inputs.csv") %>%
-  transmute(treatment = as_trt(treatment), Organic = org_g_m2 * 10, Ammonium = nh4_g_m2 * 10) %>%
-  pivot_longer(-treatment, names_to = "form", values_to = "kg") %>%
-  mutate(form = factor(form, levels = c("Ammonium", "Organic")))
-s1n <- ggplot(napp, aes(treatment, kg, fill = treatment, alpha = form)) +
-  geom_col(width = 0.6, colour = NA) +
-  scale_fill_trt(guide = "none") +
-  scale_alpha_manual(values = c(Organic = 0.9, Ammonium = 0.35), name = NULL,
-                     labels = c(Organic = "Organic N", Ammonium = expression(NH[4]^'+'*'-N'))) +
-  scale_x_discrete(labels = TRT_LABELS) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
-  labs(x = NULL, y = expression(N~applied~(kg~N~ha^{-1}))) +
-  theme(legend.position = "inside", legend.position.inside = c(0.98, 0.98), legend.justification = c(1, 1),
-        legend.background = element_blank(), legend.key.size = unit(7, "pt"))
-fig1 <- ((s1map + theme(legend.position = "bottom")) | (s1time / s1n + plot_layout(heights = c(1.5, 1)))) +
-  plot_layout(widths = c(1.25, 1)) + tags_pub()
+# (c) what went on each plot: dry matter and N (organic filled, NH4+ open), per ha
+ai <- read.csv("output/tables/application_inputs.csv")
+inp <- bind_rows(
+  ai %>% transmute(treatment, panel = "dm", seg = "Organic", ymin = 0, ymax = dm_Mg_ha),
+  ai %>% transmute(treatment, panel = "n", seg = "Organic", ymin = 0, ymax = org_g_m2 * 10),
+  ai %>% transmute(treatment, panel = "n", seg = "Ammonium", ymin = org_g_m2 * 10, ymax = (org_g_m2 + nh4_g_m2) * 10)) %>%
+  mutate(x = match(treatment, c("compost", "slurry")),
+         panel = factor(panel, levels = c("dm", "n"), labels = c("Dry~matter~(Mg~ha^{-1})", "Total~N~(kg~ha^{-1})")))
+key <- tibble(form = factor(c("Organic N", "NH4"), levels = c("Organic N", "NH4")), x = 1, y = 0,
+              panel = factor("Total~N~(kg~ha^{-1})", levels = levels(inp$panel)))
+s1n <- ggplot(inp) +
+  geom_rect(aes(xmin = x - 0.3, xmax = x + 0.3, ymin = ymin, ymax = ymax, colour = treatment,
+                fill = ifelse(seg == "Organic", treatment, "white")), linewidth = 0.35) +
+  geom_point(data = key, aes(x, y, shape = form), size = 0, colour = NA) +
+  scale_fill_manual(values = c(TRT_COLS, white = "white"), guide = "none") +
+  scale_colour_manual(values = TRT_COLS, guide = "none") +
+  scale_shape_manual(values = c(22, 22), name = NULL, labels = c("Organic N", expression(NH[4]^'+'*'-N')),
+                     guide = guide_legend(override.aes = list(size = 3.2, colour = INK, fill = c("grey45", "white"), stroke = 0.35))) +
+  facet_wrap(~ panel, scales = "free_y", labeller = label_parsed) +
+  scale_x_continuous(breaks = 1:2, labels = c("Compost", "Slurry"), expand = expansion(add = 0.5)) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.06))) +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position = "right", strip.text = element_text(face = "plain", size = 6.5),
+        axis.text.x = element_text(size = 6.5), legend.text = element_text(size = 6.5), legend.key.size = unit(7, "pt"),
+        panel.spacing = unit(8, "pt"))
+fig1 <- ((s1map + theme(legend.position = "bottom")) | (s1time / s1n + plot_layout(heights = c(1.2, 1)))) +
+  plot_layout(widths = c(1, 1.15)) + tags_pub()
 save_fig(fig1, "fig1_design", 180, 110)
 
 # =============================================================================
