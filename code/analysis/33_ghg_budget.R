@@ -125,39 +125,52 @@ amend_c <- bind_rows(lapply(c("slurry", "compost"), function(tr) {
   tibble(treatment = as_trt(tr), val = co2(d * C_FRAC[[tr]]))
 }))
 att_net <- att %>% filter(comp == "net") %>% select(treatment, diff)
-ctx_rows <- c(rs = "Soil respiration", anpp = "Aboveground production",
-              amend = "Manure C added", net = "CH4 + N2O budget",
-              att = "CH4 + N2O, manure effect", ch4 = "CH4 uptake")
-ctx_labs <- expression(rs = "Soil respiration", anpp = "Aboveground production", amend = "Manure C added",
-                       net = CH[4]+N[2]*O~budget, att = CH[4]+N[2]*O*","~manure~effect, ch4 = CH[4]~uptake)
-lvl <- rev(names(ctx_rows))
-pts <- bind_rows(rs %>% mutate(row = "rs"), anpp %>% mutate(row = "anpp"),
-                 wide %>% transmute(plot, treatment, val = net, row = "net"),
-                 wide %>% transmute(plot, treatment, val = -ch4, row = "ch4")) %>%
-  mutate(row = factor(row, levels = lvl))
+# Rows are grouped so no term is double counted: gross CO2 exchange, the manure C input,
+# the CH4 and N2O components, and (shaded, set apart) the manure effect, which is a
+# difference already contained in the CH4 and N2O rows. Signed: + to atmosphere,
+# - from the atmosphere or into soil; symmetric log axis.
+grp_of <- c(rs = "CO2", anpp = "CO2", amend = "Manure C", n2o = "CH4, N2O", ch4 = "CH4, N2O", att = "Effect")
+grp_lvl <- c("CO2", "Manure C", "CH4, N2O", "Effect")
+grp_labs <- c("CO2" = "CO[2]", "Manure C" = "Manure~C", "CH4, N2O" = "CH[4]*','~N[2]*O", "Effect" = "Manure~effect")
+row_lvl <- rev(c("rs", "anpp", "amend", "n2o", "ch4", "att"))
+row_labs <- expression(att = Manure~effect~on~CH[4]+N[2]*O, ch4 = CH[4], n2o = N[2]*O,
+                       amend = "Manure C added", anpp = "Aboveground production", rs = "Soil respiration")
+pts <- bind_rows(rs %>% mutate(row = "rs"), anpp %>% mutate(row = "anpp", val = -val),
+                 wide %>% transmute(plot, treatment, val = n2o, row = "n2o"),
+                 wide %>% transmute(plot, treatment, val = ch4, row = "ch4"))
 mns <- pts %>% group_by(row, treatment) %>% summarize(val = mean(val), .groups = "drop") %>%
-  bind_rows(att_net %>% transmute(row = factor("att", levels = lvl), treatment, val = diff),
-            amend_c %>% mutate(row = factor("amend", levels = lvl)))
+  bind_rows(att_net %>% transmute(row = "att", treatment, val = diff),
+            amend_c %>% mutate(row = "amend", val = -val))
+grp_fix <- function(d) d %>% mutate(grp = factor(grp_of[row], levels = grp_lvl), row = factor(row, levels = row_lvl))
+pts <- grp_fix(pts); mns <- grp_fix(mns)
+shade <- tibble(grp = factor("Effect", levels = grp_lvl))
 pdd <- position_dodge(width = 0.6)
 pd_ <- ggplot() +
+  geom_rect(data = shade, aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf), fill = "grey93") +
+  geom_vline(xintercept = 0, colour = INK, linewidth = 0.3) +
   geom_point(data = pts, aes(val, row, colour = treatment), shape = 16, size = 0.8, alpha = 0.35,
              position = position_jitterdodge(jitter.width = 0, jitter.height = 0.08, dodge.width = 0.6, seed = 1)) +
   geom_point(data = mns, aes(val, row, colour = treatment, shape = treatment, fill = treatment),
              position = pdd, size = 1.8, stroke = 0.4) +
-  scale_x_log10(breaks = c(1, 10, 100, 1000, 10000), labels = c("1", "10", "100", "1k", "10k"), limits = c(0.5, 12000)) +
-  annotation_logticks(sides = "b", linewidth = 0.2, short = unit(1, "pt"), mid = unit(2, "pt"), long = unit(3, "pt")) +
-  scale_y_discrete(labels = ctx_labs, drop = FALSE) +
+  facet_grid(grp ~ ., scales = "free_y", space = "free_y", labeller = labeller(grp = as_labeller(grp_labs, label_parsed))) +
+  scale_y_discrete(labels = row_labs) +
+  scale_x_continuous(trans = scales::pseudo_log_trans(sigma = 1, base = 10),
+                     breaks = c(-1000, -100, -10, 0, 10, 100, 1000, 10000),
+                     labels = c("\u22121k", "\u2212100", "\u221210", "0", "10", "100", "1k", "10k"), limits = c(-2000, 12000)) +
   scale_colour_trt(guide = "none") + scale_fill_trt(guide = "none") + scale_shape_trt(guide = "none") +
-  labs(x = expression(Season~total~(g~CO[2]~or~CO[2]*"-eq"~m^{-2}*","~log~scale)), y = NULL) +
+  labs(x = expression(Season~total~(g~CO[2]~or~CO[2]*"-eq"~m^{-2}*","~symmetric~log~scale)), y = NULL) +
+  geom_text(data = tibble(grp = factor("CO2", levels = grp_lvl), x = c(-4, 4), hj = c(1, 0),
+                          lab = c("\u2190 from atmosphere or into soil", "to atmosphere \u2192")),
+            aes(x = x, y = Inf, label = lab, hjust = hj), vjust = 1.4, size = 2.2, colour = MUTED) +
   theme(plot.title.position = "plot", panel.grid.major.x = element_line(colour = "grey92", linewidth = 0.25),
-        panel.grid.major.y = element_blank())
-
+        panel.grid.major.y = element_blank(), strip.background = element_blank(),
+        strip.text.y = element_text(angle = 0, hjust = 0, size = 7, colour = MUTED), panel.spacing.y = unit(3, "pt"))
 fig7 <- ((free(pa) | pc) / pd_) + plot_layout(heights = c(1.15, 1)) + tags_pub()
 save_fig(fig7, "fig6_ghg_budget", 180, 140)
 
 # context numbers
-ctx <- mns %>% mutate(val = signif(val, 3)) %>% pivot_wider(names_from = treatment, values_from = val)
-brk <- att_net %>% left_join(amend_c, by = "treatment") %>% mutate(c_input_over_att = val / diff)
+ctx <- mns %>% select(-grp) %>% mutate(val = signif(val, 3)) %>% pivot_wider(names_from = treatment, values_from = val)
+brk <- att_net %>% left_join(amend_c %>% select(treatment, val), by = "treatment") %>% mutate(c_input_over_att = val / diff)
 cat("  context (g CO2-eq m-2):\n"); print(as.data.frame(ctx))
 cat("  amendment C input (as CO2) relative to attributable non-CO2:\n")
 print(as.data.frame(brk %>% mutate(across(where(is.numeric), ~ signif(.x, 3)))))
