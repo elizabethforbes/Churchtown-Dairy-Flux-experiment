@@ -98,6 +98,8 @@ pc <- ggplot() + scale_x_discrete() +
   geom_point(data = ef_ci, aes(period, mean, colour = treatment, shape = treatment, fill = treatment),
              position = position_dodge(0.6), size = 2, stroke = 0.4) +
   scale_colour_trt() + scale_fill_trt() + scale_shape_trt() +
+  scale_y_continuous(trans = scales::pseudo_log_trans(sigma = 0.1, base = 10),
+                     breaks = c(-1, 0, 0.1, 1, 5), labels = c("\u22121", "0", "0.1", "1", "5")) +
   annotate("text", x = 2.62, y = c(1, 0.6), label = c("IPCC 1%", "0.6% (organic N, wet)"),
            vjust = c(-0.3, 1.3), hjust = 0, size = 2.2, colour = INK) +
   coord_cartesian(clip = "off") +
@@ -168,7 +170,7 @@ pd_ <- ggplot() +
   theme(plot.title.position = "plot", panel.grid.major.x = element_line(colour = "grey92", linewidth = 0.25),
         panel.grid.major.y = element_blank(), strip.background = element_blank(),
         strip.text.y = element_blank(), panel.spacing.y = unit(3, "pt"))
-fig7 <- ((free(pa) | pc) / pd_) + plot_layout(heights = c(1.15, 1)) + tags_pub()
+fig7 <- ((free(pa) | pc) + plot_layout(widths = c(1, 1))) / pd_ + plot_layout(heights = c(1.15, 1)) + tags_pub()
 save_fig(fig7, "fig6_ghg_budget", 180, 140)
 
 # context numbers
