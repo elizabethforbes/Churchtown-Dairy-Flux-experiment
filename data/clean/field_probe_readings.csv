@@ -1,0 +1,496 @@
+"date","plot","treatment","collar","time","vwc1","vwc2","vwc3","mean_vwc","soil_temp_c","soil_temp_source","soil_temp_filled_c","uncertain","notes"
+"2025-05-27",1,"slurry","A",NA,17.1,12.5,17.8,15.8,18.4,"measured",18.4,FALSE,NA
+"2025-05-27",1,"slurry","B",NA,16.9,11.2,13.9,14,18.2,"measured",18.2,FALSE,NA
+"2025-05-27",1,"slurry","C",NA,17.3,13.7,12.5,14.5,19.1,"measured",19.1,FALSE,NA
+"2025-05-27",2,"control","A",NA,14.9,15.5,18.3,16.2333333333333,18.4,"measured",18.4,FALSE,NA
+"2025-05-27",2,"control","B",NA,13.9,14.1,16.3,14.7666666666667,18.9,"measured",18.9,FALSE,NA
+"2025-05-27",2,"control","C",NA,13.9,12.4,16,14.1,18.1,"measured",18.1,FALSE,NA
+"2025-05-27",3,"compost","A",NA,19.6,18.7,13.3,17.2,18.6,"measured",18.6,FALSE,NA
+"2025-05-27",3,"compost","B",NA,19.7,14.3,22.8,18.9333333333333,19.5,"measured",19.5,FALSE,NA
+"2025-05-27",3,"compost","C",NA,21.8,16.3,23.4,20.5,18.6,"measured",18.6,FALSE,NA
+"2025-05-27",4,"compost","A",NA,13.2,15.5,14,14.2333333333333,17.8,"measured",17.8,FALSE,NA
+"2025-05-27",4,"compost","B",NA,13.3,19.1,19.2,17.2,17.6,"measured",17.6,FALSE,NA
+"2025-05-27",4,"compost","C",NA,12.6,14.5,11.1,12.7333333333333,18,"measured",18,FALSE,NA
+"2025-05-27",5,"control","A",NA,14.6,14.9,12.9,14.1333333333333,18.8,"measured",18.8,FALSE,"Wrong chamber volume"
+"2025-05-27",5,"control","B",NA,14.8,16.8,14.2,15.2666666666667,18.3,"measured",18.3,FALSE,NA
+"2025-05-27",5,"control","C",NA,14.8,10.5,13.6,12.9666666666667,17.3,"measured",17.3,FALSE,NA
+"2025-05-27",6,"slurry","A",NA,14.2,17.7,24.5,18.8,18.7,"measured",18.7,FALSE,NA
+"2025-05-27",6,"slurry","B",NA,20.3,19.2,18.4,19.3,18.2,"measured",18.2,FALSE,NA
+"2025-05-27",6,"slurry","C",NA,17.8,15.7,12.4,15.3,17.9,"measured",17.9,FALSE,NA
+"2025-05-27",7,"control","A",NA,15.5,14.7,14.1,14.7666666666667,15.7,"measured",15.7,FALSE,NA
+"2025-05-27",7,"control","B",NA,13.3,16.8,12.3,14.1333333333333,15.3,"measured",15.3,FALSE,NA
+"2025-05-27",7,"control","C",NA,14.4,16.3,17.3,16,16.1,"measured",16.1,FALSE,NA
+"2025-05-27",8,"compost","A",NA,14.1,17.9,11.3,14.4333333333333,16.5,"measured",16.5,FALSE,NA
+"2025-05-27",8,"compost","B",NA,15.1,15.6,14.7,15.1333333333333,17.2,"measured",17.2,FALSE,NA
+"2025-05-27",8,"compost","C",NA,11.7,11.3,18.1,13.7,18.3,"measured",18.3,FALSE,NA
+"2025-05-27",9,"compost","A",NA,17.3,16.6,19.6,17.8333333333333,17.2,"measured",17.2,FALSE,NA
+"2025-05-27",9,"compost","B",NA,17.6,13.3,12.5,14.4666666666667,17.6,"measured",17.6,FALSE,NA
+"2025-05-27",9,"compost","C",NA,15.7,18.7,17.3,17.2333333333333,15.8,"measured",15.8,FALSE,NA
+"2025-05-27",10,"control","A",NA,16.1,18.7,18.2,17.6666666666667,15.7,"measured",15.7,FALSE,NA
+"2025-05-27",10,"control","B",NA,16.8,14.8,17.7,16.4333333333333,16.6,"measured",16.6,FALSE,NA
+"2025-05-27",10,"control","C",NA,19.9,17.4,14.2,17.1666666666667,15.5,"measured",15.5,FALSE,NA
+"2025-05-27",11,"slurry","A",NA,14.1,23,18.9,18.6666666666667,16.5,"measured",16.5,FALSE,NA
+"2025-05-27",11,"slurry","B",NA,20.3,14.8,17.8,17.6333333333333,15.4,"measured",15.4,FALSE,NA
+"2025-05-27",11,"slurry","C",NA,16.4,20.9,19.8,19.0333333333333,16.4,"measured",16.4,FALSE,NA
+"2025-05-27",12,"slurry","A",NA,19.7,15.2,13.8,16.2333333333333,14.5,"measured",14.5,FALSE,NA
+"2025-05-27",12,"slurry","B",NA,17.5,18.2,20.6,18.7666666666667,15.6,"measured",15.6,FALSE,NA
+"2025-05-27",12,"slurry","C",NA,23.4,15.5,16.8,18.5666666666667,16,"measured",16,FALSE,NA
+"2025-05-27",13,"slurry","A",NA,16.6,15.7,15.8,16.0333333333333,14.7,"measured",14.7,FALSE,"Took 2 due to soil setting (11:10 AM)"
+"2025-05-27",13,"slurry","B",NA,19.7,16.9,18.6,18.4,NA,"filled_within_campaign",16.83,FALSE,"Took 2 due to soil setting (11:13 AM)"
+"2025-05-27",13,"slurry","C",NA,19.3,20.7,17.5,19.1666666666667,NA,"filled_within_campaign",16.79,FALSE,NA
+"2025-05-27",14,"compost","A",NA,18.9,22.6,19,20.1666666666667,16.3,"measured",16.3,FALSE,NA
+"2025-05-27",14,"compost","B",NA,17.3,18.2,20.2,18.5666666666667,15.3,"measured",15.3,FALSE,NA
+"2025-05-27",14,"compost","C",NA,20.4,16.6,21.7,19.5666666666667,15.4,"measured",15.4,FALSE,NA
+"2025-05-27",15,"control","A",NA,21.1,19.4,15.7,18.7333333333333,15.7,"measured",15.7,FALSE,NA
+"2025-05-27",15,"control","B",NA,19.6,23.8,16.4,19.9333333333333,16.6,"measured",16.6,FALSE,NA
+"2025-05-27",15,"control","C",NA,21.1,16.4,17.2,18.2333333333333,16.5,"measured",16.5,FALSE,NA
+"2025-05-29",1,"slurry","A",NA,16.6,14.5,19.9,17,15.9,"measured",15.9,FALSE,NA
+"2025-05-29",1,"slurry","B",NA,13.3,15.3,15.6,14.7333333333333,16,"measured",16,FALSE,NA
+"2025-05-29",1,"slurry","C",NA,16.2,17.3,18.8,17.4333333333333,16.3,"measured",16.3,FALSE,NA
+"2025-05-29",2,"control","A",NA,15.1,14.6,16.3,15.3333333333333,16.4,"measured",16.4,FALSE,NA
+"2025-05-29",2,"control","B",NA,15.9,13,14.5,14.4666666666667,16.4,"measured",16.4,FALSE,NA
+"2025-05-29",2,"control","C",NA,16.3,15.4,14.4,15.3666666666667,16.5,"measured",16.5,FALSE,NA
+"2025-05-29",3,"compost","A",NA,12.9,16.7,18.6,16.0666666666667,17.8,"measured",17.8,FALSE,NA
+"2025-05-29",3,"compost","B",NA,15.8,15.9,20.6,17.4333333333333,17.4,"measured",17.4,FALSE,NA
+"2025-05-29",3,"compost","C",NA,21.4,17.9,17,18.7666666666667,17.3,"measured",17.3,FALSE,NA
+"2025-05-29",4,"compost","A",NA,13.2,11.6,17.2,14,15.6,"measured",15.6,FALSE,NA
+"2025-05-29",4,"compost","B",NA,14.4,14.4,15.3,14.7,15.9,"measured",15.9,FALSE,NA
+"2025-05-29",4,"compost","C",NA,15.4,12.9,13.9,14.0666666666667,16,"measured",16,FALSE,NA
+"2025-05-29",5,"control","A",NA,12.8,19.7,15.7,16.0666666666667,16,"measured",16,FALSE,NA
+"2025-05-29",5,"control","B",NA,15.1,19,15.9,16.6666666666667,16,"measured",16,FALSE,NA
+"2025-05-29",5,"control","C",NA,14.8,15.2,15.7,15.2333333333333,16.2,"measured",16.2,FALSE,NA
+"2025-05-29",6,"slurry","A",NA,16.9,15.1,16.1,16.0333333333333,17,"measured",17,FALSE,NA
+"2025-05-29",6,"slurry","B",NA,21,19.8,15.1,18.6333333333333,16.9,"measured",16.9,FALSE,NA
+"2025-05-29",6,"slurry","C",NA,19.9,18.2,18.9,19,16.8,"measured",16.8,FALSE,NA
+"2025-05-29",7,"control","A",NA,14.9,14.8,13.9,14.5333333333333,15.8,"measured",15.8,FALSE,NA
+"2025-05-29",7,"control","B",NA,15.2,19.4,15.5,16.7,15.5,"measured",15.5,FALSE,NA
+"2025-05-29",7,"control","C",NA,15.2,16.1,15.4,15.5666666666667,15.7,"measured",15.7,FALSE,NA
+"2025-05-29",8,"compost","A",NA,15.6,17,17.8,16.8,16.2,"measured",16.2,FALSE,NA
+"2025-05-29",8,"compost","B",NA,16.4,17.4,17.6,17.1333333333333,16.1,"measured",16.1,FALSE,NA
+"2025-05-29",8,"compost","C",NA,17.8,19.7,16.7,18.0666666666667,16.4,"measured",16.4,FALSE,NA
+"2025-05-29",9,"compost","A",NA,12.2,16.9,19.1,16.0666666666667,17.1,"measured",17.1,FALSE,NA
+"2025-05-29",9,"compost","B",NA,13.8,15.9,18.4,16.0333333333333,17.3,"measured",17.3,FALSE,NA
+"2025-05-29",9,"compost","C",NA,13.3,13.9,14.1,13.7666666666667,17.5,"measured",17.5,FALSE,NA
+"2025-05-29",10,"control","A",NA,12.5,10.9,13.6,12.3333333333333,16.1,"measured",16.1,FALSE,"Labeled 10C"
+"2025-05-29",10,"control","B",NA,14.5,16.9,16.2,15.8666666666667,16,"measured",16,FALSE,NA
+"2025-05-29",10,"control","C",NA,17.6,13.6,19.3,16.8333333333333,16,"measured",16,FALSE,"Labeled 10Creal"
+"2025-05-29",11,"slurry","A",NA,19.3,17,19,18.4333333333333,16.4,"measured",16.4,FALSE,NA
+"2025-05-29",11,"slurry","B",NA,19.5,18,22.4,19.9666666666667,16.1,"measured",16.1,FALSE,NA
+"2025-05-29",11,"slurry","C",NA,15.1,22.9,18.5,18.8333333333333,16.2,"measured",16.2,FALSE,NA
+"2025-05-29",12,"slurry","A",NA,12.8,14.8,16.4,14.6666666666667,16.5,"measured",16.5,FALSE,NA
+"2025-05-29",12,"slurry","B",NA,15.3,15.1,16,15.4666666666667,16.3,"measured",16.3,FALSE,NA
+"2025-05-29",12,"slurry","C",NA,17.9,22,16.2,18.7,16.8,"measured",16.8,FALSE,NA
+"2025-05-29",13,"slurry","A",NA,11.9,11.6,10.8,11.4333333333333,16.2,"measured",16.2,FALSE,NA
+"2025-05-29",13,"slurry","B",NA,10.2,13.8,20.9,14.9666666666667,16,"measured",16,FALSE,NA
+"2025-05-29",13,"slurry","C",NA,15.1,16.9,15.1,15.7,16.1,"measured",16.1,FALSE,NA
+"2025-05-29",14,"compost","A",NA,13.4,14.6,17.3,15.1,16.4,"measured",16.4,FALSE,NA
+"2025-05-29",14,"compost","B",NA,16.3,14.3,18.3,16.3,16.4,"measured",16.4,FALSE,NA
+"2025-05-29",14,"compost","C",NA,17.3,17.1,16.2,16.8666666666667,16.2,"measured",16.2,FALSE,NA
+"2025-05-29",15,"control","A",NA,15.9,16.6,14.9,15.8,16.9,"measured",16.9,FALSE,NA
+"2025-05-29",15,"control","B",NA,24.5,16.1,12.8,17.8,16.6,"measured",16.6,FALSE,NA
+"2025-05-29",15,"control","C",NA,16.2,15.3,15.5,15.6666666666667,17.2,"measured",17.2,FALSE,NA
+"2025-05-30",1,"slurry","A",NA,15.4,NA,NA,15.4,17.8,"measured",17.8,FALSE,NA
+"2025-05-30",1,"slurry","B",NA,11.8,NA,NA,11.8,18.2,"measured",18.2,FALSE,NA
+"2025-05-30",1,"slurry","C",NA,17.9,NA,NA,17.9,18.3,"measured",18.3,FALSE,NA
+"2025-05-30",2,"control","A",NA,12.3,NA,NA,12.3,18.7,"measured",18.7,FALSE,NA
+"2025-05-30",2,"control","B",NA,13.3,NA,NA,13.3,18.6,"measured",18.6,FALSE,NA
+"2025-05-30",2,"control","C",NA,12.5,NA,NA,12.5,19.8,"measured",19.8,FALSE,NA
+"2025-05-30",3,"compost","A",NA,17.5,NA,NA,17.5,17.9,"measured",17.9,FALSE,"FIRST"
+"2025-05-30",3,"compost","B",NA,18.5,NA,NA,18.5,18.4,"measured",18.4,FALSE,NA
+"2025-05-30",3,"compost","C",NA,17.3,NA,NA,17.3,17.8,"measured",17.8,FALSE,NA
+"2025-05-30",4,"compost","A",NA,14.8,NA,NA,14.8,18,"measured",18,FALSE,NA
+"2025-05-30",4,"compost","B",NA,10.2,NA,NA,10.2,17.9,"measured",17.9,FALSE,"Used wrong ht - 6.78"
+"2025-05-30",4,"compost","C",NA,14.1,NA,NA,14.1,18.3,"measured",18.3,FALSE,NA
+"2025-05-30",5,"control","A",NA,10.4,NA,NA,10.4,18.9,"measured",18.9,FALSE,NA
+"2025-05-30",5,"control","B",NA,10.7,NA,NA,10.7,18.1,"measured",18.1,FALSE,NA
+"2025-05-30",5,"control","C",NA,11.9,NA,NA,11.9,18.5,"measured",18.5,FALSE,NA
+"2025-05-30",6,"slurry","A",NA,19.6,NA,NA,19.6,18.5,"measured",18.5,FALSE,NA
+"2025-05-30",6,"slurry","B",NA,12.3,NA,NA,12.3,18.2,"measured",18.2,FALSE,NA
+"2025-05-30",6,"slurry","C",NA,19.4,NA,NA,19.4,18.4,"measured",18.4,FALSE,NA
+"2025-05-30",7,"control","A",NA,10.7,NA,NA,10.7,19.8,"measured",19.8,FALSE,NA
+"2025-05-30",7,"control","B",NA,8.9,NA,NA,8.9,18.7,"measured",18.7,FALSE,NA
+"2025-05-30",7,"control","C",NA,15.4,NA,NA,15.4,18.2,"measured",18.2,FALSE,NA
+"2025-05-30",8,"compost","A",NA,12.7,NA,NA,12.7,19.6,"measured",19.6,FALSE,NA
+"2025-05-30",8,"compost","B",NA,13.8,NA,NA,13.8,18.9,"measured",18.9,FALSE,NA
+"2025-05-30",8,"compost","C",NA,15.7,NA,NA,15.7,20.3,"measured",20.3,FALSE,NA
+"2025-05-30",9,"compost","A",NA,13.2,NA,NA,13.2,19.2,"measured",19.2,FALSE,NA
+"2025-05-30",9,"compost","B",NA,14.5,NA,NA,14.5,18.5,"measured",18.5,FALSE,NA
+"2025-05-30",9,"compost","C",NA,16.9,NA,NA,16.9,19.5,"measured",19.5,FALSE,NA
+"2025-05-30",10,"control","A",NA,12,NA,NA,12,18.6,"measured",18.6,FALSE,"Ran 4x"
+"2025-05-30",10,"control","B",NA,12.3,NA,NA,12.3,18.8,"measured",18.8,FALSE,NA
+"2025-05-30",10,"control","C",NA,14.4,NA,NA,14.4,18.9,"measured",18.9,FALSE,NA
+"2025-05-30",11,"slurry","A",NA,10.7,NA,NA,10.7,20.3,"measured",20.3,FALSE,NA
+"2025-05-30",11,"slurry","B",NA,12.9,NA,NA,12.9,18.8,"measured",18.8,FALSE,NA
+"2025-05-30",11,"slurry","C",NA,18.2,NA,NA,18.2,18.7,"measured",18.7,FALSE,NA
+"2025-05-30",12,"slurry","A",NA,16,NA,NA,16,19.4,"measured",19.4,FALSE,NA
+"2025-05-30",12,"slurry","B",NA,16.6,NA,NA,16.6,18.3,"measured",18.3,FALSE,NA
+"2025-05-30",12,"slurry","C",NA,15.8,NA,NA,15.8,19.4,"measured",19.4,FALSE,NA
+"2025-05-30",13,"slurry","A",NA,16.3,NA,NA,16.3,20.7,"measured",20.7,FALSE,NA
+"2025-05-30",13,"slurry","B",NA,14.2,NA,NA,14.2,19.4,"measured",19.4,FALSE,"Ran twice, + CH4 flux"
+"2025-05-30",13,"slurry","C",NA,13.2,NA,NA,13.2,20.4,"measured",20.4,FALSE,NA
+"2025-05-30",14,"compost","A",NA,12.7,NA,NA,12.7,19.4,"measured",19.4,FALSE,NA
+"2025-05-30",14,"compost","B",NA,16.3,NA,NA,16.3,19.4,"measured",19.4,FALSE,NA
+"2025-05-30",14,"compost","C",NA,11.9,NA,NA,11.9,19.9,"measured",19.9,FALSE,NA
+"2025-05-30",15,"control","A",NA,12.2,NA,NA,12.2,20,"measured",20,FALSE,NA
+"2025-05-30",15,"control","B",NA,15.3,NA,NA,15.3,21.1,"measured",21.1,FALSE,NA
+"2025-05-30",15,"control","C",NA,16.5,NA,NA,16.5,21.2,"measured",21.2,FALSE,NA
+"2025-06-03",1,"slurry","A",NA,29.9,NA,NA,29.9,18.8,"measured",18.8,FALSE,"Last"
+"2025-06-03",1,"slurry","B",NA,17.6,NA,NA,17.6,19.4,"measured",19.4,FALSE,NA
+"2025-06-03",1,"slurry","C",NA,22.7,NA,NA,22.7,19.4,"measured",19.4,FALSE,NA
+"2025-06-03",2,"control","A",NA,22.1,NA,NA,22.1,18.2,"measured",18.2,FALSE,NA
+"2025-06-03",2,"control","B",NA,23.4,NA,NA,23.4,18,"measured",18,FALSE,NA
+"2025-06-03",2,"control","C",NA,14.9,NA,NA,14.9,17.5,"measured",17.5,FALSE,NA
+"2025-06-03",3,"compost","A",NA,28,NA,NA,28,20.6,"measured",20.6,FALSE,NA
+"2025-06-03",3,"compost","B",NA,25.4,NA,NA,25.4,18.6,"measured",18.6,FALSE,NA
+"2025-06-03",3,"compost","C",NA,27.6,NA,NA,27.6,17.9,"measured",17.9,FALSE,NA
+"2025-06-03",4,"compost","A",NA,16.4,NA,NA,16.4,18,"measured",18,FALSE,NA
+"2025-06-03",4,"compost","B",NA,20.9,NA,NA,20.9,18.4,"measured",18.4,FALSE,"Mislabeled ""C"", wrong height"
+"2025-06-03",4,"compost","C",NA,20.1,NA,NA,20.1,19,"measured",19,FALSE,"Mislabeled ""B"""
+"2025-06-03",5,"control","A",NA,19.2,NA,NA,19.2,18.7,"measured",18.7,FALSE,NA
+"2025-06-03",5,"control","B",NA,20.8,NA,NA,20.8,17.4,"measured",17.4,FALSE,NA
+"2025-06-03",5,"control","C",NA,22.6,NA,NA,22.6,17.7,"measured",17.7,FALSE,NA
+"2025-06-03",6,"slurry","A",NA,21.9,NA,NA,21.9,16.3,"measured",16.3,FALSE,NA
+"2025-06-03",6,"slurry","B",NA,26,NA,NA,26,17.2,"measured",17.2,FALSE,NA
+"2025-06-03",6,"slurry","C",NA,27.7,NA,NA,27.7,17.2,"measured",17.2,FALSE,NA
+"2025-06-03",7,"control","A",NA,18.6,NA,NA,18.6,18.2,"measured",18.2,FALSE,NA
+"2025-06-03",7,"control","B",NA,15.8,NA,NA,15.8,18.1,"measured",18.1,FALSE,NA
+"2025-06-03",7,"control","C",NA,22.7,NA,NA,22.7,18.9,"measured",18.9,FALSE,NA
+"2025-06-03",8,"compost","A",NA,20.9,NA,NA,20.9,18.4,"measured",18.4,FALSE,NA
+"2025-06-03",8,"compost","B",NA,22.8,NA,NA,22.8,17.7,"measured",17.7,FALSE,NA
+"2025-06-03",8,"compost","C",NA,18.8,NA,NA,18.8,19.1,"measured",19.1,FALSE,NA
+"2025-06-03",9,"compost","A",NA,28.2,NA,NA,28.2,16.8,"measured",16.8,FALSE,NA
+"2025-06-03",9,"compost","B",NA,27.9,NA,NA,27.9,17,"measured",17,FALSE,NA
+"2025-06-03",9,"compost","C",NA,19.6,NA,NA,19.6,17.5,"measured",17.5,FALSE,NA
+"2025-06-03",10,"control","A",NA,25.5,NA,NA,25.5,17.8,"measured",17.8,FALSE,NA
+"2025-06-03",10,"control","B",NA,23.4,NA,NA,23.4,18.5,"measured",18.5,FALSE,NA
+"2025-06-03",10,"control","C",NA,19.7,NA,NA,19.7,18.8,"measured",18.8,FALSE,NA
+"2025-06-03",11,"slurry","A",NA,20.3,NA,NA,20.3,17.5,"measured",17.5,FALSE,NA
+"2025-06-03",11,"slurry","B",NA,23.5,NA,NA,23.5,17.1,"measured",17.1,FALSE,"Error - re-connected"
+"2025-06-03",11,"slurry","C",NA,27,NA,NA,27,17.7,"measured",17.7,FALSE,NA
+"2025-06-03",12,"slurry","A",NA,26.9,NA,NA,26.9,16.2,"measured",16.2,FALSE,NA
+"2025-06-03",12,"slurry","B",NA,26.6,NA,NA,26.6,15.6,"measured",15.6,FALSE,NA
+"2025-06-03",12,"slurry","C",NA,24.4,NA,NA,24.4,16.6,"measured",16.6,FALSE,NA
+"2025-06-03",13,"slurry","A",NA,18,NA,NA,18,18.4,"measured",18.4,FALSE,NA
+"2025-06-03",13,"slurry","B",NA,21.7,NA,NA,21.7,18.2,"measured",18.2,FALSE,"Still has + CH4 flux!"
+"2025-06-03",13,"slurry","C",NA,20.7,NA,NA,20.7,19.1,"measured",19.1,FALSE,NA
+"2025-06-03",14,"compost","A",NA,24.4,NA,NA,24.4,18,"measured",18,FALSE,NA
+"2025-06-03",14,"compost","B",NA,21.5,NA,NA,21.5,18.8,"measured",18.8,FALSE,"Error; re-connected"
+"2025-06-03",14,"compost","C",NA,21.4,NA,NA,21.4,19.5,"measured",19.5,FALSE,NA
+"2025-06-03",15,"control","A",NA,24.9,NA,NA,24.9,16.4,"measured",16.4,FALSE,"First"
+"2025-06-03",15,"control","B",NA,26.9,NA,NA,26.9,17.1,"measured",17.1,FALSE,"Error; zero - re-ran"
+"2025-06-03",15,"control","C",NA,29.4,NA,NA,29.4,17,"measured",17,FALSE,NA
+"2025-06-19",1,"slurry","A","1:59",32.4,NA,NA,32.4,22.1,"measured",22.1,FALSE,"temp: a digit before final 1 crossed out (illegible); date written 6-1[crossed digit]9"
+"2025-06-19",1,"slurry","B","2:02",25.9,NA,NA,25.9,22.6,"measured",22.6,FALSE,"temp: a digit before final 6 crossed out (illegible)"
+"2025-06-19",1,"slurry","C","2:05",23.4,NA,NA,23.4,22.8,"measured",22.8,FALSE,""
+"2025-06-19",2,"control","A","1:47",27.9,NA,NA,27.9,23.6,"measured",23.6,FALSE,"restarted (2X)"
+"2025-06-19",2,"control","B","1:52",22.8,NA,NA,22.8,22.8,"measured",22.8,FALSE,""
+"2025-06-19",2,"control","C","1:55",25.9,NA,NA,25.9,23.3,"measured",23.3,FALSE,""
+"2025-06-19",3,"compost","A","1:37",30.5,NA,NA,30.5,23.5,"measured",23.5,FALSE,""
+"2025-06-19",3,"compost","B","1:40",33.8,NA,NA,33.8,22.7,"measured",22.7,FALSE,"pos. CH4"
+"2025-06-19",3,"compost","C","1:43",30.9,NA,NA,30.9,22.3,"measured",22.3,FALSE,"temp: 4 crossed out, replaced by 3"
+"2025-06-19",4,"compost","A","2:31",28.3,NA,NA,28.3,22.3,"measured",22.3,FALSE,""
+"2025-06-19",4,"compost","B","2:35",23.4,NA,NA,23.4,22.9,"measured",22.9,FALSE,""
+"2025-06-19",4,"compost","C","2:38",28.4,NA,NA,28.4,23,"measured",23,FALSE,"DONE"
+"2025-06-19",5,"control","A","2:22",27.2,NA,NA,27.2,23.1,"measured",23.1,FALSE,""
+"2025-06-19",5,"control","B","2:25",26.1,NA,NA,26.1,21.7,"measured",21.7,FALSE,""
+"2025-06-19",5,"control","C","2:28",25.1,NA,NA,25.1,23.1,"measured",23.1,FALSE,""
+"2025-06-19",6,"slurry","A","2:11",26.3,NA,NA,26.3,22.6,"measured",22.6,FALSE,""
+"2025-06-19",6,"slurry","B","2:14",32,NA,NA,32,22.7,"measured",22.7,FALSE,"pulled up; stamped back in; printed depth 7.475 crossed out and 6.75 handwritten; temp: 8 crossed out, replaced by 7"
+"2025-06-19",6,"slurry","C","2:18",25.7,NA,NA,25.7,22.3,"measured",22.3,FALSE,""
+"2025-06-19",7,"control","A","11:45",23.6,NA,NA,23.6,20.8,"measured",20.8,FALSE,"START"
+"2025-06-19",7,"control","B","11:48",29.7,NA,NA,29.7,21.3,"measured",21.3,FALSE,"temp: 4 crossed out, replaced by 3"
+"2025-06-19",7,"control","C","11:52",25.5,NA,NA,25.5,21.1,"measured",21.1,FALSE,""
+"2025-06-19",8,"compost","A","11:57",28.9,NA,NA,28.9,21.3,"measured",21.3,FALSE,"temp: digit (4?) crossed out, replaced by 3"
+"2025-06-19",8,"compost","B","12:01",27.8,NA,NA,27.8,21.8,"measured",21.8,FALSE,""
+"2025-06-19",8,"compost","C","12:04",31.2,NA,NA,31.2,21.8,"measured",21.8,FALSE,"v. high!"
+"2025-06-19",9,"compost","A","12:12",30.2,NA,NA,30.2,21.8,"measured",21.8,FALSE,""
+"2025-06-19",9,"compost","B","12:09",30.3,NA,NA,30.3,21.9,"measured",21.9,FALSE,""
+"2025-06-19",9,"compost","C","12:16",25.4,NA,NA,25.4,21.5,"measured",21.5,FALSE,"x2, leak in 1st"
+"2025-06-19",10,"control","A","12:45?",24.6,NA,NA,24.6,21.7,"measured",21.7,TRUE,"forgot to get time; time written with '?'"
+"2025-06-19",10,"control","B","12:52",25.1,NA,NA,25.1,22.3,"measured",22.3,FALSE,""
+"2025-06-19",10,"control","C","12:55",28.2,NA,NA,28.2,21.6,"measured",21.6,FALSE,""
+"2025-06-19",11,"slurry","A","12:36",33.8,NA,NA,33.8,21.5,"measured",21.5,FALSE,"temp: digit (6?) crossed out, replaced by 5"
+"2025-06-19",11,"slurry","B","12:43",27.9,NA,NA,27.9,21.5,"measured",21.5,FALSE,""
+"2025-06-19",11,"slurry","C","12:40",30.3,NA,NA,30.3,22,"measured",22,FALSE,""
+"2025-06-19",12,"slurry","A","12:28",29.1,NA,NA,29.1,21.3,"measured",21.3,FALSE,""
+"2025-06-19",12,"slurry","B","12:31",25.7,NA,NA,25.7,20.6,"measured",20.6,FALSE,""
+"2025-06-19",12,"slurry","C","12:24",31.7,NA,NA,31.7,21.5,"measured",21.5,FALSE,""
+"2025-06-19",13,"slurry","A","1:03",24.6,NA,NA,24.6,22.7,"measured",22.7,FALSE,""
+"2025-06-19",13,"slurry","B","1:06",25.1,NA,NA,25.1,22,"measured",22,FALSE,"pos. CH4"
+"2025-06-19",13,"slurry","C","1:09",21.9,NA,NA,21.9,22.4,"measured",22.4,FALSE,""
+"2025-06-19",14,"compost","A","1:14",30.3,NA,NA,30.3,23.8,"measured",23.8,FALSE,""
+"2025-06-19",14,"compost","B","1:18",30.8,NA,NA,30.8,23.7,"measured",23.7,TRUE,""
+"2025-06-19",14,"compost","C","1:21",28.5,NA,NA,28.5,23.9,"measured",23.9,FALSE,""
+"2025-06-19",15,"control","A","1:25",30,NA,NA,30,22.5,"measured",22.5,FALSE,""
+"2025-06-19",15,"control","B","1:28",32.3,NA,NA,32.3,23.2,"measured",23.2,FALSE,""
+"2025-06-19",15,"control","C","1:31",27.9,NA,NA,27.9,24.1,"measured",24.1,FALSE,""
+"2025-07-09",1,"slurry","A","3:03",9.7,NA,NA,9.7,25.3,"measured",25.3,FALSE,"original time scribbled out (illegible); 3:03 written above column header with arrow; temp: 7 crossed out, replaced by 3; sheet header 'JULY 9 2025 EF'"
+"2025-07-09",1,"slurry","B","3:07",11.3,NA,NA,11.3,25.5,"measured",25.5,FALSE,""
+"2025-07-09",1,"slurry","C","3:10",14,NA,NA,14,26.1,"measured",26.1,FALSE,""
+"2025-07-09",2,"control","A","2:50",9.4,NA,NA,9.4,28.3,"measured",28.3,FALSE,""
+"2025-07-09",2,"control","B","2:53",12.8,NA,NA,12.8,27.3,"measured",27.3,TRUE,"temp: two earlier values scribbled out (illegible; possibly 26.8 and 28.3), 27.3 written small at left; VWC: earlier value scribbled out (illegible)"
+"2025-07-09",2,"control","C","2:57",8.7,NA,NA,8.7,26.8,"measured",26.8,FALSE,""
+"2025-07-09",3,"compost","A","1:05",16,NA,NA,16,24.2,"measured",24.2,FALSE,""
+"2025-07-09",3,"compost","B","1:09",10.7,NA,NA,10.7,25,"measured",25,FALSE,""
+"2025-07-09",3,"compost","C","1:12",13.6,NA,NA,13.6,24.2,"measured",24.2,FALSE,""
+"2025-07-09",4,"compost","A","3:14",6.5,NA,NA,6.5,26.3,"measured",26.3,FALSE,""
+"2025-07-09",4,"compost","B","3:17",7.4,NA,NA,7.4,26.3,"measured",26.3,FALSE,""
+"2025-07-09",4,"compost","C","3:21",8.9,NA,NA,8.9,26.3,"measured",26.3,FALSE,""
+"2025-07-09",5,"control","A","2:39",9.7,NA,NA,9.7,26.4,"measured",26.4,FALSE,"VWC: earlier value scribbled out (illegible, possibly 9.3)"
+"2025-07-09",5,"control","B","2:43",12.4,NA,NA,12.4,25,"measured",25,FALSE,""
+"2025-07-09",5,"control","C","2:46",13.1,NA,NA,13.1,27.3,"measured",27.3,FALSE,""
+"2025-07-09",6,"slurry","A","1:19",17.2,NA,NA,17.2,24.6,"measured",24.6,FALSE,"temp: digit (7?) crossed out, replaced by 6"
+"2025-07-09",6,"slurry","B","1:22",9.5,NA,NA,9.5,24.4,"measured",24.4,FALSE,""
+"2025-07-09",6,"slurry","C","1:26",13,NA,NA,13,24.3,"measured",24.3,FALSE,""
+"2025-07-09",7,"control","A","3:24",6.2,NA,NA,6.2,26.1,"measured",26.1,FALSE,""
+"2025-07-09",7,"control","B","3:27",9.7,NA,NA,9.7,24.8,"measured",24.8,FALSE,""
+"2025-07-09",7,"control","C","3:30",11.6,NA,NA,11.6,25.8,"measured",25.8,FALSE,""
+"2025-07-09",8,"compost","A","2:26",13.8,NA,NA,13.8,25.4,"measured",25.4,FALSE,""
+"2025-07-09",8,"compost","B","2:30",16.2,NA,NA,16.2,25.7,"measured",25.7,TRUE,"x2"
+"2025-07-09",8,"compost","C","2:35",6.3,NA,NA,6.3,26,"measured",26,FALSE,""
+"2025-07-09",9,"compost","A","1:30",8.3,NA,NA,8.3,24.5,"measured",24.5,FALSE,""
+"2025-07-09",9,"compost","B","1:34",10.7,NA,NA,10.7,25.3,"measured",25.3,FALSE,""
+"2025-07-09",9,"compost","C","1:36",9.9,NA,NA,9.9,24.6,"measured",24.6,FALSE,""
+"2025-07-09",10,"control","A","3:36",13.9,NA,NA,13.9,25.6,"measured",25.6,FALSE,"temp: 8 crossed out, replaced by 6"
+"2025-07-09",10,"control","B","3:39",14.2,NA,NA,14.2,25.7,"measured",25.7,FALSE,""
+"2025-07-09",10,"control","C","3:42",8.2,NA,NA,8.2,24.8,"measured",24.8,FALSE,""
+"2025-07-09",11,"slurry","A","2:15",14.1,NA,NA,14.1,25.1,"measured",25.1,FALSE,""
+"2025-07-09",11,"slurry","B","2:18",13.7,NA,NA,13.7,24.6,"measured",24.6,FALSE,""
+"2025-07-09",11,"slurry","C","2:21",10.7,NA,NA,10.7,26.3,"measured",26.3,FALSE,""
+"2025-07-09",12,"slurry","A","1:41",7.8,NA,NA,7.8,24,"measured",24,TRUE,"temp decimal digit heavily overwritten as 0"
+"2025-07-09",12,"slurry","B","1:47",11.2,NA,NA,11.2,24.4,"measured",24.4,FALSE,""
+"2025-07-09",12,"slurry","C","1:44",12,NA,NA,12,24.4,"measured",24.4,FALSE,"VWC: leading digit crossed out (illegible)"
+"2025-07-09",13,"slurry","A","3:46",7.9,NA,NA,7.9,25.7,"measured",25.7,FALSE,""
+"2025-07-09",13,"slurry","B","3:49",7.8,NA,NA,7.8,26,"measured",26,TRUE,""
+"2025-07-09",13,"slurry","C","3:52",11.2,NA,NA,11.2,25.8,"measured",25.8,FALSE,""
+"2025-07-09",14,"compost","A","2:03",14.5,NA,NA,14.5,26.5,"measured",26.5,FALSE,""
+"2025-07-09",14,"compost","B","2:10",12.2,NA,NA,12.2,25.4,"measured",25.4,FALSE,""
+"2025-07-09",14,"compost","C","2:07",10.2,NA,NA,10.2,26.1,"measured",26.1,FALSE,"temp: 2 crossed out, replaced by 1"
+"2025-07-09",15,"control","A","1:51",14.1,NA,NA,14.1,26.4,"measured",26.4,FALSE,""
+"2025-07-09",15,"control","B","1:55",13.6,NA,NA,13.6,25.3,"measured",25.3,FALSE,""
+"2025-07-09",15,"control","C","1:58",13.6,NA,NA,13.6,25.8,"measured",25.8,FALSE,""
+"2025-07-23",1,"slurry","A","1:08",6.8,NA,NA,6.8,21.5,"measured",21.5,FALSE,""
+"2025-07-23",1,"slurry","B","1:11",3.9,NA,NA,3.9,22,"measured",22,FALSE,"temp: a leading 8 crossed out before 22.0"
+"2025-07-23",1,"slurry","C","1:15",4.1,NA,NA,4.1,21.7,"measured",21.7,FALSE,""
+"2025-07-23",2,"control","A","1:18",6.2,NA,NA,6.2,22.8,"measured",22.8,FALSE,""
+"2025-07-23",2,"control","B","1:22",5.7,NA,NA,5.7,21.9,"measured",21.9,FALSE,""
+"2025-07-23",2,"control","C","1:25",6,NA,NA,6,22.3,"measured",22.3,FALSE,""
+"2025-07-23",3,"compost","A","",NA,NA,NA,NA,NA,"filled_within_campaign",22.45,TRUE,"*; time scribbled out with no replacement (illegible); VWC: earlier value scribbled out, replaced by 5.9; handwritten scribbles over printed plot number 3 (rows 3A-3C)"
+"2025-07-23",3,"compost","B","3:41",9.6,NA,NA,9.6,NA,"filled_within_campaign",22.34,TRUE,"*; time: 3:41 written (starts in date column) with trailing characters crossed out; VWC: earlier value scribbled out, replaced by 9.6; handwritten scribbles over printed plot number 3"
+"2025-07-23",3,"compost","C","3:38",7.9,NA,NA,7.9,NA,"filled_within_campaign",22.38,TRUE,"*; collar a bit loose; VWC: earlier value scribbled out, replaced by 7.9; handwritten scribbles over printed plot number 3"
+"2025-07-23",4,"compost","A","12:57",4.9,NA,NA,4.9,22.1,"measured",22.1,FALSE,""
+"2025-07-23",4,"compost","B","1:01",6.8,NA,NA,6.8,22,"measured",22,FALSE,""
+"2025-07-23",4,"compost","C","1:04",5.8,NA,NA,5.8,21.9,"measured",21.9,FALSE,""
+"2025-07-23",5,"control","A","1:29",3.7,NA,NA,3.7,22.5,"measured",22.5,FALSE,"VWC: earlier values scribbled out and circled (illegible); 3.7 written to the right with arrow"
+"2025-07-23",5,"control","B","1:32",6.9,NA,NA,6.9,22.6,"measured",22.6,FALSE,"VWC: earlier value scribbled out (illegible)"
+"2025-07-23",5,"control","C","1:36",4.4,NA,NA,4.4,23.2,"measured",23.2,FALSE,""
+"2025-07-23",6,"slurry","A","3:24",5.2,NA,NA,5.2,NA,"filled_within_campaign",22.66,TRUE,"*; VWC: middle digit crossed out (5.[x]2); handwritten scribbles over printed plot number 6 (rows 6A-6C)"
+"2025-07-23",6,"slurry","B","3:28",5.5,NA,NA,5.5,NA,"filled_within_campaign",22.61,TRUE,"*; had been pulled 4 wks ago; VWC: earlier value scribbled out, replaced by 5.5; 6.75 handwritten beside printed depth 7.475; handwritten scribbles over printed plot number 6"
+"2025-07-23",6,"slurry","C","3:31",7.8,NA,NA,7.8,NA,"filled_within_campaign",22.54,TRUE,"*; handwritten scribbles over printed plot number 6"
+"2025-07-23",7,"control","A","12:45",4.8,NA,NA,4.8,21.9,"measured",21.9,FALSE,"temp: earlier value scribbled out (illegible), 21.9 written small to the right"
+"2025-07-23",7,"control","B","12:49",5.9,NA,NA,5.9,20.8,"measured",20.8,FALSE,""
+"2025-07-23",7,"control","C","12:53",6.8,NA,NA,6.8,21.1,"measured",21.1,FALSE,""
+"2025-07-23",8,"compost","A","",6.3,NA,NA,6.3,22.7,"measured",22.7,FALSE,"POOP IN PLOT (bear? dee[r?] [text continues off sheet edge]; time written as a dash (missing)"
+"2025-07-23",8,"compost","B","1:44",6.6,NA,NA,6.6,22.3,"measured",22.3,FALSE,"x2, 1:50"
+"2025-07-23",8,"compost","C","1:47",5.4,NA,NA,5.4,22.4,"measured",22.4,FALSE,""
+"2025-07-23",9,"compost","A","2:40",5.3,NA,NA,5.3,23.7,"measured",23.7,FALSE,""
+"2025-07-23",9,"compost","B","2:43",4.7,NA,NA,4.7,22.7,"measured",22.7,FALSE,""
+"2025-07-23",9,"compost","C","2:48",7.4,NA,NA,7.4,NA,"filled_within_campaign",22.36,FALSE,"*; x2; sheet header note '* temp probe broken'"
+"2025-07-23",10,"control","A","12:32",4.8,NA,NA,4.8,22.5,"measured",22.5,FALSE,""
+"2025-07-23",10,"control","B","12:37",8.4,NA,NA,8.4,21.8,"measured",21.8,TRUE,""
+"2025-07-23",10,"control","C","12:41",6.9,NA,NA,6.9,21.4,"measured",21.4,FALSE,""
+"2025-07-23",11,"slurry","A","1:55",6.1,NA,NA,6.1,22.7,"measured",22.7,FALSE,""
+"2025-07-23",11,"slurry","B","2:03",6.5,NA,NA,6.5,21.9,"measured",21.9,FALSE,""
+"2025-07-23",11,"slurry","C","1:59",6.2,NA,NA,6.2,22.1,"measured",22.1,FALSE,""
+"2025-07-23",12,"slurry","A","2:29",6.5,NA,NA,6.5,21.8,"measured",21.8,FALSE,"VWC: earlier value scribbled out (illegible), 6.5 written small to the right"
+"2025-07-23",12,"slurry","B","2:32",6.8,NA,NA,6.8,21.8,"measured",21.8,FALSE,"VWC: a digit crossed out (6.[x]8); temp decimal 8 overwritten/retraced"
+"2025-07-23",12,"slurry","C","2:36",8.1,NA,NA,8.1,23.1,"measured",23.1,TRUE,"time: original scribbled out (illegible), 2:36 written small to the right; date 'July 23' written in this row with arrows up and down"
+"2025-07-23",13,"slurry","A","12:22",8.8,NA,NA,8.8,21.3,"measured",21.3,FALSE,""
+"2025-07-23",13,"slurry","B","12:25",7.3,NA,NA,7.3,22.8,"measured",22.8,FALSE,""
+"2025-07-23",13,"slurry","C","12:28",8.1,NA,NA,8.1,22.3,"measured",22.3,FALSE,""
+"2025-07-23",14,"compost","A","2:07",6.5,NA,NA,6.5,23.2,"measured",23.2,FALSE,""
+"2025-07-23",14,"compost","B","2:13",4.7,NA,NA,4.7,21.8,"measured",21.8,FALSE,""
+"2025-07-23",14,"compost","C","2:10",6,NA,NA,6,22.5,"measured",22.5,FALSE,""
+"2025-07-23",15,"control","A","2:17",8.5,NA,NA,8.5,22.8,"measured",22.8,FALSE,""
+"2025-07-23",15,"control","B","2:21",6.6,NA,NA,6.6,24.1,"measured",24.1,FALSE,"time written with a period (2.21)"
+"2025-07-23",15,"control","C","2:24",8.3,NA,NA,8.3,23.1,"measured",23.1,TRUE,""
+"2025-08-22",1,"slurry","A","2:25",11.7,NA,NA,11.7,NA,"filled_whole_campaign",22.56,FALSE,"x2 written above check mark; scribbled-out mark then '+12.75' under handwritten header 'CO2 f umol' and '-0.51' under 'CH4 f nmol'; page header annotations '2025' and a squiggle; soil_temp written as dash (missing)"
+"2025-08-22",1,"slurry","B","2:31",13.8,NA,NA,13.8,NA,"filled_whole_campaign",22.39,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",1,"slurry","C","2:35",10.3,NA,NA,10.3,NA,"filled_whole_campaign",22.27,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",2,"control","A","2:46",12.7,NA,NA,12.7,NA,"filled_whole_campaign",22.09,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",2,"control","B","2:39",16.7,NA,NA,16.7,NA,"filled_whole_campaign",22.2,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",2,"control","C","2:43",11.7,NA,NA,11.7,NA,"filled_whole_campaign",22.16,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",3,"compost","A","2:51",17.9,NA,NA,17.9,NA,"filled_whole_campaign",22.07,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",3,"compost","B","2:58",23,NA,NA,23,NA,"filled_whole_campaign",21.95,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",3,"compost","C","2:55",16.8,NA,NA,16.8,NA,"filled_whole_campaign",22,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",4,"compost","A","3:22",11.6,NA,NA,11.6,NA,"filled_whole_campaign",21.92,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",4,"compost","B","3:25",14.9,NA,NA,14.9,NA,"filled_whole_campaign",21.84,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",4,"compost","C","3:29",14.6,NA,NA,14.6,NA,"filled_whole_campaign",21.79,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",5,"control","A","3:12",11.6,NA,NA,11.6,NA,"filled_whole_campaign",21.75,FALSE,"time: earlier value scribbled out (illegible), replaced with 3:12; notes: scribble then check mark; soil_temp written as dash (missing)"
+"2025-08-22",5,"control","B","3:15",12.1,NA,NA,12.1,NA,"filled_whole_campaign",21.75,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",5,"control","C","3:18",13.7,NA,NA,13.7,NA,"filled_whole_campaign",21.81,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",6,"slurry","A","3:01",17.6,NA,NA,17.6,NA,"filled_whole_campaign",21.91,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",6,"slurry","B","3:05",16.8,NA,NA,16.8,NA,"filled_whole_campaign",21.81,TRUE,"mean_depth: printed value scribbled out (illegible; on the 10 Sept sheet the printed 6B value is 7.475), handwritten 6.75; check mark; 'the one that had been pulled' followed by a short word below the line (possibly '2nd'); soil_temp written as dash (missing)"
+"2025-08-22",6,"slurry","C","3:08",21.4,NA,NA,21.4,NA,"filled_whole_campaign",21.72,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",7,"control","A","3:32",12.7,NA,NA,12.7,NA,"filled_whole_campaign",21.8,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",7,"control","B","3:36",10.9,NA,NA,10.9,NA,"filled_whole_campaign",21.79,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",7,"control","C","3:39",14.8,NA,NA,14.8,NA,"filled_whole_campaign",21.72,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",8,"compost","A","3:44",13.6,NA,NA,13.6,NA,"filled_whole_campaign",21.75,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",8,"compost","B","3:47",13.7,NA,NA,13.7,NA,"filled_whole_campaign",21.77,FALSE,"check mark with small extra mark; soil_temp written as dash (missing)"
+"2025-08-22",8,"compost","C","3:50",12.1,NA,NA,12.1,NA,"filled_whole_campaign",21.75,FALSE,"date '22 Aug.' written once with down-arrow; check mark; soil_temp written as dash (missing)"
+"2025-08-22",9,"compost","A","3:54",11.8,NA,NA,11.8,NA,"filled_whole_campaign",21.77,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",9,"compost","B","3:57",13,NA,NA,13,NA,"filled_whole_campaign",21.81,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",9,"compost","C","4:00",10.5,NA,NA,10.5,NA,"filled_whole_campaign",21.86,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",10,"control","A","4.24",12.7,NA,NA,12.7,NA,"filled_whole_campaign",21.45,FALSE,"check mark; soil_temp written as dash (missing); time written with '.' not ':'"
+"2025-08-22",10,"control","B","4:27",13.9,NA,NA,13.9,NA,"filled_whole_campaign",21.4,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",10,"control","C","4:31",17.9,NA,NA,17.9,NA,"filled_whole_campaign",21.38,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",11,"slurry","A","4:14",17.2,NA,NA,17.2,NA,"filled_whole_campaign",21.61,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",11,"slurry","B","4.17",12,NA,NA,12,NA,"filled_whole_campaign",21.58,FALSE,"check mark; soil_temp written as dash (missing); time written with '.' not ':'; VWC written with slashed zero (12.Ø)"
+"2025-08-22",11,"slurry","C","4:21",18.9,NA,NA,18.9,NA,"filled_whole_campaign",21.52,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",12,"slurry","A","4:04",16.3,NA,NA,16.3,NA,"filled_whole_campaign",21.84,FALSE,"check mark; soil_temp written as dash (missing); small dot to left of VWC value"
+"2025-08-22",12,"slurry","B","4:07",16.7,NA,NA,16.7,NA,"filled_whole_campaign",21.75,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",12,"slurry","C","4:11",16,NA,NA,16,NA,"filled_whole_campaign",21.65,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",13,"slurry","A","",14.8,NA,NA,14.8,NA,"filled_whole_campaign",21.4,TRUE,"time written as dash (missing); check mark; soil_temp written as dash (missing)"
+"2025-08-22",13,"slurry","B","4:38",15.6,NA,NA,15.6,NA,"filled_whole_campaign",21.42,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",13,"slurry","C","4:42",11.7,NA,NA,11.7,NA,"filled_whole_campaign",21.42,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",14,"compost","A","4:45",13.6,NA,NA,13.6,NA,"filled_whole_campaign",21.45,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",14,"compost","B","4:49",15,NA,NA,15,NA,"filled_whole_campaign",21.45,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",14,"compost","C","4:52",11.5,NA,NA,11.5,NA,"filled_whole_campaign",21.45,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",15,"control","A","4:56",16.7,NA,NA,16.7,NA,"filled_whole_campaign",21.42,FALSE,"check mark; soil_temp written as dash (missing); stray pen stroke in notes column"
+"2025-08-22",15,"control","B","4:59",14.5,NA,NA,14.5,NA,"filled_whole_campaign",21.38,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-08-22",15,"control","C","5:02",15.1,NA,NA,15.1,NA,"filled_whole_campaign",21.37,FALSE,"check mark; soil_temp written as dash (missing)"
+"2025-09-10",1,"slurry","A","11:58",10.7,NA,NA,10.7,17,"measured",17,FALSE,"check mark; soil temp written with slashed zero (17.Ø); page header annotations: 'PIN-2490', 'with Grace', 'new thermometer' with arrow to soil_temp_C column; same page also photographed in 10Sept2025_metadata2.png"
+"2025-09-10",1,"slurry","B","12:02",15.1,NA,NA,15.1,17.7,"measured",17.7,FALSE,"check mark; curved arrow drawn from this row's mean_depth (6.075) to 1C's (5.375)"
+"2025-09-10",1,"slurry","C","12:05",10.4,NA,NA,10.4,18.5,"measured",18.5,TRUE,"check mark; 'collar height?' then crossed-out word ('check'), then crossed-out word (possibly 'used') and '6.07'; arrow from 1B mean_depth points to this row"
+"2025-09-10",2,"control","A","12:12",13.1,NA,NA,13.1,18.3,"measured",18.3,FALSE,"check mark"
+"2025-09-10",2,"control","B","12:15",13.5,NA,NA,13.5,17.5,"measured",17.5,FALSE,"check mark"
+"2025-09-10",2,"control","C","12.19",11.8,NA,NA,11.8,17.3,"measured",17.3,FALSE,"check mark; time written with '.' not ':'"
+"2025-09-10",3,"compost","A","12:23",16.2,NA,NA,16.2,17.6,"measured",17.6,FALSE,"check mark"
+"2025-09-10",3,"compost","B","12:26",17.9,NA,NA,17.9,17.1,"measured",17.1,FALSE,"check mark"
+"2025-09-10",3,"compost","C","12:30",16.9,NA,NA,16.9,16.9,"measured",16.9,FALSE,"check mark"
+"2025-09-10",4,"compost","A","12:59",8.4,NA,NA,8.4,18.4,"measured",18.4,TRUE,"VWC: earlier value scribbled out (illegible), replaced with 8.4; check mark; 'check label;'"
+"2025-09-10",4,"compost","B","1:02",15.4,NA,NA,15.4,17.6,"measured",17.6,FALSE,"check mark"
+"2025-09-10",4,"compost","C","1:06",13.5,NA,NA,13.5,18.2,"measured",18.2,FALSE,"check mark"
+"2025-09-10",5,"control","A","12:47",12.7,NA,NA,12.7,17.8,"measured",17.8,FALSE,"check mark"
+"2025-09-10",5,"control","B","12:51",14.5,NA,NA,14.5,17.6,"measured",17.6,FALSE,"check mark"
+"2025-09-10",5,"control","C","12:54",10.9,NA,NA,10.9,17.5,"measured",17.5,FALSE,"check mark"
+"2025-09-10",6,"slurry","A","12:36",16.9,NA,NA,16.9,17.8,"measured",17.8,FALSE,"check mark"
+"2025-09-10",6,"slurry","B","12:39",14.1,NA,NA,14.1,17.4,"measured",17.4,FALSE,"mean_depth: printed 7.475 crossed out, handwritten 6.75; check mark; 'the one that had been pulled'"
+"2025-09-10",6,"slurry","C","12:42",12.9,NA,NA,12.9,16.7,"measured",16.7,FALSE,"check mark"
+"2025-09-10",7,"control","A","1:10",10.7,NA,NA,10.7,19.1,"measured",19.1,TRUE,"check mark; stray mark between hour and minutes in time (written like '1%10')"
+"2025-09-10",7,"control","B","1:14",12.7,NA,NA,12.7,17.9,"measured",17.9,FALSE,"check mark"
+"2025-09-10",7,"control","C","1:18",9.4,NA,NA,9.4,19.2,"measured",19.2,FALSE,"check mark"
+"2025-09-10",8,"compost","A","11:21",10.9,NA,NA,10.9,16.8,"measured",16.8,FALSE,"* in left margin; row dated '11 Sept' on the 10 Sept page; time: earlier value (possibly 11:0x) crossed out, 11:21 written above; check mark; margin note bracketing 8A-8B: 'redid b/c of collar offset'"
+"2025-09-10",8,"compost","B","11:16",12.5,NA,NA,12.5,16.8,"measured",16.8,TRUE,"* in left margin; date ditto of 11 Sept; time: two earlier values crossed out (illegible), 11:16 written below; mean_depth: printed 6.425 crossed out, handwritten '8.5cm'; notes: 'readjusted in field' and check mark; margin note bracketing 8A-8B: 'redid b/c of collar offset'; scribbles below table"
+"2025-09-10",8,"compost","C","11:12",10.9,NA,NA,10.9,15.8,"measured",15.8,TRUE,"* in left margin; time: earlier value crossed out (illegible), replaced with 11:12; 'redid bc forgot to update collar height' with check mark; same page also photographed in 11Sept2025_metadata2.png"
+"2025-09-10",9,"compost","A","11:25",9.7,NA,NA,9.7,16.3,"measured",16.3,TRUE,"soil temp: digit after decimal blotted out, 3 written after it; check mark"
+"2025-09-10",9,"compost","B","11:28",10.5,NA,NA,10.5,16.5,"measured",16.5,FALSE,"check mark"
+"2025-09-10",9,"compost","C","11:32",10.5,NA,NA,10.5,18.4,"measured",18.4,FALSE,"check mark"
+"2025-09-10",10,"control","A","11:58",9.5,NA,NA,9.5,17,"measured",17,FALSE,"check mark"
+"2025-09-10",10,"control","B","12:01",13.6,NA,NA,13.6,16.7,"measured",16.7,TRUE,"check mark"
+"2025-09-10",10,"control","C","12:04",13.3,NA,NA,13.3,15.8,"measured",15.8,FALSE,"check mark"
+"2025-09-10",11,"slurry","A","11:47",9.4,NA,NA,9.4,16.8,"measured",16.8,FALSE,"check mark"
+"2025-09-10",11,"slurry","B","11:50",10.3,NA,NA,10.3,17.5,"measured",17.5,FALSE,"check mark"
+"2025-09-10",11,"slurry","C","11:54",12.3,NA,NA,12.3,16.5,"measured",16.5,FALSE,"check mark"
+"2025-09-10",12,"slurry","A","11:36",12.5,NA,NA,12.5,16.5,"measured",16.5,FALSE,"check mark"
+"2025-09-10",12,"slurry","B","11:39",10.3,NA,NA,10.3,16.3,"measured",16.3,FALSE,"check mark"
+"2025-09-10",12,"slurry","C","11:42",9.4,NA,NA,9.4,15.9,"measured",15.9,FALSE,"check mark"
+"2025-09-10",13,"slurry","A","12:16",10.9,NA,NA,10.9,16.5,"measured",16.5,TRUE,"time: minute digits partly scribbled out before '16'; soil temp: earlier value scribbled out (illegible), replaced with 16.5; notes text fully scribbled out (illegible); margin note: 'Redid due to label. Previous label was 13A' with a 'C' written above the A"
+"2025-09-10",13,"slurry","B","12:13",9.5,NA,NA,9.5,17.5,"measured",17.5,TRUE,"check mark"
+"2025-09-10",13,"slurry","C","12:20",12.5,NA,NA,12.5,17.8,"measured",17.8,TRUE,"scribbled-out word, then 'Labelled as 13C1.' then scribbled-out word and check mark"
+"2025-09-10",14,"compost","A","12:25",10.1,NA,NA,10.1,16.7,"measured",16.7,TRUE,"time: last digit 5 written over another digit; check mark"
+"2025-09-10",14,"compost","B","12:28",12.9,NA,NA,12.9,16.8,"measured",16.8,FALSE,"check mark"
+"2025-09-10",14,"compost","C","12:32",11.4,NA,NA,11.4,17.2,"measured",17.2,FALSE,"check mark"
+"2025-09-10",15,"control","A","12:36",10.1,NA,NA,10.1,16.7,"measured",16.7,FALSE,"check mark"
+"2025-09-10",15,"control","B","12:39",12.3,NA,NA,12.3,16.7,"measured",16.7,FALSE,"check mark"
+"2025-09-10",15,"control","C","12:42",10.6,NA,NA,10.6,17.7,"measured",17.7,FALSE,"check mark"
+"2025-09-30",1,"slurry","A","10:21",19,NA,NA,19,17.1,"measured",17.1,FALSE,""
+"2025-09-30",1,"slurry","B","10:25",15.9,NA,NA,15.9,17,"measured",17,FALSE,""
+"2025-09-30",1,"slurry","C","10:29",14.9,NA,NA,14.9,16.9,"measured",16.9,FALSE,""
+"2025-09-30",2,"control","A","10:33",17.8,NA,NA,17.8,17.4,"measured",17.4,FALSE,""
+"2025-09-30",2,"control","B","10:37",15.6,NA,NA,15.6,16.9,"measured",16.9,FALSE,""
+"2025-09-30",2,"control","C","10:40",14.7,NA,NA,14.7,17.3,"measured",17.3,FALSE,""
+"2025-09-30",3,"compost","A","10:44",16.9,NA,NA,16.9,17.3,"measured",17.3,FALSE,""
+"2025-09-30",3,"compost","B","10:47",21.6,NA,NA,21.6,17,"measured",17,TRUE,""
+"2025-09-30",3,"compost","C","10:51",19.4,NA,NA,19.4,16.8,"measured",16.8,TRUE,""
+"2025-09-30",4,"compost","A","11:18",17.1,NA,NA,17.1,17.4,"measured",17.4,FALSE,""
+"2025-09-30",4,"compost","B","11:21",15.4,NA,NA,15.4,17.3,"measured",17.3,FALSE,""
+"2025-09-30",4,"compost","C","11:24",14.4,NA,NA,14.4,17.5,"measured",17.5,FALSE,""
+"2025-09-30",5,"control","A","11:07",17.5,NA,NA,17.5,17.3,"measured",17.3,FALSE,""
+"2025-09-30",5,"control","B","11:10",18,NA,NA,18,17.3,"measured",17.3,FALSE,""
+"2025-09-30",5,"control","C","11:14",16.9,NA,NA,16.9,17.7,"measured",17.7,FALSE,""
+"2025-09-30",6,"slurry","A","10:56",20.9,NA,NA,20.9,17,"measured",17,FALSE,""
+"2025-09-30",6,"slurry","B","10:59",21.4,NA,NA,21.4,17,"measured",17,FALSE,"[printed] re-measured height (pulled in June)"
+"2025-09-30",6,"slurry","C","11:02",19.9,NA,NA,19.9,16.7,"measured",16.7,FALSE,"soil temp first digit after 1 overwritten (reads 16.7)"
+"2025-09-30",7,"control","A","11:28",17.1,NA,NA,17.1,17.8,"measured",17.8,FALSE,""
+"2025-09-30",7,"control","B","11:32",14.8,NA,NA,14.8,17.5,"measured",17.5,TRUE,""
+"2025-09-30",7,"control","C","11:35",14.9,NA,NA,14.9,17.7,"measured",17.7,FALSE,""
+"2025-09-30",8,"compost","A","11:39",13.9,NA,NA,13.9,17.4,"measured",17.4,FALSE,""
+"2025-09-30",8,"compost","B","11:42",17.2,NA,NA,17.2,17.7,"measured",17.7,FALSE,"[printed] re-measured (pulled in Aug or Sept, bear scat nearby?)"
+"2025-09-30",8,"compost","C","11:46",19.9,NA,NA,19.9,17.5,"measured",17.5,FALSE,""
+"2025-09-30",9,"compost","A","11:50",23.5,NA,NA,23.5,18,"measured",18,FALSE,""
+"2025-09-30",9,"compost","B","11:53",17.9,NA,NA,17.9,17.9,"measured",17.9,FALSE,""
+"2025-09-30",9,"compost","C","11:57",19.3,NA,NA,19.3,18,"measured",18,FALSE,""
+"2025-09-30",10,"control","A","12:58",17.8,NA,NA,17.8,18.1,"measured",18.1,FALSE,""
+"2025-09-30",10,"control","B","1:01",19.7,NA,NA,19.7,18.1,"measured",18.1,FALSE,""
+"2025-09-30",10,"control","C","1:05",17.3,NA,NA,17.3,17.4,"measured",17.4,FALSE,""
+"2025-09-30",11,"slurry","A","1:09",14.7,NA,NA,14.7,18.7,"measured",18.7,FALSE,""
+"2025-09-30",11,"slurry","B","1:12",20.6,NA,NA,20.6,17.9,"measured",17.9,FALSE,""
+"2025-09-30",11,"slurry","C","1:14",19.4,NA,NA,19.4,18,"measured",18,FALSE,""
+"2025-09-30",12,"slurry","A","1:20",21.8,NA,NA,21.8,17.8,"measured",17.8,FALSE,""
+"2025-09-30",12,"slurry","B","1:23",16.9,NA,NA,16.9,17.7,"measured",17.7,FALSE,""
+"2025-09-30",12,"slurry","C","1:26",16.4,NA,NA,16.4,17.7,"measured",17.7,FALSE,""
+"2025-09-30",13,"slurry","A","1:51",11.8,NA,NA,11.8,17.9,"measured",17.9,FALSE,""
+"2025-09-30",13,"slurry","B","1:54",16.7,NA,NA,16.7,18.6,"measured",18.6,FALSE,""
+"2025-09-30",13,"slurry","C","1:58",12.9,NA,NA,12.9,19.6,"measured",19.6,FALSE,""
+"2025-09-30",14,"compost","A","1:40",18.3,NA,NA,18.3,18.1,"measured",18.1,FALSE,""
+"2025-09-30",14,"compost","B","1:44",15.3,NA,NA,15.3,18.5,"measured",18.5,TRUE,"first digits of soil temp overwritten"
+"2025-09-30",14,"compost","C","1:48",16,NA,NA,16,18,"measured",18,FALSE,""
+"2025-09-30",15,"control","A","1:30",17.7,NA,NA,17.7,17.7,"measured",17.7,FALSE,""
+"2025-09-30",15,"control","B","1:33",18.3,NA,NA,18.3,18.3,"measured",18.3,TRUE,"a digit in VWC blotted out"
+"2025-09-30",15,"control","C","1:37",19.7,NA,NA,19.7,18,"measured",18,FALSE,""
+"2025-10-14",1,"slurry","A","11:25AM",18.5,NA,NA,18.5,13.4,"measured",13.4,FALSE,"VWC written 18.5%; temp written 13.4°C"
+"2025-10-14",1,"slurry","B","11:29",23.8,NA,NA,23.8,13.4,"measured",13.4,FALSE,""
+"2025-10-14",1,"slurry","C","11:35",20.1,NA,NA,20.1,13.2,"measured",13.2,TRUE,"time last digit overwritten; soil temp 13.4 with 2 written over/after the 4"
+"2025-10-14",2,"control","A","11:45",19.4,NA,NA,19.4,13.2,"measured",13.2,TRUE,"time 11:40 crossed out, replaced with 11:45; note: 'repeated - #2 is correct' (with 'first measurement' written small beneath)"
+"2025-10-14",2,"control","B","11:48",22.2,NA,NA,22.2,13.5,"measured",13.5,FALSE,""
+"2025-10-14",2,"control","C","11:52",24.9,NA,NA,24.9,13.3,"measured",13.3,FALSE,""
+"2025-10-14",3,"compost","A","11:56",26,NA,NA,26,13.5,"measured",13.5,TRUE,"time minutes overwritten"
+"2025-10-14",3,"compost","B","12:01",30.9,NA,NA,30.9,12.9,"measured",12.9,TRUE,""
+"2025-10-14",3,"compost","C","12:03",25.9,NA,NA,25.9,13.2,"measured",13.2,FALSE,""
+"2025-10-14",4,"compost","A","10:32",16.7,NA,NA,16.7,13.5,"measured",13.5,TRUE,"date 2025-10-14 crossed out, replaced 10/15; time crossed out (12:28?) replaced 10:32; note: 'LICOR turned off - had to turn back on'; margin bracket '10/15' on 4A-4C"
+"2025-10-14",4,"compost","B","10:35",20.2,NA,NA,20.2,13.4,"measured",13.4,FALSE,"date 2025-10-14 crossed out, replaced 10/15"
+"2025-10-14",4,"compost","C","10:38",21.1,NA,NA,21.1,13.5,"measured",13.5,FALSE,"date 2025-10-14 crossed out, replaced 10/15"
+"2025-10-14",5,"control","A","12:18",14.1,NA,NA,14.1,13.2,"measured",13.2,FALSE,"note: 'redid VWC - 2nd time = 19.4%' (14.1% not crossed out)"
+"2025-10-14",5,"control","B","12:21",27.3,NA,NA,27.3,13.2,"measured",13.2,FALSE,""
+"2025-10-14",5,"control","C","12:24",18.2,NA,NA,18.2,13.3,"measured",13.3,TRUE,""
+"2025-10-14",6,"slurry","A","12:07",28.2,NA,NA,28.2,13.1,"measured",13.1,FALSE,""
+"2025-10-14",6,"slurry","B","12:10",25.7,NA,NA,25.7,12.9,"measured",12.9,FALSE,"[printed] re-measured height (pulled in June)"
+"2025-10-14",6,"slurry","C","12:14",29.8,NA,NA,29.8,12.9,"measured",12.9,FALSE,""
+"2025-10-14",7,"control","A","10:42",22.6,NA,NA,22.6,13.4,"measured",13.4,FALSE,"date written '10-15' with down-arrow to 8B"
+"2025-10-14",7,"control","B","10:45",20.7,NA,NA,20.7,13.5,"measured",13.5,FALSE,""
+"2025-10-14",7,"control","C","10:48",23.6,NA,NA,23.6,13.4,"measured",13.4,FALSE,""
+"2025-10-14",8,"compost","A","10:53",23.9,NA,NA,23.9,13.4,"measured",13.4,FALSE,""
+"2025-10-14",8,"compost","B","10:56",27.8,NA,NA,27.8,13.4,"measured",13.4,FALSE,"[printed] re-measured (pulled in Aug or Sept, bear scat nearby?)"
+"2025-10-14",8,"compost","C","10:59",19.7,NA,NA,19.7,13.4,"measured",13.4,FALSE,""
+"2025-10-14",9,"compost","A","11:03",17.8,NA,NA,17.8,13.5,"measured",13.5,FALSE,"Bear scat nearby"
+"2025-10-14",9,"compost","B","11:06",28.5,NA,NA,28.5,13.6,"measured",13.6,FALSE,""
+"2025-10-14",9,"compost","C","11:09",23.7,NA,NA,23.7,13.4,"measured",13.4,FALSE,""
+"2025-10-14",10,"control","A","11:55",16.7,NA,NA,16.7,13.4,"measured",13.4,FALSE,""
+"2025-10-14",10,"control","B","11:58",25.1,NA,NA,25.1,13.3,"measured",13.3,FALSE,""
+"2025-10-14",10,"control","C","12:01",22.4,NA,NA,22.4,13.2,"measured",13.2,FALSE,""
+"2025-10-14",11,"slurry","A","11:45",21.9,NA,NA,21.9,13.8,"measured",13.8,FALSE,""
+"2025-10-14",11,"slurry","B","11:48",20.8,NA,NA,20.8,13.4,"measured",13.4,FALSE,""
+"2025-10-14",11,"slurry","C","11:51",20.2,NA,NA,20.2,13.5,"measured",13.5,FALSE,""
+"2025-10-14",12,"slurry","A","11:14",25.6,NA,NA,25.6,13.5,"measured",13.5,FALSE,""
+"2025-10-14",12,"slurry","B","11:16",26.6,NA,NA,26.6,13.4,"measured",13.4,FALSE,""
+"2025-10-14",12,"slurry","C","11:20",26,NA,NA,26,13.3,"measured",13.3,FALSE,""
+"2025-10-14",13,"slurry","A","12:05",18.7,NA,NA,18.7,13.4,"measured",13.4,TRUE,"soil temp last digit overwritten"
+"2025-10-14",13,"slurry","B","12:08",20.9,NA,NA,20.9,13.5,"measured",13.5,FALSE,""
+"2025-10-14",13,"slurry","C","12:12",24.1,NA,NA,24.1,13.6,"measured",13.6,FALSE,""
+"2025-10-14",14,"compost","A","11:35",28.8,NA,NA,28.8,13.5,"measured",13.5,TRUE,""
+"2025-10-14",14,"compost","B","11:38",26,NA,NA,26,13.7,"measured",13.7,FALSE,""
+"2025-10-14",14,"compost","C","11:41",20.9,NA,NA,20.9,13.5,"measured",13.5,FALSE,"Bear scat on the collar (removed)"
+"2025-10-14",15,"control","A","11:24",20.7,NA,NA,20.7,13.4,"measured",13.4,FALSE,""
+"2025-10-14",15,"control","B","11:27",23.7,NA,NA,23.7,13.4,"measured",13.4,FALSE,""
+"2025-10-14",15,"control","C","11:30",26,NA,NA,26,13.4,"measured",13.4,FALSE,""

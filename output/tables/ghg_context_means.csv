@@ -1,0 +1,17 @@
+"row","treatment","val"
+"anpp","control",-393.609333333333
+"anpp","compost",-392.92
+"anpp","slurry",-399.813333333333
+"ch4","control",-2.298902384809
+"ch4","compost",-2.35052235940399
+"ch4","slurry",-2.11912800497702
+"n2o","control",22.9712138255391
+"n2o","compost",33.3027570738247
+"n2o","slurry",44.435534145853
+"rs","control",5885.62050645111
+"rs","compost",6057.60845248575
+"rs","slurry",6122.8882288352
+"att","compost",10.2799232736906
+"att","slurry",21.6440947001459
+"amend","slurry",-209.733333333333
+"amend","compost",-441.65
