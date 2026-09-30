@@ -44,7 +44,7 @@ All values are in CO2-equivalents (GWP100, IPCC AR6: CH4 27.0, N2O 273), from pl
 (a) Season budget per treatment. Bars are component means: CH4 uptake, N2O in days 1–6, and N2O over the rest of the season. Small points are net CH4 + N2O per plot; large symbols are the treatment mean ± 95% CI.
 (b) N2O emission factor: amendment-attributable N2O-N (plot minus control mean) as % of the N applied (slurry 2.75, compost 3.87 g N m−2), for days 1–6 and the season. Reference lines are the IPCC 2019 EF1 aggregate default (1%) and the value for organic N inputs in wet climates (0.6%).
 (c) Season totals for scale, all in g CO2 or CO2-eq m−2 on a log scale. Soil respiration and aboveground production are components of the carbon balance, which was not closed, so the terms are not summed.
-- **Soil respiration:** from the clipped collars, so roots plus microbes. It is integrated from midday closures (10:00–17:00), so it is likely biased high compared with a 24-h total.
+- **Soil respiration:** from the clipped collars, so roots plus microbes. It is integrated from daytime closures (10:00–17:00), so it is likely biased high compared with a 24-h total.
 - **Aboveground production:** the October harvest of the 0.5 m² subplot left uncut since the pre-experiment mow, assuming C = 45% of dry mass.
 - **Manure C added:** not measured. The range assumes C = 25–40% of dry matter for slurry and 15–30% for compost.
 - **Result:** the CH4 + N2O budget is 0.35–0.7% of season soil respiration and 5–11% of aboveground production. For the amendment effect to be offset, 10–17% of the slurry C, or 2–4% of the compost C, would have to stay in the soil through the season (point estimates).
@@ -73,7 +73,7 @@ Results:
   - (a) Gravimetric soil moisture at sampling. Amended plots averaged 0.008 (compost) and 0.013 g g−1 (slurry) wetter than controls (4% and 7%), a difference also present in field VWC before application.
   - (b) Covariation of soil temperature and moisture from the handheld probe (r ≈ −0.3 across collars), which is why the two drivers could be separated in Fig. S1.
 - **S4. C-mineralization time courses (20 °C, 65% WHC).** Thin lines are individual plots. The 16 Dec reading of round 3 is excluded: tube identity was uncertain and the standards were anomalous.
-- **S5. Extractable N pools at day 0 and day 28 of each incubation, and net nitrification.** Initial extractions were made at incubation setup, about 5, 14 and 42 days after sampling (soils at 4 °C), so the NH4+:NO3− split and net nitrification are not comparable across samplings.
+- **S5. Extractable N pools at the start and end of each incubation, and net nitrification.** Initial extractions were made at incubation setup, about 5, 14 and 42 days after sampling (soils at 4 °C), so the NH4+:NO3− split and net nitrification are not comparable across samplings.
 
 ## Methods notes
 - **Flux calculation.** Fluxes were recomputed from the raw 1 Hz concentration records with goFlux 0.4.0 (best.flux, Hüppi criteria) through fluxqc 0.2.3.
