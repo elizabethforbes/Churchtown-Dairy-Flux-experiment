@@ -109,10 +109,12 @@ pc <- ggplot() + scale_x_discrete() +
 #     midday closures (10:00-17:00), so likely biased high vs a 24-h integral.
 #   ANPP: Oct harvest of a 0.5 m2 subplot left uncut since the pre-experiment mow;
 #     C = 45% of dry mass (standard herbage value).
-#   Amendment C: not measured. Assumed C = 25-40% of dry matter for slurry and
-#     15-30% for compost (typical ranges; checked against C:N of ~13-21 and ~17-34
-#     from the measured N); shown as a range.
-C_FRAC <- list(slurry = c(0.25, 0.40), compost = c(0.15, 0.30))
+#   Amendment C: not measured. C = 50% of volatile solids, using the same assumed
+#     VS shares of dry matter as 35_storage_vs_field.R (slurry 0.80, after ASAE D384.2
+#     VS/TS = 0.85 for lactating dairy manure as excreted; compost 0.55), i.e.
+#     40% (slurry) and 27.5% (compost) of dry matter.
+VS_FRAC <- c(slurry = 0.80, compost = 0.55)
+C_FRAC <- 0.5 * VS_FRAC
 co2 <- function(gC) gC * 44 / 12
 rs <- tot %>% filter(period == "season") %>% transmute(plot, treatment = as_trt(treatment), val = co2(CO2_C_g_m2))
 anpp <- read.csv("data/processed/biomass.csv") %>% group_by(plot, treatment) %>%
@@ -120,7 +122,7 @@ anpp <- read.csv("data/processed/biomass.csv") %>% group_by(plot, treatment) %>%
 dm <- read.csv("output/tables/application_inputs.csv")
 amend_c <- bind_rows(lapply(c("slurry", "compost"), function(tr) {
   d <- dm$dm_g_m2[dm$treatment == tr]
-  tibble(treatment = as_trt(tr), lo = co2(d * C_FRAC[[tr]][1]), hi = co2(d * C_FRAC[[tr]][2]))
+  tibble(treatment = as_trt(tr), val = co2(d * C_FRAC[[tr]]))
 }))
 att_net <- att %>% filter(comp == "net") %>% select(treatment, diff)
 ctx_rows <- c(rs = "Soil respiration", anpp = "Aboveground production",
@@ -134,11 +136,10 @@ pts <- bind_rows(rs %>% mutate(row = "rs"), anpp %>% mutate(row = "anpp"),
                  wide %>% transmute(plot, treatment, val = -ch4, row = "ch4")) %>%
   mutate(row = factor(row, levels = lvl))
 mns <- pts %>% group_by(row, treatment) %>% summarize(val = mean(val), .groups = "drop") %>%
-  bind_rows(att_net %>% transmute(row = factor("att", levels = lvl), treatment, val = diff))
+  bind_rows(att_net %>% transmute(row = factor("att", levels = lvl), treatment, val = diff),
+            amend_c %>% mutate(row = factor("amend", levels = lvl)))
 pdd <- position_dodge(width = 0.6)
 pd_ <- ggplot() +
-  geom_linerange(data = amend_c %>% mutate(row = factor("amend", levels = lvl)),
-                 aes(y = row, xmin = lo, xmax = hi, colour = treatment), position = pdd, linewidth = 1.6, alpha = 0.6) +
   geom_point(data = pts, aes(val, row, colour = treatment), shape = 16, size = 0.8, alpha = 0.35,
              position = position_jitterdodge(jitter.width = 0, jitter.height = 0.08, dodge.width = 0.6, seed = 1)) +
   geom_point(data = mns, aes(val, row, colour = treatment, shape = treatment, fill = treatment),
@@ -156,10 +157,9 @@ save_fig(fig7, "fig6_ghg_budget", 180, 140)
 
 # context numbers
 ctx <- mns %>% mutate(val = signif(val, 3)) %>% pivot_wider(names_from = treatment, values_from = val)
-brk <- att_net %>% left_join(amend_c, by = "treatment") %>%
-  mutate(breakeven_retention_pct_lo = 100 * diff / hi, breakeven_retention_pct_hi = 100 * diff / lo)
+brk <- att_net %>% left_join(amend_c, by = "treatment") %>% mutate(c_input_over_att = val / diff)
 cat("  context (g CO2-eq m-2):\n"); print(as.data.frame(ctx))
-cat("  share of amendment C that must stay in soil to offset attributable non-CO2 (%):\n")
+cat("  amendment C input (as CO2) relative to attributable non-CO2:\n")
 print(as.data.frame(brk %>% mutate(across(where(is.numeric), ~ signif(.x, 3)))))
 cat(sprintf("  non-CO2 net as %% of soil respiration: %s\n",
             paste(sprintf("%s %.2f", levels(wide$treatment),

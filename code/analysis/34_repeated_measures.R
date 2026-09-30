@@ -122,21 +122,20 @@ nsup <- tibble(item = c("Net N mineralization, lab potential (mg N kg-1 d-1, mea
                          round(nmin_mean * season_d * SOIL_KG_HA_NOFRAG / 1e6)))
 # Soil organic C stock (0-15 cm) for scale against the amendment C inputs: Dairy One LOI organic matter
 # at the first sampling, OM assumed 50% C (Pribyl 2010), same fine-earth mass as above. Amendment C uses
-# the dry matter applied and the assumed C fractions of 33_ghg_budget.R (slurry 25-40%, compost 15-30%).
+# the dry matter applied and the C fractions of 33_ghg_budget.R (50% of assumed VS: slurry 40%, compost 27.5%).
 OM_C <- 0.5
 om1 <- mean(read.csv("data/processed/dairy_one_clean.csv") %>% filter(timepoint == 1) %>% pull(om_pct), na.rm = TRUE)
 soc_g_m2 <- om1 / 100 * OM_C * SOIL_KG_HA * 1e3 / 1e4
 app <- read.csv("output/tables/application_inputs.csv")
-C_FRAC <- list(slurry = c(0.25, 0.40), compost = c(0.15, 0.30))
+C_FRAC <- 0.5 * c(slurry = 0.80, compost = 0.55)
 amend_c <- sapply(c("slurry", "compost"), function(tr) app$dm_g_m2[app$treatment == tr] * C_FRAC[[tr]])
 nsup <- bind_rows(nsup, tibble(
   item = c("Soil organic C stock, 0-15 cm (g C m-2; LOI OM x 0.5, first sampling)",
            "Amendment C input, slurry / compost (g C m-2; assumed C fractions)",
            "Amendment C as % of 0-15 cm soil C stock, slurry / compost"),
   value = c(as.character(signif(soc_g_m2, 2)),
-            sprintf("%.0f-%.0f / %.0f-%.0f", amend_c[1, "slurry"], amend_c[2, "slurry"], amend_c[1, "compost"], amend_c[2, "compost"]),
-            sprintf("%.1f-%.1f / %.1f-%.1f", 100 * amend_c[1, "slurry"] / soc_g_m2, 100 * amend_c[2, "slurry"] / soc_g_m2,
-                    100 * amend_c[1, "compost"] / soc_g_m2, 100 * amend_c[2, "compost"] / soc_g_m2))))
+            sprintf("%.0f / %.0f", amend_c["slurry"], amend_c["compost"]),
+            sprintf("%.1f / %.1f", 100 * amend_c["slurry"] / soc_g_m2, 100 * amend_c["compost"] / soc_g_m2))))
 write.csv(bind_rows(nsup, upt %>% transmute(item = paste("Plant N uptake (Oct harvest), ", treatment, " (kg N ha-1; N %)"),
                                             value = sprintf("%.0f; %.2f%%", n_uptake_kg_ha, n_pct))),
           "output/tables/n_supply_context.csv", row.names = FALSE)

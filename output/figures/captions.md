@@ -46,8 +46,8 @@ All values are in CO2-equivalents (GWP100, IPCC AR6: CH4 27.0, N2O 273), from pl
 (c) Season totals for scale, all in g CO2 or CO2-eq m−2 on a log scale. Soil respiration and aboveground production are components of the carbon balance, which was not closed, so the terms are not summed.
 - **Soil respiration:** from the clipped collars, so roots plus microbes. It is integrated from daytime closures (10:00–17:00), so it is likely biased high compared with a 24-h total.
 - **Aboveground production:** the October harvest of the 0.5 m² subplot left uncut since the pre-experiment mow, assuming C = 45% of dry mass.
-- **Manure C added:** not measured. The range assumes C = 25–40% of dry matter for slurry and 15–30% for compost.
-- **Result:** the CH4 + N2O budget is 0.35–0.7% of season soil respiration and 5–11% of aboveground production. For the amendment effect to be offset, 10–17% of the slurry C, or 2–4% of the compost C, would have to stay in the soil through the season (point estimates).
+- **Manure C added:** not measured. Estimated as 50% of volatile solids, with the VS shares of dry matter used for the storage comparison (slurry 0.80, compost 0.55).
+- **Result:** the CH4 + N2O budget is 0.35–0.7% of season soil respiration and 5–11% of aboveground production. The manure C added, as CO2, is roughly 10–40 times the amendment-attributable CH4 + N2O.
 - **Metric choice barely matters** (ghg_co2eq_metrics.csv): season net non-CO2 for the slurry plots is 42 g CO2-eq m−2 under GWP100, 38 under GWP20, 38 under GTP100 and 44 under GWP* for a sustained practice. N2O dominates, and its GWP20 equals its GWP100.
 
 Soil CO2 is not included in panels a–b. Chamber CO2 is soil respiration (roots plus microbes), not net ecosystem exchange, so it is not a term in a GHG balance. The amendments' carbon inputs were not measured.
