@@ -93,51 +93,51 @@
 "Plant","K","k_pct","Oct harvest","slurry",-0.47,-1.73,0.79,-0.128,-0.521,0.265,0.776,0.446,0.762814814814815,0.349
 "Plant","S","s_pct","Oct harvest","compost",1.36,-0.02,2.73,0.068,0.000264,0.136,0.178,0.049,0.620666666666667,0.085
 "Plant","S","s_pct","Oct harvest","slurry",1.06,-0.27,2.38,0.046,-0.0117,0.104,0.178,0.103,0.635636363636364,0.085
-"Soil tests","pH","dairyone_ph","Jul","compost",-0.11,-1.35,1.13,-0.036,-0.472,0.4,5.85,0.853,0.970046511627907,0.834
-"Soil tests","pH","dairyone_ph","Jul","slurry",0.23,-1.02,1.47,0.066,-0.332,0.464,5.85,0.705,0.9492,0.834
-"Soil tests","Organic matter","dairyone_om_pct","Jul","compost",-0.65,-1.92,0.62,-0.218,-0.701,0.265,3.73,0.304,0.9492,0.491
-"Soil tests","Organic matter","dairyone_om_pct","Jul","slurry",-0.16,-1.4,1.08,-0.06,-0.561,0.441,3.73,0.785,0.9492,0.491
-"Soil tests","CEC","dairyone_cec_meq100g","Jul","compost",-0.19,-1.43,1.06,-0.22,-1.84,1.4,9.38,0.755,0.9492,0.626
-"Soil tests","CEC","dairyone_cec_meq100g","Jul","slurry",0.33,-0.92,1.57,0.36,-1.21,1.93,9.38,0.59,0.9492,0.626
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Jul","compost",-0.23,-1.48,1.01,-1.56,-10.4,7.3,76.4,0.695,0.9492,0.577
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Jul","slurry",0.37,-0.88,1.62,2.1,-5.59,9.79,76.4,0.536,0.9492,0.577
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Jul","compost",-0.43,-1.68,0.83,-23.4,-95.9,49.1,137,0.478,0.9492,0.538
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Jul","slurry",-0.64,-1.91,0.63,-33.2,-102,35.3,137,0.294,0.9492,0.538
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Jul","compost",-0.42,-1.68,0.83,-23.8,-110,62.4,104,0.496,0.9492,0.666
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Jul","slurry",-0.03,-1.27,1.21,-1.8,-87.8,84.2,104,0.96,0.971,0.666
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Jul","compost",-0.05,-1.29,1.19,-12.4,-376,351,1100,0.938,0.971,0.816
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Jul","slurry",0.27,-0.97,1.52,71.2,-284,427,1100,0.646,0.9492,0.816
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Jul","compost",-0.74,-2.02,0.54,-24.2,-69.5,21.1,170,0.242,0.9492,0.181
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Jul","slurry",0.28,-0.97,1.52,9.2,-36.5,54.9,170,0.645,0.9492,0.181
-"Soil tests","pH","dairyone_ph","May","compost",-0.07,-1.31,1.17,-0.018,-0.362,0.326,5.84,0.907,0.971,0.778
-"Soil tests","pH","dairyone_ph","May","slurry",0.34,-0.91,1.59,0.076,-0.22,0.372,5.84,0.569,0.9492,0.778
-"Soil tests","Organic matter","dairyone_om_pct","May","compost",-0.13,-1.37,1.11,-0.04,-0.447,0.367,3.56,0.824,0.964682926829268,0.957
-"Soil tests","Organic matter","dairyone_om_pct","May","slurry",-0.17,-1.42,1.07,-0.048,-0.414,0.318,3.56,0.77,0.9492,0.957
-"Soil tests","CEC","dairyone_cec_meq100g","May","compost",0.19,-1.05,1.43,0.2,-1.23,1.63,9.06,0.748,0.9492,0.812
-"Soil tests","CEC","dairyone_cec_meq100g","May","slurry",0.34,-0.9,1.59,0.34,-1.06,1.74,9.06,0.57,0.9492,0.812
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","May","compost",0.24,-1,1.49,1.28,-5.8,8.36,75.3,0.683,0.9492,0.449
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","May","slurry",0.71,-0.56,1.99,3.42,-3.34,10.2,75.3,0.259,0.9492,0.449
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","May","compost",0.1,-1.14,1.34,4,-51.5,59.5,118,0.869,0.970046511627907,0.836
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","May","slurry",-0.25,-1.5,0.99,-10.8,-68.6,47,118,0.67,0.9492,0.836
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","May","compost",0.6,-0.67,1.87,18.6,-22.3,59.5,75.8,0.324,0.9492,0.627
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","May","slurry",0.44,-0.81,1.7,18.6,-38.3,75.5,75.8,0.464,0.9492,0.627
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","May","compost",0.22,-1.02,1.47,51,-266,368,1050,0.71,0.9492,0.764
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","May","slurry",0.39,-0.87,1.64,86,-228,400,1050,0.526,0.9492,0.764
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","May","compost",-0.34,-1.59,0.91,-9.4,-45.7,26.9,167,0.565,0.9492,0.688
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","May","slurry",0.18,-1.06,1.43,6.4,-40,52.8,167,0.757,0.9492,0.688
-"Soil tests","pH","dairyone_ph","Oct","compost",0.03,-1.21,1.27,0.008,-0.391,0.407,5.94,0.964,0.971,0.447
-"Soil tests","pH","dairyone_ph","Oct","slurry",0.66,-0.61,1.94,0.188,-0.189,0.565,5.94,0.28,0.9492,0.447
-"Soil tests","Organic matter","dairyone_om_pct","Oct","compost",0.82,-0.47,2.11,0.118,-0.0764,0.312,3.44,0.195,0.9492,0.359
-"Soil tests","Organic matter","dairyone_om_pct","Oct","slurry",0.73,-0.55,2.01,0.102,-0.0856,0.29,3.44,0.241,0.9492,0.359
-"Soil tests","CEC","dairyone_cec_meq100g","Oct","compost",0.31,-0.93,1.56,0.34,-1.2,1.88,8.26,0.603,0.9492,0.553
-"Soil tests","CEC","dairyone_cec_meq100g","Oct","slurry",0.56,-0.71,1.82,0.64,-0.937,2.22,8.26,0.365,0.9492,0.553
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Oct","compost",0.27,-0.98,1.51,2,-8.56,12.6,73.2,0.658,0.9492,0.502
-"Soil tests","Base saturation","dairyone_base_sat_total_pct","Oct","slurry",0.62,-0.65,1.89,4.44,-6.05,14.9,73.2,0.327,0.9492,0.502
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Oct","compost",-0.25,-1.5,0.99,-12.4,-77.5,52.7,123,0.672,0.9492,0.55
-"Soil tests","P (Mehlich-3)","dairyone_p_ppm","Oct","slurry",-0.65,-1.93,0.62,-29.6,-89.7,30.5,123,0.287,0.9492,0.55
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Oct","compost",-0.28,-1.52,0.97,-16.6,-101,67.5,103,0.647,0.9492,0.868
-"Soil tests","K (Mehlich-3)","dairyone_k_ppm","Oct","slurry",-0.16,-1.4,1.08,-9.6,-93.9,74.7,103,0.791,0.9492,0.868
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Oct","compost",0.32,-0.93,1.57,79.8,-266,426,937,0.596,0.9492,0.62
-"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","Oct","slurry",0.51,-0.75,1.77,130,-218,478,937,0.402,0.9492,0.62
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Oct","compost",-0.02,-1.26,1.22,-0.6,-41.9,40.7,137,0.971,0.971,0.333
-"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","Oct","slurry",0.64,-0.63,1.91,20.6,-22.8,64,137,0.3,0.9492,0.333
+"Soil tests","pH","dairyone_ph","14 Oct","compost",0.03,-1.21,1.27,0.008,-0.391,0.407,5.94,0.964,0.971,0.447
+"Soil tests","pH","dairyone_ph","14 Oct","slurry",0.66,-0.61,1.94,0.188,-0.189,0.565,5.94,0.28,0.9492,0.447
+"Soil tests","Organic matter","dairyone_om_pct","14 Oct","compost",0.82,-0.47,2.11,0.118,-0.0764,0.312,3.44,0.195,0.9492,0.359
+"Soil tests","Organic matter","dairyone_om_pct","14 Oct","slurry",0.73,-0.55,2.01,0.102,-0.0856,0.29,3.44,0.241,0.9492,0.359
+"Soil tests","CEC","dairyone_cec_meq100g","14 Oct","compost",0.31,-0.93,1.56,0.34,-1.2,1.88,8.26,0.603,0.9492,0.553
+"Soil tests","CEC","dairyone_cec_meq100g","14 Oct","slurry",0.56,-0.71,1.82,0.64,-0.937,2.22,8.26,0.365,0.9492,0.553
+"Soil tests","Base saturation","dairyone_base_sat_total_pct","14 Oct","compost",0.27,-0.98,1.51,2,-8.56,12.6,73.2,0.658,0.9492,0.502
+"Soil tests","Base saturation","dairyone_base_sat_total_pct","14 Oct","slurry",0.62,-0.65,1.89,4.44,-6.05,14.9,73.2,0.327,0.9492,0.502
+"Soil tests","P (Mehlich-3)","dairyone_p_ppm","14 Oct","compost",-0.25,-1.5,0.99,-12.4,-77.5,52.7,123,0.672,0.9492,0.55
+"Soil tests","P (Mehlich-3)","dairyone_p_ppm","14 Oct","slurry",-0.65,-1.93,0.62,-29.6,-89.7,30.5,123,0.287,0.9492,0.55
+"Soil tests","K (Mehlich-3)","dairyone_k_ppm","14 Oct","compost",-0.28,-1.52,0.97,-16.6,-101,67.5,103,0.647,0.9492,0.868
+"Soil tests","K (Mehlich-3)","dairyone_k_ppm","14 Oct","slurry",-0.16,-1.4,1.08,-9.6,-93.9,74.7,103,0.791,0.9492,0.868
+"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","14 Oct","compost",0.32,-0.93,1.57,79.8,-266,426,937,0.596,0.9492,0.62
+"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","14 Oct","slurry",0.51,-0.75,1.77,130,-218,478,937,0.402,0.9492,0.62
+"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","14 Oct","compost",-0.02,-1.26,1.22,-0.6,-41.9,40.7,137,0.971,0.971,0.333
+"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","14 Oct","slurry",0.64,-0.63,1.91,20.6,-22.8,64,137,0.3,0.9492,0.333
+"Soil tests","pH","dairyone_ph","21 Jul","compost",-0.11,-1.35,1.13,-0.036,-0.472,0.4,5.85,0.853,0.970046511627907,0.834
+"Soil tests","pH","dairyone_ph","21 Jul","slurry",0.23,-1.02,1.47,0.066,-0.332,0.464,5.85,0.705,0.9492,0.834
+"Soil tests","Organic matter","dairyone_om_pct","21 Jul","compost",-0.65,-1.92,0.62,-0.218,-0.701,0.265,3.73,0.304,0.9492,0.491
+"Soil tests","Organic matter","dairyone_om_pct","21 Jul","slurry",-0.16,-1.4,1.08,-0.06,-0.561,0.441,3.73,0.785,0.9492,0.491
+"Soil tests","CEC","dairyone_cec_meq100g","21 Jul","compost",-0.19,-1.43,1.06,-0.22,-1.84,1.4,9.38,0.755,0.9492,0.626
+"Soil tests","CEC","dairyone_cec_meq100g","21 Jul","slurry",0.33,-0.92,1.57,0.36,-1.21,1.93,9.38,0.59,0.9492,0.626
+"Soil tests","Base saturation","dairyone_base_sat_total_pct","21 Jul","compost",-0.23,-1.48,1.01,-1.56,-10.4,7.3,76.4,0.695,0.9492,0.577
+"Soil tests","Base saturation","dairyone_base_sat_total_pct","21 Jul","slurry",0.37,-0.88,1.62,2.1,-5.59,9.79,76.4,0.536,0.9492,0.577
+"Soil tests","P (Mehlich-3)","dairyone_p_ppm","21 Jul","compost",-0.43,-1.68,0.83,-23.4,-95.9,49.1,137,0.478,0.9492,0.538
+"Soil tests","P (Mehlich-3)","dairyone_p_ppm","21 Jul","slurry",-0.64,-1.91,0.63,-33.2,-102,35.3,137,0.294,0.9492,0.538
+"Soil tests","K (Mehlich-3)","dairyone_k_ppm","21 Jul","compost",-0.42,-1.68,0.83,-23.8,-110,62.4,104,0.496,0.9492,0.666
+"Soil tests","K (Mehlich-3)","dairyone_k_ppm","21 Jul","slurry",-0.03,-1.27,1.21,-1.8,-87.8,84.2,104,0.96,0.971,0.666
+"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","21 Jul","compost",-0.05,-1.29,1.19,-12.4,-376,351,1100,0.938,0.971,0.816
+"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","21 Jul","slurry",0.27,-0.97,1.52,71.2,-284,427,1100,0.646,0.9492,0.816
+"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","21 Jul","compost",-0.74,-2.02,0.54,-24.2,-69.5,21.1,170,0.242,0.9492,0.181
+"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","21 Jul","slurry",0.28,-0.97,1.52,9.2,-36.5,54.9,170,0.645,0.9492,0.181
+"Soil tests","pH","dairyone_ph","29 May","compost",-0.07,-1.31,1.17,-0.018,-0.362,0.326,5.84,0.907,0.971,0.778
+"Soil tests","pH","dairyone_ph","29 May","slurry",0.34,-0.91,1.59,0.076,-0.22,0.372,5.84,0.569,0.9492,0.778
+"Soil tests","Organic matter","dairyone_om_pct","29 May","compost",-0.13,-1.37,1.11,-0.04,-0.447,0.367,3.56,0.824,0.964682926829268,0.957
+"Soil tests","Organic matter","dairyone_om_pct","29 May","slurry",-0.17,-1.42,1.07,-0.048,-0.414,0.318,3.56,0.77,0.9492,0.957
+"Soil tests","CEC","dairyone_cec_meq100g","29 May","compost",0.19,-1.05,1.43,0.2,-1.23,1.63,9.06,0.748,0.9492,0.812
+"Soil tests","CEC","dairyone_cec_meq100g","29 May","slurry",0.34,-0.9,1.59,0.34,-1.06,1.74,9.06,0.57,0.9492,0.812
+"Soil tests","Base saturation","dairyone_base_sat_total_pct","29 May","compost",0.24,-1,1.49,1.28,-5.8,8.36,75.3,0.683,0.9492,0.449
+"Soil tests","Base saturation","dairyone_base_sat_total_pct","29 May","slurry",0.71,-0.56,1.99,3.42,-3.34,10.2,75.3,0.259,0.9492,0.449
+"Soil tests","P (Mehlich-3)","dairyone_p_ppm","29 May","compost",0.1,-1.14,1.34,4,-51.5,59.5,118,0.869,0.970046511627907,0.836
+"Soil tests","P (Mehlich-3)","dairyone_p_ppm","29 May","slurry",-0.25,-1.5,0.99,-10.8,-68.6,47,118,0.67,0.9492,0.836
+"Soil tests","K (Mehlich-3)","dairyone_k_ppm","29 May","compost",0.6,-0.67,1.87,18.6,-22.3,59.5,75.8,0.324,0.9492,0.627
+"Soil tests","K (Mehlich-3)","dairyone_k_ppm","29 May","slurry",0.44,-0.81,1.7,18.6,-38.3,75.5,75.8,0.464,0.9492,0.627
+"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","29 May","compost",0.22,-1.02,1.47,51,-266,368,1050,0.71,0.9492,0.764
+"Soil tests","Ca (Mehlich-3)","dairyone_ca_ppm","29 May","slurry",0.39,-0.87,1.64,86,-228,400,1050,0.526,0.9492,0.764
+"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","29 May","compost",-0.34,-1.59,0.91,-9.4,-45.7,26.9,167,0.565,0.9492,0.688
+"Soil tests","Mg (Mehlich-3)","dairyone_mg_ppm","29 May","slurry",0.18,-1.06,1.43,6.4,-40,52.8,167,0.757,0.9492,0.688

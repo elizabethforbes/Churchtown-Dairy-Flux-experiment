@@ -279,7 +279,7 @@ save_fig(figs4, "figS3_soil_conditions", 180, 75, "si")
 # Fig S3: Dairy One soil tests by sampling round
 # =============================================================================
 d1 <- read.csv("data/processed/dairy_one_clean.csv") %>%
-  mutate(treatment = as_trt(treatment), round_lab = factor(c("May", "Jul", "Oct")[timepoint], levels = c("May", "Jul", "Oct")))
+  mutate(treatment = as_trt(treatment), round_lab = factor(ROUND_LABELS[timepoint], levels = ROUND_LABELS))
 d1_vars <- tribble(
   ~col,                  ~title,                 ~ylab,
   "ph",                  "pH (Dairy One)",       "'pH'",
@@ -296,6 +296,7 @@ s9 <- lapply(seq_len(nrow(d1_vars)), function(i) {
   pv <- anova_p(d1, !!v, round_lab)
   ggplot() + dot_ci_layers(d1, trt_summary(d1, !!v, round_lab), round_lab, !!v) +
     geom_text(data = pv, aes(round_lab, Inf, label = ifelse(p < 0.05, "*", "")), vjust = 1.1, size = 3.2) +
+    scale_x_discrete(labels = function(x) sub(" ", "\n", x)) +
     labs(x = NULL, y = ev(m$ylab))
 })
 figs9 <- wrap_plots(s9, ncol = 4) + plot_layout(guides = "collect") + tags_pub() & theme(legend.position = "bottom")
