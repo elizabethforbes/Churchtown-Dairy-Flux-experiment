@@ -123,11 +123,11 @@ amend_c <- bind_rows(lapply(c("slurry", "compost"), function(tr) {
   tibble(treatment = as_trt(tr), lo = co2(d * C_FRAC[[tr]][1]), hi = co2(d * C_FRAC[[tr]][2]))
 }))
 att_net <- att %>% filter(comp == "net") %>% select(treatment, diff)
-ctx_rows <- c(rs = "Soil respiration", anpp = "Aboveground NPP",
-              amend = "Amendment C input", net = "Non-CO2 net",
-              att = "Non-CO2, amendment effect", ch4 = "CH4 uptake")
-ctx_labs <- expression(rs = "Soil respiration", anpp = "Aboveground NPP", amend = "Amendment C input",
-                       net = Non*"-"*CO[2]~net, att = Non*"-"*CO[2]*","~amendment~effect, ch4 = CH[4]~uptake)
+ctx_rows <- c(rs = "Soil respiration", anpp = "Aboveground production",
+              amend = "Manure C added", net = "CH4 + N2O budget",
+              att = "CH4 + N2O, manure effect", ch4 = "CH4 uptake")
+ctx_labs <- expression(rs = "Soil respiration", anpp = "Aboveground production", amend = "Manure C added",
+                       net = CH[4]+N[2]*O~budget, att = CH[4]+N[2]*O*","~manure~effect, ch4 = CH[4]~uptake)
 lvl <- rev(names(ctx_rows))
 pts <- bind_rows(rs %>% mutate(row = "rs"), anpp %>% mutate(row = "anpp"),
                  wide %>% transmute(plot, treatment, val = net, row = "net"),
@@ -147,7 +147,7 @@ pd_ <- ggplot() +
   annotation_logticks(sides = "b", linewidth = 0.2, short = unit(1, "pt"), mid = unit(2, "pt"), long = unit(3, "pt")) +
   scale_y_discrete(labels = ctx_labs, drop = FALSE) +
   scale_colour_trt(guide = "none") + scale_fill_trt(guide = "none") + scale_shape_trt(guide = "none") +
-  labs(x = expression(Season~flux~(g~CO[2]*"(-eq)"~m^{-2}*","~log~scale)), y = NULL) +
+  labs(x = expression(Season~total~(g~CO[2]~or~CO[2]*"-eq"~m^{-2}*","~log~scale)), y = NULL) +
   theme(plot.title.position = "plot", panel.grid.major.x = element_line(colour = "grey92", linewidth = 0.25),
         panel.grid.major.y = element_blank())
 
