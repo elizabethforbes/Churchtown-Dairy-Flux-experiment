@@ -1,19 +1,19 @@
 "gas","model","AIC","dAIC","family","n"
-"CO2","null",2519.5,429,"Gamma(log) GLMM",445
-"CO2","T",2207.8,117.4,"Gamma(log) GLMM",445
-"CO2","W",2518.6,428.1,"Gamma(log) GLMM",445
-"CO2","T+W",2149.5,59,"Gamma(log) GLMM",445
-"CO2","T+W+W2",2139.3,48.8,"Gamma(log) GLMM",445
-"CO2","TxW",2090.4,0,"Gamma(log) GLMM",445
-"CH4","null",309.5,103.2,"Gaussian LMM (ML)",445
-"CH4","T",267.9,61.6,"Gaussian LMM (ML)",445
-"CH4","W",226.6,20.3,"Gaussian LMM (ML)",445
-"CH4","T+W",209.9,3.6,"Gaussian LMM (ML)",445
-"CH4","T+W+W2",211.8,5.5,"Gaussian LMM (ML)",445
-"CH4","TxW",206.3,0,"Gaussian LMM (ML)",445
-"N2O","null",566.9,5.3,"Gaussian LMM (ML)",445
-"N2O","T",567,5.4,"Gaussian LMM (ML)",445
-"N2O","W",566.6,5,"Gaussian LMM (ML)",445
-"N2O","T+W",564.7,3.1,"Gaussian LMM (ML)",445
-"N2O","T+W+W2",561.6,0,"Gaussian LMM (ML)",445
-"N2O","TxW",564.2,2.6,"Gaussian LMM (ML)",445
+"CO2","null",2530.4,429.8,"Gamma(log) GLMM",445
+"CO2","T",2218.1,117.5,"Gamma(log) GLMM",445
+"CO2","W",2529.6,429,"Gamma(log) GLMM",445
+"CO2","T+W",2159.5,58.9,"Gamma(log) GLMM",445
+"CO2","T+W+W2",2149.4,48.8,"Gamma(log) GLMM",445
+"CO2","TxW",2100.6,0,"Gamma(log) GLMM",445
+"CH4","null",319.2,103.6,"Gaussian LMM (ML)",445
+"CH4","T",277.4,61.8,"Gaussian LMM (ML)",445
+"CH4","W",236,20.4,"Gaussian LMM (ML)",445
+"CH4","T+W",219.2,3.6,"Gaussian LMM (ML)",445
+"CH4","T+W+W2",221.1,5.5,"Gaussian LMM (ML)",445
+"CH4","TxW",215.6,0,"Gaussian LMM (ML)",445
+"N2O","null",578,5.3,"Gaussian LMM (ML)",445
+"N2O","T",578.1,5.4,"Gaussian LMM (ML)",445
+"N2O","W",577.7,5,"Gaussian LMM (ML)",445
+"N2O","T+W",575.8,3.1,"Gaussian LMM (ML)",445
+"N2O","T+W+W2",572.7,0,"Gaussian LMM (ML)",445
+"N2O","TxW",575.3,2.6,"Gaussian LMM (ML)",445

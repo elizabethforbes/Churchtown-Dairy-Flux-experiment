@@ -1,13 +1,13 @@
 "metric","treatment","ch4_co2eq","n2o_co2eq","net_co2eq","attributable_co2eq"
-"GWP100","control",-2.3,23,20.7,NA
-"GWP100","compost",-2.35,33.3,31,10.3
-"GWP100","slurry",-2.12,44.4,42.3,21.6
-"GWP20","control",-6.79,23,16.2,NA
-"GWP20","compost",-6.94,33.3,26.4,10.2
-"GWP20","slurry",-6.26,44.4,38.2,22
-"GTP100","control",-0.4,19.6,19.2,NA
-"GTP100","compost",-0.409,28.4,28,8.81
-"GTP100","slurry",-0.369,37.9,37.6,18.4
-"GWP* (sustained practice)","control",-0.644,23,22.3,NA
-"GWP* (sustained practice)","compost",-0.658,33.3,32.6,10.1
-"GWP* (sustained practice)","slurry",-0.593,44.4,43.8,22.3
+"GWP100","control",-2.33,23.3,20.9,NA
+"GWP100","compost",-2.38,33.7,31.3,10.4
+"GWP100","slurry",-2.15,45,42.8,21.9
+"GWP20","control",-6.87,23.3,16.4,NA
+"GWP20","compost",-7.02,33.7,26.7,10.3
+"GWP20","slurry",-6.33,45,38.7,22.3
+"GTP100","control",-0.405,19.8,19.4,NA
+"GTP100","compost",-0.414,28.8,28.4,8.92
+"GTP100","slurry",-0.373,38.4,38,18.6
+"GWP* (sustained practice)","control",-0.652,23.3,22.6,NA
+"GWP* (sustained practice)","compost",-0.666,33.7,33.1,10.2
+"GWP* (sustained practice)","slurry",-0.601,45,44.4,22.6

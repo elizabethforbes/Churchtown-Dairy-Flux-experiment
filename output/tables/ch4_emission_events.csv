@@ -1,10 +1,10 @@
 "period","treatment","n","emission_events","pct_events","max_flux"
-"19 Jun-14 Oct","compost",105,1,1,0.46
+"19 Jun-14 Oct","compost",105,1,1,0.47
 "19 Jun-14 Oct","control",105,0,0,-0.13
 "19 Jun-14 Oct","slurry",102,1,1,0.18
 "before application","compost",29,1,3.4,0.12
 "before application","control",30,0,0,-0.09
 "before application","slurry",29,1,3.4,0.26
-"days 1-6","compost",45,2,4.4,0.31
+"days 1-6","compost",45,2,4.4,0.32
 "days 1-6","control",44,0,0,-0.17
-"days 1-6","slurry",45,4,8.9,5.23
+"days 1-6","slurry",45,4,8.9,5.29

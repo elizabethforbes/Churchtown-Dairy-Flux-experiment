@@ -27,11 +27,22 @@
 #   This catches a ~70 s clock step at ~14:10 on 30 May (plots 10-15) that a
 #   single day offset missed.
 # Geometry
-#   Vtot = the chamber's TotalVolume for that measurement (chamber + collar
-#   offset + LI-7810 loop), Area = 318 cm2, Pcham/Tcham from the chamber
-#   sensors - the same geometry SoilFluxPro used, so the goFlux vs SoilFluxPro
-#   comparison isolates the fitting method. The LI-7820 loop volume is not
-#   added (as in SoilFluxPro).
+#   Vtot = chamber (4244.1 cm3) + collar offset x area (318 cm2) + the closed
+#   loop outside the chamber, built explicitly rather than taken from the header.
+#   Lab convention: 28 cm3 of analyzer internal volume for each analyzer in the
+#   loop (LI-COR's LI-78xx analyzer volume; not the 6.4 cm3 optical cavity quoted
+#   by goFlux), plus the tubing. With the LI-7810 and LI-7820 on LI-COR's
+#   two-analyzer setup (T-split at the chamber, one 2 m assembly to each
+#   analyzer; 33.97 cm3 of tubing per branch) the loop is
+#   2 x 28 + 2 x 33.97 = 123.94 cm3 on every date.
+#   The chamber header's TotalVolume is not used as is, because its IrgaVolume
+#   was a single-analyzer setting that changed with the chamber configuration,
+#   not with the plumbing: 61.97 = 28 + 33.97 on 6, 27 and 29 May (KT01 files),
+#   46.96 = 28 + 18.96 (1.2 m bundle default) from 30 May. The header is used
+#   only for chamber + collar (TotalVolume - IrgaVolume).
+#   SoilFluxPro's export used header TotalVolume + 67.94 cm3 (114.9 or 129.9 cm3
+#   of loop), so goFlux Vtot / SoilFluxPro VOLUME_TOTAL is ~1.0015 from 30 May and
+#   ~0.999 before. Pcham/Tcham from the chamber sensors.
 # Repeat closures of a collar on one date: the last one is kept (field-sheet
 #   notes record re-measurements after leaks/restarts; same rule as the team's
 #   "redo supersedes" convention). Dropped closures are listed in the report.
@@ -50,6 +61,11 @@ TZ <- "America/New_York"
 SHOULDER_S <- 30
 PREC_7810 <- c(CO2 = 3.5, CH4 = 0.6, H2O = 45)      # datasheet 1-s precision (goFlux default)
 PREC_7820 <- c(N2O = 0.4, H2O = 45)
+# Closed loop outside the chamber (see Geometry above). Lab convention: 28 cm3 of
+# analyzer internal volume per analyzer in the loop; tubing is LI-COR's value for
+# one 2 m assembly + T-split leg, one branch per analyzer.
+ANALYZER_VOL_L <- 0.028
+TUBING_BRANCH_VOL_L <- 0.03397
 dir.create("output/qc", showWarnings = FALSE, recursive = TRUE)
 treatment_key <- read.csv("data/intermediate/treatment_key.csv")
 
@@ -71,7 +87,7 @@ hdr <- bind_rows(lapply(json_files, function(f) {
     bind_rows(lapply(names(ds[[nm]]$reps), function(rp) {
       h <- ds[[nm]]$reps[[rp]]$header
       tibble(chamID = paste0(nm, "_", sub("REP_", "", rp)), TotalVolume_cm3 = h$TotalVolume,
-             Offset_cm = h$Offset, header_time = h$Date)
+             IrgaVolume_cm3 = h$IrgaVolume, Offset_cm = h$Offset, header_time = h$Date)
     }))))))
 })) %>% distinct(chamID, .keep_all = TRUE)
 
@@ -83,7 +99,7 @@ ch <- ch %>% filter(!is.na(plot), plot %in% 1:15) %>% left_join(hdr, by = "chamI
 closures <- ch %>% group_by(chamID) %>%
   summarize(date_name = first(date_name), plot = first(plot), collar = first(collar),
             start.time = first(start.time), end.time = first(cham.open), cham.close = first(cham.close),
-            Vtot = first(TotalVolume_cm3) / 1000, Area = first(Area),
+            Vtot_header = first(TotalVolume_cm3) / 1000, IrgaVolume = first(IrgaVolume_cm3) / 1000, Area = first(Area),
             Pcham = mean(Pcham[flag == 1], na.rm = TRUE), Tcham = mean(Tcham[flag == 1], na.rm = TRUE),
             json_file = first(json_file), .groups = "drop") %>%
   mutate(bad_clock = is.na(start.time) | format(start.time, "%Y") != "2025",
@@ -181,6 +197,17 @@ lags <- bind_rows(lapply(closures$chamID[!closures$bad_clock], closure_lag)) %>%
   mutate(run_med = as.numeric(stats::runmed(lag_s, k = min(5, 2 * ((n() - 1) %/% 2) + 1), endrule = "median")),
          clock_offset_s = ifelse(abs(lag_s - run_med) <= 5 & lag_r >= 0.9, lag_s, run_med)) %>% ungroup()
 write.csv(lags, "output/qc/goflux_clock_offsets_by_closure.csv", row.names = FALSE)
+
+# LI-7820 in the loop: the closure has an aligned LI-7820 trace (or, lacking one,
+# another closure of the same sheet date does). Vtot = chamber + collar + one
+# analyzer and one tubing branch per analyzer in the loop.
+closures <- closures %>% group_by(date_name) %>%
+  mutate(li7820_in_loop = chamID %in% lags$chamID | any(chamID %in% lags$chamID)) %>% ungroup() %>%
+  mutate(Vloop = (1 + li7820_in_loop) * (ANALYZER_VOL_L + TUBING_BRANCH_VOL_L),
+         Vtot = Vtot_header - IrgaVolume + Vloop)
+cat(sprintf("LI-7820 in the loop for %d of %d closures; loop volume %s L; Vtot median %.3f L (header %.3f L, x%.4f)\n",
+            sum(closures$li7820_in_loop), nrow(closures), paste(unique(round(closures$Vloop, 5)), collapse = "/"),
+            median(closures$Vtot), median(closures$Vtot_header), median(closures$Vtot / closures$Vtot_header)))
 saveRDS(list(ch = ch, n2 = n2, closures = closures, dropped = dropped, lags = lags),
         "data/intermediate/flux_raw_traces.rds")   # for code/qc/plot_closure_traces.R
 offsets <- offsets %>% left_join(lags %>% group_by(day) %>%
