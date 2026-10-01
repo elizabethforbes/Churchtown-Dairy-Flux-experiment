@@ -7,6 +7,11 @@
 # Stage 4 (code/4_qc):       quality-control outputs (output/qc), not used in the paper
 # Each script runs in a fresh R session, so it depends only on the files it reads.
 
+# output folders (not all are kept in git)
+for (d in c("data/intermediate", "data/clean", "output/tables", "output/figures/main", "output/figures/si",
+            "output/qc/closure_traces"))
+  dir.create(d, showWarnings = FALSE, recursive = TRUE)
+
 scripts <- c(
   # 1. data cleaning: one script per data source, then the final tables
   "code/1_clean/00_plots_treatment_key.R",

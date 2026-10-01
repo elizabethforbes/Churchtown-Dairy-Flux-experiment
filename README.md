@@ -22,7 +22,8 @@ Rscript run_all.R
 ```
 
 This runs every script in order, each in a fresh R session, from the raw data to the
-final tables, statistics and figures. R 4.4 with the packages dplyr, tidyr, readxl,
+final tables, statistics and figures. It has been checked from a fresh clone with all generated
+files deleted: every table in `data/clean/` and `output/tables/` is reproduced byte-for-byte. R 4.4 with the packages dplyr, tidyr, readxl,
 jsonlite, ggplot2, patchwork, scales, colorspace, ragg, lme4, lmerTest, emmeans, vegan,
 spdep and goFlux.
 
