@@ -38,6 +38,7 @@ scripts <- c(
   "code/2_analysis/06_storage_vs_field.R",
   "code/2_analysis/07_spatial.R",
   "code/2_analysis/08_effect_synthesis.R",
+  "code/2_analysis/09_heterogeneity.R",
   # 3. figures
   "code/3_figures/fig1_design.R",
   "code/3_figures/fig2_season_fluxes.R",

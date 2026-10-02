@@ -107,6 +107,7 @@ analyzer volume calibration, clock alignment) are made and commented in these sc
 | `06_storage_vs_field.R` | field-phase vs IPCC storage-phase emissions per kg manure N |
 | `07_spatial.R` | spatial balance and autocorrelation checks; baseline-adjusted effects |
 | `08_effect_synthesis.R` | Hedges' g for all responses; Benjamini-Hochberg within screening panels |
+| `09_heterogeneity.R` | spatial heterogeneity of responses: plot-level spread and top-plot share; within-plot collar spread before vs after application |
 
 **3_figures**: one script per figure (`fig1_design.R` ... `fig6_ghg_budget.R`,
 `figS1_flux_drivers.R` ... `figS5_nmin_pools.R`).
