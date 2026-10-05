@@ -17,10 +17,9 @@ Treatment encoding is the same in every figure: control is a grey circle, compos
 (d, f, h) Season totals from 29 May to 14 Oct, integrated per plot by the trapezoid rule. One-way ANOVA p = 0.74 (CO2), 0.72 (CH4) and 0.57 (N2O).
 
 **Figure 3. The application pulse.**
-(a, c, e) Fluxes from the day before application to day 22. Open circles are individual collars and large symbols treatment means ± SE. CO2 is shown on a log axis; CH4 and N2O on pseudo-log axes, so that hotspot collars stay visible; the time axis is compressed between days 6 and 22 (//).
-(b, d, f) Cumulative flux over days 1–6 (29 May–3 Jun) per plot. Amendment minus control (Welch 95% CI): CO2 compost −1.8 (−14 to 11), slurry 11.5 (−1.9 to 25) g C m−2; CH4 compost 0.15 (−0.88 to 1.2), slurry 1.1 (−0.65 to 2.9) mg C m−2; N2O compost 0.36 (−1.2 to 1.9), slurry 4.6 (−0.23 to 9.4) mg N m−2.
-CH4 is hotspot-driven, so the event count in panel c is the more appropriate test than the plot means in panel d. An emission event is a collar measurement with net CH4 emission (flux > 0). Events occurred in 4 of 45 slurry collar measurements in days 1–6, against 6 of 489 at all other times and in all other treatments (Fisher exact p = 0.006). Control plots had no events at any time. The largest events of the season were all at slurry collar 13B in days 1–6 (5.2, 1.8 and 0.52 nmol m−2 s−1); all others were below 0.5.
-The strongest hotspot (plot 13, collar B) was already a weak source before application (0.26 nmol m−2 s−1 on 27 May). Slurry amplified it about 20-fold on day 1, and it returned to near zero by day 22. Event counts by treatment and period are in ch4_emission_events.csv.
+(a, c, e) Fluxes from the day before application to day 22. Open circles are individual collars and large symbols treatment means ± SE. CO2 is shown on a log axis; CH4 and N2O on pseudo-log axes, so that individual high collars stay visible; the time axis is compressed between days 6 and 22 (//).
+(b, d, f) Cumulative flux over days 1–6 (29 May–3 Jun) per plot. Amendment minus control (Welch 95% CI): CO2 compost −1.8 (−14 to 11), slurry 11.6 (−2.0 to 25) g C m−2; CH4 compost 0.16 (−0.89 to 1.2), slurry 1.1 (−0.66 to 2.9) mg C m−2; N2O compost 0.36 (−1.2 to 1.9), slurry 4.6 (−0.23 to 9.5) mg N m−2.
+Net CH4 emission occurred in 4 of 45 slurry collar measurements in days 1–6, three of them at collar 13B (5.3, 1.8 and 0.52 nmol m−2 s−1), consistent with uneven spreading of the slurry; control collars never emitted CH4 after application. Event counts by treatment and period are in ch4_emission_events.csv.
 
 **Figure 4. Soil C and N cycling across the season.**
 Soils were sampled on 29 May, 21 Jul and 14 Oct. Panels are grouped in two columns:
@@ -48,7 +47,7 @@ All values are in CO2-equivalents (GWP100, IPCC AR6: CH4 27.0, N2O 273), from pl
 - **Aboveground production:** the October harvest of the 0.5 m² subplot left uncut since the pre-experiment mow, assuming C = 47% of dry mass (IPCC 2006 default for herbaceous biomass).
 - **Manure C added:** not measured. Estimated as 50% of volatile solids, with the VS shares of dry matter used for the storage comparison (slurry 0.80, compost 0.55).
 - **Result:** the CH4 + N2O budget is 0.35–0.7% of season soil respiration and 5–11% of aboveground production. The manure C added, as CO2, is roughly 10–40 times the amendment-attributable CH4 + N2O.
-- **Metric choice barely matters** (ghg_co2eq_metrics.csv): season net non-CO2 for the slurry plots is 42 g CO2-eq m−2 under GWP100, 38 under GWP20, 38 under GTP100 and 44 under GWP* for a sustained practice. N2O dominates, and its GWP20 equals its GWP100.
+- **Metric choice barely matters** (ghg_co2eq_metrics.csv): season net non-CO2 for the slurry plots is 43 g CO2-eq m−2 under GWP100, 39 under GWP20, 38 under GTP100 and 44 under GWP* for a sustained practice. N2O dominates, and its GWP20 equals its GWP100.
 
 Soil CO2 is not included in panels a–b. Chamber CO2 is soil respiration (roots plus microbes), not net ecosystem exchange, so it is not a term in a GHG balance. The amendments' carbon inputs were not measured.
 
