@@ -55,7 +55,7 @@ Results:
 - N2O dominates the non-CO2 budget in every treatment: 23 (control), 33 (compost) and 44 (slurry) g CO2-eq m−2. CH4 uptake offsets about 2 g CO2-eq m−2.
 - The first week is 3–7% of season N2O.
 - Net budgets did not differ (ANOVA p = 0.57).
-- The slurry emission factor was 0.17% (−0.01 to 0.34) over days 1–6 and 1.8% (−3.2 to 6.8) over the season. Compost was 0.01% and 0.6%.
+- The slurry emission factor was 0.17% (−0.01 to 0.34) over days 1–6 and 1.8% (−3.2 to 6.9) over the season. Compost was 0.01% and 0.6%.
 
 ## Supplementary
 
