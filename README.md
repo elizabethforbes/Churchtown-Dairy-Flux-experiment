@@ -25,7 +25,13 @@ This runs every script in order, each in a fresh R session, from the raw data to
 final tables, statistics and figures. It has been checked from a fresh clone with all generated
 files deleted: every table in `data/clean/` and `output/tables/` is reproduced byte-for-byte. R 4.4 with the packages dplyr, tidyr, readxl,
 jsonlite, ggplot2, patchwork, scales, colorspace, ragg, lme4, lmerTest, emmeans, vegan,
-spdep and goFlux.
+spdep and goFlux. goFlux is pinned to the fork release used for the paper (goFlux 0.5.0.9002
+with additions, github.com/jgewirtzman/goFlux, commit 006f625, doi:10.5281/zenodo.23256675), installed
+in a project library that `.Rprofile` puts first on the library path:
+
+```r
+remotes::install_github("jgewirtzman/goFlux@v0.5.0.9002", lib = "r-lib", dependencies = FALSE)
+```
 
 ## How the repository is organized
 

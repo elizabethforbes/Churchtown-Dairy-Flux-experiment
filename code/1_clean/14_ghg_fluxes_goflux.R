@@ -1,14 +1,17 @@
 # 14_ghg_fluxes_goflux.R
 # Recompute CO2, CH4 and N2O chamber fluxes from the raw 1 Hz concentration
-# records with goFlux + fluxqc, following the conventions of the user's other
-# flux projects (tree-flux-2025/scripts/01_import/09_goflux_reprocess.R):
+# records with goFlux (Rheault et al. 2024) version 0.5.0.9002 with additions
+# (Gewirtzman 2026, doi:10.5281/zenodo.23256675; github.com/jgewirtzman/goFlux,
+# commit 006f625), pinned in the project library r-lib/ (see .Rprofile):
 #   - Flux = goFlux::best.flux (LM or HM, Hüppi et al. 2018 criteria), via
-#     fluxqc::process_fluxes().
-#   - MDF = 1.96 * sigma / t * flux.term (95 %, two-sided); sigma = MAD of first
-#     differences over each analyzer's whole record per field day
-#     (precision = "mad"); t = closure length in seconds. Retain-and-flag:
-#     nothing is deleted.
-#   - fluxqc physical QC screens flag closures for review (not removed).
+#     goFlux::process.fluxes().
+#   - MDF = z * sigma / t * flux.term with z = 1.96 (conf = 0.95; a benchmark
+#     multiplier, not a calibrated 95 % test; Cowan et al. 2025). sigma = the
+#     per-closure second-difference (Hadamard) precision, 1.4826 * MAD(diff2) / sqrt(6)
+#     within the fitted window, median per analyzer x field day (and logging
+#     interval) (goFlux::empirical.prec); t = goFlux::closure.time. Below-MDF fluxes
+#     are kept signed. Retain-and-flag: nothing is deleted.
+#   - goFlux::qc.flags physical QC screens flag closures for review (not removed).
 #
 # Inputs
 #   data/raw/flux/json/*.json        LI-8200 smart chamber + LI-7810 (CO2, CH4, H2O)
@@ -18,7 +21,7 @@
 #   chamber), end = chamber opening (~95 s). N2O uses the same windows after
 #   shifting the LI-7820 clock onto the chamber clock: the per-day offset is
 #   the difference between the H2O rise onsets in the LI-7820 record and in the
-#   chamber's own (LI-7810) record, both found with fluxqc::find_clock_offset()
+#   chamber's own (LI-7810) record, both found with goFlux::find.clock.offset()
 #   against the logged closure times. Offsets drift ~1 s/day and reset twice
 #   (3 Jun, 30 Sep). The day offset is then refined per closure by
 #   cross-correlating the chamber H2O trace with the LI-7820 H2O trace
@@ -47,15 +50,15 @@
 #   notes record re-measurements after leaks/restarts; same rule as the team's
 #   "redo supersedes" convention). Dropped closures are listed in the report.
 # Outputs
-#   data/intermediate/flux_goflux.csv               one row per collar x date, all goFlux/fluxqc fields
+#   data/intermediate/flux_goflux.csv               one row per collar x date, all goFlux fields
 #   data/intermediate/flux_estimates.csv            analysis table (same columns as before + MDF flags)
 #   output/qc/goflux_clock_offsets.csv, goflux_qc_review.csv (QC)
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 suppressPackageStartupMessages({
-  library(dplyr); library(tidyr); library(goFlux); library(fluxqc); library(jsonlite)
+  library(dplyr); library(tidyr); library(goFlux); library(jsonlite)
 })
-stopifnot(packageVersion("fluxqc") >= "0.2.3")
+stopifnot(packageVersion("goFlux") == "0.5.0.9002")
 
 TZ <- "America/New_York"
 SHOULDER_S <- 30
@@ -168,8 +171,8 @@ offsets <- bind_rows(lapply(days, function(d) {
   starts <- closures %>% filter(!bad_clock, as.Date(start.time, tz = TZ) == d) %>% pull(cham.close)
   n1 <- n2[n2$day == d, ]
   if (length(starts) < 5 || nrow(n1) < 300) return(tibble(day = d, n_closures = length(starts)))
-  a <- find_clock_offset(n1, starts, gas = "H2O_ppm", search = c(-150, 150), window = 30, plot = FALSE)
-  b <- find_clock_offset(ch_ok[ch_ok$day == d, ], starts, gas = "H2O_ppm", search = c(-120, 120), window = 30, plot = FALSE)
+  a <- find.clock.offset(n1, starts, gastype = "H2O_ppm", search = c(-150, 150), window = 30, plot = FALSE)
+  b <- find.clock.offset(ch_ok[ch_ok$day == d, ], starts, gastype = "H2O_ppm", search = c(-120, 120), window = 30, plot = FALSE)
   tibble(day = d, n_closures = length(starts), onset_7820_s = a$offset, score_7820 = round(a$score, 1),
          onset_chamber_s = b$offset, clock_offset_s = a$offset - b$offset)
 }))
@@ -260,25 +263,36 @@ man_n2o <- bind_rows(lapply(seq_len(nrow(closures)), function(i) {
 cat(sprintf("Segments: CO2/CH4 %d closures; N2O %d closures\n",
             n_distinct(man_ch$UniqueID), n_distinct(man_n2o$UniqueID)))
 
-# --- 4. goFlux + fluxqc ---------------------------------------------------------
+# --- 4. goFlux: fluxes, detection and QC flags ---------------------------------
+# Precision for the detection limit: goFlux::empirical.prec (default of process.fluxes),
+# median per analyzer x field day. The datasheet precision in the *_prec columns still
+# sets goFlux's kappa-max for the HM fit, as before.
 aux_ch  <- man_ch %>% distinct(UniqueID, instrument_day)
 aux_n2o <- man_n2o %>% distinct(UniqueID, instrument_day)
-qc_list <- list(c0 = TRUE, co2_tracer = TRUE, convex = TRUE, min_window = list(secs = 60),
-                ambient_start = FALSE, noisy = TRUE)   # windows start after the 25 s deadband
-res_co2 <- process_fluxes(man_ch, aux = aux_ch, gastype = "CO2dry_ppm", precision = "mad", mdf = "wassmann",
-                          conf = 0.95, group = "instrument_day", qc = FALSE)
-res_ch4 <- process_fluxes(man_ch, aux = aux_ch, gastype = "CH4dry_ppb", precision = "mad", mdf = "wassmann",
-                          conf = 0.95, group = "instrument_day", co2 = res_co2$fluxes, qc = qc_list)
-res_n2o <- process_fluxes(man_n2o, aux = aux_n2o, gastype = "N2Odry_ppb", precision = "mad", mdf = "wassmann",
-                          conf = 0.95, group = "instrument_day", co2 = res_co2$fluxes, qc = qc_list)
-cs <- bind_rows(closure_seconds(man_ch) %>% mutate(src = "LI-7810"), closure_seconds(man_n2o) %>% mutate(src = "LI-7820"))
+qc_list <- list(min.secs = 60, min.obs = NULL,   # closures shorter than 60 s
+                ambient.sigma = NULL)              # windows start after the 25 s deadband
+res_co2 <- process.fluxes(man_ch, "CO2dry_ppm", auxfile = aux_ch, by = "instrument_day", conf = 0.95, qc = FALSE)
+res_ch4 <- process.fluxes(man_ch, "CH4dry_ppb", auxfile = aux_ch, by = "instrument_day", conf = 0.95,
+                          qc = qc_list, co2.flux.result = res_co2$fluxes)
+res_n2o <- process.fluxes(man_n2o, "N2Odry_ppb", auxfile = aux_n2o, by = "instrument_day", conf = 0.95,
+                          qc = qc_list, co2.flux.result = res_co2$fluxes)
+saveRDS(list(CO2 = res_co2$settings, CH4 = res_ch4$settings, N2O = res_n2o$settings),
+        "output/qc/goflux_settings.rds")   # every option used, goFlux version and commit
 
 pick <- function(f, gas) {
   se <- ifelse(f$model == "HM" & !is.na(f$HM.SE), f$HM.SE, f$LM.SE)
+  flag_cols <- grep("^qc\\.(c0|convex|min\\.secs|min\\.obs|noisy|ambient|clock)$", names(f), value = TRUE)
+  # a CH4/N2O closure whose CO2 did not rise clearly is flagged too (co2.tracer FALSE)
+  no_co2 <- if ("co2.tracer" %in% names(f)) f$co2.tracer %in% FALSE else rep(FALSE, nrow(f))
+  note <- vapply(seq_len(nrow(f)), function(i) {
+    fired <- flag_cols[vapply(flag_cols, function(cn) isTRUE(f[[cn]][i]), logical(1))]
+    paste(c(sub("^qc\\.", "", fired), if (no_co2[i]) "no CO2 rise"), collapse = ", ")
+  }, character(1))
+  qc_any <- if ("qc.any" %in% names(f)) (f$qc.any %in% TRUE) | no_co2 else NA
   out <- tibble(chamID = f$UniqueID, flux = f$best.flux, model = f$model, LM = f$LM.flux, HM = f$HM.flux,
-                SE = se, LM_r2 = f$LM.r2, g_fact = f$g.fact, sigma_mad = f$sigma_emp, MDF = f$MDF_emp,
-                below_MDF = f$below_MDF_emp, det_class = f$det_class_emp, quality_check = f$quality.check,
-                qc_any = if ("qc_any" %in% names(f)) f$qc_any else NA, qc_note = if ("qc_note" %in% names(f)) f$qc_note else NA)
+                SE = se, LM_r2 = f$LM.r2, g_fact = f$g.fact, sigma_prec = f$det.prec, MDF = f$det.MDF,
+                below_MDF = f$det.class == "below MDF", det_class = f$det.class, quality_check = f$quality.check,
+                qc_any = qc_any, qc_note = if ("qc.any" %in% names(f)) note else NA)
   names(out)[-1] <- paste0(gas, "_", names(out)[-1]); out
 }
 gf <- closures %>%
