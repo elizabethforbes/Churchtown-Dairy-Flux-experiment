@@ -29,3 +29,6 @@ output/qc/closure_traces/
 # Manuscript drafts and their build script stay outside the public repo (docs/manuscript/)
 code/manuscript/
 r-lib/
+
+# Superseded scripts and working notes (kept locally, not published)
+code/archive/

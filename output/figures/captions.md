@@ -1,4 +1,4 @@
-# Figure captions (draft)
+# Figure captions
 
 Panels carry only axis labels, facet labels and necessary markers; statistics and explanations are in the captions below.
 

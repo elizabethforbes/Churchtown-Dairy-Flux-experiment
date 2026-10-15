@@ -36,6 +36,7 @@ remotes::install_github("jgewirtzman/goFlux@v0.5.0.9002", lib = "r-lib", depende
 ## How the repository is organized
 
 The workflow runs in one direction: **raw data → clean tables → analysis → figures**.
+The raw files are described in `data/README.md`.
 Analysis and figure scripts read only `data/clean/` and `output/tables/`, never the raw
 files.
 
@@ -53,7 +54,6 @@ code/
   4_qc/                     quality-control checks (output/qc); not used in the paper
   lib/                      shared helpers (clean_helpers.R; setup.R: constants,
                             statistics helpers, figure theme)
-  archive/                  superseded scripts, kept for reference
 output/
   tables/                   statistics reported in the paper
   figures/main, figures/si  manuscript figures (PDF and PNG)
@@ -123,3 +123,7 @@ analyzer volume calibration, clock alignment) are made and commented in these sc
 ## Data availability
 
 The final tables and code are archived at Zenodo (DOI to be added on publication).
+
+## License
+
+Code: MIT (`LICENSE`). Data: CC BY 4.0 (`LICENSE-data`).

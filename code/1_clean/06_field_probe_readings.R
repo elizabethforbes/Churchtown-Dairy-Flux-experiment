@@ -6,7 +6,7 @@
 #   data/raw/field_metadata/In situ fluxes meta-data.xlsx           27 May - 3 Jun (typed in 2025)
 #   data/raw/field_metadata/handheld_probe_transcribed_2026-09-28.csv 19 Jun - 15 Oct
 #     (transcribed from the scanned field sheets; see
-#      handheld_probe_transcribed_TO_VERIFY.xlsx; 'uncertain' rows flagged)
+#      handheld_probe_transcribed_2026-09-28.xlsx; 'uncertain' rows flagged)
 # Output: data/intermediate/field_metadata.csv
 # Split campaigns are merged to the flux dates (11 Sep -> 10 Sep, 15 Oct -> 14 Oct).
 # No handheld sheet exists for 6 May. 22 Aug has no soil temperature (not recorded);

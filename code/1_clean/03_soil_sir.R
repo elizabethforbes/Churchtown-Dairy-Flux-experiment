@@ -331,8 +331,8 @@ sir1 <- calc_sir_lgr(
 )
 
 # =============================================================================
-# SIR_2: Has both LGR (Gas) and IRGA (Sheet3) data
-# TODO: Confirm with Jon which method to use for SIR_2. Processing both for now.
+# SIR_2: the workbook has an LGR sheet (Gas) and an IRGA sheet (Sheet3). The LGR
+# sheet has no injections recorded, so SIR_2 uses the IRGA data.
 # =============================================================================
 cat("Processing SIR_2 (LGR + IRGA)...\n")
 

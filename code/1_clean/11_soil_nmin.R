@@ -87,6 +87,8 @@ res <- read_excel(raw_path, sheet = "Final data") %>%
   filter(!is.na(sample_id)) %>%
   mutate(sample_id = str_squish(sample_id), row_order = row_number())
 
+# The lab's results file also held samples from other projects (SRS, CP, BL); they are
+# removed from the archived copy, and this filter drops them from the full file too.
 other_project <- str_detect(res$sample_id, "SRS|^CP\\d|^BL\\d")
 cat(sprintf("Read %d rows; dropping %d from other projects (SRS, CP, BL)\n",
             nrow(res), sum(other_project)))
